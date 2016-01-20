@@ -2,7 +2,7 @@
 /**
  *
  **/
-class MProduct extends CI_Model
+class Mproduct extends CI_Model
 {
     private $objDB;
 

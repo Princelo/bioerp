@@ -5,7 +5,7 @@ class Login extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->database();
-        $this->load->model('MUser', 'MUser');
+        $this->load->model('Muser', 'Muser');
         $this->load->helper('captcha');
         //$this->load->library('pagination');
         $this->load->helper('string');
@@ -46,10 +46,10 @@ class Login extends CI_Controller {
         if(isset($_POST['captcha']) && isset($_POST['login_id']) && isset($_POST['password'])){
             $_POST['password'] = md5($_POST['password']);
             if($this->__validate_captcha() === true){
-                if($this->MUser->boolVerify($_POST['login_id'], $_POST['password'])){
+                if($this->Muser->boolVerify($_POST['login_id'], $_POST['password'])){
                     $this->session->set_userdata('user', $this->input->post('login_id'));
                     if ($this->session->userdata('role') == 'user')
-                        $this->session->set_userdata('current_user_id', $this->MUser->intGetCurrentUserId($this->input->post('login_id')));
+                        $this->session->set_userdata('current_user_id', $this->Muser->intGetCurrentUserId($this->input->post('login_id')));
                     redirect('forecast/index', 'refresh');
                 }else{
                     $this->index('用戶或密码错误');

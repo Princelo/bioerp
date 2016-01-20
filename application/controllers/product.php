@@ -8,8 +8,8 @@ class Product extends MY_Controller {
         parent::__construct();
         if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
             redirect('login');
-        $this->load->model('MProduct', 'MProduct');
-        $this->load->model('MUser', 'MUser');
+        $this->load->model('Mproduct', 'Mproduct');
+        $this->load->model('Muser', 'Muser');
         $this->load->library('form_validation');
         $this->load->library('pagination');
         $this->db = $this->load->database('default', true);
@@ -55,7 +55,7 @@ class Product extends MY_Controller {
             $where = '';
             $where .= ' and p.is_valid = true ';
             $where .= $this->__get_search_str($search, $price_low, $price_high, $category);
-            $config['total_rows'] = $this->MProduct->intGetProductsCount($where);
+            $config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -63,7 +63,7 @@ class Product extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             //$where = '';
             $order = '';
-            $data['products'] = $this->MProduct->objGetProductList($where, $order, $limit);
+            $data['products'] = $this->Mproduct->objGetProductList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('product/listpage_admin', $data);
         }else{
@@ -73,14 +73,14 @@ class Product extends MY_Controller {
             $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
             $where = '';
             $where .= ' and p.is_valid = true ';
-            $config['total_rows'] = $this->MProduct->intGetProductsCount($where);
+            $config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
             $limit = '';
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             $order = '';
-            $data['products'] = $this->MProduct->objGetProductList($where, $order, $limit);
+            $data['products'] = $this->Mproduct->objGetProductList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('product/listpage_admin', $data);
         }
@@ -126,7 +126,7 @@ class Product extends MY_Controller {
             $where = '';
             $where .= ' and p.is_valid = false ';
             $where .= $this->__get_search_str($search, $price_low, $price_high, $category);
-            $config['total_rows'] = $this->MProduct->intGetProductsCount($where);
+            $config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -134,7 +134,7 @@ class Product extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             //$where = '';
             $order = '';
-            $data['products'] = $this->MProduct->objGetProductList($where, $order, $limit);
+            $data['products'] = $this->Mproduct->objGetProductList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('product/listpage_admin', $data);
         }else{
@@ -144,13 +144,13 @@ class Product extends MY_Controller {
             $config['base_url'] = base_url()."product/listpage_admin_invalid/";
             if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
             $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-            $config['total_rows'] = $this->MProduct->intGetProductsCount($where);
+            $config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
             $limit = '';
             $limit .= " limit {$config['per_page']} offset {$offset} ";
-            $data['products'] = $this->MProduct->objGetProductList($where, $order, $limit);
+            $data['products'] = $this->Mproduct->objGetProductList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('product/listpage_admin', $data);
         }
@@ -196,7 +196,7 @@ class Product extends MY_Controller {
             $where = '';
             $where .= ' and p.is_valid = true ';
             $where .= $this->__get_search_str($search, $price_low, $price_high, $category);
-            $config['total_rows'] = $this->MProduct->intGetProductsCount($where);
+            $config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -204,7 +204,7 @@ class Product extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             //$where = '';
             $order = '';
-            $data['products'] = $this->MProduct->objGetProductList($where, $order, $limit);
+            $data['products'] = $this->Mproduct->objGetProductList($where, $order, $limit);
             $this->load->view('templates/header_user', $data);
             $this->load->view('product/listpage', $data);
         }else{
@@ -214,13 +214,13 @@ class Product extends MY_Controller {
             $config['base_url'] = base_url()."product/listpage/";
             if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
             $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-            $config['total_rows'] = $this->MProduct->intGetProductsCount($where);
+            $config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
             $limit = '';
             $limit .= " limit {$config['per_page']} offset {$offset} ";
-            $data['products'] = $this->MProduct->objGetProductList($where, $order, $limit);
+            $data['products'] = $this->Mproduct->objGetProductList($where, $order, $limit);
             $this->load->view('templates/header_user', $data);
             $this->load->view('product/listpage', $data);
         }
@@ -231,7 +231,7 @@ class Product extends MY_Controller {
         if($this->session->userdata('role') != 'admin')
             exit('You are not the admin.');
         $data = array();
-        $data['v'] = $this->MProduct->objGetProductInfo($product_id);
+        $data['v'] = $this->Mproduct->objGetProductInfo($product_id);
         $config = array(
             array(
                 'field'   => 'title',
@@ -281,7 +281,7 @@ class Product extends MY_Controller {
                     'is_valid' => false,
                 );
                 $main_data['is_valid'] = $this->input->post('is_valid')=='1'?'true':'false';
-                if($this->MProduct->update($main_data, $product_id))
+                if($this->Mproduct->update($main_data, $product_id))
                 {
                     $this->session->set_flashdata('flashdata', '产品更改成功');
                 }else{
@@ -300,7 +300,7 @@ class Product extends MY_Controller {
         if($this->session->userdata('role') != 'user')
             exit('You are not admin.');
         $data = array();
-        $data['v'] = $this->MProduct->objGetProductInfo($product_id);
+        $data['v'] = $this->Mproduct->objGetProductInfo($product_id);
         if($data['v']->is_valid == false)
             exit('The product is invalid');
         $this->load->view('templates/header_user', $data);
@@ -380,7 +380,7 @@ class Product extends MY_Controller {
                     'price' => $this->input->post('price'),
                     'thumb' => $thumb,
                 );
-                $result = $this->MProduct->add($main_data);
+                $result = $this->Mproduct->add($main_data);
                 if($result){
                     $this->session->set_flashdata('flashdata', '产品添加成功');
                     redirect('product/add');

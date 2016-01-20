@@ -2,7 +2,7 @@
 /**
  *
  **/
-class MPost extends CI_Model
+class Mpost extends CI_Model
 {
     private $objDB;
 

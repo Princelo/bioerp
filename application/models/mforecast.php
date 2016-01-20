@@ -2,7 +2,7 @@
 /**
  *
  **/
-class MForecast extends CI_Model
+class Mforecast extends CI_Model
 {
     private $objDB;
 

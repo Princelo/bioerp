@@ -8,9 +8,9 @@ class Report extends MY_Controller {
         parent::__construct();
         if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
             redirect('login');
-        $this->load->model('MProduct', 'MProduct');
-        $this->load->model('MBill', 'MBill');
-        $this->load->model('MUser', 'MUser');
+        $this->load->model('Mproduct', 'Mproduct');
+        $this->load->model('Mbill', 'Mbill');
+        $this->load->model('Muser', 'Muser');
         $this->load->library('form_validation');
         $this->load->library('pagination');
         $this->db = $this->load->database('default', true);
@@ -46,7 +46,7 @@ class Report extends MY_Controller {
             $where = '';
             //$where .= ' and p.is_valid = true ';
             $where .= $this->__get_search_str($search);
-            $config['total_rows'] = $this->MUser->intGetUsersCount($where);
+            $config['total_rows'] = $this->Muser->intGetUsersCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -54,7 +54,7 @@ class Report extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             //$where = '';
             $order = '';
-            $data['users'] = $this->MUser->objGetUserList($where, $order, $limit);
+            $data['users'] = $this->Muser->objGetUserList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('report/listuser_admin', $data);
         }else{
@@ -63,7 +63,7 @@ class Report extends MY_Controller {
             if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
             $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
             $where = '';
-            $config['total_rows'] = $this->MUser->intGetUsersCount($where);
+            $config['total_rows'] = $this->Muser->intGetUsersCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -71,7 +71,7 @@ class Report extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             //$where = ' and p.is_valid = true ';
             $order = '';
-            $data['users'] = $this->MUser->objGetUserList($where, $order, $limit);
+            $data['users'] = $this->Muser->objGetUserList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('report/listuser_admin', $data);
         }
@@ -122,7 +122,7 @@ class Report extends MY_Controller {
             //$where .= ' and p.is_valid = true ';
             $where = "";
             $where .= $this->__get_search_str($search);
-            $config['total_rows'] = $this->MUser->intGetSubUsersCount($where, $iwhere);
+            $config['total_rows'] = $this->Muser->intGetSubUsersCount($where, $iwhere);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -130,7 +130,7 @@ class Report extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             //$where = '';
             $order = '';
-            $data['users'] = $this->MUser->objGetSubUserList($where, $iwhere, $order, $limit, 2);
+            $data['users'] = $this->Muser->objGetSubUserList($where, $iwhere, $order, $limit, 2);
             $this->load->view('templates/header_user', $data);
             $this->load->view('report/index_sub', $data);
         }else{
@@ -140,7 +140,7 @@ class Report extends MY_Controller {
             $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
             $iwhere = " and p.id = {$current_user_id} ";
             $where = "";
-            $config['total_rows'] = $this->MUser->intGetSubUsersCount($where, $iwhere);
+            $config['total_rows'] = $this->Muser->intGetSubUsersCount($where, $iwhere);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -148,7 +148,7 @@ class Report extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             //$where = ' and p.is_valid = true ';
             $order = '';
-            $data['users'] = $this->MUser->objGetSubUserList($where, $iwhere, $order, $limit, 2);
+            $data['users'] = $this->Muser->objGetSubUserList($where, $iwhere, $order, $limit, 2);
             $this->load->view('templates/header_user', $data);
             $this->load->view('report/index_sub', $data);
         }
@@ -161,7 +161,7 @@ class Report extends MY_Controller {
         $pid = $this->session->userdata('current_user_id');
         if(!is_numeric($id))
             exit('ERROR');
-        if(!$this->MUser->isAccessibleSons($pid, $id))
+        if(!$this->Muser->isAccessibleSons($pid, $id))
             exit('You are not the Superior of this user');
         $data['id'] = $id;
         $this->load->view('templates/header_user');
@@ -176,7 +176,7 @@ class Report extends MY_Controller {
         if(!is_numeric($user_id))
             exit('ERROR');
         $pid = $this->session->userdata('current_user_id');
-        if(!$this->MUser->isAccessibleSons($pid, $user_id))
+        if(!$this->Muser->isAccessibleSons($pid, $user_id))
             exit('You are not the Superior of this user');
         $get_config = array(
             array(
@@ -271,7 +271,7 @@ class Report extends MY_Controller {
             //$where = '';
             //$where .= ' and p.is_valid = true ';
             //$where .= $this->__get_search_str($search, $price_low, $price_high);
-            //$config['total_rows'] = $this->MProduct->intGetProductsCount($where);
+            //$config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
 
             $config['per_page'] = 30;
             switch($report_type)
@@ -279,12 +279,12 @@ class Report extends MY_Controller {
                 case "day":
                     $config['total_rows'] = $interval->days + 1;
                     //if($this->input->get('is_filter') == 'on')
-                    //$config['total_rows'] = $this->MBill->objGetBillsOfDay($date_from, $date_to, $limit);
+                    //$config['total_rows'] = $this->Mbill->objGetBillsOfDay($date_from, $date_to, $limit);
                     break;
                 case "month":
                     $config['total_rows'] = $interval->y*12 + $interval->m + 1;
                     //if($this->input->get('is_filter') == 'on')
-                    //$config['total_rows'] = $this->MBill->objGetBillsOfDay($date_from, $date_to, $limit);
+                    //$config['total_rows'] = $this->Mbill->objGetBillsOfDay($date_from, $date_to, $limit);
                     break;
                 case "year":
                     $config['total_rows'] = $interval->y + 1;;
@@ -303,31 +303,31 @@ class Report extends MY_Controller {
             {
                 case 'day':
                     if($this->input->get('is_filter') == 'on') {
-                        $data['bills'] = $this->MBill->objGetBillsOfDayWithFilter($date_from, $date_to, $user_id, $limit);
-                        $config['total_rows'] = $this->MBill->objGetBillsOfDayWithFilterCount($date_from, $date_to, $user_id);
+                        $data['bills'] = $this->Mbill->objGetBillsOfDayWithFilter($date_from, $date_to, $user_id, $limit);
+                        $config['total_rows'] = $this->Mbill->objGetBillsOfDayWithFilterCount($date_from, $date_to, $user_id);
                         $this->pagination->initialize($config);
                         $data['page'] = $this->pagination->create_links();
                     }else
-                        $data['bills'] = $this->MBill->objGetBillsOfDay($date_from, $date_to, $user_id, $limit);
+                        $data['bills'] = $this->Mbill->objGetBillsOfDay($date_from, $date_to, $user_id, $limit);
                     $this->load->view('templates/header_user', $data);
                     $this->load->view('report/listpage_day', $data);
                     break;
                 case 'month':
                     if($this->input->get('is_filter') == 'on') {
-                        $data['bills'] = $this->MBill->objGetBillsOfMonthWithFilter($date_from, $date_to, $user_id, $limit);
-                        $config['total_rows'] = $this->MBill->objGetBillsOfMonthWithFilterCount($date_from, $date_to, $user_id);
+                        $data['bills'] = $this->Mbill->objGetBillsOfMonthWithFilter($date_from, $date_to, $user_id, $limit);
+                        $config['total_rows'] = $this->Mbill->objGetBillsOfMonthWithFilterCount($date_from, $date_to, $user_id);
                         $this->pagination->initialize($config);
                         $data['page'] = $this->pagination->create_links();
                     } else
-                        $data['bills'] = $this->MBill->objGetBillsOfMonth($date_from, $date_to, $user_id, $limit);
+                        $data['bills'] = $this->Mbill->objGetBillsOfMonth($date_from, $date_to, $user_id, $limit);
                     $this->load->view('templates/header_user', $data);
                     $this->load->view('report/listpage_month', $data);
                     break;
                 case 'year':
                     if($this->input->get('is_filter') == 'on')
-                        $data['bills'] = $this->MBill->objGetBillsOfYearWithFilter($date_from, $date_to, $user_id);
+                        $data['bills'] = $this->Mbill->objGetBillsOfYearWithFilter($date_from, $date_to, $user_id);
                     else
-                        $data['bills'] = $this->MBill->objGetBillsOfYear($date_from, $date_to, $user_id);
+                        $data['bills'] = $this->Mbill->objGetBillsOfYear($date_from, $date_to, $user_id);
                     $this->load->view('templates/header_user', $data);
                     $this->load->view('report/listpage_year', $data);
                     break;
@@ -446,12 +446,12 @@ class Report extends MY_Controller {
             switch($report_type)
             {
                 case 'day':
-                    $data['bills'] = $this->MBill->objGetBillsOfDay($date_from, $date_to, $user_id, $limit);
+                    $data['bills'] = $this->Mbill->objGetBillsOfDay($date_from, $date_to, $user_id, $limit);
                     $this->load->view('templates/header', $data);
                     $this->load->view('report/listpage_day_users', $data);
                     break;
                 case 'month':
-                    $data['bills'] = $this->MBill->objGetBillsOfMonth($date_from, $date_to, $user_id, $limit);
+                    $data['bills'] = $this->Mbill->objGetBillsOfMonth($date_from, $date_to, $user_id, $limit);
                     $this->load->view('templates/header', $data);
                     $this->load->view('report/listpage_month_users', $data);
                     break;
@@ -573,7 +573,7 @@ class Report extends MY_Controller {
                     $config['total_rows'] = $interval->y + 1;;
                     break;
                 case "products":
-                    $config['total_rows'] = $this->MBill->objGetProductBillsItemCount($date_from, $date_to);
+                    $config['total_rows'] = $this->Mbill->objGetProductBillsItemCount($date_from, $date_to);
                     break;
                 default:
                     $report_type = "";
@@ -588,17 +588,17 @@ class Report extends MY_Controller {
             switch($report_type)
             {
                 case 'day':
-                    $data['bills'] = $this->MBill->objGetBillsOfDay($date_from, $date_to, $user_id, $limit);
+                    $data['bills'] = $this->Mbill->objGetBillsOfDay($date_from, $date_to, $user_id, $limit);
                     $this->load->view('templates/header_user', $data);
                     $this->load->view('report/listpage_day', $data);
                     break;
                 case 'month':
-                    $data['bills'] = $this->MBill->objGetBillsOfMonth($date_from, $date_to, $user_id, $limit);
+                    $data['bills'] = $this->Mbill->objGetBillsOfMonth($date_from, $date_to, $user_id, $limit);
                     $this->load->view('templates/header_user', $data);
                     $this->load->view('report/listpage_month', $data);
                     break;
                 case 'year':
-                    $data['bills'] = $this->MBill->objGetBillsOfYear($date_from, $date_to, $user_id);
+                    $data['bills'] = $this->Mbill->objGetBillsOfYear($date_from, $date_to, $user_id);
                     $this->load->view('templates/header_user', $data);
                     $this->load->view('report/listpage_year', $data);
                     break;
@@ -714,7 +714,7 @@ class Report extends MY_Controller {
             //$where = '';
             //$where .= ' and p.is_valid = true ';
             //$where .= $this->__get_search_str($search, $price_low, $price_high);
-            //$config['total_rows'] = $this->MProduct->intGetProductsCount($where);
+            //$config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
 
             $config['per_page'] = 30;
             switch($report_type)
@@ -722,7 +722,7 @@ class Report extends MY_Controller {
                 case "day":
                     $config['total_rows'] = $interval->days + 1;
                     //if($this->input->get('is_filter') == 'on')
-                    //$config['total_rows'] = $this->MBill->objGetZentsBillsOfDay($date_from, $date_to, $limit)->count;
+                    //$config['total_rows'] = $this->Mbill->objGetZentsBillsOfDay($date_from, $date_to, $limit)->count;
                     break;
                 case "month":
                     $config['total_rows'] = $interval->y*12 + $interval->m + 1;
@@ -735,7 +735,7 @@ class Report extends MY_Controller {
                     $config['total_rows'] = 9999;
                     break;
                 case "users":
-                    $config['total_rows'] = $this->MBill->intGetUserBillsCount($date_from, $date_to);
+                    $config['total_rows'] = $this->Mbill->intGetUserBillsCount($date_from, $date_to);
                     break;
                 default:
                     $report_type = "";
@@ -750,27 +750,27 @@ class Report extends MY_Controller {
             switch($report_type)
             {
                 case 'day':
-                    $data['bills'] = $this->MBill->objGetZentsBillsOfDay($date_from, $date_to, $limit);
+                    $data['bills'] = $this->Mbill->objGetZentsBillsOfDay($date_from, $date_to, $limit);
                     $this->load->view('templates/header', $data);
                     $this->load->view('report/listpage_day_admin', $data);
                     break;
                 case 'month':
-                    $data['bills'] = $this->MBill->objGetZentsBillsOfMonth($date_from, $date_to, $limit);
+                    $data['bills'] = $this->Mbill->objGetZentsBillsOfMonth($date_from, $date_to, $limit);
                     $this->load->view('templates/header', $data);
                     $this->load->view('report/listpage_month_admin', $data);
                     break;
                 case 'year':
-                    $data['bills'] = $this->MBill->objGetZentsBillsOfYear($date_from, $date_to);
+                    $data['bills'] = $this->Mbill->objGetZentsBillsOfYear($date_from, $date_to);
                     $this->load->view('templates/header', $data);
                     $this->load->view('report/listpage_year_admin', $data);
                     break;
                 case 'products':
-                    $data['bills'] = $this->MBill->objGetProductBills($date_from, $date_to);
+                    $data['bills'] = $this->Mbill->objGetProductBills($date_from, $date_to);
                     $this->load->view('templates/header', $data);
                     $this->load->view('report/listpage_productbills', $data);
                     break;
                 case 'users':
-                    $data['bills'] = $this->MBill->objGetUserBills($date_from, $date_to, $limit);
+                    $data['bills'] = $this->Mbill->objGetUserBills($date_from, $date_to, $limit);
                     $this->load->view('templates/header', $data);
                     $this->load->view('report/listpage_userbills', $data);
                     break;
@@ -812,7 +812,7 @@ class Report extends MY_Controller {
             $limit = '';
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             $where = ' and w.user_id = '.$this->session->userdata('current_user_id');
-            $data['logs'] = $this->MBill->objGetWithdrawLogs($where, $date_from, $date_to, $limit);
+            $data['logs'] = $this->Mbill->objGetWithdrawLogs($where, $date_from, $date_to, $limit);
             $this->load->view('templates/header_user', $data);
             $this->load->view('report/withdraw_log', $data);
         }else {
@@ -858,7 +858,7 @@ class Report extends MY_Controller {
         if ($date_to == '') {
             $date_to = '2099-12-31';
         }
-        $data['logs'] = $this->MBill->objGetWithdrawLogs($where, $date_from, $date_to, $limit);
+        $data['logs'] = $this->Mbill->objGetWithdrawLogs($where, $date_from, $date_to, $limit);
         $this->load->view('templates/header', $data);
         $this->load->view('report/withdraw_log_admin', $data);
     }
@@ -886,26 +886,26 @@ class Report extends MY_Controller {
             switch($report_type) {
                 case 'day':
                     $title = "ERP 日报表 $date_from - $date_to";
-                    $bills = $this->MBill->objGetZentsBillsOfDay($date_from, $date_to);
+                    $bills = $this->Mbill->objGetZentsBillsOfDay($date_from, $date_to);
                     break;
                 case 'month':
-                    $bills = $this->MBill->objGetZentsBillsOfMonth($date_from, $date_to);
+                    $bills = $this->Mbill->objGetZentsBillsOfMonth($date_from, $date_to);
                     $date_from = date('Y-m', strtotime($date_from));
                     $date_to = date('Y-m', strtotime($date_to));
                     $title = "ERP 月报表 $date_from - $date_to";
                     break;
                 case 'year':
-                    $bills = $this->MBill->objGetZentsBillsOfYear($date_from, $date_to);
+                    $bills = $this->Mbill->objGetZentsBillsOfYear($date_from, $date_to);
                     $date_from = date('Y', strtotime($date_from));
                     $date_to = date('Y', strtotime($date_to));
                     $title = "ERP 年报表 $date_from - $date_to";
                     break;
                 case 'products':
-                    $bills = $this->MBill->objGetProductBills($date_from, $date_to);
+                    $bills = $this->Mbill->objGetProductBills($date_from, $date_to);
                     $title = "ERP 产品报表 $date_from - $date_to";
                     break;
                 case 'users':
-                    $bills = $this->MBill->objGetUserBills($date_from, $date_to);
+                    $bills = $this->Mbill->objGetUserBills($date_from, $date_to);
                     $title = "ERP 代理交易统计报表 $date_from - $date_to";
                     break;
                 default:

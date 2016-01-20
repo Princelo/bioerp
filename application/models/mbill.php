@@ -2,7 +2,7 @@
 /**
  *
  **/
-class MBill extends CI_Model
+class Mbill extends CI_Model
 {
     private $objDB;
 

@@ -8,7 +8,7 @@ class User extends MY_Controller {
         parent::__construct();
         if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
             redirect('login');
-        $this->load->model('MUser', 'MUser');
+        $this->load->model('Muser', 'Muser');
         $this->load->library('form_validation');
         $this->load->library('pagination');
         $this->db = $this->load->database('default', true);
@@ -19,7 +19,7 @@ class User extends MY_Controller {
         if($this->session->userdata('role') != 'user')
             exit('You are the admin.');
         $data = array();
-        $data['users'] = $this->MUser->getTree();
+        $data['users'] = $this->Muser->getTree();
         $this->load->view('templates/header_user', $data);
         $this->load->view('user/treepage', $data);
     }
@@ -30,13 +30,13 @@ class User extends MY_Controller {
         if($this->session->userdata('role') != 'user')
             exit('You are the admin.');
         if ($this->input->get('id', true) == '#') {
-            $tree = $this->MUser->getTree('#', 1, $current_user_id);
+            $tree = $this->Muser->getTree('#', 1, $current_user_id);
         } else {
             $id = filter_var($this->input->get('id', true), FILTER_VALIDATE_INT);
             if ($id < $current_user_id) {
                 exit;
             }
-            $tree = $this->MUser->getTree($id, 1, $current_user_id);
+            $tree = $this->Muser->getTree($id, 1, $current_user_id);
         }
         if ($tree == null){
         } else {
@@ -74,7 +74,7 @@ class User extends MY_Controller {
             //$where .= ' and p.is_valid = true ';
             $where = "";
             $where .= $this->__get_search_str($search);
-            $config['total_rows'] = $this->MUser->intGetSubUsersCount($where, $iwhere);
+            $config['total_rows'] = $this->Muser->intGetSubUsersCount($where, $iwhere);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -83,7 +83,7 @@ class User extends MY_Controller {
             //$where = '';
             //$where = ' and is_admin = false ';
             $order = ' order by u.id ';
-            $data['users'] = $this->MUser->objGetSubUserList($where, $iwhere, $order, $limit, 2);
+            $data['users'] = $this->Muser->objGetSubUserList($where, $iwhere, $order, $limit, 2);
             $this->load->view('templates/header_user', $data);
             $this->load->view('user/listpage', $data);
         } else {
@@ -115,7 +115,7 @@ class User extends MY_Controller {
             $where = '';
             //$where .= ' and p.is_valid = true ';
             $where .= $this->__get_search_str($search);
-            $config['total_rows'] = $this->MUser->intGetUsersCount($where);
+            $config['total_rows'] = $this->Muser->intGetUsersCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -124,7 +124,7 @@ class User extends MY_Controller {
             //$where = '';
             //$where = ' and is_admin = false ';
             $order = ' order by u.id ';
-            $data['users'] = $this->MUser->objGetUserList($where, $order, $limit);
+            $data['users'] = $this->Muser->objGetUserList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('user/listpage_admin', $data);
         }else{
@@ -133,7 +133,7 @@ class User extends MY_Controller {
             if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
             $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
             $where = '';
-            $config['total_rows'] = $this->MUser->intGetUsersCount($where);
+            $config['total_rows'] = $this->Muser->intGetUsersCount($where);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -141,7 +141,7 @@ class User extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             //$where = ' and p.is_valid = true ';
             $order = ' order by u.id ';
-            $data['users'] = $this->MUser->objGetUserList($where, $order, $limit);
+            $data['users'] = $this->Muser->objGetUserList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('user/listpage_admin', $data);
         }
@@ -234,7 +234,7 @@ class User extends MY_Controller {
                             )
                         );
                 }
-                $result = $this->MUser->addWithPid($main_data, $id);
+                $result = $this->Muser->addWithPid($main_data, $id);
                 if($result){
                     $this->output
                         ->set_content_type('application/json')
@@ -326,7 +326,7 @@ class User extends MY_Controller {
                     $this->session->set_flashdata('flashdata', '兩次輸入密碼不一致');
                     redirect('user/add');
                 }
-                $result = $this->MUser->add($main_data);
+                $result = $this->Muser->add($main_data);
                 if($result){
                     $this->session->set_flashdata('flashdata', '代理账号添加成功');
                     redirect('user/add');
@@ -348,9 +348,9 @@ class User extends MY_Controller {
         $op = $this->input->post('op');
         $id = intval($id);
         if ($op == 'enable') {
-            $result = $this->MUser->update(['is_valid' => true], $id);
+            $result = $this->Muser->update(['is_valid' => true], $id);
         } else {
-            $result = $this->MUser->update(['is_valid' => false], $id);
+            $result = $this->Muser->update(['is_valid' => false], $id);
         }
         if($result){
             $this->output
@@ -376,19 +376,19 @@ class User extends MY_Controller {
             exit('You are the admin.');
         $id = intval($id);
         $current_user_id = $this->session->userdata('current_user_id');
-        $isParent = $this->MUser->isParent($id, $current_user_id);
+        $isParent = $this->Muser->isParent($id, $current_user_id);
         $query = $this->db->query("select pid from users where id = {$current_user_id}")->result()[0];
-        $isGrandParent = $this->MUser->isParent($id, $query->pid);
+        $isGrandParent = $this->Muser->isParent($id, $query->pid);
         if ( $isParent || $isGrandParent ) {
-            $data['v'] = $this->MUser->objGetUserInfo($id);
+            $data['v'] = $this->Muser->objGetUserInfo($id);
             $data['id'] = $id;
             $this->load->view('templates/header_simple', $data);
             $this->load->view('user/details_parent', $data);
             return false;
         }
-        $check = $this->MUser->isAccessibleSons( $current_user_id, $id );
+        $check = $this->Muser->isAccessibleSons( $current_user_id, $id );
         if ( $check ) {
-            $data['v'] = $this->MUser->objGetUserInfo($id);
+            $data['v'] = $this->Muser->objGetUserInfo($id);
             $data['id'] = $id;
             $this->load->view('templates/header_simple', $data);
             $this->load->view('user/details_son', $data);
@@ -452,7 +452,7 @@ class User extends MY_Controller {
             $this->form_validation->set_rules($config);
             if(isset($_POST) && !empty($_POST))
             {
-                $data['v'] = $this->MUser->objGetUserInfo($id);
+                $data['v'] = $this->Muser->objGetUserInfo($id);
 
                 if ($this->form_validation->run() == FALSE)
                 {
@@ -472,7 +472,7 @@ class User extends MY_Controller {
                         'qq_no' => $this->input->post('qq_no'),
                         'is_valid' => $this->input->post('is_valid'),
                     );
-                    $result = $this->MUser->update($main_data, $id);
+                    $result = $this->Muser->update($main_data, $id);
                     if($result){
                         //$this->session->set_flashdata('flashdata', '代理账号修改成功');
                         $this->output
@@ -493,7 +493,7 @@ class User extends MY_Controller {
                     }
                 }
             }else{
-                $data['v'] = $this->MUser->objGetUserInfo($id);
+                $data['v'] = $this->Muser->objGetUserInfo($id);
                 $data['id'] = $id;
                 $this->load->view('templates/header_simple', $data);
                 $this->load->view('user/details_admin', $data);
@@ -508,7 +508,7 @@ class User extends MY_Controller {
             exit('You are not the admin.');
         $volume = floatval($this->input->post('volume'));
         $id = intval($this->input->post('id'));
-        $isEnough = $this->MUser->isEnough($volume, $id);
+        $isEnough = $this->Muser->isEnough($volume, $id);
         if (!$isEnough) {
             //$this->session->set_flashdata('flashdata', '错误: 结算失败, 会员可提现余额不足');
             $this->output
@@ -518,7 +518,7 @@ class User extends MY_Controller {
                     )
                 );
         } else {
-            $result = $this->MUser->boolWithdraw($volume, $id);
+            $result = $this->Muser->boolWithdraw($volume, $id);
 
             if ($result) {
                 //$this->session->set_flashdata('flashdata', '结算成功');
@@ -545,7 +545,7 @@ class User extends MY_Controller {
     {
         if($this->session->userdata('role') != 'user')
             exit('You are the admin.');
-        $data['v'] = $this->MUser->getSuperiorInfo($this->session->userdata('current_user_id'));
+        $data['v'] = $this->Muser->getSuperiorInfo($this->session->userdata('current_user_id'));
         $this->load->view('templates/header_user', $data);
         $this->load->view('user/my_superior', $data);
     }
@@ -572,8 +572,8 @@ class User extends MY_Controller {
             $_POST['password'] = md5($_POST['password']);
             $_POST['password2'] = md5($_POST['password2']);
             $result = false;
-            if($this->MUser->boolVerify($this->session->userdata('user'), md5($_POST['password-original']))){
-                $result = $this->MUser->boolUpdatePassword($_POST['password'], $this->session->userdata('current_user_id'));
+            if($this->Muser->boolVerify($this->session->userdata('user'), md5($_POST['password-original']))){
+                $result = $this->Muser->boolUpdatePassword($_POST['password'], $this->session->userdata('current_user_id'));
             }else{
                 $this->session->set_flashdata('flashdata', '原密码错误');
                 redirect('user/password');
@@ -594,7 +594,7 @@ class User extends MY_Controller {
         if($this->session->userdata('role') != 'admin')
             exit('You are not the admin.');
         $data = array();
-        $data['users'] = $this->MUser->getTree();
+        $data['users'] = $this->Muser->getTree();
         $this->load->view('templates/header', $data);
         $this->load->view('user/treepage_admin', $data);
     }
@@ -603,10 +603,10 @@ class User extends MY_Controller {
         if($this->session->userdata('role') != 'admin')
             exit('You are not the admin.');
         if ($this->input->get('id', true) == '#') {
-            $tree = $this->MUser->getTree('#', 3);
+            $tree = $this->Muser->getTree('#', 3);
         } else {
             $id = filter_var($this->input->get('id', true), FILTER_VALIDATE_INT);
-            $tree = $this->MUser->getTree($id);
+            $tree = $this->Muser->getTree($id);
         }
         if ($tree == null){
         } else {

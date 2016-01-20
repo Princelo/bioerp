@@ -7,8 +7,8 @@ class Forecast extends MY_Controller {
         parent::__construct();
         if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
             redirect('login');
-        $this->load->model('MForecast', 'MForecast');
-        $this->load->model('MUser', 'MUser');
+        $this->load->model('Mforecast', 'Mforecast');
+        $this->load->model('Muser', 'Muser');
         $this->load->library('form_validation');
     }
 
@@ -50,7 +50,7 @@ class Forecast extends MY_Controller {
         {
             if($this->session->userdata('role')=='admin' && $this->input->post('forecast') != '')
             {
-                if($this->MForecast->update($this->input->post('forecast'))){
+                if($this->Mforecast->update($this->input->post('forecast'))){
                     $this->session->set_flashdata('flashdata', '修改成功');
                     redirect('forecast/index');
                 }
@@ -62,16 +62,16 @@ class Forecast extends MY_Controller {
                 'wechat_id' => $this->input->post('wechat_id'),
                 'qq_no' => $this->input->post('qq_no'),
             );
-            if($this->MUser->update($main_data, $id))
+            if($this->Muser->update($main_data, $id))
             {
                 $this->session->set_flashdata('flashdata', '修改成功');
                 redirect('forecast/index');
             }
         }
         $data = array();
-        $data['forecast'] = $this->MForecast->objGetForecastInfo()->content;
-        $data['v'] = $this->MUser->objGetUserInfo($id);
-        //$data['forecasts'] = $this->MForecast->objGetForecastList();
+        $data['forecast'] = $this->Mforecast->objGetForecastInfo()->content;
+        $data['v'] = $this->Muser->objGetUserInfo($id);
+        //$data['forecasts'] = $this->Mforecast->objGetForecastList();
         if($this->session->userdata('role') == 'admin'){
 
             $this->load->view('templates/header', $data);

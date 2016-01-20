@@ -2,7 +2,7 @@
 /**
  *
  **/
-class MUser extends CI_Model
+class Muser extends CI_Model
 {
     function __construct()
     {

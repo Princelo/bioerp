@@ -2,7 +2,7 @@
 /**
  *
  **/
-class MOrder extends CI_Model
+class Morder extends CI_Model
 {
     private $objDB;
 

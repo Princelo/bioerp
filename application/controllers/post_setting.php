@@ -9,14 +9,14 @@ class Post_Setting extends MY_Controller {
             redirect('login');
         if($this->session->userdata('role') != 'admin')
             exit('You are not the admin');
-        $this->load->model('MPost', 'MPost');
+        $this->load->model('Mpost', 'Mpost');
         $this->load->library('form_validation');
     }
 
     public function index()
     {
         $data = array();
-        $data['rules'] = $this->MPost->objGetRules();
+        $data['rules'] = $this->Mpost->objGetRules();
 
         $this->load->view('templates/header', $data);
 
@@ -69,10 +69,10 @@ class Post_Setting extends MY_Controller {
                 'first_pay' => $this->input->post('first_pay'),
                 'additional_pay' => $this->input->post('additional_pay'),
             );
-            if($this->MPost->checkIsDuplicate($main_data)) {
+            if($this->Mpost->checkIsDuplicate($main_data)) {
                 exit('The rule you edited Is Duplicate Or Conflict with another rule exists');
             }
-            if($this->MPost->add($main_data))
+            if($this->Mpost->add($main_data))
             {
                 $this->session->set_flashdata('flashdata', '修改成功');
                 redirect('post_setting/index');
@@ -133,16 +133,16 @@ class Post_Setting extends MY_Controller {
                 'first_pay' => $this->input->post('first_pay'),
                 'additional_pay' => $this->input->post('additional_pay'),
             );
-            if($this->MPost->checkWhetherConflict($main_data, $id)) {
+            if($this->Mpost->checkWhetherConflict($main_data, $id)) {
                 exit('The rule you edited Is Duplicate Or Conflict with another rule exists');
             }
-            if($this->MPost->update($main_data, $id))
+            if($this->Mpost->update($main_data, $id))
             {
                 $this->session->set_flashdata('flashdata', '修改成功');
                 redirect('post_setting/index');
             }
         }
-        $data = $this->MPost->getRuleInfo($id);
+        $data = $this->Mpost->getRuleInfo($id);
         $this->load->view('templates/header', $data);
 
         $this->load->view('post_setting/edit', $data);

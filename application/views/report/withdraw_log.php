@@ -49,7 +49,7 @@
                                 <td><?=$v->wid?></td>
                                 <td><?=cny($v->volume)?></td>
                                 <td><?=cny($v->balance_before);?></td>
-                                <td>￥<?=bcadd(money($v->balance_before), money($v->volume));?></td>
+                                <td>￥<?=bcsub(money($v->balance_before), money($v->volume));?></td>
                                 <td><?=cny($v->balance);?></td>
                                 <td><?=cny($v->profit);?></td>
                                 <td><?=$v->create_time?></td>

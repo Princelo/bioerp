@@ -85,16 +85,20 @@ class Order extends MY_Controller {
 
     public function query_sub($id)
     {
-        if($this->session->userdata('role') != 'user')
-            exit('You are the admin.');
-        $pid = $this->session->userdata('current_user_id');
-        if(!is_numeric($id))
-            exit('ERROR');
-        if(!$this->Muser->isAccessibleSons($pid, $id))
-            exit('You are not the Superior of this user');
-        $data['id'] = $id;
-        $this->load->view('templates/header_user');
-        $this->load->view('order/query_sub', $data);
+        if($this->session->userdata('role') == 'user') {
+            $pid = $this->session->userdata('current_user_id');
+            if(!is_numeric($id))
+                exit('ERROR');
+            if(!$this->Muser->isAccessibleSons($pid, $id))
+                exit('You are not the Superior of this user');
+            $data['id'] = $id;
+            $this->load->view('templates/header_user');
+            $this->load->view('order/query_sub', $data);
+        } else {
+            $data['id'] = $id;
+            $this->load->view('templates/header');
+            $this->load->view('order/query_sub_admin', $data);
+        }
     }
 
     public function listpage_admin($offset = 0)

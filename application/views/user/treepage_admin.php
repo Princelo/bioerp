@@ -184,6 +184,7 @@
                             "action"			: function (data) {
                                 var inst = $.jstree.reference(data.reference),
                                     obj = inst.get_node(data.reference);
+                                window.open('<?=site_url('order/query_sub');?>/'+obj.id,"_blank");
                             }
                         },
                         "create_file" : {
@@ -191,6 +192,7 @@
                             "action"			: function (data) {
                                 var inst = $.jstree.reference(data.reference),
                                     obj = inst.get_node(data.reference);
+                                window.open('<?=site_url('report/index_user');?>?user='+obj.id,"_blank");
                             }
                         }
                     };

@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>UNVWEB Management System 远维网络</title>
+    <title>BIOERP Management System</title>
 
     <meta name="language" content="en" />
 

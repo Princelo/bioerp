@@ -50,6 +50,8 @@ class Login extends CI_Controller {
                     $this->session->set_userdata('user', $this->input->post('login_id'));
                     if ($this->session->userdata('role') == 'user')
                         $this->session->set_userdata('current_user_id', $this->Muser->intGetCurrentUserId($this->input->post('login_id')));
+                    else
+                        $this->session->set_userdata('current_user_id', $this->Muser->intGetCurrentAdminId($this->input->post('login_id')));
                     redirect('forecast/index', 'refresh');
                 }else{
                     $this->index('用戶或密码错误');

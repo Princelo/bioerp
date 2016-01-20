@@ -572,11 +572,20 @@ class User extends MY_Controller {
             $_POST['password'] = md5($_POST['password']);
             $_POST['password2'] = md5($_POST['password2']);
             $result = false;
-            if($this->Muser->boolVerify($this->session->userdata('user'), md5($_POST['password-original']))){
-                $result = $this->Muser->boolUpdatePassword($_POST['password'], $this->session->userdata('current_user_id'));
-            }else{
-                $this->session->set_flashdata('flashdata', '原密码错误');
-                redirect('user/password');
+            if ($this->session->userdata('role') == 'user') {
+                if($this->Muser->boolVerify($this->session->userdata('user'), md5($_POST['password-original']))){
+                    $result = $this->Muser->boolUpdatePassword($_POST['password'], $this->session->userdata('current_user_id'));
+                }else{
+                    $this->session->set_flashdata('flashdata', '原密码错误');
+                    redirect('user/password');
+                }
+            } else {
+                if($this->Muser->boolVerify($this->session->userdata('user'), md5($_POST['password-original']))){
+                    $result = $this->Muser->boolUpdatePasswordAdmin($_POST['password'], $this->session->userdata('current_user_id'));
+                }else{
+                    $this->session->set_flashdata('flashdata', '原密码错误');
+                    redirect('user/password');
+                }
             }
             if($result === true)
                 $this->session->set_flashdata('flashdata', '更改成功');

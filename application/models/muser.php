@@ -61,6 +61,16 @@ class Muser extends CI_Model
             return false;
     }
 
+    public function boolUpdatePasswordAdmin($password, $login_id){
+        $update_data = array("password" => $password);
+        $update_sql =  $this->db->update_string('admins', $update_data, array("id"=>$login_id));
+        $result = $this->db->query($update_sql);
+        if($result === true)
+            return true;
+        else
+            return false;
+    }
+
     public function addRootUser($main_data)
     {
         $current_user_id = $this->session->userdata('current_user_id');
@@ -160,6 +170,20 @@ class Muser extends CI_Model
         $query_sql = "";
         $query_sql .= "
             select id from users where username = ?;
+        ";
+        $binds = array($username);
+        $result = $this->db->query($query_sql, $binds);
+        if($result->result()[0]->id > 0)
+            return $result->result()[0]->id;
+        else
+            exit('error');
+    }
+
+    public function intGetCurrentAdminId($username)
+    {
+        $query_sql = "";
+        $query_sql .= "
+            select id from admins where username = ?;
         ";
         $binds = array($username);
         $result = $this->db->query($query_sql, $binds);

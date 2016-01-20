@@ -117,7 +117,7 @@ class User extends MY_Controller {
             //$where .= ' and p.is_valid = true ';
             $where = "";
             $where .= $this->__get_search_str($search);
-            $config['total_rows'] = $this->MUser->intGetSubUsersCount($where, $iwhere);
+            $config['total_rows'] = $this->Muser->intGetSubUsersCount($where, $iwhere);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -126,7 +126,7 @@ class User extends MY_Controller {
             //$where = '';
             //$where = ' and is_admin = false ';
             $order = ' order by u.id ';
-            $data['users'] = $this->MUser->objGetSubUserList($where, $iwhere, $order, $limit);
+            $data['users'] = $this->Muser->objGetSubUserList($where, $iwhere, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('user/sublistpage', $data);
         }else{
@@ -136,7 +136,7 @@ class User extends MY_Controller {
             $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
             $iwhere = " and p.id = {$current_user_id} ";
             $where = "";
-            $config['total_rows'] = $this->MUser->intGetSubUsersCount($where, $iwhere);
+            $config['total_rows'] = $this->Muser->intGetSubUsersCount($where, $iwhere);
             $config['per_page'] = 30;
             $this->pagination->initialize($config);
             $data['page'] = $this->pagination->create_links();
@@ -144,7 +144,7 @@ class User extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             //$where = ' and p.is_valid = true ';
             $order = ' order by u.id ';
-            $data['users'] = $this->MUser->objGetSubUserList($where, $iwhere, $order, $limit);
+            $data['users'] = $this->Muser->objGetSubUserList($where, $iwhere, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('user/sublistpage', $data);
         }

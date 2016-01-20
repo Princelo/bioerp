@@ -91,6 +91,64 @@ class User extends MY_Controller {
         }
     }
 
+    public function sublistpage($id, $offset = 0)
+    {
+        if($this->session->userdata('role') != 'admin')
+            exit('You are not the admin.');
+        $current_user_id = //$this->session->userdata('current_user_id');
+            $id;
+        $get_config = array(
+            array(
+                'field' =>  'search',
+                'label' =>  '用戶名',
+                'rules' =>  'trim|xss_clean'
+            )
+        );
+        $this->form_validation->set_rules($get_config);
+        if($this->input->get('search', true) != '' )
+        {
+            $search = $this->input->get('search', true);
+            $search = $this->db->escape_like_str($search);
+            $data = array();
+            $config['base_url'] = base_url()."user/sublistpage/".$id;
+            if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+            $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
+            $iwhere = " and p.id = {$current_user_id} ";
+            //$where .= ' and p.is_valid = true ';
+            $where = "";
+            $where .= $this->__get_search_str($search);
+            $config['total_rows'] = $this->MUser->intGetSubUsersCount($where, $iwhere);
+            $config['per_page'] = 30;
+            $this->pagination->initialize($config);
+            $data['page'] = $this->pagination->create_links();
+            $limit = '';
+            $limit .= " limit {$config['per_page']} offset {$offset} ";
+            //$where = '';
+            //$where = ' and is_admin = false ';
+            $order = ' order by u.id ';
+            $data['users'] = $this->MUser->objGetSubUserList($where, $iwhere, $order, $limit);
+            $this->load->view('templates/header', $data);
+            $this->load->view('user/sublistpage', $data);
+        }else{
+            $data = array();
+            $config['base_url'] = base_url()."user/sublistpage/".$id;
+            if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+            $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
+            $iwhere = " and p.id = {$current_user_id} ";
+            $where = "";
+            $config['total_rows'] = $this->MUser->intGetSubUsersCount($where, $iwhere);
+            $config['per_page'] = 30;
+            $this->pagination->initialize($config);
+            $data['page'] = $this->pagination->create_links();
+            $limit = '';
+            $limit .= " limit {$config['per_page']} offset {$offset} ";
+            //$where = ' and p.is_valid = true ';
+            $order = ' order by u.id ';
+            $data['users'] = $this->MUser->objGetSubUserList($where, $iwhere, $order, $limit);
+            $this->load->view('templates/header', $data);
+            $this->load->view('user/sublistpage', $data);
+        }
+    }
 
     public function listpage_admin($offset = 0)
     {

@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/report/withdraw_log.php" afterPath="$PROJECT_DIR$/application/views/report/withdraw_log.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/report/withdraw_log_admin.php" afterPath="$PROJECT_DIR$/application/views/report/withdraw_log_admin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/User.php" afterPath="$PROJECT_DIR$/application/controllers/User.php" />
     </list>
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,21 +36,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.625">
-              <caret line="564" column="4" selection-start-line="564" selection-start-column="4" selection-end-line="564" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.77710843">
+              <caret line="108" column="8" selection-start-line="108" selection-start-column="8" selection-end-line="108" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="withdraw_log_admin.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="withdraw_log_admin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/report/withdraw_log_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18072289">
-              <caret line="75" column="88" selection-start-line="75" selection-start-column="88" selection-end-line="75" selection-end-column="88" />
+            <state vertical-scroll-proportion="-13.75">
+              <caret line="87" column="96" selection-start-line="87" selection-start-column="96" selection-end-line="87" selection-end-column="96" />
               <folding>
                 <marker date="1453309507000" expanded="true" signature="1945:1994" placeholder="..." />
                 <marker date="1453309507000" expanded="true" signature="3670:3924" placeholder="/*...*/" />
@@ -209,11 +208,11 @@
         <option value="$PROJECT_DIR$/application/controllers/Report.php" />
         <option value="$PROJECT_DIR$/application/controllers/Order.php" />
         <option value="$PROJECT_DIR$/application/controllers/Post_setting.php" />
-        <option value="$PROJECT_DIR$/application/controllers/User.php" />
         <option value="$PROJECT_DIR$/application/controllers/Login.php" />
         <option value="$PROJECT_DIR$/application/models/Muser.php" />
         <option value="$PROJECT_DIR$/application/views/report/withdraw_log.php" />
         <option value="$PROJECT_DIR$/application/views/report/withdraw_log_admin.php" />
+        <option value="$PROJECT_DIR$/application/controllers/User.php" />
       </list>
     </option>
   </component>
@@ -979,14 +978,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.625">
-          <caret line="564" column="4" selection-start-line="564" selection-start-column="4" selection-end-line="564" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/report/withdraw_log.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-24.375">
@@ -997,13 +988,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/report/withdraw_log_admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18072289">
-          <caret line="75" column="88" selection-start-line="75" selection-start-column="88" selection-end-line="75" selection-end-column="88" />
+        <state vertical-scroll-proportion="-13.75">
+          <caret line="87" column="96" selection-start-line="87" selection-start-column="96" selection-end-line="87" selection-end-column="96" />
           <folding>
             <marker date="1453309507000" expanded="true" signature="1945:1994" placeholder="..." />
             <marker date="1453309507000" expanded="true" signature="3670:3924" placeholder="/*...*/" />
             <marker date="1453309507000" expanded="true" signature="4080:4324" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77710843">
+          <caret line="108" column="8" selection-start-line="108" selection-start-column="8" selection-end-line="108" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>

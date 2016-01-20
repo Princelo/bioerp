@@ -236,70 +236,23 @@ class Order extends MY_Controller {
         $current_user_id = $this->input->get('user');
         if(!is_numeric($current_user_id))
             exit('User Id Error');
-        $get_config = array(
-            array(
-                'field' =>  'search',
-                'label' =>  'Search Keyword',
-                'rules' =>  'trim|xss_clean'
-            ),
-            /*array(
-                'field' =>  'uid',
-                'label' =>  'User Id',
-                'rules' =>  'trim|xss_clean|numeric'
-            ),*/
-            array(
-                'field' =>  'is_finish',
-                'label' =>  'Is Finish',
-                'rules' =>  'trim|xss_clean|boolean'
-            ),
-        );
-        //$uid = $this->session->userdata('current_user_id');
         $uid = $current_user_id;
-        $this->form_validation->set_rules($get_config);
-        if($this->input->get('search', true) != '' ||
-            //$this->input->get('uid', true) != '' ||
-            $this->input->get('is_finish', true) != ''
-        )
-        {
-            $search = $this->input->get('search', true);
-            $search = $this->db->escape_like_str($search);
-            //$uid = $this->input->get('uid', true);
-            $is_finish = $this->input->get('is_finish', true);
-            $data = array();
-            $config['base_url'] = base_url()."order/listpage_admin/";
-            if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
-            $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-            $where = '';
-            //$where .= ' and p.is_valid = true ';
-            $where .= $this->__get_search_str($search, $uid, $is_finish);
-            $config['total_rows'] = $this->Morder->intGetOrdersCount($where);
-            $config['per_page'] = 30;
-            $this->pagination->initialize($config);
-            $data['page'] = $this->pagination->create_links();
-            $limit = '';
-            $limit .= " limit {$config['per_page']} offset {$offset} ";
-            //$where = '';
-            $order = '';
-            $data['orders'] = $this->Morder->objGetOrderList($where, $order, $limit);
-            $this->load->view('templates/header', $data);
-            $this->load->view('order/listpage_admin', $data);
-        }else{
-            $data = array();
-            $where = ' and ( o.is_pay = true or o.is_correct = false ) and o.user_id = '. $uid;
-            $config['base_url'] = base_url()."order/listpage_admin/";
-            if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
-            $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-            $config['total_rows'] = $this->Morder->intGetOrdersCount($where);
-            $config['per_page'] = 30;
-            $this->pagination->initialize($config);
-            $data['page'] = $this->pagination->create_links();
-            $limit = '';
-            $limit .= " limit {$config['per_page']} offset {$offset} ";
-            $order = '';
-            $data['orders'] = $this->Morder->objGetOrderList($where, $order, $limit);
-            $this->load->view('templates/header', $data);
-            $this->load->view('order/listpage_admin', $data);
-        }
+
+        $data = array();
+        $where = ' and o.user_id = '. $uid;
+        $config['base_url'] = base_url()."order/listpage_sub_admin/";
+        if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+        $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
+        $config['total_rows'] = $this->Morder->intGetOrdersCount($where);
+        $config['per_page'] = 30;
+        $this->pagination->initialize($config);
+        $data['page'] = $this->pagination->create_links();
+        $limit = '';
+        $limit .= " limit {$config['per_page']} offset {$offset} ";
+        $order = '';
+        $data['orders'] = $this->Morder->objGetOrderList($where, $order, $limit);
+        $this->load->view('templates/header', $data);
+        $this->load->view('order/listpage_admin', $data);
 
     }
 
@@ -313,70 +266,22 @@ class Order extends MY_Controller {
             exit('User Id Error');
         if(!$this->Muser->isAccessibleSons($pid, $current_user_id))
             exit('You are not the Superior of this user');
-        $get_config = array(
-            array(
-                'field' =>  'search',
-                'label' =>  'Search Keyword',
-                'rules' =>  'trim|xss_clean'
-            ),
-            /*array(
-                'field' =>  'uid',
-                'label' =>  'User Id',
-                'rules' =>  'trim|xss_clean|numeric'
-            ),*/
-            array(
-                'field' =>  'is_finish',
-                'label' =>  'Is Finish',
-                'rules' =>  'trim|xss_clean|boolean'
-            ),
-        );
-        //$uid = $this->session->userdata('current_user_id');
         $uid = $current_user_id;
-        $this->form_validation->set_rules($get_config);
-        if($this->input->get('search', true) != '' ||
-            //$this->input->get('uid', true) != '' ||
-            $this->input->get('is_finish', true) != ''
-        )
-        {
-            $search = $this->input->get('search', true);
-            $search = $this->db->escape_like_str($search);
-            //$uid = $this->input->get('uid', true);
-            $is_finish = $this->input->get('is_finish', true);
-            $data = array();
-            $config['base_url'] = base_url()."order/listpage/";
-            if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
-            $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-            $where = '';
-            //$where .= ' and p.is_valid = true ';
-            $where .= $this->__get_search_str($search, $uid, $is_finish);
-            $config['total_rows'] = $this->Morder->intGetOrdersCount($where);
-            $config['per_page'] = 30;
-            $this->pagination->initialize($config);
-            $data['page'] = $this->pagination->create_links();
-            $limit = '';
-            $limit .= " limit {$config['per_page']} offset {$offset} ";
-            //$where = '';
-            $order = '';
-            $data['orders'] = $this->Morder->objGetOrderList($where, $order, $limit);
-            $this->load->view('templates/header_user', $data);
-            $this->load->view('order/listpage', $data);
-        }else{
-            $data = array();
-            $where = ' and ( o.is_pay = true or o.is_correct = false ) and o.user_id = '. $uid;
-            $config['base_url'] = base_url()."order/listpage/";
-            if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
-            $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-            $config['total_rows'] = $this->Morder->intGetOrdersCount($where);
-            $config['per_page'] = 30;
-            $this->pagination->initialize($config);
-            $data['page'] = $this->pagination->create_links();
-            $limit = '';
-            $limit .= " limit {$config['per_page']} offset {$offset} ";
-            $order = '';
-            $data['orders'] = $this->Morder->objGetOrderList($where, $order, $limit);
-            $this->load->view('templates/header_user', $data);
-            $this->load->view('order/listpage', $data);
-        }
+        $data = array();
+        $where = ' and o.user_id = '. $uid;
+        $config['base_url'] = base_url()."order/listpage_sub/";
+        if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+        $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
+        $config['total_rows'] = $this->Morder->intGetOrdersCount($where);
+        $config['per_page'] = 30;
+        $this->pagination->initialize($config);
+        $data['page'] = $this->pagination->create_links();
+        $limit = '';
+        $limit .= " limit {$config['per_page']} offset {$offset} ";
+        $order = '';
+        $data['orders'] = $this->Morder->objGetOrderList($where, $order, $limit);
+        $this->load->view('templates/header_user', $data);
+        $this->load->view('order/listpage', $data);
 
     }
 

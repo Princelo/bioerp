@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - zentserp@localhost" uuid="7888c526-8f6f-4ae7-85ad-62776cb4a8d0">
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <schema-pattern>zentserp.pg_catalog zentserp.public</schema-pattern>
+      <default-schemas>zentserp.pg_catalog zentserp.public</default-schemas>
+    </data-source>
+  </component>
+</project>

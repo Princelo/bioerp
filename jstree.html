@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jsTree test</title>
+    <link rel="stylesheet" href="./assets/dist/themes/custom/style.css" />
+    <!--[if lt IE 8]>
+    <script>
+        alert('你的浏览器版本太老不技持本系统的某些功能,请升级或更换浏览器');
+    </script>
+    <![endif]-->
+    <style>
+        .id-remark{color:#ccc}
+    </style>
+</head>
+<body>
+<div id="jstree" style="background:#ececec">
+</div>
+<button>demo button</button>
+
+<script src="./assets/js/jquery.1.9.0.min.js"></script>
+<script src="./assets/dist/jstree.min.js"></script>
+<script>
+    $(function () {
+        $.jstree.defaults.core.themes.variant = "large";
+        $("#jstree").on("changed.jstree", function (e, data) {
+            console.log(data.action);
+            console.log(data);
+        }).jstree({
+            "core" : {
+                "multiple" : false,
+                "animation" : 1,
+                "themes" : {
+                    "variant" : "large"
+                },
+                'data' : [
+                    { "id" : "node1", "parent" : "#", "text" : "總經理<span class=\"id-remark\">(id:1)</span>", "icon":"person32px",
+                        state : { opened : true }
+                    },
+                    { "id" : "node2", "parent" : "node1", "text" : "總經理細佬<span class=\"id-remark\">(id:2)</span>", "icon":"person32px",
+                        state : { opened : true }
+                    },
+                    { "id" : "node56", "parent" : "node2", "text" : "周星馳<span class=\"id-remark\">(id:56)</span>", "icon":"person32px",
+                        state : { opened : false }
+                    },
+                    { "id" : "node58", "parent" : "node56", "text" : "朱茵<span class=\"id-remark\">(id:58)</span>", "icon":"person32px", "children":true,
+                        state : { opened : false }
+                    },
+                    { "id" : "node99", "parent" : "node56", "text" : "莫文蔚<span class=\"id-remark\">(id:99)</span>", "icon":"person32px", "children":true,
+                        state : { opened : false }
+                    },
+                    { "id" : "node101", "parent" : "node56", "text" : "吳孟達<span class=\"id-remark\">(id:101)</span>", "icon":"person32px", "children":true,
+                        state : { opened : false }
+                    },
+                    { "id" : "node57", "parent" : "node2", "text" : "蔣天生<span class=\"id-remark\">(id:57)</span>", "icon":"person32px",
+                        state : { opened : false }
+                    },
+                    { "id" : "node59", "parent" : "node57", "text" : "陳浩南<span class=\"id-remark\">(id:59)</span>", "icon":"person32px", "children":true,
+                        state : { opened : false }
+                    },
+                    { "id" : "node121", "parent" : "node57", "text" : "山雞<span class=\"id-remark\">(id:121)</span>", "icon":"person32px", "children":true,
+                        state : { opened : false }
+                    },
+                    { "id" : "node111", "parent" : "node57", "text" : "大天二<span class=\"id-remark\">(id:111)</span>", "icon":"person32px", "children":true,
+                        state : { opened : false }
+                    },
+                    { "id" : "node178", "parent" : "node57", "text" : "包皮<span class=\"id-remark\">(id:178)</span>", "icon":"person32px",
+                        state : { opened : false }
+                    },
+                    { "id" : "node279", "parent" : "node178", "text" : "蕉皮<span class=\"id-remark\">(id:279)</span>", "icon":"person32px", "children":true,
+                        state : { opened : false }
+                    },
+                ]
+            }
+        });
+        // bind to events triggered on the tree
+        $('#jstree').on("changed.jstree", function (e, data) {
+            console.log(data.selected);
+        });
+        // interact with the tree - either way is OK
+        $('button').on('click', function () {
+            $('#jstree').jstree(true).select_node('child_node_1');
+            $('#jstree').jstree('select_node', 'child_node_1');
+            $.jstree.reference('#jstree').select_node('child_node_1');
+        });
+    });
+</script>
+</body>
+</html>

@@ -73,7 +73,7 @@
                             <td><a href="<?=base_url()?>user/details_admin/<?=$v->uid?>"><?=$v->name?>(id: <?=$v->uid?>)</a></td>
                             <td><?=cny($v->volume)?></td>
                             <td><?=cny($v->balance_before);?></td>
-                            <td>￥<?=bcsub(money($v->balance_before), money($v->volume));?></td>
+                            <td>￥<?=bcsub(money($v->balance_before), money($v->volume), 2);?></td>
                             <td><?=cny($v->balance);?></td>
                             <td><?=cny($v->profit);?></td>
                             <td><?=$v->create_time?></td>

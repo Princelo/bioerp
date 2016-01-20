@@ -47,25 +47,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="withdraw_log_admin.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="withdraw_log_admin.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/report/withdraw_log_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25">
-              <caret line="75" column="40" selection-start-line="75" selection-start-column="40" selection-end-line="75" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.18072289">
+              <caret line="75" column="88" selection-start-line="75" selection-start-column="88" selection-end-line="75" selection-end-column="88" />
               <folding>
-                <marker date="1453309430000" expanded="true" signature="1945:1994" placeholder="..." />
-                <marker date="1453309430000" expanded="true" signature="3667:3921" placeholder="/*...*/" />
-                <marker date="1453309430000" expanded="true" signature="4077:4321" placeholder="..." />
+                <marker date="1453309507000" expanded="true" signature="1945:1994" placeholder="..." />
+                <marker date="1453309507000" expanded="true" signature="3670:3924" placeholder="/*...*/" />
+                <marker date="1453309507000" expanded="true" signature="4080:4324" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="withdraw_log.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="withdraw_log.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/report/withdraw_log.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70481926">
-              <caret line="51" column="44" selection-start-line="51" selection-start-column="44" selection-end-line="51" selection-end-column="44" />
+            <state vertical-scroll-proportion="-24.375">
+              <caret line="51" column="92" selection-start-line="51" selection-start-column="92" selection-end-line="51" selection-end-column="92" />
               <folding />
             </state>
           </provider>
@@ -212,8 +212,8 @@
         <option value="$PROJECT_DIR$/application/controllers/User.php" />
         <option value="$PROJECT_DIR$/application/controllers/Login.php" />
         <option value="$PROJECT_DIR$/application/models/Muser.php" />
-        <option value="$PROJECT_DIR$/application/views/report/withdraw_log_admin.php" />
         <option value="$PROJECT_DIR$/application/views/report/withdraw_log.php" />
+        <option value="$PROJECT_DIR$/application/views/report/withdraw_log_admin.php" />
       </list>
     </option>
   </component>
@@ -987,23 +987,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/report/withdraw_log_admin.php">
+    <entry file="file://$PROJECT_DIR$/application/views/report/withdraw_log.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25">
-          <caret line="75" column="40" selection-start-line="75" selection-start-column="40" selection-end-line="75" selection-end-column="40" />
-          <folding>
-            <marker date="1453309430000" expanded="true" signature="1945:1994" placeholder="..." />
-            <marker date="1453309430000" expanded="true" signature="3667:3921" placeholder="/*...*/" />
-            <marker date="1453309430000" expanded="true" signature="4077:4321" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="-24.375">
+          <caret line="51" column="92" selection-start-line="51" selection-start-column="92" selection-end-line="51" selection-end-column="92" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/report/withdraw_log.php">
+    <entry file="file://$PROJECT_DIR$/application/views/report/withdraw_log_admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70481926">
-          <caret line="51" column="44" selection-start-line="51" selection-start-column="44" selection-end-line="51" selection-end-column="44" />
-          <folding />
+        <state vertical-scroll-proportion="0.18072289">
+          <caret line="75" column="88" selection-start-line="75" selection-start-column="88" selection-end-line="75" selection-end-column="88" />
+          <folding>
+            <marker date="1453309507000" expanded="true" signature="1945:1994" placeholder="..." />
+            <marker date="1453309507000" expanded="true" signature="3670:3924" placeholder="/*...*/" />
+            <marker date="1453309507000" expanded="true" signature="4080:4324" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

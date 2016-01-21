@@ -8,9 +8,9 @@
 
             <ul id="left_menu">
                 <li>
-                    <a href='<?=base_url()?>report/index_admin' ><div>代理报表查询 </div></a>
+                    <a href='<?=base_url()?>report/index' ><div>代理报表查询 </div></a>
                 </li>
-                <li><a href='<?=base_url();?>report/index_zents' ><div>ERP总报表查询 </div></a></li>
+                <li><a href='<?=base_url();?>report/index_sub' ><div>下级代理报表查询 </div></a></li>
                 <li>
                     <a href='<?=base_url()?>report/withdraw' ><div>结算查询 </div></a>
                 </li>

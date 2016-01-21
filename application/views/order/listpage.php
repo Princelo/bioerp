@@ -58,15 +58,16 @@
                 <tr>
                     <th>订单号</th>
                     <th>产品总量</th>
-                    <th>产品种类数目</th>
-                    <th>订单总价</th>
+                    <!--<th>产品种类数目</th>-->
+                    <th>产品总价</th>
+                    <th>运费</th>
                     <th>是否已付款</th>
                     <th>是否完成</th>
                     <th>交易完成时间</th>
                     <th>取货方式</th>
                     <th>订单联系人</th>
                     <th>联系人电话</th>
-                    <th>订单备注</th>
+                    <!--<th>订单备注</th>-->
                     <th>快递单号</th>
                     <th>订单提交时间</th>
                     <th></th>
@@ -79,15 +80,16 @@
                     <tr class="<?=$n%2==0?"even":"odd";?>">
                         <td><?=$v->id?></td>
                         <td><?=$v->quantity;?></td>
-                        <td><?=$v->diff_quantity;?></td>
+                        <!--<td><?=$v->diff_quantity;?></td>-->
                         <td><?=cny($v->amount)?></td>
+                        <td><?=cny($v->post_fee)?></td>
                         <td><span class="<?=$v->is_pay==true?"accept":"cross";?>"></span></td>
                         <td><span class="<?=$v->is_pay==true&&$v->is_correct==true?"accept":"cross";?>"></span></td>
                         <td><?=$v->finish_time?></td>
                         <td><?=$v->is_post==true?"邮寄":"自取"?></td>
                         <td><?=$v->linkman?></td>
                         <td><?=$v->mobile?></td>
-                        <td><?=$v->remark?></td>
+                        <!--<td><?=$v->remark?></td>-->
                         <td><?=$v->post_info?></td>
                         <td><?=substr($v->stock_time, 0, 19);?></td>
                         <td><a href="<?=base_url()?>order/details/<?=$v->id;?>">查看详情</a></td>

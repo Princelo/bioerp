@@ -97,8 +97,8 @@
 
 
 
-                            <div align="left">
-                                <form action="<?=base_url()?>login/check" method="post" class="yform columnar" id="frm" style="min-width: 276px;">
+                            <div align="left" style="min-width: 276px;">
+                                <form action="<?=base_url()?>login/check" method="post" class="yform columnar" id="frm" style="min-width: 274px;">
 
 
                                     <div style="width:113px; margin:0 auto; margin-bottom: 10px;">

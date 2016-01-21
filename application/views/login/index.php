@@ -97,7 +97,7 @@
 
 
 
-                            <div align="left" style="min-width: 276px;">
+                            <div align="left" style="min-width: 276px;" id="fuck">
                                 <form action="<?=base_url()?>login/check" method="post" class="yform columnar" id="frm" style="min-width: 274px;">
 
 
@@ -140,5 +140,9 @@
         <!-- end: #main -->
     </div>
 </div>
+<script>
+    $('#fuck').width(276);
+    $('#frm').width(274);
+</script>
 </body>
 </html>

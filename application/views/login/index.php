@@ -169,7 +169,7 @@
 <!--[if IE 9 ]>  <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->  <!--<![endif]-->
 <script>
-    $('.google_email').width(274 - 16);
+    $('.google_email').width(274);
     $('#fuck').width(276);
     $('#frm').width(274);
 </script>

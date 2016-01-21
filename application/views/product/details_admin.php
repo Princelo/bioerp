@@ -53,9 +53,6 @@
                         <select name="category">
                             <option value="0" <?=$v->category==0?"selected=\"selected\"":""?>><?=getCategoryName(0)?></option>
                             <option value="1" <?=$v->category==1?"selected=\"selected\"":""?>><?=getCategoryName(1)?></option>
-                            <option value="2" <?=$v->category==2?"selected=\"selected\"":""?>><?=getCategoryName(2)?></option>
-                            <option value="3" <?=$v->category==3?"selected=\"selected\"":""?>><?=getCategoryName(3)?></option>
-                            <option value="4" <?=$v->category==4?"selected=\"selected\"":""?>><?=getCategoryName(4)?></option>
                         </select>
                     </td>
                 </tr>

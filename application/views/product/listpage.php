@@ -33,9 +33,6 @@
                                     <option value="">所有</option>
                                     <option value="0"><?=getCategoryName(0)?></option>
                                     <option value="1"><?=getCategoryName(1)?></option>
-                                    <option value="2"><?=getCategoryName(2)?></option>
-                                    <option value="3"><?=getCategoryName(3)?></option>
-                                    <option value="4"><?=getCategoryName(4)?></option>
                                 </select>
                             </th>
                             <th>

@@ -404,10 +404,10 @@ function getCategoryName($category)
     switch($category)
     {
         case 0:
-            $return = "护肤系列";
+            $return = "酵素系列";
             break;
         case 1:
-            $return = "手工皂系列";
+            $return = "柠檬粉系列";
             break;
         case 2:
             $return = "基础精油";

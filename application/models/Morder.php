@@ -447,12 +447,21 @@ class Morder extends CI_Model
                 '{$next_week}')
             ";
         } else {
-            $insert_sql_job = "
-            insert into jobs (user_id, order_id, return_profit, excute_time)
-            values ({$user_id}, {$order_id},
-            {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent},
-            '{$next_week}')
+            if ($is_first) {
+                $insert_sql_job = "
+                    insert into jobs (user_id, order_id, return_profit, excute_time)
+                    values ({$user_id}, {$order_id},
+                    {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent},
+                    '{$next_week}')
             ";
+            } else {
+                $insert_sql_job = "
+                    insert into jobs (user_id, order_id, return_profit, excute_time)
+                    values ({$user_id}, {$order_id},
+                    {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent},
+                    '{$next_week}')
+            ";
+            }
         }
 
         $update_sql_first_purchase = "

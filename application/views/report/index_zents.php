@@ -28,7 +28,7 @@
             </span>
                 <form action="<?=base_url()?>report/listpage_admin" method="get">
                     <fieldset>
-                        <legend>添加产品 </legend>
+                        <legend>报名查询 </legend>
                         <table width="70%">
                             <!--<col width="50%">
                             <col width="50%">-->

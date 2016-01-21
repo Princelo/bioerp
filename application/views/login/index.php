@@ -79,8 +79,8 @@
 
                     <!--<div style="background:url('includes/images/login_interface.jpg'); width:500px; height:300px;border:6px solid #fff">-->
                     <div>
-                        <h1 class="title">XX有限公司</h1>
-                        <h2 class="">使用您的XX帐号登陆</h2>
+                        <h1 class="title">广州洋宝生物科技有限公司 - 会员直销系统</h1>
+                        <h2 class="">使用您的帐号登陆</h2>
                         <p style="width:100%; text-align:center; color:#f00;"><?=$error;?></p>
                         <div class="choose-block" style="display:none;">
                             <div class="choose">

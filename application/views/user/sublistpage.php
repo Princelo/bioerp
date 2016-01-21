@@ -63,7 +63,7 @@
                                 <td><?=$v->qq_no?></td>
                                 <td><?=cny($v->turnover)?></td>
                                 <td><?=cny($v->profit)?></td>
-                                <td><?=$v->is_valid=='t'?'是':'否'?></td>
+                                <td><?=$v->is_valid==true?'是':'否'?></td>
                                 <td><a href="<?=base_url()?>user/sublistpage/<?=$v->id?>">他的下一级</a></td>
                                 <td><a bhref="<?=base_url()?>user/details_admin/<?=$v->id?>" onclick="window.open('<?=base_url()?>user/details_admin/<?=$v->id?>','Edit','width=600,height=600,0,status=0,')">编辑</a></td>
                             </tr>

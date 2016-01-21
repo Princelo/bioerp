@@ -62,7 +62,7 @@
                                 <td><?=$v->qq_no?></td>
                                 <td><?=cny($v->turnover)?></td>
                                 <td><?=cny($v->profit)?></td>
-                                <td><?=$v->is_valid=='t'?'是':'否'?></td>
+                                <td><?=$v->is_valid==true?'是':'否'?></td>
                                 <td><a href="<?=base_url()?>order/query_sub/<?=$v->id?>">查询他的订单</a></td>
                             </tr>
                         <? } ?>

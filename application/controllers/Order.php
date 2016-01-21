@@ -310,7 +310,7 @@ class Order extends MY_Controller {
         {
             if($this->input->post('finish') == 'finish_with_pay')
             {
-                if($data['v']->is_pay == 't' && $data['v']->is_correct == 't')
+                if($data['v']->is_pay == true && $data['v']->is_correct == true)
                 {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单已完成');
                     redirect('order/details_admin/'.$order_id);
@@ -330,17 +330,17 @@ class Order extends MY_Controller {
             }
             if($this->input->post('finish') == 'finish_without_pay')
             {
-                if($data['v']->is_pay == 't' && $data['v']->is_correct == 't')
+                if($data['v']->is_pay == true && $data['v']->is_correct == true)
                 {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单已完成');
                     redirect('order/details_admin/'.$order_id);
                 }
-                if($data['v']->is_pay_online == 'f')
+                if($data['v']->is_pay_online == false)
                 {
                     $this->session->set_flashdata('flashdata', '该订单属于线下付款类，必须插入付款纪录');
                     redirect('order/details_admin/'.$order_id);
                 }
-                if($data['v']->is_pay == 'f' && $data['v']->is_pay_online == 't')
+                if($data['v']->is_pay == false && $data['v']->is_pay_online == true)
                 {
                     $this->session->set_flashdata('flashdata', '该订单未支付金额，且属于线上交易类，未能完成订单');
                     redirect('order/details_admin/'.$order_id);
@@ -349,7 +349,7 @@ class Order extends MY_Controller {
                 (money($data['v']->pay_amt) <
                     bcadd(money($data['v']->post_fee), bcmul(money($data['v']->unit_price), $data['v']->count, 4), 4)
                 ) &&
-                $data['v']->is_pay_online == 't'
+                $data['v']->is_pay_online == true
                 )
                 {
                     $this->session->set_flashdata('flashdata', '该订单支付金额不足，未能完成订单');
@@ -364,12 +364,12 @@ class Order extends MY_Controller {
             }
             if($this->input->post('finish') == 'unfinish_rollback')
             {
-                if($data['v']->is_pay == 'f' || $data['v']->is_correct == 'f')
+                if($data['v']->is_pay == false || $data['v']->is_correct == false)
                 {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单未完成');
                     redirect('order/details_admin/'.$order_id);
                 }
-                if($data['v']->is_pay_online == 't')
+                if($data['v']->is_pay_online == true)
                 {
                     $this->session->set_flashdata('flashdata', '该订单属于线上付款类，禁止清除付款纪录');
                     redirect('order/details_admin/'.$order_id);
@@ -382,12 +382,12 @@ class Order extends MY_Controller {
             }
             if($this->input->post('finish') == 'unfinish')
             {
-                if($data['v']->is_pay == 'f' || $data['v']->is_correct == 'f')
+                if($data['v']->is_pay == false || $data['v']->is_correct == false)
                 {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单未完成');
                     redirect('order/details_admin/'.$order_id);
                 }
-                if($data['v']->is_pay_online == 'f')
+                if($data['v']->is_pay_online == false)
                 {
                     $this->session->set_flashdata('flashdata', '该订单属于线下付款类，要执行该操作，必须清除付款纪录');
                     redirect('order/details_admin/'.$order_id);

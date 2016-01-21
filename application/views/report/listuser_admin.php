@@ -72,7 +72,7 @@
                             <td><?=$v->mobile_no?></td>
                             <td><?=$v->wechat_id?></td>
                             <td><?=$v->qq_no?></td>
-                            <td><?=$v->is_valid=='t'?'是':'否'?></td>
+                            <td><?=$v->is_valid==true?'是':'否'?></td>
                             <td><a href="<?=base_url()?>report/index_user?user=<?=$v->id?>">查看他的报表</a></td>
                         </tr>
                     <? } ?>

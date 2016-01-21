@@ -80,7 +80,7 @@
                             <td><?=cny($v->profit)?></td>
                             <td><?=cny($v->withdraw_volume)?></td>
                             <td><?=cny($v->balance)?></td>
-                            <td><?=$v->is_valid=='t'?'是':'否'?></td>
+                            <td><?=$v->is_valid==true?'是':'否'?></td>
                             <? if($v->pid == '0' || $v->pid == '') { ?>
                                 <td>无上级</td>
                                 <? } else { ?>

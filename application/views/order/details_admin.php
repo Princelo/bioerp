@@ -89,13 +89,13 @@
             <tr class="odd">
                 <th>取货方式</th>
                 <td>
-                    <span class="info"><?=$v->is_post=='t'?"邮寄":"自取"?></span>
+                    <span class="info"><?=$v->is_post==true?"邮寄":"自取"?></span>
                 </td>
             </tr>
             <tr class="even">
                 <th>收货地址</th>
                 <td>
-                    <span class="info important<?=$v->is_post=='f'?" hidden":""?>"> <?=getStrProvinceName($v->province_id)?>&nbsp;<?=getStrCityName($v->city_id)?>&nbsp;<?=$v->address_info?> </span>
+                    <span class="info important<?=$v->is_post==false?" hidden":""?>"> <?=getStrProvinceName($v->province_id)?>&nbsp;<?=getStrCityName($v->city_id)?>&nbsp;<?=$v->address_info?> </span>
                 </td>
             </tr>
             <tr class="odd">
@@ -127,7 +127,7 @@
             <tr class="odd">
                 <th>是否已付款</th>
                 <td>
-                    <span class="<?=$v->is_pay=='t'&&$v->is_correct=='t'?"accept":"cross";?>"></span>
+                    <span class="<?=$v->is_pay==true&&$v->is_correct==true?"accept":"cross";?>"></span>
                 </td>
             </tr>
             <tr class="even">
@@ -151,13 +151,13 @@
             <tr class="odd">
                 <th>付款数目是否正确</th>
                 <td>
-                    <span class="<?=$v->is_pay=='t'&&$v->is_correct=='t'?"accept":"cross";?>"></span>
+                    <span class="<?=$v->is_pay==true&&$v->is_correct==true?"accept":"cross";?>"></span>
                 </td>
             </tr>
             <tr class="even">
                 <th>订单取消情況</th>
                 <td>
-                    <span class="info"><?=$v->is_cancelled=='t'?"已取消":"正常"?></span>
+                    <span class="info"><?=$v->is_cancelled==true?"已取消":"正常"?></span>
                 </td>
             </tr>
             <tr class="odd">
@@ -169,7 +169,7 @@
             <tr class="even">
                 <th>是否完成订单</th>
                 <td>
-                    <span class="<?=$v->is_pay=='t'&&$v->is_correct=='t'?"accept":"cross";?>"></span>
+                    <span class="<?=$v->is_pay==true&&$v->is_correct==true?"accept":"cross";?>"></span>
                 </td>
             </tr>
             <tr class="odd">

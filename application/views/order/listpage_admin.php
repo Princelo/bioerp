@@ -91,10 +91,10 @@
                         <td><?=$v->quantity;?></td>
                         <td><?=$v->diff_quantity?></td>
                         <td><?=cny($v->amount)?></td>
-                        <td><span class="<?=$v->is_pay=='t'?"accept":"cross";?>"></span></td>
-                        <td><span class="<?=$v->is_pay=='t'&&$v->is_correct=='t'?"accept":"cross";?>"></span></td>
+                        <td><span class="<?=$v->is_pay==true?"accept":"cross";?>"></span></td>
+                        <td><span class="<?=$v->is_pay==true&&$v->is_correct==true?"accept":"cross";?>"></span></td>
                         <td><?=$v->finish_time?></td>
-                        <td><?=$v->is_post=='t'?"邮寄":"自取"?></td>
+                        <td><?=$v->is_post==true?"邮寄":"自取"?></td>
                         <td><?=$v->linkman?></td>
                         <td><?=$v->mobile?></td>
                         <td><?=$v->remark?></td>
@@ -103,7 +103,7 @@
                         <td><?=cny($v->return_profit)?></td>
                         <td><?=cny($v->p_return_invite)?></td>
                         <td><a href="<?=base_url()?>order/details_admin/<?=$v->id;?>">查看详情</a></td>
-                        <td><?if($v->is_pay!='t'):?><a href="javascript:void(0);" onclick="myconfirm(<?=$v->id?>);">移除</a><?endif?></td>
+                        <td><?if($v->is_pay!=true):?><a href="javascript:void(0);" onclick="myconfirm(<?=$v->id?>);">移除</a><?endif?></td>
                     </tr>
                 <? } ?>
                 <? } ?>

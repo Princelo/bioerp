@@ -259,17 +259,6 @@ class Product extends MY_Controller {
                 $this->load->view('templates/header', $data);
                 $this->load->view('product/details_admin/'.$product_id, $data);
             }else{
-                /*if($this->input->post('is_valid') == '1' && $data['v']->is_valid == 't')
-                {
-                    $this->session->set_flashdata('flashdata', '非法操作: 产品本已上架');
-                    redirect('product/details_admin/'.$product_id);
-                }
-                if($this->input->post('is_valid') == '0' && $data['v']->is_valid == 'f')
-                {
-                    $this->session->set_flashdata('flashdata', '非法操作: 产品本已下架');
-                    redirect('product/details_admin/'.$product_id);
-                }*/
-                $main_data = array();
                 $main_data = array(
                     'title' => $this->input->post('title'),
                     'properties' => $this->input->post('properties'),

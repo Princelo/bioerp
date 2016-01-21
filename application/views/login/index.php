@@ -141,6 +141,7 @@
     </div>
 </div>
 <script>
+    $('.google_email').width(274);
     $('#fuck').width(276);
     $('#frm').width(274);
 </script>

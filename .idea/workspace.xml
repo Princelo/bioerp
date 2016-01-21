@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/general.css" afterPath="$PROJECT_DIR$/assets/general.css" />
-    </list>
+    <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="" />
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -133,8 +131,8 @@
       <file leaf-file-name="general.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/general.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13863216">
-              <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
+            <state vertical-scroll-proportion="0.41589648">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1093,8 +1091,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/general.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13863216">
-          <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
+        <state vertical-scroll-proportion="0.41589648">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>

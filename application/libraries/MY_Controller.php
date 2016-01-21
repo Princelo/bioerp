@@ -21,8 +21,9 @@ class MY_Controller extends CI_Controller {
         $update_job_sql = array();
         if (count($result) > 0) {
             foreach($result as $k => $v) {
-                $update_user_sql[] = "update users set profit = profit::decimal + '{$v->return_profit}'::decimal,
-                balance = balance::decimal + '{$v->return_profit}'
+                $return_profit = money($v->return_profit);
+                $update_user_sql[] = "update users set profit = profit::decimal + {$return_profit},
+                balance = balance::decimal + {$return_profit}
                 where id = {$v->user_id};";
                 $update_job_sql[] = "update jobs set is_expired = true and is_success = true;";
             }

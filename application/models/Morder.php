@@ -475,24 +475,10 @@ class Morder extends CI_Model
                 where id = {$user_id};";
         $update_sql_parent_profit = "
             update users set profit = profit::decimal + (
-                select
                     {$parent_profit} + {$parent_extra_profit}
-                  from
-                      orders o, users u, users p
-                      where 1 = 1
-                          and o.id = {$order_id}
-                          and u.id = {$user_id}
-                          and p.id = u.pid
             ),
             balance = balance::decimal + (
-                select
                     {$parent_profit} + {$parent_extra_profit}
-                  from
-                      orders o, users u, users p
-                      where 1 = 1
-                          and o.id = {$order_id}
-                          and u.id = {$user_id}
-                          and p.id = u.pid
             )
             where id = {$parent_user_id};
             ";
@@ -531,8 +517,12 @@ class Morder extends CI_Model
         }
         $this->objDB->query($update_sql_order);
         $this->objDB->query($update_sql_turnover);
-        $this->objDB->query($update_sql_parent_profit);
-        $this->objDB->query($update_sql_grand_parent_profit);
+        if($parent_user_id > 0) {
+            $this->objDB->query($update_sql_parent_profit);
+        }
+        if ($grand_parent_user_id > 0) {
+            $this->objDB->query($update_sql_grand_parent_profit);
+        }
         $this->objDB->query($update_sql_initiation);
         $this->objDB->query($finish_log, $binds_finish_log);
 

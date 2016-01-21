@@ -123,12 +123,9 @@
       <file leaf-file-name="details_admin.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/order/details_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.027726432">
-              <caret line="211" column="76" selection-start-line="211" selection-start-column="76" selection-end-line="211" selection-end-column="76" />
-              <folding>
-                <marker date="1453368556000" expanded="true" signature="8274:8616" placeholder="..." />
-                <marker date="1453368556000" expanded="true" signature="8285:8594" placeholder="..." />
-              </folding>
+            <state vertical-scroll-proportion="0.36044362">
+              <caret line="211" column="40" selection-start-line="211" selection-start-column="40" selection-end-line="211" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -880,12 +877,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/order/details_admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.027726432">
-          <caret line="211" column="76" selection-start-line="211" selection-start-column="76" selection-end-line="211" selection-end-column="76" />
-          <folding>
-            <marker date="1453368556000" expanded="true" signature="8274:8616" placeholder="..." />
-            <marker date="1453368556000" expanded="true" signature="8285:8594" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.36044362">
+          <caret line="211" column="40" selection-start-line="211" selection-start-column="40" selection-end-line="211" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>

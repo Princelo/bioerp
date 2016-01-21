@@ -209,7 +209,7 @@
 
 
             <div class="toolbar type-button">
-                <div <?=$v->pay_method=='alipay'?'':'style="display:none;"'?>>
+                <div <?=$v->is_post==true?'':'style="display:none;"'?>>
                     <table>
                         <tr>
                             <th>快递单号</th>

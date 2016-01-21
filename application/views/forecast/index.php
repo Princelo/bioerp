@@ -6,7 +6,7 @@
 
 
         <div class="info view_form">
-            <h2>BIOERP管理系统 </h2>
+            <h2>广州洋宝生物科技有限公司 - 会员直销系统</h2>
             <h4><?php echo validation_errors(); ?>
                 <script>
                     if("<?=$this->session->flashdata('flashdata', 'value');?>"!="")
@@ -56,7 +56,7 @@
 <!-- end: #col4 -->	</div>
 
 <div id="footer">
-    Copyright &copy; <?=date('Y');?> by BIO<br/>
+    Copyright &copy; <?=date('Y');?> by GEOMETRY<br/>
     All Rights Reserved.<br/>
 </div><!-- footer -->
 </body>

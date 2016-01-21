@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>XX ERP System XX订单管理系統</title>
+    <title>广州洋宝生物科技有限公司 - 会员直销系统</title>
     <!--<link href="includes/css/style_login.css" rel="stylesheet" type="text/css"/>-->
     <link rel="stylesheet" href="<?=base_url();?>assets/login.css">
 

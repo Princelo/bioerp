@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>BIOERP Management System</title>
+    <title>广州洋宝生物科技有限公司 - 会员直销系统</title>
 
     <meta name="language" content="en" />
 
@@ -119,7 +119,7 @@
 
 
 <div id="header">
-    <div id="logo">BIOERP管理系统 </div>
+    <div id="logo">广州洋宝生物科技有限公司 - 会员直销系统</div>
 
 
     <div id='head_info'>

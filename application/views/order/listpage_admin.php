@@ -161,7 +161,7 @@
     });
 </script>
 <div id="footer">
-    Copyright &copy; <?=date('Y');?> by BIOERP<br/>
+    Copyright &copy; <?=date('Y');?> by GEOMETRY<br/>
     All Rights Reserved.<br/>
 </div><!-- footer -->
 </body>

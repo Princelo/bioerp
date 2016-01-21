@@ -83,7 +83,7 @@
                     <tr>
                         <th>产品图片</th>
                         <td>
-                            <img src="<?=base_url().$v->img;?>" />
+                            <img src="<?=base_url().$v->img;?>" style="max-width: 800px;"/>
                         </td>
                     </tr>
                     <!--<tr>

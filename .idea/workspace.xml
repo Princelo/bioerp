@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/treepage.php" afterPath="$PROJECT_DIR$/application/views/user/treepage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/treepage_admin.php" afterPath="$PROJECT_DIR$/application/views/user/treepage_admin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/general.css" afterPath="$PROJECT_DIR$/assets/general.css" />
     </list>
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -119,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="treepage_admin.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="treepage_admin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/user/treepage_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11090573">
-              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+            <state vertical-scroll-proportion="-17.5">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <marker date="1453360907000" expanded="true" signature="128:191" placeholder="..." />
               </folding>
@@ -131,11 +130,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="general.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="general.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/general.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.5">
-              <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.13863216">
+              <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -216,12 +215,12 @@
         <option value="$PROJECT_DIR$/application/views/report/listpage_productbills.php" />
         <option value="$PROJECT_DIR$/application/views/templates/header_simple.php" />
         <option value="$PROJECT_DIR$/application/views/user/listpage.php" />
-        <option value="$PROJECT_DIR$/assets/general.css" />
         <option value="$PROJECT_DIR$/application/views/templates/header.php" />
         <option value="$PROJECT_DIR$/application/views/templates/header_user.php" />
         <option value="$PROJECT_DIR$/application/views/login/index.php" />
         <option value="$PROJECT_DIR$/application/views/user/treepage.php" />
         <option value="$PROJECT_DIR$/application/views/user/treepage_admin.php" />
+        <option value="$PROJECT_DIR$/assets/general.css" />
       </list>
     </option>
   </component>
@@ -1040,14 +1039,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/general.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.5">
-          <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/templates/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.875">
@@ -1092,11 +1083,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/user/treepage_admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11090573">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+        <state vertical-scroll-proportion="-17.5">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
             <marker date="1453360907000" expanded="true" signature="128:191" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/general.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13863216">
+          <caret line="5" column="71" selection-start-line="5" selection-start-column="71" selection-end-line="5" selection-end-column="71" />
+          <folding />
         </state>
       </provider>
     </entry>

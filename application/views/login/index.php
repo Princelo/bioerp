@@ -106,7 +106,7 @@
                                     </div>
                                     <input type="text" name="login_id" value="" id="login_id" class="google_textfield google_email" placeholder="登入帐号 "  />
                                     <input type="password" name="password" value="" id="password" class="google_textfield google_email" placeholder="密码 "  />
-                                    <div style="padding-top:5px; padding-bottom:5px;" class="div-captcha">
+                                    <div style="padding-top:5px; padding-bottom:5px; min-width: 274px;" class="div-captcha">
                                         <input type="text" name="captcha" class="google_textfield captcha" placeholder="验证码" value="" />
                                         <?=$captcha;?>
                                     </div>
@@ -114,7 +114,7 @@
                                     <div class="info_msg">
                                     </div>
 
-                                    <div class="type-button" align="right">
+                                    <div class="type-button" align="right" style="min-width: 274px;">
 
                                         <input type="submit" name="btnSubmit" value="登入 "  />										<input type="reset" value="重设 " class="reset" id="btnReset" name="btnReset" />
                                         <input type="hidden" value="" id="system" name="system" />

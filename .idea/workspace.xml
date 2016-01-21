@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Morder.php" afterPath="$PROJECT_DIR$/application/models/Morder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/order/pay_method.php" afterPath="$PROJECT_DIR$/application/views/order/pay_method.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/order/order_product.php" afterPath="$PROJECT_DIR$/application/views/order/order_product.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/order/order_product_admin.php" afterPath="$PROJECT_DIR$/application/views/order/order_product_admin.php" />
     </list>
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,11 +49,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Morder.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="order_product_admin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/order/order_product_admin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.541667">
+              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="order_product.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/order/order_product.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.16635859">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Morder.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Morder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41589648">
-              <caret line="394" column="33" selection-start-line="394" selection-start-column="33" selection-end-line="394" selection-end-column="33" />
+            <state vertical-scroll-proportion="-15.0">
+              <caret line="403" column="16" selection-start-line="403" selection-start-column="16" selection-end-line="403" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -113,16 +133,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="listpage.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/user/listpage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25">
-              <caret line="10" column="69" selection-start-line="10" selection-start-column="69" selection-end-line="10" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="treepage.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/user/treepage.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -130,18 +140,6 @@
               <caret line="19" column="69" selection-start-line="19" selection-start-column="69" selection-end-line="19" selection-end-column="69" />
               <folding>
                 <marker date="1453362471000" expanded="true" signature="128:191" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/user/add.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.875">
-              <caret line="11" column="69" selection-start-line="11" selection-start-column="69" selection-end-line="11" selection-end-column="69" />
-              <folding>
-                <marker date="1453362427000" expanded="true" signature="1012:1021" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -183,8 +181,6 @@
         <option value="$PROJECT_DIR$/application/views/order/index_sub.php" />
         <option value="$PROJECT_DIR$/application/views/order/listpage.php" />
         <option value="$PROJECT_DIR$/application/views/order/listpage_admin.php" />
-        <option value="$PROJECT_DIR$/application/views/order/order_product.php" />
-        <option value="$PROJECT_DIR$/application/views/order/order_product_admin.php" />
         <option value="$PROJECT_DIR$/application/views/order/query_sub.php" />
         <option value="$PROJECT_DIR$/application/views/order/query_sub_admin.php" />
         <option value="$PROJECT_DIR$/application/views/report/index.php" />
@@ -218,6 +214,8 @@
         <option value="$PROJECT_DIR$/application/views/order/pay_method.php" />
         <option value="$PROJECT_DIR$/application/controllers/Order.php" />
         <option value="$PROJECT_DIR$/application/models/Morder.php" />
+        <option value="$PROJECT_DIR$/application/views/order/order_product_admin.php" />
+        <option value="$PROJECT_DIR$/application/views/order/order_product.php" />
       </list>
     </option>
   </component>
@@ -541,7 +539,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="com.intellij.ide.scratch.ScratchpadManager" value="PostgreSQL" />
     <property name="dynamic.classpath" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="morder&#9;null&#9;null&#10;order&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Order.php&#10;details&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/product/details.php&#10;listpage_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/listpage_admin.php&#10;listpage&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/listpage.php&#10;hea&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;header&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header.php&#10;general.css&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/assets/general.css&#10;header_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;treepage&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage.php&#10;tree&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage_admin.php&#10;query&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/query_sub.php&#10;user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/User.php&#10;muser&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;with&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/withdraw_log.php&#10;withdra&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/withdraw_log_admin.php&#10;M&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;Login&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Login.php&#10;Muser&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;mpo&#9;null&#9;null&#10;mfo&#9;null&#9;null&#10;mbill&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Mbill.php&#10;mpro&#9;null&#9;null&#10;muser.&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;report&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/report.php&#10;det&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;detail&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;treepage_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage_admin.php&#10;index_u&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/index_user.php&#10;detai&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;MY&#9;null&#9;null&#10;deta&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;details_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/details_admin.php&#10;index_sub&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/index_sub.php&#10;listpage_mon&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_month.php&#10;listpage_&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_day_users.php&#10;listpage_day&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_day_admin.php&#10;listpage_ye&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_year.php&#10;listpage_da&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_day_users.php&#10;report/index.php&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/index.php&#10;query_sub&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/query_sub.php&#10;index_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/index_user.php&#10;repor&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/report.php&#10;re&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/report.php&#10;product&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_productbills.php&#10;listpage_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_userbills.php&#10;listpage_pr&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_productbills.php&#10;listpage_y&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_year_admin.php&#10;listpage_m&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_month_admin.php&#10;list&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_day_admin.php" />
+    <property name="SearchEverywhereHistoryKey" value="order_pr&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/order_product.php&#10;order_pro&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/order_product_admin.php&#10;morder&#9;null&#9;null&#10;order&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Order.php&#10;details&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/product/details.php&#10;listpage_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/listpage_admin.php&#10;listpage&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/listpage.php&#10;hea&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;header&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header.php&#10;general.css&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/assets/general.css&#10;header_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;treepage&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage.php&#10;tree&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage_admin.php&#10;query&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/query_sub.php&#10;user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/User.php&#10;muser&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;with&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/withdraw_log.php&#10;withdra&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/withdraw_log_admin.php&#10;M&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;Login&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Login.php&#10;Muser&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;mpo&#9;null&#9;null&#10;mfo&#9;null&#9;null&#10;mbill&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Mbill.php&#10;mpro&#9;null&#9;null&#10;muser.&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;report&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/report.php&#10;det&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;detail&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;treepage_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage_admin.php&#10;index_u&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/index_user.php&#10;detai&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;MY&#9;null&#9;null&#10;deta&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;details_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/details_admin.php&#10;index_sub&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/index_sub.php&#10;listpage_mon&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_month.php&#10;listpage_&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_day_users.php&#10;listpage_day&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_day_admin.php&#10;listpage_ye&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_year.php&#10;listpage_da&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_day_users.php&#10;report/index.php&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/index.php&#10;query_sub&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/query_sub.php&#10;index_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/index_user.php&#10;repor&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/report.php&#10;re&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/report.php&#10;product&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_productbills.php&#10;listpage_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_userbills.php&#10;listpage_pr&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_productbills.php&#10;listpage_y&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_year_admin.php" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
@@ -754,22 +752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-33.75">
           <caret line="105" column="8" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/order/order_product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-31.25">
-          <caret line="94" column="47" selection-start-line="94" selection-start-column="47" selection-end-line="94" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/order/order_product_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-31.25">
-          <caret line="90" column="47" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -1086,6 +1068,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Morder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.0">
+          <caret line="403" column="16" selection-start-line="403" selection-start-column="16" selection-end-line="403" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Order.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.625">
@@ -1096,10 +1086,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Morder.php">
+    <entry file="file://$PROJECT_DIR$/application/views/order/order_product_admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41589648">
-          <caret line="394" column="33" selection-start-line="394" selection-start-column="33" selection-end-line="394" selection-end-column="33" />
+        <state vertical-scroll-proportion="-13.541667">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/order/order_product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16635859">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>

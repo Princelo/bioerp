@@ -33,7 +33,6 @@
                     <tr>
                         <th>产品编号</th>
                         <th>产品名称</th>
-                        <th>是否为试用品或者活动产品</th>
                         <th>购买价格</th>
                         <th>入货数量</th>
                     </tr>
@@ -44,9 +43,6 @@
                             <tr class="<?=$n%2==0?"even":"odd";?>">
                                 <td><?=$v->id?></td>
                                 <td><a href="<?=base_url();?>product/details/<?=$v->id?>"><?=$v->title?></a></td>
-                                <td>
-                                    <?=$v->is_trial == 't'?'是':'否'?>
-                                </td>
                                 <td>
                                     <?=$v->amount?>
                                 </td>

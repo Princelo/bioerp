@@ -25,7 +25,7 @@ class MY_Controller extends CI_Controller {
                 $update_user_sql[] = "update users set profit = profit::decimal + {$return_profit},
                 balance = balance::decimal + {$return_profit}
                 where id = {$v->user_id};";
-                $update_job_sql[] = "update jobs set is_expired = true and is_success = true where id = {$v->id};";
+                $update_job_sql[] = "update jobs set is_expired = true, is_success = true where id = {$v->id};";
             }
             $this->db->trans_start();
             $this->db->query("set constraints all deferred");

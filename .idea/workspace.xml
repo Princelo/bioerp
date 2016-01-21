@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="" />
+    <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/MY_Controller.php" afterPath="$PROJECT_DIR$/application/libraries/MY_Controller.php" />
+    </list>
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -121,8 +123,8 @@
       <file leaf-file-name="MY_Controller.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/libraries/MY_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7763401">
-              <caret line="31" column="41" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.66543436">
+              <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -875,8 +877,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/MY_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7763401">
-          <caret line="31" column="41" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.66543436">
+          <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
           <folding />
         </state>
       </provider>

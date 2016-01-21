@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="/assets/dist/themes/custom/style.css" />
     <!--[if lt IE 8]>
     <script>
-        alert('你的浏览器版本太老不技持本系统的某些功能,请升级或更换浏览器');
+        alert('你的浏览器版本太老不支持本系统的某些功能,请升级或更换浏览器');
     </script>
     <![endif]-->
     <style>

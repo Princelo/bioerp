@@ -69,12 +69,11 @@ class Login extends CI_Controller {
         $sql = "SELECT COUNT(1) AS count FROM captcha WHERE lower(word) = ? AND ip_address = ? AND captcha_time > ?";
         $binds = array(strtolower($_POST['captcha']), $this->input->ip_address(), $expiration);
         $query = $this->db->query($sql, $binds);
-        $row = $query->num_rows();
+        $row = $query->result()[0]->count;
 
-        if (intval($row) == 0)
-        {
+        if (intval($row) == 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }

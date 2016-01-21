@@ -140,8 +140,34 @@
         <!-- end: #main -->
     </div>
 </div>
+<!--[if lt IE 7 ]>
+    <script>
+        $('.google_email').width(274 - 16);
+        $('.captcha').width(110 - 16);
+        $('#fuck').width(276);
+        $('#frm').width(274);
+    </script>
+<![endif]-->
+<!--[if IE 7 ]>
 <script>
-    $('.google_email').width(274);
+    $('.google_email').width(274 - 16);
+    $('.captcha').width(110 - 16);
+    $('#fuck').width(276);
+    $('#frm').width(274);
+</script>
+<![endif]-->
+<!--[if IE 8 ]>
+<script>
+    $('.google_email').width(274 - 16);
+    $('.captcha').width(110 - 16);
+    $('#fuck').width(276);
+    $('#frm').width(274);
+</script>
+<![endif]-->
+<!--[if IE 9 ]>  <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->  <!--<![endif]-->
+<script>
+    $('.google_email').width(274 - 16);
     $('#fuck').width(276);
     $('#frm').width(274);
 </script>

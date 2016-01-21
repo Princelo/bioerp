@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="<?=base_url();?>assets/navigator_memu.css" type="text/css" media="screen, projection" >
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>广州洋宝生物科技有限公司 - 会员直销系统</title>
 
+    <link rel="stylesheet" href="<?=base_url();?>assets/navigator_memu.css" type="text/css" media="screen, projection" >
     <meta name="language" content="en" />
 
     <!--[if IE]>

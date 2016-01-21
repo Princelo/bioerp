@@ -141,6 +141,9 @@
                         'report': {
                             "label": '报表',
                             "action": function (data) {
+                                var inst = $.jstree.reference(data.reference),
+                                    obj = inst.get_node(data.reference);
+                                window.open('<?=site_url('report/query_sub');?>/'+obj.id,"_blank");
                             }
                         }
                     };

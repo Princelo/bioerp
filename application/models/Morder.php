@@ -442,7 +442,7 @@ class Morder extends CI_Model
         $insert_sql_job = "
             insert into jobs (user_id, order_id, return_profit, excute_time)
             values ({$user_id}, {$order_id},
-            {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}+{$parent_extra_profit},
+            {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}-{$parent_extra_profit},
             '{$next_week}')
         ";
 

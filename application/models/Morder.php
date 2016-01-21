@@ -392,7 +392,7 @@ class Morder extends CI_Model
                 p.id id,
                 p.title title,
                 op.quantity quantity,
-                pa.amount   amount,
+                pa.amount   amount
             from
                 products p
                 join order_product op

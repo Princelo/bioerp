@@ -24,9 +24,9 @@
                 </div>
                 <form id="pay" action="<?=base_url()?>order/pay/<?=$order_id?>" method="post">
                     <input type="hidden" name="token" value="<?=$token?>" />
-                    <input type="submit" style="display:none;" />
+                    <input type="submit" style="" value="马上付款"/>
                 </form>
-                <a class="btn btn-primary" href="javascript:;" onclick="$('#pay').submit();">马上付款</a>
+                <!--<a class="btn btn-primary" href="javascript:;" onclick="$('#pay').submit();">马上付款</a>-->
                 <!--<a class="btn btn-primary" href="">以后付款或选择线下付款方式</a>-->
 
             </fieldset>

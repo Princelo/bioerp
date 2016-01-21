@@ -439,12 +439,21 @@ class Morder extends CI_Model
             $grand_parent_profit = 0;
         }
 
-        $insert_sql_job = "
+        if($parent_user_id > 0) {
+            $insert_sql_job = "
+                insert into jobs (user_id, order_id, return_profit, excute_time)
+                values ({$user_id}, {$order_id},
+                {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}-{$parent_extra_profit},
+                '{$next_week}')
+            ";
+        } else {
+            $insert_sql_job = "
             insert into jobs (user_id, order_id, return_profit, excute_time)
             values ({$user_id}, {$order_id},
-            {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}-{$parent_extra_profit},
+            {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent},
             '{$next_week}')
-        ";
+            ";
+        }
 
         $update_sql_first_purchase = "
             update users set first_purchase = '{$pay_amt}'::decimal

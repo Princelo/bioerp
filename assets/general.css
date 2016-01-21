@@ -6,7 +6,7 @@ body{font-family:sans-serif, Verdana,Arial,'Lucida Grande','Lucida Sans Unicode'
 #container{position:relative;clear:both;float:left;width:100%;z-index: -1;}
 #footer{padding-top: 10px;font-size: 0.8em;text-align: center;border-top: 1px solid #dedede;clear:both;float:left;width:100%;}
 
-#logo{padding: 10px 20px;float:left;width:150px;}
+#logo{padding: 10px 20px;float:left;width:300px;}
 #head_info{padding: 10px 20px;float:right;width:800px;text-align:right}
 
 

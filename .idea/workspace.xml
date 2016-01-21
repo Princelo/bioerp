@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/login/index.php" afterPath="$PROJECT_DIR$/application/views/login/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/general.css" afterPath="$PROJECT_DIR$/assets/general.css" />
     </list>
     <ignored path="zentserp.iws" />
@@ -124,8 +123,8 @@
       <file leaf-file-name="general.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/general.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.018072288">
-              <caret line="5" column="73" selection-start-line="5" selection-start-column="73" selection-end-line="5" selection-end-column="73" />
+            <state vertical-scroll-proportion="0.072289154">
+              <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -1074,8 +1073,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/general.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.018072288">
-          <caret line="5" column="73" selection-start-line="5" selection-start-column="73" selection-end-line="5" selection-end-column="73" />
+        <state vertical-scroll-proportion="0.072289154">
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
           <folding />
         </state>
       </provider>

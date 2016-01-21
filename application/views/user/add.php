@@ -9,7 +9,7 @@
 
             <ul id="left_menu">
                 <li>
-                    <a href='<?=base_url()?>user/treepage' ><div>连带代理树 </div></a>
+                    <a href='<?=base_url()?>user/treepage' ><div>代理关系图 </div></a>
                 </li>
                 <li><a href='<?=base_url();?>user/add' ><div>新增代理 </div></a></li>
             </ul>

@@ -169,7 +169,7 @@
             <li class="li-menu">
                 <a href="javascript:;" onclick="showmenu('menu-user')" class="parent" ><span>代理 </span></a>
                 <ul class="dropdown-menu other-menu" id="menu-user">
-                    <li><a href="<?=base_url()?>user/treepage" class="" style="background: none;"><span>连带代理树 </span></a>
+                    <li><a href="<?=base_url()?>user/treepage" class="" style="background: none;"><span>代理关系图 </span></a>
                     </li>
                     <li><a href="<?=base_url()?>user/add" class="" style="background: none;"><span>新增代理 </span></a>
                     </li>

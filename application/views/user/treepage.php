@@ -17,7 +17,7 @@
 
             <ul id="left_menu">
                 <li>
-                    <a href='<?=base_url()?>user/treepage' ><div>连带代理树 </div></a>
+                    <a href='<?=base_url()?>user/treepage' ><div>代理关系图 </div></a>
                 </li>
                 <li><a href='<?=base_url();?>user/add' ><div>新增代理 </div></a></li>
             </ul>
@@ -33,7 +33,7 @@
 
 
             <div class="info view_form">
-                <h2>连带代理树</h2>
+                <h2>代理关系图</h2>
                 <script>
                     if("<?=$this->session->flashdata('flashdata', 'value');?>"!="")
                         alert("<?=$this->session->flashdata('flashdata', 'value');?>");

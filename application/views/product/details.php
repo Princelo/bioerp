@@ -58,7 +58,7 @@
                     </tr>
                     <tr>
                         <th><label>总重量</label></th>
-                        <td><input type="text" value="<?=$v->weight?>g" /></td>
+                        <td><input type="text" value="<?=$v->weight?>g" disabled/></td>
                     </tr>
                     <tr>
                         <th><label for="properties">规格 </label></th>
@@ -81,39 +81,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <th><label for="price_special"><?=getLevelName(1)?>价</label></th>
-                        <td>
-                            <input disabled  name="price_special" data-validate="required,decimal" value="<?=cny($v->price_special)?>"/>(单位: 元)
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><label for="price_last_2"><?=getLevelName(2)?>价</label></th>
-                        <td>
-                            <input disabled  name="price_last_2" data-validate="required,decimal" value="<?=cny($v->price_last_2)?>"/>(单位: 元)
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><label for="price_last_3"><?=getLevelName(3)?>价</label></th>
-                        <td>
-                            <input disabled  name="price_last_3" data-validate="required,decimal" value="<?=cny($v->price_last_3)?>"/>(单位: 元)
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><label for="price_normal"><?=getLevelName(0)?>价</label></th>
-                        <td>
-                            <input disabled  name="price_normal" data-validate="required,decimal" value="<?=cny($v->price_normal)?>"/>(单位: 元)
-                        </td>
-                    </tr>
-                    <tr>
                         <th>产品图片</th>
                         <td>
                             <img src="<?=base_url().'uploads/'.$v->img;?>" />
                         </td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <th>产品下订</th>
                         <td><a href="<?=base_url()?>order/add/<?=$v->id?>">立即下订</a></td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <th>加入购物车</th>
                         <td>

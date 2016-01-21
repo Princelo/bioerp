@@ -51,7 +51,7 @@
                         <th>代理ID</th>
                         <th>用戶名</th>
                         <th>姓名</th>
-                        <th>其它信息</th>
+                        <th>电话</th>
                         <th>他的业绩</th>
                         <th>他的收益</th>
                         <th>共提现</th>
@@ -70,11 +70,12 @@
                             <td><?=$v->id?></td>
                             <td><?=$v->username;?></td>
                             <td><?=$v->name;?></td>
-                            <td>身份证: <?=$v->citizen_id;?><br>
+                            <!--<td>身份证: <?=$v->citizen_id;?><br>
                                 电话: <?=$v->mobile_no;?><br>
                                 微信: <?=$v->wechat_id;?><br>
                                 qq: <?=$v->qq_no?>
-                            </td>
+                            </td>-->
+                            <td><?=$v->mobile_no;?></td>
                             <td><?=cny($v->turnover)?></td>
                             <td><?=cny($v->profit)?></td>
                             <td><?=cny($v->withdraw_volume)?></td>

@@ -446,8 +446,8 @@ class Morder extends CI_Model
             + case when
                 not exists
                     (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
-                then {$ten_percent}
-                else 0
+                then 0
+                else {$ten_percent}
                 end ,
             '{$next_week}')
         ";

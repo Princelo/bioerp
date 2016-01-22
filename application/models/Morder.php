@@ -528,7 +528,7 @@ class Morder extends CI_Model
             insert into
                 finish_log(order_id, pay_amt, user_id, parent_user_id, pay_amt_without_post_fee, g_parent_user_id, is_first)
                 values
-                ({$order_id}, ?, ?, ?, ?, ?
+                ({$order_id}, ?, ?, ?, ?, ?,
                     case when
                         not exists
                             (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)

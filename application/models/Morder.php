@@ -526,9 +526,9 @@ class Morder extends CI_Model
         ";
         $finish_log = "
             insert into
-                finish_log(order_id, pay_amt, user_id, parent_user_id, pay_amt_without_post_fee, is_first)
+                finish_log(order_id, pay_amt, user_id, parent_user_id, pay_amt_without_post_fee, g_parent_user_id, is_first)
                 values
-                ({$order_id}, ?, ?, ?, ?,
+                ({$order_id}, ?, ?, ?, ?, ?
                     case when
                         not exists
                             (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
@@ -538,7 +538,7 @@ class Morder extends CI_Model
                 )
             ;";
         $binds_finish_log = array(
-            $pay_amt, $user_id, $parent_user_id, $pay_amt_without_post_fee
+            $pay_amt, $user_id, $parent_user_id, $pay_amt_without_post_fee, $grand_parent_user_id
         );
         $this->objDB->trans_start();
 

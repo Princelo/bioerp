@@ -69,7 +69,7 @@
                         <? $n ++; ?>
                         <tr class="<?=$n%2==0?"even":"odd";?>">
                             <td><?=$v->wid?></td>
-                            <td><a href="javascript:void()" bhref="<?=base_url()?>user/details_admin/<?=$v->uid?>" onclick="goto(<?=$v->id?>)"><?=$v->name?>(id: <?=$v->uid?>)</a></td>
+                            <td><a href="javascript:void()" bhref="<?=base_url()?>user/details_admin/<?=$v->uid?>" onclick="goto(<?=$v->uid?>)"><?=$v->name?>(id: <?=$v->uid?>)</a></td>
                             <td><?=cny($v->volume)?></td>
                             <td><?=cny($v->balance_before);?></td>
                             <td>￥<?=bcsub(money($v->balance_before), money($v->volume), 2);?></td>
@@ -89,7 +89,7 @@
                      }
                      }*/
                     var goto = function(id) {
-                        window.open('<?=$base_url()?>user/details_admin/'+id,"Edit","width=600,height=600,0,status=0,");
+                        window.open('<?=base_url()?>user/details_admin/'+id,"Edit","width=600,height=600,0,status=0,");
                     }
                 </script>
 

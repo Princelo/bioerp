@@ -226,7 +226,7 @@
                             <!--<input type="radio" name="finish" value="finish_without_pay" /><span class="red">完成但不插入付款纪录(用于线上付款订单)<br />-->
                             <!--<input type="radio" name="finish" value="unfinish_rollback" disabled="disabled">未完成并取消付款纪录(用于线下付款订单)<br />
                             <input type="radio" name="finish" value="unfinish" disabled="disabled">未完成但不取消付款纪录(用于线上付款订单)<br />-->
-                            <input type="button" onclick="finishConfirm()" name="btnSubmit" value="提交 "  />			</div>
+                            <input type="button" onclick="finishConfirm()" name="btnSubmit" value="提交 "  style="margin-top:22px; margin-bottom: 50px;"/>			</div>
                 <!--<input type="submit" name="btnSubmit" value="提交 "  />-->			</div>
                 <div class="c50r right">
                 </div>

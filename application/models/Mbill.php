@@ -22,12 +22,12 @@ class Mbill extends CI_Model
                 u.username,
                 u.name,
                 coalesce( sum(s_amount.amount), '$0')               self_turnover,
-                coalesce(o_sub.volume, '$0') as                     sub_turnover,
+                coalesce(o_sub.volume+o_sub_0.volume, '$0') as      sub_turnover,
                 coalesce(sum(o_self.return_profit), '$0')           normal_return_profit_self2parents,
                 coalesce(sum(o_self.p_return_profit), '$0')         normal_return_profit_self2parent,
                 coalesce(sum(o_self.gp_return_profit), '$0')        normal_return_profit_self2gparent,
                 coalesce(sum(o_self.p_return_invite), '$0')         extra_return_profit_self2parent,
-                coalesce(o_sub.return_profit, '$0')                 normal_return_profit_sub2self,
+                coalesce(o_sub.gp_return_profit+o_sub_0.p_return_profit, '$0')                 normal_return_profit_sub2self,
                 coalesce(o_sub_0.extra_return_profit, '$0')         extra_return_profit_sub2self,
                 coalesce(jobs.return_profit, '$0')                  delay_return_profit,
                 pu.id                                               pid,
@@ -59,8 +59,8 @@ class Mbill extends CI_Model
                 and jobs.user_id = {$current_user_id}
                 and jobs.is_success = true
             left join (
-                select sum(i.return_profit) return_profit, sum(i.volume) volume, i.pid, finish_time from(
-                SELECT Sum(o.return_profit) AS return_profit,
+                select sum(i.gp_return_profit) gp_return_profit, sum(i.volume) volume, i.pid, finish_time from(
+                SELECT Sum(o.gp_return_profit) AS gp_return_profit,
                          Sum(sa.amount)       volume,
                          u.pid,
                          Date(o.finish_time)  finish_time
@@ -74,8 +74,8 @@ class Mbill extends CI_Model
                                    AND o.user_id = u.id
                          JOIN amounts sa
                          ON sa.order_id = o.id
-                  WHERE  u.pid = {$current_user_id}
-                         OR (select pid from users where id = u.pid) = {$current_user_id}
+                  WHERE  --u.pid = {$current_user_id}
+                          (select pid from users where id = u.pid) = {$current_user_id}
                   GROUP  BY u.pid,
                             Date(o.finish_time)
                   ORDER  BY u.pid) as i
@@ -84,9 +84,11 @@ class Mbill extends CI_Model
                 ) as o_sub
                 on date(o_sub.finish_time)::char(10) = d.date
             left join (
-                select sum(i.extra_return_profit) extra_return_profit, i.pid, finish_time from
+                select sum(i.extra_return_profit) extra_return_profit, i.pid, finish_time, sum(i.volume) volume, sum(i.p_return_profit) p_return_profit from
                     (select
                            sum(o.p_return_invite) as extra_return_profit,
+                           sum(o.p_return_profit) as p_return_profit,
+                           Sum(sa.amount)       volume,
                            u.pid,
                            date(o.finish_time) finish_time
                        from
@@ -95,6 +97,8 @@ class Mbill extends CI_Model
                            on o.finish_time between '{$date_from} 00:00:00' and '{$date_to} 23:59:59'
                            and o.is_pay = true and o.is_correct = true
                            and o.user_id = u.id
+                         JOIN amounts sa
+                         ON sa.order_id = o.id
                            where u.pid = {$current_user_id}
                        group by u.pid, date(o.finish_time)
                        order by u.pid ) as i
@@ -109,7 +113,7 @@ class Mbill extends CI_Model
                 on pu.pid = gpu.id
             where 1 = 1
             group by u.id, u.username, u.name, u.pid, pu.id, pu.name, pu.username,gpu.id, gpu.name, gpu.username,
-            o_sub.volume, o_sub.return_profit, o_sub_0.extra_return_profit, jobs.return_profit
+            o_sub.volume, o_sub.gp_return_profit, o_sub_0.extra_return_profit, jobs.return_profit, o_sub_0.volume, o_sub_0.p_return_profit
             , d.date,date(o_sub.finish_time)::char(10),
                 date(o_self.finish_time)::char(10)
             order by date
@@ -180,12 +184,12 @@ class Mbill extends CI_Model
                 u.username,
                 u.name,
                 coalesce( sum(s_amount.amount), '$0')               self_turnover,
-                coalesce(o_sub.volume, '$0') as                     sub_turnover,
+                coalesce(o_sub.volume+o_sub_0.volume, '$0') as      sub_turnover,
                 coalesce(sum(o_self.return_profit), '$0')           normal_return_profit_self2parents,
                 coalesce(sum(o_self.p_return_profit), '$0')         normal_return_profit_self2parent,
                 coalesce(sum(o_self.gp_return_profit), '$0')        normal_return_profit_self2gparent,
                 coalesce(sum(o_self.p_return_invite), '$0')         extra_return_profit_self2parent,
-                coalesce(o_sub.return_profit, '$0')                 normal_return_profit_sub2self,
+                coalesce(o_sub.gp_return_profit+o_sub_0.p_return_profit, '$0')                 normal_return_profit_sub2self,
                 coalesce(o_sub_0.extra_return_profit, '$0')         extra_return_profit_sub2self,
                 coalesce(jobs.return_profit, '$0')                  delay_return_profit,
                 pu.id                                               pid,
@@ -220,8 +224,8 @@ class Mbill extends CI_Model
                 and jobs.user_id = {$current_user_id}
                 and jobs.is_success = true
             left join (
-                select sum(i.return_profit) return_profit, sum(i.volume) volume, i.pid, finish_time from(
-                SELECT Sum(o.return_profit) AS return_profit,
+                select sum(i.gp_return_profit) gp_return_profit, sum(i.volume) volume, i.pid, finish_time from(
+                SELECT Sum(o.gp_return_profit) AS gp_return_profit,
                          Sum(sa.amount)       volume,
                          u.pid,
                          Date_trunc('month', o.finish_time)  finish_time
@@ -235,7 +239,8 @@ class Mbill extends CI_Model
                                    AND o.user_id = u.id
                          JOIN amounts sa
                          ON sa.order_id = o.id
-                  WHERE  u.pid = {$current_user_id}
+                  WHERE  --u.pid = {$current_user_id}
+                          (select pid from users where id = u.pid) = {$current_user_id}
                   GROUP  BY u.pid,
                             Date_trunc('month', o.finish_time)
                   ORDER  BY u.pid) as i
@@ -244,9 +249,13 @@ class Mbill extends CI_Model
                 ) as o_sub
                 on date(o_sub.finish_time)::char(7) = d.date::char(7)
             left join (
-                select sum(i.extra_return_profit) extra_return_profit, i.pid, finish_time from
+                select sum(i.extra_return_profit) extra_return_profit, i.pid, finish_time,
+                        sum(i.volume) volume, sum(i.p_return_profit) p_return_profit
+                        from
                     (select
                            sum(o.p_return_invite) as extra_return_profit,
+                           sum(o.p_return_profit) as p_return_profit,
+                           Sum(sa.amount)       volume,
                            u.pid,
                            date_trunc('month', o.finish_time) finish_time
                        from
@@ -255,8 +264,10 @@ class Mbill extends CI_Model
                            on o.finish_time between '{$date_from} 00:00:00' and '{$date_to} 23:59:59'
                            and o.is_pay = true and o.is_correct = true
                            and o.user_id = u.id
+                       JOIN amounts sa
+                       ON sa.order_id = o.id
                            where u.pid = {$current_user_id}
-                             OR (select pid from users where id = u.pid) = {$current_user_id}
+                             --OR (select pid from users where id = u.pid) = {$current_user_id}
                        group by u.pid, date_trunc('month', o.finish_time)
                        order by u.pid ) as i
                        group by pid,finish_time

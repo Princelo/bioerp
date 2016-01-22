@@ -325,7 +325,7 @@ class Order extends MY_Controller {
                 if($result === true)
                 {
                     $this->session->set_flashdata('flashdata', '订单更改成功');
-                    redirect('order/details_admin/'.$order_id);
+                    redirect('order/listpage_admin');
                 }
             }
             if($this->input->post('finish') == 'finish_without_pay')

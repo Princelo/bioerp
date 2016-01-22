@@ -426,7 +426,7 @@ class Morder extends CI_Model
         $five_percent = bcmul($pay_amt_without_post_fee, 0.05, 2);
 
         if($parent_user_id > 0) {
-            $parent_profit =  bcadd($ten_percent, $five_percent);
+            $parent_profit =  bcadd($ten_percent, $five_percent, 2);
             //$parent_extra_profit = $is_first?$ten_percent:0;
         } else {
             $parent_profit = 0;
@@ -460,28 +460,6 @@ class Morder extends CI_Model
         ";
 
         $order_id = $this->objDB->escape($order_id);
-        $update_sql_order = "
-            update orders
-                set pay_amt = '{$pay_amt}',
-                    is_pay = true,
-                    is_correct = true,
-                    pay_amt_without_post_fee = '{$pay_amt_without_post_fee}',
-                    update_time = '{$now}',
-                    finish_time = '{$now}',
-                    return_profit = ( {$parent_profit} + {$grand_parent_profit} ),
-                    p_return_profit = {$parent_profit},
-                    gp_return_profit = {$grand_parent_profit},
-                    p_return_invite =
-                     case when
-                        not exists
-                        (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
-                        and {$parent_user_id} > 0
-                        then {$ten_percent}
-                        else 0
-                        end
-            where
-                id = {$order_id};
-                ";
         $update_sql_turnover = "
             update
                 users
@@ -540,12 +518,33 @@ class Morder extends CI_Model
         $binds_finish_log = array(
             $pay_amt, $user_id, $parent_user_id, $pay_amt_without_post_fee, $grand_parent_user_id
         );
+        $update_sql_order = "
+            update orders
+                set pay_amt = '{$pay_amt}',
+                    is_pay = true,
+                    is_correct = true,
+                    pay_amt_without_post_fee = '{$pay_amt_without_post_fee}',
+                    update_time = '{$now}',
+                    finish_time = '{$now}',
+                    return_profit = ( {$parent_profit} + {$grand_parent_profit} ),
+                    p_return_profit = {$parent_profit},
+                    gp_return_profit = {$grand_parent_profit},
+                    p_return_invite =
+                     case when
+                        not exists
+                        (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                        and {$parent_user_id} > 0
+                        then {$ten_percent}
+                        else 0
+                        end
+            where
+                id = {$order_id};
+                ";
         $this->objDB->trans_start();
 
         $this->objDB->query("set constraints all deferred");
         $this->objDB->query($insert_sql_job);
         $this->objDB->query($update_sql_first_purchase);
-        $this->objDB->query($update_sql_order);
         $this->objDB->query($update_sql_turnover);
         if($parent_user_id > 0) {
             $this->objDB->query($update_sql_parent_profit);
@@ -555,6 +554,7 @@ class Morder extends CI_Model
         }
         $this->objDB->query($update_sql_initiation);
         $this->objDB->query($finish_log, $binds_finish_log);
+        $this->objDB->query($update_sql_order);
 
         $this->objDB->trans_complete();
 

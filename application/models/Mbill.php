@@ -154,6 +154,7 @@ class Mbill extends CI_Model
             on (d.date=to_char(date_trunc('day', o.finish_time), 'YYYY-MM-DD'))
             left join jobs j
             on (d.date=to_char(date_trunc('day', j.excute_time), 'YYYY-MM-DD'))
+            and j.order_id = o.id
             and j.is_success = true and j.is_expired = true
             where o.is_pay = true and o.is_correct = true
             group by d.date
@@ -328,6 +329,7 @@ class Mbill extends CI_Model
             ON (to_char(date_trunc('month', d.date), 'YYYY-MM')=to_char(date_trunc('month', o.finish_time), 'YYYY-MM'))
             left join jobs j
             on (to_char(date_trunc('month', d.date), 'YYYY-MM')=to_char(date_trunc('month', j.excute_time), 'YYYY-MM'))
+            and j.order_id = o.id
             and j.is_success = true and j.is_expired = true
             where o.is_pay = true and o.is_correct = true
             GROUP BY d.date
@@ -373,6 +375,7 @@ class Mbill extends CI_Model
             ON (to_char(date_trunc('year', d.date), 'YYYY')=to_char(date_trunc('year', o.finish_time), 'YYYY'))
             left join jobs j
             on (to_char(date_trunc('year', d.date), 'YYYY')=to_char(date_trunc('year', j.excute_time), 'YYYY'))
+            and j.order_id = o.id
             and j.is_success = true and j.is_expired = true
             where o.is_pay = true and o.is_correct = true
             GROUP BY d.date
@@ -466,6 +469,7 @@ class Mbill extends CI_Model
                 on o_self.id = s_amount.order_id
                 left join jobs j
                 on j.user_id = u.id
+                and j.order_id = o.id
                 and j.is_success = true and j.is_expired = true
                 and j.excute_time between '{$date_from} 00:00:00' and '{$date_to} 23:59:59'
                 left join (

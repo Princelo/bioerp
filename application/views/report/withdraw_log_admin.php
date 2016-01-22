@@ -74,7 +74,7 @@
                             <td><?=cny($v->balance_before);?></td>
                             <td>￥<?=bcsub(money($v->balance_before), money($v->volume), 2);?></td>
                             <td><?=cny($v->balance);?></td>
-                            <td><?=$v->create_time?></td>
+                            <td><?=substr($v->create_time, 0, 19)?></td>
                         </tr>
                     <? } ?>
                     <? } ?>

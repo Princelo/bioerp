@@ -160,6 +160,7 @@
                                 if(ajaxobj.state=='success')
                                 {
                                     alert(ajaxobj.message);
+                                    window.close();
                                 }
                                 else
                                 {

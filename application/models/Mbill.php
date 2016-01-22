@@ -282,7 +282,7 @@ class Mbill extends CI_Model
             where 1 = 1
             group by u.id, u.username, u.name, u.pid, pu.id, pu.name, pu.username,gpu.id, gpu.name, gpu.username,
             o_sub.volume,
-                o_sub.return_profit, o_sub_0.extra_return_profit
+                o_sub.gp_return_profit, o_sub_0.extra_return_profit,o_sub_0.extra_return_profit, jobs.return_profit, o_sub_0.volume, o_sub_0.p_return_profit
             , d.date,date(o_sub.finish_time)::char(7),
                 date(o_self.finish_time)::char(7), jobs.return_profit
             order by date

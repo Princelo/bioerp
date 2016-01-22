@@ -104,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/application/models/Mbill.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.37951806">
-              <caret line="29" column="88" selection-start-line="29" selection-start-column="88" selection-end-line="29" selection-end-column="88" />
+              <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -825,7 +825,7 @@
     <entry file="file://$PROJECT_DIR$/application/models/Mbill.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37951806">
-          <caret line="29" column="88" selection-start-line="29" selection-start-column="88" selection-end-line="29" selection-end-column="88" />
+          <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
           <folding />
         </state>
       </provider>

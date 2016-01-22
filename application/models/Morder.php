@@ -427,7 +427,7 @@ class Morder extends CI_Model
 
         if($parent_user_id > 0) {
             $parent_profit =  bcadd($ten_percent, $five_percent);
-            $parent_extra_profit = $is_first?$ten_percent:0;
+            //$parent_extra_profit = $is_first?$ten_percent:0;
         } else {
             $parent_profit = 0;
             $parent_extra_profit = 0;
@@ -439,34 +439,24 @@ class Morder extends CI_Model
             $grand_parent_profit = 0;
         }
 
-        if($parent_user_id > 0) {
-            $insert_sql_job = "
-                insert into jobs (user_id, order_id, return_profit, excute_time)
-                values ({$user_id}, {$order_id},
-                {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}-{$parent_extra_profit},
-                '{$next_week}')
-            ";
-        } else {
-            if ($is_first) {
-                $insert_sql_job = "
-                    insert into jobs (user_id, order_id, return_profit, excute_time)
-                    values ({$user_id}, {$order_id},
-                    {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent},
-                    '{$next_week}')
-            ";
-            } else {
-                $insert_sql_job = "
-                    insert into jobs (user_id, order_id, return_profit, excute_time)
-                    values ({$user_id}, {$order_id},
-                    {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent},
-                    '{$next_week}')
-            ";
-            }
-        }
+        $insert_sql_job = "
+            insert into jobs (user_id, order_id, return_profit, excute_time)
+            values ({$user_id}, {$order_id},
+            {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}
+            + case when
+                not exists
+                    (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                then {$ten_percent}
+                else 0
+                end ,
+            '{$next_week}')
+        ";
 
         $update_sql_first_purchase = "
             update users set first_purchase = '{$pay_amt}'::decimal
-             where id = {$user_id} and first_purchase::decimal > 0;
+             where not exists
+                (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+             and id = {$user_id}
         ";
 
         $order_id = $this->objDB->escape($order_id);
@@ -481,7 +471,14 @@ class Morder extends CI_Model
                     return_profit = ( {$parent_profit} + {$grand_parent_profit} ),
                     p_return_profit = {$parent_profit},
                     gp_return_profit = {$grand_parent_profit},
-                    p_return_invite = {$parent_extra_profit}
+                    p_return_invite =
+                     case when
+                        not exists
+                        (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                        and {$parent_user_id} > 0
+                        then {$ten_percent}
+                        else 0
+                        end
             where
                 id = {$order_id};
                 ";
@@ -493,10 +490,22 @@ class Morder extends CI_Model
                 where id = {$user_id};";
         $update_sql_parent_profit = "
             update users set profit = profit::decimal + (
-                    {$parent_profit} + {$parent_extra_profit}
+                    {$parent_profit} +
+                    case when
+                        not exists
+                            (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                        then {$ten_percent}
+                        else 0
+                    end
             ),
             balance = balance::decimal + (
-                    {$parent_profit} + {$parent_extra_profit}
+                    {$parent_profit} +
+                    case when
+                        not exists
+                            (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                        then {$ten_percent}
+                        else 0
+                    end
             )
             where id = {$parent_user_id};
             ";
@@ -519,20 +528,23 @@ class Morder extends CI_Model
             insert into
                 finish_log(order_id, pay_amt, user_id, parent_user_id, pay_amt_without_post_fee, is_first)
                 values
-                ({$order_id}, ?, ?, ?, ?, ?)
+                ({$order_id}, ?, ?, ?, ?,
+                    case when
+                        not exists
+                            (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                        then true
+                        else false
+                    end
+                )
             ;";
         $binds_finish_log = array(
-            $pay_amt, $user_id, $parent_user_id, $pay_amt_without_post_fee, $is_first
+            $pay_amt, $user_id, $parent_user_id, $pay_amt_without_post_fee
         );
         $this->objDB->trans_start();
 
         $this->objDB->query("set constraints all deferred");
         $this->objDB->query($insert_sql_job);
-        if($is_first) {
-            $this->objDB->query($update_sql_first_purchase);
-        } else {
-            //$this->objDB->query($update_sql);
-        }
+        $this->objDB->query($update_sql_first_purchase);
         $this->objDB->query($update_sql_order);
         $this->objDB->query($update_sql_turnover);
         if($parent_user_id > 0) {

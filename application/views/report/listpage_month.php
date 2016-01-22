@@ -40,11 +40,11 @@
                         <th>自下级推荐收益增量</th>
                         <th>自身延时收益增量</th>
                         <th>总收益增量</th>
-                        <th>至上级收益</th>
-                        <th>至上级推荐收益</th>
-                        <th>至上上级收益</th>
+                        <!--<th>至上级收益</th>-->
+                        <!--<th>至上级推荐收益</th>-->
+                        <!--<th>至上上级收益</th>-->
                         <th>上级代理</th>
-                        <th>上上级代理</th>
+                        <!--<th>上上级代理</th>-->
                     </tr>
                     <? $n = 0; ?>
                     <? foreach($bills as $k => $v){ ?>
@@ -57,16 +57,16 @@
                             <td><?=cny($v->extra_return_profit_sub2self)?></td>
                             <td><?=cny($v->delay_return_profit)?></td>
                             <td>￥<?=bcadd(money($v->normal_return_profit_sub2self), bcadd(money($v->extra_return_profit_sub2self),$v->delay_return_profit,2), 2 )?></td>
-                            <td><?=cny($v->normal_return_profit_self2parent);?></td>
-                            <td><?=cny($v->extra_return_profit_self2parent);?></td>
-                            <td><?=cny($v->normal_return_profit_self2gparent);?></td>
+                            <td><?//=cny($v->normal_return_profit_self2parent);?></td>
+                            <td><?//=cny($v->extra_return_profit_self2parent);?></td>
+                            <td><?//=cny($v->normal_return_profit_self2gparent);?></td>
                             <? if($v->pid == '0' || $v->pid == '') {?>
                                 <td></td>
                             <?} else {?>
                                 <td><a target="_blank" href="<?=base_url()?>user/details_admin/<?=$v->pid?>"><?=$v->pname?>(<?=$v->pusername?>/<?=$v->pid?>)</a></td>
                             <? } ?>
-                            <? if($v->gpid == '0' || $v->gpid == '') {?>
-                                <td></td>
+                            <? if($v->gpid == '0' || $v->gpid == '' || true) {?>
+                                <!--<td></td>-->
                             <?} else {?>
                                 <td><a target="_blank" href="<?=base_url()?>user/details_admin/<?=$v->gpid?>"><?=$v->gpname?>(<?=$v->gpusername?>/<?=$v->gpid?>)</a></td>
                             <? } ?>

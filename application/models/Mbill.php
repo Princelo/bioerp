@@ -142,6 +142,7 @@ class Mbill extends CI_Model
                 sum(o.pay_amt_without_post_fee) as products_volume,
                 sum(o.post_fee) as post_fee,
                 coalesce(sum(o.return_profit), '$0') as normal_return_profit_volume,
+                coalesce(sum(o.p_return_invite), '$0') as invite_return_profit_volume,
                 coalesce(sum(j.return_profit), '$0') as delay_return_profit_volume,
                 count(o.id) order_quantity
                 FROM (
@@ -314,6 +315,7 @@ class Mbill extends CI_Model
                     sum(o.pay_amt_without_post_fee) as products_volume,
                     sum(o.post_fee) as post_fee,
                     coalesce(sum(o.return_profit), '$0') as normal_return_profit_volume,
+                    coalesce(sum(o.p_return_invite), '$0') as invite_return_profit_volume,
                     coalesce(sum(j.return_profit), '$0') as delay_return_profit_volume,
                     count(o.id) order_quantity
                     FROM (
@@ -360,6 +362,7 @@ class Mbill extends CI_Model
                     sum(o.pay_amt_without_post_fee) as products_volume,
                     sum(o.post_fee) as post_fee,
                     coalesce(sum(o.return_profit), '$0') as normal_return_profit_volume,
+                    coalesce(sum(o.p_return_invite), '$0') as invite_return_profit_volume,
                     coalesce(sum(j.return_profit), '$0') as delay_return_profit_volume,
                     count(o.id) order_quantity
                     FROM (

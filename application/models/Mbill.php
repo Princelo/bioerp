@@ -477,7 +477,7 @@ class Mbill extends CI_Model
                 and j.excute_time between '{$date_from} 00:00:00' and '{$date_to} 23:59:59'
                 left join (
                 select sum(i.p_return_profit) p_return_profit, sum(i.p_return_invite) p_return_invite, sum(i.volume) volume, i.pid from(
-                SELECT Sum(o.return_profit) AS p_return_profit,
+                SELECT Sum(o.p_return_profit) AS p_return_profit,
                          Sum(o.p_return_invite) AS p_return_invite,
                          Sum(sa.amount)       volume,
                          u.pid,

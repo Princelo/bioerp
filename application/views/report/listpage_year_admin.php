@@ -52,7 +52,7 @@
                         <td><?=cny($v->normal_return_profit_volume);?></td>
                         <td><?=cny($v->invite_return_profit_volume);?></td>
                         <td><?=cny($v->delay_return_profit_volume);?></td>
-                        <td>￥<?=bcadd(bcadd(money($v->normal_return_profit_volume), money($v->delay_return_profit_volume), 2), $v->invite_return_profit_volume, 2);?></td>
+                        <td>￥<?=bcadd(bcadd(money($v->normal_return_profit_volume), money($v->delay_return_profit_volume), 2), money($v->invite_return_profit_volume), 2);?></td>
                         <td><?=$v->order_quantity?></td>
                     </tr>
                 <? } ?>

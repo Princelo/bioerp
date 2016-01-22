@@ -219,6 +219,8 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+            <div class="toolbar type-button">
                 <div class="c50l">
                 <input type="radio" name="finish" value="finish_with_pay" /><span class="red">审核完成<br />
                             <!--<input type="radio" name="finish" value="finish_without_pay" /><span class="red">完成但不插入付款纪录(用于线上付款订单)<br />-->

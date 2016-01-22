@@ -472,7 +472,7 @@ class Mbill extends CI_Model
                 on o_self.id = s_amount.order_id
                 left join jobs j
                 on j.user_id = u.id
-                and j.order_id = o.id
+                and j.order_id = o_self.id
                 and j.is_success = true and j.is_expired = true
                 and j.excute_time between '{$date_from} 00:00:00' and '{$date_to} 23:59:59'
                 left join (

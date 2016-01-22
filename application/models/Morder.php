@@ -445,7 +445,7 @@ class Morder extends CI_Model
             {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}
             + case when
                 not exists
-                    (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                    (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
                 then {$ten_percent}
                 else 0
                 end ,
@@ -455,7 +455,7 @@ class Morder extends CI_Model
         $update_sql_first_purchase = "
             update users set first_purchase = '{$pay_amt}'::decimal
              where not exists
-                (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
              and id = {$user_id}
         ";
 
@@ -474,7 +474,7 @@ class Morder extends CI_Model
                     p_return_invite =
                      case when
                         not exists
-                        (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                        (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
                         and {$parent_user_id} > 0
                         then {$ten_percent}
                         else 0
@@ -493,7 +493,7 @@ class Morder extends CI_Model
                     {$parent_profit} +
                     case when
                         not exists
-                            (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
                         then {$ten_percent}
                         else 0
                     end
@@ -502,7 +502,7 @@ class Morder extends CI_Model
                     {$parent_profit} +
                     case when
                         not exists
-                            (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
                         then {$ten_percent}
                         else 0
                     end
@@ -531,7 +531,7 @@ class Morder extends CI_Model
                 ({$order_id}, ?, ?, ?, ?, ?
                     case when
                         not exists
-                            (select id from orders where o.user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
                         then true
                         else false
                     end

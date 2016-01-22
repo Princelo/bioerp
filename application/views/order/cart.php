@@ -65,8 +65,8 @@
                         <td>
                             <div class="buy-quantity">
                                 <input value="<?=$v->quantity;?>" class="quantity" pid="<?=$v->pid?>" id="quantity-<?=$v->pid?>"/>
-                                <a href="javascript:void(0)" class="increase" onclick="increase(<?=$v->pid?>)" pid="<?=$v->pid?>">+</a>
-                                <a href="javascript:void(0)" class="decrease" onclick="decrease(<?=$v->pid?>)" pid="<?=$v->pid?>">-</a>
+                                <a href="javascript:void(0);" class="increase" onclick="increase(<?=$v->pid?>)" pid="<?=$v->pid?>">+</a>
+                                <a href="javascript:void(0);" class="decrease" onclick="decrease(<?=$v->pid?>)" pid="<?=$v->pid?>">-</a>
                             </div>
                         </td>
                         <td>
@@ -251,6 +251,7 @@
             if($("#product-"+id).is(':checked'))
                 $("#select-items").val(addSelectedItemsForCalc(id, $("#select-items").val()));
             updateTotal();
+            return false;
         }
         var decrease = function(id)
         {
@@ -262,6 +263,7 @@
                     $("#select-items").val(addSelectedItemsForCalc(id, $("#select-items").val()));
             }
             updateTotal();
+            return false;
         }
         $(".increase").each(function(){$(this).click()});
         $(".decrease").each(function(){$(this).click()});

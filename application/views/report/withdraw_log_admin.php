@@ -90,6 +90,7 @@
                      }*/
                     var goto = function(id) {
                         window.open('<?=base_url()?>user/details_admin/'+id,"Edit","width=600,height=600,0,status=0,");
+                        return false;
                     }
                 </script>
 

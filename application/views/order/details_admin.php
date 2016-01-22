@@ -204,6 +204,7 @@
                     } else {
 
                     }
+                    return false;
                 }
             </script>
 

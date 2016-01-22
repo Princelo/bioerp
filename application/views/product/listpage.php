@@ -88,8 +88,8 @@
                         <td>
                             <div class="buy-quantity">
                                 <input value="1" name="product<?=$v->id?>" id="quantity-<?=$v->id?>"/>
-                                <a href="javascript:void(0)" class="increase" onclick="increase(<?=$v->id?>)">+</a>
-                                <a href="javascript:void(0)" class="decrease" onclick="decrease(<?=$v->id?>)">-</a>
+                                <a href="javascript:void(0);" class="increase" onclick="increase(<?=$v->id?>)">+</a>
+                                <a href="javascript:void(0);" class="decrease" onclick="decrease(<?=$v->id?>)">-</a>
                             </div>
                         </td>
                         <td><a href="<?=base_url()?>product/details/<?=$v->id;?>">查看详情</a></td>
@@ -110,15 +110,18 @@
                         function(data){
                             alert(data.info);
                         }, "json");
+                    return false;
                 }
                 var increase = function(id)
                 {
                     $("#quantity-"+id).val(parseInt($("#quantity-" + id).val()) + 1);
+                    return false;
                 }
                 var decrease = function(id)
                 {
                     if($("#quantity-" + id).val() > 1)
                         $("#quantity-"+id).val(parseInt($("#quantity-" + id).val()) - 1);
+                    return false;
                 }
             </script>
 

@@ -88,7 +88,7 @@
                     <? $n ++; ?>
                     <tr class="<?=$n%2==0?"even":"odd";?>">
                         <td><?=$v->id?></td>
-                        <td><a href="<?=base_url()?>user/details_admin/<?=$v->uid?>"><?=$v->name_ch."(".$v->username."/".$v->uid.")"?></a></td>
+                        <td><a href="javascript:void(0);" onclick="goto(<?$v->uid?>)" bhref="<?=base_url()?>user/details_admin/<?=$v->uid?>"><?=$v->name_ch."(".$v->username."/".$v->uid.")"?></a></td>
                         <td><?=$v->quantity;?></td>
                         <!--<td><?=$v->diff_quantity?></td>-->
                         <td><?=cny($v->amount)?></td>
@@ -118,7 +118,12 @@
                  } else {
 
                  }
+                    return false;
                  }
+                var goto = function(id) {
+                    window.open('<?=base_url()?>user/details_admin/'+id,"Edit","width=600,height=600,0,status=0,");
+                    return false;
+                }
             </script>
 
 

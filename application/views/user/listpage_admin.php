@@ -92,7 +92,7 @@
                                 <td><a href="<?=base_url()?>user/details_admin/<?=$v->ppid?>"><?=$v->ppname?>(id:<?=$v->ppid?>)</a></td>
                             <? } ?>
                             <td><a href="<?=base_url()?>user/sublistpage/<?=$v->id?>">他的下一级</a></td>
-                            <td><a bhref="<?=base_url()?>user/details_admin/<?=$v->id?>" onclick="window.open('<?=base_url()?>user/details_admin/<?=$v->id?>','Edit','width=600,height=600,0,status=0,')">编辑</a></td>
+                            <td><a bhref="<?=base_url()?>user/details_admin/<?=$v->id?>" onclick="window.open('<?=base_url()?>user/details_admin/<?=$v->id?>','Edit','width=600,height=600,0,status=0,');return false;">编辑</a></td>
                         </tr>
                     <? } ?>
                     <? } ?>

@@ -144,10 +144,12 @@
         var increase = function(id)
         {
             $("#quantity-"+id).val(parseInt($("#quantity-" + id).val()) + 1);
+            return false;
         }
         var decrease = function(id)
         {
             if($("#quantity-" + id).val() > 1)
                 $("#quantity-"+id).val(parseInt($("#quantity-" + id).val()) - 1);
+            return false;
         }
     </script>

@@ -407,7 +407,7 @@ class Mbill extends CI_Model
               p.title,
               list.quantity total_quantity,
               coalesce(list.quantity, 0) quantity,
-              coalesce(list.amount*list.quantity, '$0') amount
+              list.amount amount
             from
               (
                 select
@@ -423,7 +423,7 @@ class Mbill extends CI_Model
                   and o.finish_time between '{$date_from} 00:00:00' and '{$date_to} 23:59:59'
                 group by op.product_id, p.id--, pa.amount
               ) as list
-              join products p on p.id = list.product_id
+                join products p on p.id = list.product_id
             order by list.product_id
         ";
         $query = $this->objDB->query($query_sql);

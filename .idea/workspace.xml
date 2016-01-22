@@ -71,8 +71,8 @@
       <file leaf-file-name="Mbill.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/models/Mbill.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9637681">
-              <caret line="474" column="38" selection-start-line="474" selection-start-column="38" selection-end-line="474" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.5833333">
+              <caret line="453" column="61" selection-start-line="453" selection-start-column="61" selection-end-line="453" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -827,8 +827,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Mbill.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9637681">
-          <caret line="474" column="38" selection-start-line="474" selection-start-column="38" selection-end-line="474" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.5833333">
+          <caret line="453" column="61" selection-start-line="453" selection-start-column="61" selection-end-line="453" selection-end-column="61" />
           <folding />
         </state>
       </provider>

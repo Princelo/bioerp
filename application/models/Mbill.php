@@ -451,7 +451,7 @@ class Mbill extends CI_Model
                 coalesce(sum(o_self.gp_return_profit), '$0') normal_return_profit_self2gparent,
                 coalesce(sum(o_self.p_return_invite), '$0') extra_return_profit_self2parent,
                 coalesce(sum(j.return_profit), '$0') delay_return_profit,
-                coalesce(o_sub.p_return_profit + o_sub_0.gp_return_profit, '$0') normal_return_profit_sub2self,
+                coalesce(o_sub.p_return_profit,'$0')+coalesce(o_sub_0.gp_return_profit, '$0') normal_return_profit_sub2self,
                 coalesce(o_sub.p_return_invite, '$0') extra_return_profit_sub2self,
                 pu.id pid,
                 pu.name pname,

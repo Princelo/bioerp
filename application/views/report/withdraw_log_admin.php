@@ -60,7 +60,6 @@
                         <th>结算金额</th>
                         <th>结算前余额</th>
                         <th>结算后余额</th>
-                        <th>帐户现剩余额</th>
                         <th>结算时间</th>
                     </tr>
                     <? $n = 0; ?>
@@ -73,7 +72,6 @@
                             <td><?=cny($v->volume)?></td>
                             <td><?=cny($v->balance_before);?></td>
                             <td>￥<?=bcsub(money($v->balance_before), money($v->volume), 2);?></td>
-                            <td><?=cny($v->balance);?></td>
                             <td><?=substr($v->create_time, 0, 19)?></td>
                         </tr>
                     <? } ?>

@@ -81,15 +81,15 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>提现总额</th>
+                            <th>已提现金额</th>
                             <td>
                                 <input type="text" value="<?=cny($v->withdraw_volume)?>" disabled="disabled" />
                             </td>
                         </tr>
                         <tr>
-                            <th>可提现余额</th>
+                            <th>帐户余额</th>
                             <td>
-                                <input type="text" value="<?=cny($v->balance)?>" disabled="disabled" />
+                                <input type="text" value="<?=cny($v->balance)?>" disabled="disabled" style="color:#f60;"/>
                             </td>
                         </tr>
                         <tr>

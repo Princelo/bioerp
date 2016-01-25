@@ -99,7 +99,7 @@
                             <tr>
                                 <th>提现余额</th>
                                 <td>
-                                    <input type="text" value="<?=cny($v->balance)?>" disabled="disabled" />
+                                    <input type="text" value="<?=cny($v->balance)?>" disabled="disabled" style="color:#f60;"/>
                                 </td>
                             </tr>
                         </table>

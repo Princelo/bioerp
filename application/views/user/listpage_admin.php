@@ -57,8 +57,8 @@
                         <th>共提现</th>
                         <th>提现余额</th>
                         <th>是否生效</th>
-                        <th>上级</th>
-                        <th>上上级</th>
+                        <th>推荐人</th>
+                        <th>跨界推荐人</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -82,12 +82,12 @@
                             <td><?=cny($v->balance)?></td>
                             <td><?=$v->is_valid==true?'是':'否'?></td>
                             <? if($v->pid == '0' || $v->pid == '') { ?>
-                                <td>无上级</td>
+                                <td>无推荐人</td>
                                 <? } else { ?>
                             <td><a href="<?=base_url()?>user/details_admin/<?=$v->pid?>"><?=$v->pname?>(id:<?=$v->pid?>)</a></td>
                                 <? } ?>
                             <? if($v->ppid == '0' || $v->ppid == '') { ?>
-                                <td>无上上级</td>
+                                <td>无跨界推荐人</td>
                             <? } else { ?>
                                 <td><a href="<?=base_url()?>user/details_admin/<?=$v->ppid?>"><?=$v->ppname?>(id:<?=$v->ppid?>)</a></td>
                             <? } ?>

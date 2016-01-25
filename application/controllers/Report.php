@@ -945,12 +945,12 @@ class Report extends MY_Controller {
                     ->setCellValue('D2', '自下级推荐收益增量')
                     ->setCellValue('E2', '自身延时收益增量')
                     ->setCellValue('F2', '总收益增量')
-                    ->setCellValue('G2', '至上级收益')
-                    ->setCellValue('H2', '至上级推荐收益')
-                    ->setCellValue('I2', '至上级总收益')
-                    ->setCellValue('J2', '至上上级收益')
-                    ->setCellValue('K2', '上级代理')
-                    ->setCellValue('L2', '上上级代理');
+                    ->setCellValue('G2', '至推荐人收益')
+                    ->setCellValue('H2', '至推荐人推荐收益')
+                    ->setCellValue('I2', '至推荐人总收益')
+                    ->setCellValue('J2', '至跨界推荐人收益')
+                    ->setCellValue('K2', '推荐人代理')
+                    ->setCellValue('L2', '跨界推荐人代理');
                 foreach ($bills as $k => $v) {
                     $i = $k + 3;
                     $objPHPExcel->setActiveSheetIndex(0)
@@ -969,13 +969,13 @@ class Report extends MY_Controller {
                             ->setCellValue("K$i", $v->pname."(".$v->pusername."/".$v->pid.")");
                     else
                         $objPHPExcel->setActiveSheetIndex(0)
-                            ->setCellValue("K$i", "无上级");
+                            ->setCellValue("K$i", "无推荐人");
                     if(intval($v->gpid) > 0)
                         $objPHPExcel->setActiveSheetIndex(0)
                             ->setCellValue("L$i", $v->gpname."(".$v->gpusername."/".$v->gpid.")");
                     else
                         $objPHPExcel->setActiveSheetIndex(0)
-                            ->setCellValue("L$i", "无上上级");
+                            ->setCellValue("L$i", "无跨界推荐人");
 
                 }
             } else {

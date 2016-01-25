@@ -37,12 +37,12 @@
                         <th>自下级推荐收益增量</th>
                         <th>自身延时收益增量</th>
                         <th>总收益增量</th>
-                        <th>至上级收益</th>
-                        <th>至上级推荐收益</th>
-                        <th>至上级总收益</th>
-                        <th>至上上级收益</th>
-                        <th>上级代理</th>
-                        <th>上上级代理</th>
+                        <th>至推荐人收益</th>
+                        <th>至推荐人推荐收益</th>
+                        <th>至推荐人总收益</th>
+                        <th>至跨界推荐人收益</th>
+                        <th>推荐人代理</th>
+                        <th>跨界推荐人代理</th>
                     </tr>
                     <? $n = 0; ?>
                     <? foreach($bills as $k => $v){ ?>
@@ -59,12 +59,12 @@
                             <td>￥<?=bcadd(money($v->normal_return_profit_self2parent), money($v->extra_return_profit_self2parent), 2 )?></td>
                             <td><?=cny($v->normal_return_profit_self2gparent);?></td>
                             <? if(intval($v->pid) <= 0) {?>
-                            <td>无上级</td>
+                            <td>无推荐人</td>
                             <?} else {?>
                             <td><a href="<?=base_url()?>user/details_admin/<?=$v->pid?>"><?=$v->pname?>(<?=$v->pusername?>/<?=$v->pid?>)</a></td>
                             <? } ?>
                             <? if(intval($v->gpid) <= 0) {?>
-                                <td>无上上级</td>
+                                <td>无跨界推荐人</td>
                             <?} else {?>
                                 <td><a href="<?=base_url()?>user/details_admin/<?=$v->gpid?>"><?=$v->gpname?>(<?=$v->gpusername?>/<?=$v->gpid?>)</a></td>
                             <? } ?>

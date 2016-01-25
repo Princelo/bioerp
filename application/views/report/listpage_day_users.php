@@ -38,9 +38,9 @@
                         <th>推荐收益增量</th>
                         <th>自身延时收益增量</th>
                         <th>总收益增量</th>
-                        <th>至推荐人收益</th>
+                        <!--<th>至推荐人收益</th>
                         <th>至推荐人推荐收益</th>
-                        <th>至跨界推荐人收益</th>
+                        <th>至跨界推荐人收益</th>-->
                         <th>推荐人</th>
                         <th>跨界推荐人</th>
                     </tr>
@@ -55,15 +55,15 @@
                             <td><?=cny($v->extra_return_profit_sub2self)?></td>
                             <td><?=cny($v->delay_return_profit)?></td>
                             <td>￥<?=bcadd(money($v->normal_return_profit_sub2self), bcadd(money($v->extra_return_profit_sub2self),money($v->delay_return_profit),2), 2 )?></td>
-                            <td><?=cny($v->normal_return_profit_self2parent);?></td>
+                            <!--<td><?=cny($v->normal_return_profit_self2parent);?></td>
                             <td><?=cny($v->extra_return_profit_self2parent);?></td>
-                            <td><?=cny($v->normal_return_profit_self2gparent);?></td>
-                            <? if($v->pid == '0' || $v->pid == '') {?>
+                            <td><?=cny($v->normal_return_profit_self2gparent);?></td>-->
+                            <? if(intval($v->pid) <= 0 || $v->pid == '') {?>
                                 <td></td>
                             <?} else {?>
                                 <td><a target="_blank" href="<?=base_url()?>user/details_admin/<?=$v->pid?>"><?=$v->pname?>(<?=$v->pusername?>/<?=$v->pid?>)</a></td>
                             <? } ?>
-                            <? if($v->gpid == '0' || $v->gpid == '') {?>
+                            <? if(intval($v->gpid) <= 0 || $v->gpid == '') {?>
                                 <td></td>
                             <?} else {?>
                                 <td><a target="_blank" href="<?=base_url()?>user/details_admin/<?=$v->gpid?>"><?=$v->gpname?>(<?=$v->gpusername?>/<?=$v->gpid?>)</a></td>

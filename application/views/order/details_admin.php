@@ -181,13 +181,13 @@
         </table>
         <table class="float_left margin-left">
             <tr class="odd">
-                <th>回扣(不含推荐回扣)</th>
+                <th>推荐人及跨界推荐人获得收益(不含首次推荐)</th>
                 <td>
                     <span class="info important"><?=cny($v->return_profit)?></span>
                 </td>
             </tr>
             <tr class="even">
-                <th>推荐回扣</th>
+                <th>首次购买推荐收益</th>
                 <td>
                     <span class="info important"><?=cny($v->p_return_invite)?></span>
                 </td>

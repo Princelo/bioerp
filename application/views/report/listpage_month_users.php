@@ -22,7 +22,8 @@
 
 
             <div class="info view_form">
-                <h2>月报表<?if(isset($bills[0])):?>(<?=  date('Y-M', strtotime($bills[0]->date_from))?> - <?=date('Y-M', strtotime($bills[0]->date_to))?>)<?endif?></h2>
+                <h2>月报表
+                </h2>
                 <script>
                     if("<?=$this->session->flashdata('flashdata', 'value');?>"!="")
                         alert("<?=$this->session->flashdata('flashdata', 'value');?>");
@@ -34,7 +35,7 @@
                         <th>日期</th>
                         <th>自身业绩增量</th>
                         <th>下级业绩增量</th>
-                        <th>实际业绩增量</th>
+                        <!--<th>实际业绩增量</th>-->
                         <th>收益增量(不含推荐)</th>
                         <th>推荐收益增量</th>
                         <th>总收益增量</th>
@@ -42,6 +43,7 @@
                         <th>至推荐人推荐收益</th>
                         <th>至推荐人总收益</th>
                         <th>推荐人</th>
+                        <th>跨界推荐人</th>
                     </tr>
                     <? $n = 0; ?>
                     <? foreach($bills as $k => $v){ ?>
@@ -50,7 +52,7 @@
                             <td><?=$v->date?></td>
                             <td><?=cny($v->self_turnover)?></td>
                             <td><?=cny($v->sub_turnover)?></td>
-                            <td>￥<?=bcadd(money($v->self_turnover),money($v->sub_turnover),2)?></td>
+                            <!--<td>￥<?//=bcadd(money($v->self_turnover),money($v->sub_turnover),2)?></td>-->
                             <td><?=cny($v->normal_return_profit_sub2self)?></td>
                             <td><?=cny($v->extra_return_profit_sub2self)?></td>
                             <td>￥<?=bcadd(money($v->normal_return_profit_sub2self), money($v->extra_return_profit_sub2self), 2 )?></td>
@@ -61,6 +63,11 @@
                                 <td></td>
                             <?} else {?>
                                 <td><a href="<?=base_url()?>user/details_admin/<?=$v->pid?>"><?=$v->pname?>(<?=$v->pusername?>/<?=$v->pid?>)</a></td>
+                            <? } ?>
+                            <? if($v->gpid == '0' || $v->gpid == '') {?>
+                                <td></td>
+                            <?} else {?>
+                                <td><a target="_blank" href="<?=base_url()?>user/details_admin/<?=$v->gpid?>"><?=$v->gpname?>(<?=$v->gpusername?>/<?=$v->gpid?>)</a></td>
                             <? } ?>
                         </tr>
                     <? } ?>

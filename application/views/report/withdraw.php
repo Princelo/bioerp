@@ -10,7 +10,7 @@
                 <li>
                     <a href='<?=base_url()?>report/index' ><div>代理报表查询 </div></a>
                 </li>
-                <li><a href='<?=base_url();?>report/index_sub' ><div>下级代理报表查询 </div></a></li>
+                <li><a href='<?=base_url();?>report/index_sub' ><div>报表查询(下级代理) </div></a></li>
                 <li>
                     <a href='<?=base_url()?>report/withdraw' ><div>结算查询 </div></a>
                 </li>

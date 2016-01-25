@@ -986,9 +986,9 @@ class Report extends MY_Controller {
                     ->setCellValue('B2', '总金额(含运费)')
                     ->setCellValue('C2', '产品总金额')
                     ->setCellValue('D2', '运费总金额')
-                    ->setCellValue('E2', '即时回扣总量')
-                    ->setCellValue('F2', '用户自身回扣总量')
-                    ->setCellValue('G2', '回扣总量')
+                    ->setCellValue('E2', '即时收益总量')
+                    ->setCellValue('F2', '用户自身收益总量')
+                    ->setCellValue('G2', '收益总量')
                     ->setCellValue('H2', '订单数');
                 // Miscellaneous glyphs, UTF-8
                 foreach($bills as $k => $v)

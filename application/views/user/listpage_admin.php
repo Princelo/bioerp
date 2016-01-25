@@ -54,8 +54,8 @@
                         <th>电话</th>
                         <th>他的业绩</th>
                         <th>他的收益</th>
-                        <th>共提现</th>
-                        <th>提现余额</th>
+                        <th>已提现金额</th>
+                        <th>帐户余额</th>
                         <th>是否生效</th>
                         <th>推荐人</th>
                         <th>跨界推荐人</th>
@@ -91,7 +91,7 @@
                             <? } else { ?>
                                 <td><a href="<?=base_url()?>user/details_admin/<?=$v->ppid?>"><?=$v->ppname?>(id:<?=$v->ppid?>)</a></td>
                             <? } ?>
-                            <td><a href="<?=base_url()?>user/sublistpage/<?=$v->id?>">他的下一级</a></td>
+                            <td><a href="<?=base_url()?>user/sublistpage/<?=$v->id?>">他的下级</a></td>
                             <td><a bhref="<?=base_url()?>user/details_admin/<?=$v->id?>" onclick="window.open('<?=base_url()?>user/details_admin/<?=$v->id?>','Edit','width=600,height=600,0,status=0,');return false;">编辑</a></td>
                         </tr>
                     <? } ?>

@@ -10,7 +10,7 @@
                 <li>
                     <a href='<?=base_url()?>report/index_admin' ><div>代理报表查询 </div></a>
                 </li>
-                <li><a href='<?=base_url();?>report/index_zents' ><div>ERP总报表查询 </div></a></li>
+                <li><a href='<?=base_url();?>report/index_zents' ><div>总报表查询 </div></a></li>
                 <li><a href='<?=base_url();?>report/listpage_withdraw_admin' ><div>结算查询 </div></a></li>
             </ul>
         </div>
@@ -22,7 +22,7 @@
 
 
         <div class="info view_form">
-            <h2>月报表(ERP)</h2>
+            <h2>月报表</h2>
             <script>
                 if("<?=$this->session->flashdata('flashdata', 'value');?>"!="")
                     alert("<?=$this->session->flashdata('flashdata', 'value');?>");

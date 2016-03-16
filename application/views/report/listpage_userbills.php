@@ -35,7 +35,7 @@
                         <th>业绩增量</th>
                         <th>自下级(下下级)收益增量(不含推荐)</th>
                         <th>自下级推荐收益增量</th>
-                        <th>自身延时收益增量</th>
+                        <!--<th>自身延时收益增量</th>-->
                         <th>总收益增量</th>
                         <th>至推荐人收益</th>
                         <th>至推荐人推荐收益</th>
@@ -52,8 +52,8 @@
                             <td><?=cny($v->turnover)?></td>
                             <td><?=cny($v->normal_return_profit_sub2self)?></td>
                             <td><?=cny($v->extra_return_profit_sub2self)?></td>
-                            <td><?=cny($v->delay_return_profit)?></td>
-                            <td>￥<?=bcadd(bcadd(money($v->normal_return_profit_sub2self), money($v->extra_return_profit_sub2self), 2 ),money($v->delay_return_profit),2)?></td>
+                            <!--<td><?//=cny($v->delay_return_profit)?></td>-->
+                            <td>￥<?=bcadd(bcadd(money($v->normal_return_profit_sub2self), money($v->extra_return_profit_sub2self), 2 ),0,2)?></td>
                             <td><?=cny($v->normal_return_profit_self2parent);?></td>
                             <td><?=cny($v->extra_return_profit_self2parent);?></td>
                             <td>￥<?=bcadd(money($v->normal_return_profit_self2parent), money($v->extra_return_profit_self2parent), 2 )?></td>

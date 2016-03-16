@@ -82,9 +82,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <th><label for="price_special">价格 <span>*</span></label></th>
+                        <th><label for="price_special">价格(未打折) <span>*</span></label></th>
                         <td>
                             <input name="price" data-validate="required,decimal" value="<?=set_value('price')?>"/>(单位: 元)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label>折扣</label></th>
+                        <td>
+                            <input name="discount" data-validate="required,decimal" value="<?=set_value('discount', 60)?>" disabled/>(单位: 百份比)
                         </td>
                     </tr>
                     <tr>

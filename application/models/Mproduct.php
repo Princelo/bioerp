@@ -24,9 +24,11 @@ class Mproduct extends CI_Model
                 p.usage_method usage_method,
                 p.img img,
                 pr.price price,
+                pr.price * p.discount / 100 as discount_price,
                 p.category category,
                 p.thumb thumb,
-                p.ingredient ingredient
+                p.ingredient ingredient,
+                p.discount discount
             from
                 products p
                 left join price pr
@@ -63,9 +65,11 @@ class Mproduct extends CI_Model
                 p.img img,
                 p.is_valid is_valid,
                 pr.price price,
+                pr.price * p.discount / 100 as discount_price,
                 p.category category,
                 p.weight weight,
-                p.thumb thumb
+                p.thumb thumb,
+                p.discount discount
             from
                 products p
                 left join price pr
@@ -86,7 +90,7 @@ class Mproduct extends CI_Model
     public function add($main_data)
     {
         $price_str = "";
-        $price_str .= "(currval('products_id_seq'),?)";
+        $price_str .= "(currval('products_id_seq'),?,?)";
         $insert_sql_product = "";
         $insert_sql_product .= "
             insert into products
@@ -95,15 +99,15 @@ class Mproduct extends CI_Model
         ";
         $insert_sql_price = "";
         $insert_sql_price .= "
-            insert into price (product_id, price)
+            insert into price (product_id, price, discount_price)
             values {$price_str};
         ";
         $binds_product = array(
             $main_data['title'], $main_data['properties'], $main_data['feature'], $main_data['usage_method'],
             $main_data['ingredient'], $main_data['img'], $main_data['is_valid'], $main_data['weight'], $main_data['category']
-            ,$main_data['thumb']
+            ,$main_data['thumb'], $main_data['discount']
         );
-        $binds_price = array($main_data['price']);
+        $binds_price = array($main_data['price'], $main_data['price'].'*'.$main_data['discount']);
 
         $this->objDB->trans_start();
 

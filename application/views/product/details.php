@@ -53,8 +53,16 @@
                         </td>
                     </tr>
                     <tr>
+                        <th><label>原价</label></th>
+                        <td><input type="text" value="<?=cny($v->price)?>" disabled/></td>
+                    </tr>
+                    <tr>
+                        <th><label>折后价</label></th>
+                        <td><input type="text" value="<?=cny($v->discount_price)?>" disabled style="color:#f60"/></td>
+                    </tr>
+                    <tr>
                         <th><label>所属分类</label></th>
-                        <td><?=getCategoryName($v->category)?></td>
+                        <td><input type="text" value="<?=getCategoryName($v->category)?>" disabled/></td>
                     </tr>
                     <tr>
                         <th><label>总重量</label></th>

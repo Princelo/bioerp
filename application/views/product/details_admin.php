@@ -89,6 +89,12 @@
                     </td>
                 </tr>
                 <tr>
+                    <th><label for="price_special">折后价格(<?=$v->discount?>%) <span>*</span></label></th>
+                    <td>
+                        <input disabled  name="price" data-validate="required,decimal" value="<?=cny($v->discount_price)?>"/>(单位: 元)
+                    </td>
+                </tr>
+                <tr>
                     <th>产品图片</th>
                     <td>
                         <img src="<?=$v->img;?>" />

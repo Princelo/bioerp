@@ -8,16 +8,14 @@
 
             <ul id="left_menu">
                 <li>
-                    <a href='<?=base_url()?>product/listpage' ><div>产品列表 </div></a>
+                    <a href='<?=base_url()?>order/listpage' ><div>订单列表 </div></a>
                 </li>
-                <? if($this->session->userdata('level') != 0) {?>
-                    <li>
-                        <a href='<?=base_url()?>product/listpage?is_trial=true' ><div>试用品列表 </div></a>
-                    </li>
-                    <li>
-                        <a href='<?=base_url()?>product/listpage?is_trial=true&trial_type=<?=get_trial_type('event products');?>' ><div>活动产品列表 </div></a>
-                    </li>
-                <?}?>
+                <li>
+                    <a href='<?=base_url()?>order/index_sub' ><div>下级代理订单查询 </div></a>
+                </li>
+                <li>
+                    <a href="<?=base_url()?>order/cart"><div>我的购物车</div></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -137,14 +135,14 @@
                     <? $n = 0; ?>
                     <?foreach($products as $k => $v){?>
                         <? if(array_key_exists($v->pid, $products_quantity)):?>
-                        <? $n ++; ?>
-                        <?$total = bcadd($total, bcmul(money($v->unit_price), $products_quantity[$v->pid], 2), 2)?>
-                        <tr class="<?=$n%2==0?"even":"odd";?>">
-                            <td><?=$v->title?></td>
-                            <td><?=$products_quantity[$v->pid]?></td>
-                            <td><?=cny($v->unit_price)?></td>
-                            <td>￥<?=bcmul(money($v->unit_price), $products_quantity[$v->pid], 2)?></td>
-                        </tr>
+                            <? $n ++; ?>
+                            <?$total = bcadd($total, bcmul(money($v->unit_price), $products_quantity[$v->pid], 2), 2)?>
+                            <tr class="<?=$n%2==0?"even":"odd";?>">
+                                <td><?=$v->title?></td>
+                                <td><?=$products_quantity[$v->pid]?></td>
+                                <td><?=cny($v->unit_price)?></td>
+                                <td>￥<?=bcmul(money($v->unit_price), $products_quantity[$v->pid], 2)?></td>
+                            </tr>
                         <? endif ?>
                     <?}?>
 
@@ -171,11 +169,8 @@
                             trigger    : 'end_time-trigger',
                             onSelect   : function() { this.hide() }
                         });
-
                     });
-
                 </script>
-
             : IE Column Clearing -->
     </div>
     <script>

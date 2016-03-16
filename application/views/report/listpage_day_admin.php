@@ -37,7 +37,7 @@
                     <th>运费总金额</th>
                     <th>即时收益总量</th>
                     <th>推荐收益总量</th>
-                    <th>用户自身收益总量</th>
+                    <!--<th>用户自身收益总量</th>-->
                     <th>收益总量</th>
                     <th>订单数</th>
                 </tr>
@@ -51,8 +51,8 @@
                         <td><?=cny($v->post_fee);?></td>
                         <td><?=cny($v->normal_return_profit_volume);?></td>
                         <td><?=cny($v->invite_return_profit_volume);?></td>
-                        <td><?=cny($v->delay_return_profit_volume);?></td>
-                        <td>￥<?=bcadd(bcadd(money($v->normal_return_profit_volume), money($v->delay_return_profit_volume), 2), money($v->invite_return_profit_volume), 2);?></td>
+                        <!--<td><?//=cny($v->delay_return_profit_volume);?></td>-->
+                        <td>￥<?=bcadd(bcadd(money($v->normal_return_profit_volume), 0, 2), money($v->invite_return_profit_volume), 2);?></td>
                         <td><?=$v->order_quantity?></td>
                     </tr>
                 <? } ?>

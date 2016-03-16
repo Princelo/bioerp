@@ -124,7 +124,8 @@ class Morder extends CI_Model
                 c.product_id pid,
                 p.title title,
                 c.quantity quantity,
-                pr.price as unit_price
+                pr.price as unit_price_original,
+                pr.discount_price as unit_price
             from
                 cart_product c
                 left join products p
@@ -211,22 +212,26 @@ class Morder extends CI_Model
 
         $temp_amounts_str = "";
         $temp_amounts_str_2 = "";
+        $temp_original_amounts_str = "";
 
 
         foreach($main_data['products'] as $k => $v)
         {
-            $temp_amounts_str .= "coalesce(pr{$k}.price::decimal, 0) * {$v} +";
+            $temp_amounts_str .= "coalesce(pr{$k}.discount_price::decimal, 0) * {$v} +";
             $temp_amounts_str_2 .= " left join price pr{$k} on pr{$k}.product_id = {$k} ";
+            $temp_original_amounts_str .= "coalesce(pr{$k}.price::decimal, 0) * {$v} +";
         }
         $temp_amounts_str = substr($temp_amounts_str, 0, -1);
+        $temp_original_amounts_str = substr($temp_original_amounts_str, 0, -1);
 
         $insert_sql_amount = "";
         $insert_sql_amount .= "
-            insert into amounts (amount, order_id)
+            insert into amounts (amount, order_id, original_amount)
             values
             (
                 (select {$temp_amounts_str} as amount from products p {$temp_amounts_str_2} group by amount),
-                currval('orders_id_seq')
+                currval('orders_id_seq'),
+                (select {$temp_original_amounts_str} as amount from products p {$temp_amounts_str_2} group by amount)
             )
             ;
         ";
@@ -235,9 +240,10 @@ class Morder extends CI_Model
         {
             $product_id = intval($product_id);
             $insert_sql_product_amount[] = "
-            insert into product_amount (amount, order_id, product_id, quantity)
+            insert into product_amount (amount, original_amount, order_id, product_id, quantity)
             values
             (
+                (select pr.discount_price from products p left join price pr on pr.product_id = p.id where p.id = {$product_id}),
                 (select pr.price from products p left join price pr on pr.product_id = p.id where p.id = {$product_id}),
                 currval('orders_id_seq'),
                 {$product_id},
@@ -418,12 +424,13 @@ class Morder extends CI_Model
         return $data;
     }
 
-    function finish_with_pay($order_id, $pay_amt, $user_id, $parent_user_id, $grand_parent_user_id, $pay_amt_without_post_fee, $is_first)
+    function finish_with_pay($order_id, $pay_amt, $user_id, $parent_user_id, $grand_parent_user_id, $pay_amt_without_post_fee, $is_first,
+                            $original_amount)
     {
         $now = now();
         $next_week = date("Y-m-d 00:00:00", strtotime("+1 week"));
-        $ten_percent = bcmul($pay_amt_without_post_fee, 0.1, 2);
-        $five_percent = bcmul($pay_amt_without_post_fee, 0.05, 2);
+        $ten_percent = bcmul($original_amount, 0.1, 2);
+        $five_percent = bcmul($original_amount, 0.05, 2);
 
         if($parent_user_id > 0) {
             $parent_profit =  bcadd($ten_percent, $five_percent, 2);
@@ -439,7 +446,7 @@ class Morder extends CI_Model
             $grand_parent_profit = 0;
         }
 
-        $insert_sql_job = "
+        /*$insert_sql_job = "
             insert into jobs (user_id, order_id, return_profit, excute_time)
             values ({$user_id}, {$order_id},
             {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}
@@ -450,7 +457,7 @@ class Morder extends CI_Model
                 else {$ten_percent}
                 end ,
             '{$next_week}')
-        ";
+        ";*/
 
         $update_sql_first_purchase = "
             update users set first_purchase = '{$pay_amt}'::decimal
@@ -524,6 +531,7 @@ class Morder extends CI_Model
                     is_pay = true,
                     is_correct = true,
                     pay_amt_without_post_fee = '{$pay_amt_without_post_fee}',
+                    original_amount = '{$original_amount}',
                     update_time = '{$now}',
                     finish_time = '{$now}',
                     return_profit = ( {$parent_profit} + {$grand_parent_profit} ),
@@ -543,7 +551,7 @@ class Morder extends CI_Model
         $this->objDB->trans_start();
 
         $this->objDB->query("set constraints all deferred");
-        $this->objDB->query($insert_sql_job);
+        //$this->objDB->query($insert_sql_job);
         $this->objDB->query($update_sql_first_purchase);
         $this->objDB->query($update_sql_turnover);
         if($parent_user_id > 0) {

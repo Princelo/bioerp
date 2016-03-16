@@ -321,7 +321,8 @@ class Order extends MY_Controller {
                                                          $data['v']->parent_user_id,
                                                          $data['v']->grand_parent_user_id,
                                                          money($data['v']->amount),
-                                                         $data['v']->is_first);
+                                                         $data['v']->is_first,
+                                                         money($data['v']->original_amount));
                 if($result === true)
                 {
                     $this->session->set_flashdata('flashdata', '订单更改成功');

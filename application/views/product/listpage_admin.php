@@ -93,7 +93,9 @@
                         </td>
                         <td><?=$v->ingredient;?></td>
                         <td><img src="<?=$v->thumb?>" /></td>
-                        <td><?=cny($v->price)?></td>
+                        <td><span style="text-decoration: line-through;"> <?=cny($v->price)?> </span>
+                            <p style="color:#f60;"><?=cny($v->discount_price)?></p>
+                        </td>
                         <td><a href="<?=base_url()?>product/details_admin/<?=$v->id;?>">编辑</a></td>
                     </tr>
                 <? } ?>

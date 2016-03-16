@@ -84,7 +84,10 @@
                             </div>
                         </td>
                         <td><img src="<?=$v->thumb?>" /></td>
-                        <td><?=cny($v->price)?></td>
+                        <td>
+                            <span style="text-decoration: line-through;"><?=cny($v->price)?></span>
+                            <p style="color:#f60"><?=cny($v->discount_price)?></p>
+                        </td>
                         <td>
                             <div class="buy-quantity">
                                 <input value="1" name="product<?=$v->id?>" id="quantity-<?=$v->id?>"/>

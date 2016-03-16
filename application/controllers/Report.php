@@ -943,14 +943,14 @@ class Report extends MY_Controller {
                     ->setCellValue('B2', '业绩增量')
                     ->setCellValue('C2', '自下级(下下级)收益增量(不含推荐)')
                     ->setCellValue('D2', '自下级推荐收益增量')
-                    ->setCellValue('E2', '自身延时收益增量')
-                    ->setCellValue('F2', '总收益增量')
-                    ->setCellValue('G2', '至推荐人收益')
-                    ->setCellValue('H2', '至推荐人推荐收益')
-                    ->setCellValue('I2', '至推荐人总收益')
-                    ->setCellValue('J2', '至跨界推荐人收益')
-                    ->setCellValue('K2', '推荐人代理')
-                    ->setCellValue('L2', '跨界推荐人代理');
+                    //->setCellValue('E2', '自身延时收益增量')
+                    ->setCellValue('E2', '总收益增量')
+                    ->setCellValue('F2', '至推荐人收益')
+                    ->setCellValue('G2', '至推荐人推荐收益')
+                    ->setCellValue('H2', '至推荐人总收益')
+                    ->setCellValue('I2', '至跨界推荐人收益')
+                    ->setCellValue('J2', '推荐人代理')
+                    ->setCellValue('K2', '跨界推荐人代理');
                 foreach ($bills as $k => $v) {
                     $i = $k + 3;
                     $objPHPExcel->setActiveSheetIndex(0)
@@ -958,24 +958,24 @@ class Report extends MY_Controller {
                         ->setCellValue("B$i", cny($v->turnover))
                         ->setCellValue("C$i", cny($v->normal_return_profit_sub2self))
                         ->setCellValue("D$i", cny($v->extra_return_profit_sub2self))
-                        ->setCellValue("E$i", cny($v->delay_return_profit))
-                        ->setCellValue("F$i", '￥'.bcadd(bcadd(money($v->normal_return_profit_sub2self), money($v->extra_return_profit_sub2self), 2 ),money($v->delay_return_profit),2))
-                        ->setCellValue("G$i", cny($v->normal_return_profit_self2parent))
-                        ->setCellValue("H$i", cny($v->extra_return_profit_self2parent))
-                        ->setCellValue("I$i", "￥".bcadd(money($v->normal_return_profit_self2parent), money($v->extra_return_profit_self2parent), 2 ))
-                        ->setCellValue("J$i", cny($v->normal_return_profit_self2gparent));
+                        //->setCellValue("E$i", cny($v->delay_return_profit))
+                        ->setCellValue("E$i", '￥'.bcadd(bcadd(money($v->normal_return_profit_sub2self), money($v->extra_return_profit_sub2self), 2 ),0,2))
+                        ->setCellValue("F$i", cny($v->normal_return_profit_self2parent))
+                        ->setCellValue("G$i", cny($v->extra_return_profit_self2parent))
+                        ->setCellValue("H$i", "￥".bcadd(money($v->normal_return_profit_self2parent), money($v->extra_return_profit_self2parent), 2 ))
+                        ->setCellValue("I$i", cny($v->normal_return_profit_self2gparent));
                     if(intval($v->pid) > 0)
                         $objPHPExcel->setActiveSheetIndex(0)
-                            ->setCellValue("K$i", $v->pname."(".$v->pusername."/".$v->pid.")");
+                            ->setCellValue("J$i", $v->pname."(".$v->pusername."/".$v->pid.")");
                     else
                         $objPHPExcel->setActiveSheetIndex(0)
-                            ->setCellValue("K$i", "无推荐人");
+                            ->setCellValue("J$i", "无推荐人");
                     if(intval($v->gpid) > 0)
                         $objPHPExcel->setActiveSheetIndex(0)
-                            ->setCellValue("L$i", $v->gpname."(".$v->gpusername."/".$v->gpid.")");
+                            ->setCellValue("K$i", $v->gpname."(".$v->gpusername."/".$v->gpid.")");
                     else
                         $objPHPExcel->setActiveSheetIndex(0)
-                            ->setCellValue("L$i", "无跨界推荐人");
+                            ->setCellValue("K$i", "无跨界推荐人");
 
                 }
             } else {
@@ -987,9 +987,9 @@ class Report extends MY_Controller {
                     ->setCellValue('C2', '产品总金额')
                     ->setCellValue('D2', '运费总金额')
                     ->setCellValue('E2', '即时收益总量')
-                    ->setCellValue('F2', '用户自身收益总量')
-                    ->setCellValue('G2', '收益总量')
-                    ->setCellValue('H2', '订单数');
+                    //->setCellValue('F2', '用户自身收益总量')
+                    ->setCellValue('F2', '收益总量')
+                    ->setCellValue('G2', '订单数');
                 // Miscellaneous glyphs, UTF-8
                 foreach($bills as $k => $v)
                 {
@@ -1000,9 +1000,9 @@ class Report extends MY_Controller {
                         ->setCellValue("C$i", $v->products_volume)
                         ->setCellValue("D$i", $v->post_fee)
                         ->setCellValue("E$i", $v->normal_return_profit_volume)
-                        ->setCellValue("F$i", $v->delay_return_profit_volume)
-                        ->setCellValue("G$i", "￥".bcadd(money($v->normal_return_profit_volume), money($v->delay_return_profit_volume), 2))
-                        ->setCellValue("H$i", $v->order_quantity);
+                        //->setCellValue("F$i", $v->delay_return_profit_volume)
+                        ->setCellValue("F$i", "￥".bcadd(money($v->normal_return_profit_volume), 0, 2))
+                        ->setCellValue("G$i", $v->order_quantity);
                 }
             }
 

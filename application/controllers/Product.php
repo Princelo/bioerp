@@ -315,6 +315,11 @@ class Product extends MY_Controller {
                 'rules'   => 'trim|xss_clean|numeric|required'
             ),
             array(
+                'field'   => 'discount',
+                'label'   => '折扣',
+                'rules'   => 'trim|xss_clean|numeric|required'
+            ),
+            array(
                 'field' => 'weight',
                 'label' => '总重量',
                 'rules'   => 'trim|required|xss_clean|is_natural',
@@ -367,6 +372,7 @@ class Product extends MY_Controller {
                     'weight' => $this->input->post('weight'),
                     'is_valid' => $this->input->post('is_valid'),
                     'price' => $this->input->post('price'),
+                    'discount' => $this->input->post('discount'),
                     'thumb' => $thumb,
                 );
                 $result = $this->Mproduct->add($main_data);
@@ -390,24 +396,24 @@ class Product extends MY_Controller {
         $where = "";
         if($search != '' && $price_low != '' && $price_high != '') {
             $where .= " and (p.title like '%{$search}%' or p.feature like '%{$search}%' or
-                            pr.price::decimal between {$price_low} and {$price_high} )
+                            pr.discount_price::decimal between {$price_low} and {$price_high} )
                             ) ";
         } elseif($search != '' && $price_low == '' && $price_high == '') {
             $where .= " and (p.title like '%{$search}%' or p.feature like '%{$search}%') ";
         } elseif($search != '' && $price_low != '' && $price_high == '') {
             $where .= " and (p.title like '%{$search}%' or p.feature like '%{$search}%' or
-                            (cast(pr.price as decimal) > {$price_low} )
+                            (cast(pr.discount_price as decimal) > {$price_low} )
                             ) ";
         } elseif($search != '' && $price_low == '' && $price_high != '') {
             $where .= " and (p.title like '%{$search}%' or p.feature like '%{$search}%' or
-                            (cast(pr.price as decimal) < {$price_high} )
+                            (cast(pr.discount_price as decimal) < {$price_high} )
                             ) ";
         } elseif($search == '' && $price_low != '' && $price_high != '') {
-            $where .= " and (cast(pr.price as decimal) between {$price_low} and {$price_high}) ";
+            $where .= " and (cast(pr.discount_price as decimal) between {$price_low} and {$price_high}) ";
         } elseif($search == '' && $price_low != '' && $price_high == '') {
-            $where .= " and (cast(pr.price as decimal) > {$price_low} )";
+            $where .= " and (cast(pr.discount_price as decimal) > {$price_low} )";
         } elseif($search == '' && $price_low == '' && $price_high != '') {
-            $where .= " and (cast(pr.price as decimal) < {$price_high} )";
+            $where .= " and (cast(pr.discount_price as decimal) < {$price_high} )";
         }
 
         if($category != null) {

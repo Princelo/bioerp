@@ -29,7 +29,7 @@ class Mbill extends CI_Model
                 coalesce(sum(o_self.p_return_invite), '$0')         extra_return_profit_self2parent,
                 coalesce(o_sub.gp_return_profit, '$0')+coalesce(o_sub_0.p_return_profit, '$0')                 normal_return_profit_sub2self,
                 coalesce(o_sub_0.extra_return_profit, '$0')         extra_return_profit_sub2self,
-                coalesce(jobs.return_profit, '$0')                  delay_return_profit,
+                --coalesce(jobs.return_profit, '$0')                  delay_return_profit,
                 pu.id                                               pid,
                 pu.name                                             pname,
                 pu.username                                         pusername,
@@ -54,10 +54,10 @@ class Mbill extends CI_Model
                 and o_self.user_id = {$current_user_id}
             left join amounts s_amount
                 on o_self.id = s_amount.order_id
-            left join jobs jobs
-                on date(jobs.excute_time)::char(10) = d.date
-                and jobs.user_id = {$current_user_id}
-                and jobs.is_success = true
+            --left join jobs jobs
+            --    on date(jobs.excute_time)::char(10) = d.date
+            --    and jobs.user_id = {$current_user_id}
+            --    and jobs.is_success = true
             left join (
                 select sum(i.gp_return_profit) gp_return_profit, sum(i.volume) volume, i.pid, finish_time from(
                 SELECT Sum(o.gp_return_profit) AS gp_return_profit,
@@ -113,7 +113,9 @@ class Mbill extends CI_Model
                 on pu.pid = gpu.id
             where 1 = 1
             group by u.id, u.username, u.name, u.pid, pu.id, pu.name, pu.username,gpu.id, gpu.name, gpu.username,
-            o_sub.volume, o_sub.gp_return_profit, o_sub_0.extra_return_profit, jobs.return_profit, o_sub_0.volume, o_sub_0.p_return_profit
+            o_sub.volume, o_sub.gp_return_profit, o_sub_0.extra_return_profit,
+            --jobs.return_profit,
+            o_sub_0.volume, o_sub_0.p_return_profit
             , d.date,date(o_sub.finish_time)::char(10),
                 date(o_self.finish_time)::char(10)
             order by date
@@ -143,7 +145,7 @@ class Mbill extends CI_Model
                 sum(o.post_fee) as post_fee,
                 coalesce(sum(o.return_profit), '$0') as normal_return_profit_volume,
                 coalesce(sum(o.p_return_invite), '$0') as invite_return_profit_volume,
-                coalesce(sum(j.return_profit), '$0') as delay_return_profit_volume,
+                --coalesce(sum(j.return_profit), '$0') as delay_return_profit_volume,
                 count(o.id) order_quantity
                 FROM (
                 select to_char(date_trunc('day', (date('{$date_from}') + offs)), 'YYYY-MM-DD')
@@ -153,10 +155,10 @@ class Mbill extends CI_Model
                 ) d
             left join orders o
             on (d.date=to_char(date_trunc('day', o.finish_time), 'YYYY-MM-DD'))
-            left join jobs j
-            on (d.date=to_char(date_trunc('day', j.excute_time), 'YYYY-MM-DD'))
-            and j.order_id = o.id
-            and j.is_success = true and j.is_expired = true
+            --left join jobs j
+            --on (d.date=to_char(date_trunc('day', j.excute_time), 'YYYY-MM-DD'))
+            --and j.order_id = o.id
+            --and j.is_success = true and j.is_expired = true
             where o.is_pay = true and o.is_correct = true
             group by d.date
             order by d.date
@@ -193,7 +195,7 @@ class Mbill extends CI_Model
                 coalesce(sum(o_self.p_return_invite), '$0')         extra_return_profit_self2parent,
                 coalesce(o_sub.gp_return_profit, '$0')+coalesce(o_sub_0.p_return_profit, '$0')                 normal_return_profit_sub2self,
                 coalesce(o_sub_0.extra_return_profit, '$0')         extra_return_profit_sub2self,
-                coalesce(jobs.return_profit, '$0')                  delay_return_profit,
+                --coalesce(jobs.return_profit, '$0')                  delay_return_profit,
                 pu.id                                               pid,
                 pu.name                                             pname,
                 pu.username                                         pusername,
@@ -221,10 +223,10 @@ class Mbill extends CI_Model
                 and o_self.user_id = {$current_user_id}
             left join amounts s_amount
                 on o_self.id = s_amount.order_id
-            left join jobs jobs
-                on date(jobs.excute_time)::char(7) = d.date::char(7)
-                and jobs.user_id = {$current_user_id}
-                and jobs.is_success = true
+            --left join jobs jobs
+            --    on date(jobs.excute_time)::char(7) = d.date::char(7)
+            --    and jobs.user_id = {$current_user_id}
+            --    and jobs.is_success = true
             left join (
                 select sum(i.gp_return_profit) gp_return_profit, sum(i.volume) volume, i.pid, finish_time from(
                 SELECT Sum(o.gp_return_profit) AS gp_return_profit,
@@ -284,9 +286,12 @@ class Mbill extends CI_Model
             where 1 = 1
             group by u.id, u.username, u.name, u.pid, pu.id, pu.name, pu.username,gpu.id, gpu.name, gpu.username,
             o_sub.volume,
-                o_sub.gp_return_profit, o_sub_0.extra_return_profit,o_sub_0.extra_return_profit, jobs.return_profit, o_sub_0.volume, o_sub_0.p_return_profit
+                o_sub.gp_return_profit, o_sub_0.extra_return_profit,o_sub_0.extra_return_profit,
+                --jobs.return_profit,
+                o_sub_0.volume, o_sub_0.p_return_profit
             , d.date,date(o_sub.finish_time)::char(7),
-                date(o_self.finish_time)::char(7), jobs.return_profit
+                date(o_self.finish_time)::char(7)
+                --, jobs.return_profit
             order by date
             {$limit};
         ";
@@ -316,7 +321,7 @@ class Mbill extends CI_Model
                     sum(o.post_fee) as post_fee,
                     coalesce(sum(o.return_profit), '$0') as normal_return_profit_volume,
                     coalesce(sum(o.p_return_invite), '$0') as invite_return_profit_volume,
-                    coalesce(sum(j.return_profit), '$0') as delay_return_profit_volume,
+                    --coalesce(sum(j.return_profit), '$0') as delay_return_profit_volume,
                     count(o.id) order_quantity
                     FROM (
                         select DATE '{$date_from}' + (interval '1' month * generate_series(0,month_count::int)) date
@@ -329,10 +334,10 @@ class Mbill extends CI_Model
                         ) d
             left join orders o
             ON (to_char(date_trunc('month', d.date), 'YYYY-MM')=to_char(date_trunc('month', o.finish_time), 'YYYY-MM'))
-            left join jobs j
-            on (to_char(date_trunc('month', d.date), 'YYYY-MM')=to_char(date_trunc('month', j.excute_time), 'YYYY-MM'))
-            and j.order_id = o.id
-            and j.is_success = true and j.is_expired = true
+            --left join jobs j
+            --on (to_char(date_trunc('month', d.date), 'YYYY-MM')=to_char(date_trunc('month', j.excute_time), 'YYYY-MM'))
+            --and j.order_id = o.id
+            --and j.is_success = true and j.is_expired = true
             where o.is_pay = true and o.is_correct = true
             GROUP BY d.date
             order by d.date
@@ -363,7 +368,7 @@ class Mbill extends CI_Model
                     sum(o.post_fee) as post_fee,
                     coalesce(sum(o.return_profit), '$0') as normal_return_profit_volume,
                     coalesce(sum(o.p_return_invite), '$0') as invite_return_profit_volume,
-                    coalesce(sum(j.return_profit), '$0') as delay_return_profit_volume,
+                    --coalesce(sum(j.return_profit), '$0') as delay_return_profit_volume,
                     count(o.id) order_quantity
                     FROM (
                         select DATE '{$date_from}' + (interval '1' year * generate_series(0,year_count::int)) date
@@ -376,10 +381,10 @@ class Mbill extends CI_Model
                     ) d
             left join orders o
             ON (to_char(date_trunc('year', d.date), 'YYYY')=to_char(date_trunc('year', o.finish_time), 'YYYY'))
-            left join jobs j
-            on (to_char(date_trunc('year', d.date), 'YYYY')=to_char(date_trunc('year', j.excute_time), 'YYYY'))
-            and j.order_id = o.id
-            and j.is_success = true and j.is_expired = true
+            --left join jobs j
+            --on (to_char(date_trunc('year', d.date), 'YYYY')=to_char(date_trunc('year', j.excute_time), 'YYYY'))
+            --and j.order_id = o.id
+            --and j.is_success = true and j.is_expired = true
             where o.is_pay = true and o.is_correct = true
             GROUP BY d.date
             order by d.date
@@ -407,13 +412,15 @@ class Mbill extends CI_Model
               p.title,
               list.quantity total_quantity,
               coalesce(list.quantity, 0) quantity,
-              list.amount amount
+              list.amount amount,
+              list.original_amount original_amount
             from
               (
                 select
                   sum(op.quantity) quantity,
                   p.id product_id,
-                  sum(pa.amount*op.quantity) amount
+                  sum(pa.amount*op.quantity) amount,
+                  sum(pa.original_amount*op.quantity) original_amount
                 from order_product op, orders o, product_amount pa, products p
                 where
                   op.order_id = o.id
@@ -427,13 +434,8 @@ class Mbill extends CI_Model
             order by list.product_id
         ";
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
-            foreach ($query->result() as $key => $val) {
-                $data[] = $val;
-            }
-        }
-        $query->free_result();
-        return $data;
+        return $query->result();
+        //return $data;
     }
 
     function objGetUserBills($date_from, $date_to, $limit = '')
@@ -450,7 +452,7 @@ class Mbill extends CI_Model
                 coalesce(sum(o_self.p_return_profit), '$0') normal_return_profit_self2parent,
                 coalesce(sum(o_self.gp_return_profit), '$0') normal_return_profit_self2gparent,
                 coalesce(sum(o_self.p_return_invite), '$0') extra_return_profit_self2parent,
-                coalesce(sum(j.return_profit), '$0') delay_return_profit,
+                --coalesce(sum(j.return_profit), '$0') delay_return_profit,
                 coalesce(o_sub.p_return_profit,'$0')+coalesce(o_sub_0.gp_return_profit, '$0') normal_return_profit_sub2self,
                 coalesce(o_sub.p_return_invite, '$0') extra_return_profit_sub2self,
                 pu.id pid,
@@ -470,11 +472,11 @@ class Mbill extends CI_Model
                 and o_self.is_pay = true and o_self.is_correct = true
                 join amounts s_amount
                 on o_self.id = s_amount.order_id
-                left join jobs j
-                on j.user_id = u.id
-                and j.order_id = o_self.id
-                and j.is_success = true and j.is_expired = true
-                and j.excute_time between '{$date_from} 00:00:00' and '{$date_to} 23:59:59'
+                --left join jobs j
+                --on j.user_id = u.id
+                --and j.order_id = o_self.id
+                --and j.is_success = true and j.is_expired = true
+                --and j.excute_time between '{$date_from} 00:00:00' and '{$date_to} 23:59:59'
                 left join (
                 select sum(i.p_return_profit) p_return_profit, sum(i.p_return_invite) p_return_invite, sum(i.volume) volume, i.pid from(
                 SELECT Sum(o.p_return_profit) AS p_return_profit,

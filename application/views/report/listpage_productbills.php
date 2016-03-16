@@ -22,7 +22,7 @@
 
 
             <div class="info view_form">
-                <h2>产品明细报表(<?=$bills[0]->date_from?> - <?=$bills[0]->date_to?>)</h2>
+                <h2>产品明细报表(<?=$_GET['date_from']?> - <?=$_GET['date_to']?>)</h2>
                 <script>
                     if("<?=$this->session->flashdata('flashdata', 'value');?>"!="")
                         alert("<?=$this->session->flashdata('flashdata', 'value');?>");
@@ -34,7 +34,8 @@
                         <th>产品ID</th>
                         <th>产品名称</th>
                         <th>出货量</th>
-                        <th>总金额</th>
+                        <th>原价总金额</th>
+                        <th>折扣总金额</th>
                     </tr>
                     <? $n = 0; ?>
                     <? foreach($bills as $k => $v){ ?>
@@ -43,6 +44,7 @@
                             <td><?=$v->product_id?></td>
                             <td><a href="<?=base_url()?>product/details_admin/<?=$v->product_id?>"><?=$v->title?></a></td>
                             <td><?=$v->total_quantity?></td>
+                            <td><?=cny($v->original_amount);?></td>
                             <td><?=cny($v->amount);?></td>
                         </tr>
                     <? } ?>

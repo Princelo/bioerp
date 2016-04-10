@@ -112,6 +112,12 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>帐号状态</th>
+                            <td>
+                                <input type="text" value="<? if($v->initiation) {echo "代理会员";}else{echo "普通会员";}?>">
+                            </td>
+                        </tr>
+                        <tr>
                             <th><label>是否生效 <span>*</span></label></th>
                             <td>
                                 <select name="is_valid">

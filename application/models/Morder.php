@@ -724,19 +724,42 @@ class Morder extends CI_Model
             return false;
     }
 
-    public function is_paid( $order_id)
+    public function is_paid( $order_id )
     {
-        $current_user_id = $this->session->userdata('current_user_id');
-        if(!$this->checkIsOwn($current_user_id, $order_id))
-            exit('The order is not yours!');
         $query_sql = "";
         $query_sql .= "
             select
-                count(1) as count
+                count(*) as count
             from
                 orders
                 where
                 is_pay = true
+                and id = ?
+        ";
+        $binds = array($order_id);
+        $data = array();
+        $query = $this->objDB->query($query_sql, $binds);
+        if($query->num_rows() > 0){
+            if($query->result()[0]->count > 0 )
+                return true;
+            else
+                return false;
+        }else{
+            return false;
+        }
+    }
+    
+    public function has_coupon_volume( $order_id )
+    {
+        $query_sql = "";
+        $query_sql .= "
+            select
+                count(*) as count
+            from
+                orders
+                where
+                    (has_coupon_volume = true
+                or   coupon_volume::decimal > 0)
                 and id = ?
         ";
         $binds = array($order_id);
@@ -789,12 +812,14 @@ class Morder extends CI_Model
         $data['is_confirmed'] = true;
         $where = [
             'is_pay' => 'false',
-            'id'     => $order_id
+            'id'     => $order_id,
+            'has_coupon_volume'  => 'false'
             ];
         $user_id = $this->objGetOrderInfo($order_id)->uid;
         $update_sql = $this->objDB->update_string('orders', $data, $where);
         $update_user_sql = "
             update users set active_coupon = active_coupon::decimal - $volume where id = ?
+            and (select has_coupon_volume from orders where id = ?) = false
         ";
         $price = $this->getOrderPrice($order_id);
         $update_payment_sql = "
@@ -806,12 +831,17 @@ class Morder extends CI_Model
                     pay_method = 'offline'
             where
                 id = ?
+                and coupon_volume::decimal >= ?
         ";
         $this->objDB->trans_start();
         $this->objDB->query($update_sql);
-        $this->objDB->query($update_user_sql, [$user_id]);
-        if ($volume >= floatval(money($price->total)))
-            $this->objDB->query($update_payment_sql, [$price->total, $price->pay_amt_without_post_fee, $order_id]);
+        $this->objDB->query($update_user_sql, [$user_id, $order_id]);
+        if ($volume >= floatval(money($price->total))) {
+            $this->objDB->query(
+                $update_payment_sql, 
+                [$price->total, $price->pay_amt_without_post_fee, $order_id, $price->total]
+            );
+        }
         $this->objDB->trans_complete();
 
         $result = $this->objDB->trans_status();

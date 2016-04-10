@@ -709,6 +709,10 @@ class Order extends MY_Controller {
 //            exit('This Order is paid!');
             redirect('order/listpage');
         }
+        if($this->Morder->has_coupon_volume($order_id)) {
+//            exit('This Order has paid with coupon!');
+            redirect('order/listpage');
+        }
         if ($this->input->get('confirm') == '1') {
             $this->db->query("update orders set is_confirmed = true where id = ?", [$order_id]);
             $this->__redirect_order($order_id);

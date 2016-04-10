@@ -107,7 +107,7 @@ class Mproduct extends CI_Model
             $main_data['ingredient'], $main_data['img'], $main_data['is_valid'], $main_data['weight'], $main_data['category']
             ,$main_data['thumb'], $main_data['discount']
         );
-        $binds_price = array($main_data['price'], $main_data['price'].'*'.$main_data['discount']);
+        $binds_price = array($main_data['price'], $main_data['price'].'*'.$main_data['discount'].'/100');
 
         $this->objDB->trans_start();
 

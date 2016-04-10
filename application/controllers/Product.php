@@ -372,7 +372,8 @@ class Product extends MY_Controller {
                     'weight' => $this->input->post('weight'),
                     'is_valid' => $this->input->post('is_valid'),
                     'price' => $this->input->post('price'),
-                    'discount' => $this->input->post('discount'),
+//                    'discount' => $this->input->post('discount'),
+                    'discount' => 60,
                     'thumb' => $thumb,
                 );
                 $result = $this->Mproduct->add($main_data);

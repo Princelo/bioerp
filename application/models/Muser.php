@@ -122,7 +122,7 @@ class Muser extends CI_Model
         $insert_sql_user = "";
         $insert_sql_user .= "
             insert into users
-            (username, password, name, citizen_id, mobile_no, wechat_id, qq_no, pid, is_valid, bank_info lft, rgt, dept)
+            (username, password, name, citizen_id, mobile_no, wechat_id, qq_no, pid, is_valid, bank_info, lft, rgt, dept)
             values
             (?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             (select rgt from variables{$temp}), (select rgt + 1 from variables{$temp}),

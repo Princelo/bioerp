@@ -163,6 +163,8 @@
                 <ul class="dropdown-menu other-menu" id="menu-product">
                     <li><a href="<?=base_url()?>product/listpage" class="" style="background: none;"><span>产品列表 </span></a>
                     </li>
+                    <li><a href="<?=base_url()?>order/cart" class="" ><span>我的购物车 </span></a>
+                    </li>
                 </ul>
 
             </li>
@@ -182,8 +184,6 @@
                     <li><a href="<?=base_url()?>order/listpage" class="" style="background: none;"><span>订单列表 </span></a>
                     </li>
                     <li><a href="<?=base_url()?>order/index_sub" class="" style="background: none;"><span>下级代理订单查询 </span></a>
-                    </li>
-                    <li><a href="<?=base_url()?>order/cart" class="" ><span>我的购物车 </span></a>
                     </li>
                 </ul>
 

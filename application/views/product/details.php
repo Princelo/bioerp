@@ -10,14 +10,8 @@
                 <li>
                     <a href='<?=base_url()?>product/listpage' ><div>产品列表 </div></a>
                 </li>
-                <? if($this->session->userdata('level') != 0) {?>
-                <li>
-                    <a href='<?=base_url()?>product/listpage?is_trial=true' ><div>试用品列表 </div></a>
+                <li><a href="<?=base_url()?>order/cart" class="" ><div>我的购物车 </div></a>
                 </li>
-                    <li>
-                        <a href='<?=base_url()?>product/listpage?is_trial=true&trial_type=<?=get_trial_type('event products');?>' ><div>活动产品列表 </div></a>
-                    </li>
-                <?}?>
             </ul>
         </div>
     </div>

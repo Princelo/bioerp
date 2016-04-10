@@ -10,6 +10,8 @@
                 <li>
                     <a href='<?=base_url()?>product/listpage' ><div>产品列表 </div></a>
                 </li>
+                <li><a href="<?=base_url()?>order/cart" class="" ><div>我的购物车 </div></a>
+                </li>
             </ul>
         </div>
     </div>

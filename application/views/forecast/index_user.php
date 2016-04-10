@@ -114,6 +114,12 @@
                                     <input type="text" value="<?=cny($v->inactivated_coupon)?>" disabled="disabled" style="color:#f60;">
                                 </td>
                             </tr>
+                            <tr>
+                                <th>帐号状态</th>
+                                <td>
+                                    <input type="text" value="<? if($this->session->userdata('initiation')){echo "代理会员";}else{echo "普通会员";}?>" disabled="disabled" style="">
+                                </td>
+                            </tr>
                         </table>
 
                     </fieldset>

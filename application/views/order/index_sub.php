@@ -11,9 +11,6 @@
                     <a href='<?=base_url()?>order/listpage' ><div>订单列表 </div></a>
                 </li>
                 <li><a href='<?=base_url();?>order/index_sub' ><div>下级代理订单查询 </div></a></li>
-                <li>
-                    <a href="<?=base_url()?>order/cart"><div>我的购物车</div></a>
-                </li>
             </ul>
         </div>
     </div>

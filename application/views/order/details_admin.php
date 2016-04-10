@@ -205,7 +205,7 @@
                 </td>
             </tr>
             <tr class="odd">
-                <th>潜在利润</th>
+                <th>沉淀金额</th>
                 <td>
                     <span class="info important"><?=$v->profit_potential==''?'':$v->profit_potential.'%'?></span>
                 </td>

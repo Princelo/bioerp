@@ -71,7 +71,7 @@
                         <tr>
                             <th><label for="qq_no">银行卡信息 <span>*</span></label></th>
                             <td>
-                                <input type="text" name="qq_no" data-validate="required"
+                                <input type="text" name="bank_info" data-validate="required"
                                        value="<?=$v->bank_info?>"/>
                             </td>
                         </tr>

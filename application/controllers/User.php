@@ -542,7 +542,7 @@ class User extends MY_Controller {
                         );
                 }else{
                     $main_data = array(
-                        'username' => $this->input->post('username'),
+                        //'username' => $this->input->post('username'),
                         'name' => $this->input->post('name'),
                         'citizen_id' => $this->input->post('citizen_id'),
                         'mobile_no' => $this->input->post('mobile_no'),

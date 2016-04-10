@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/details_admin.php" afterPath="$PROJECT_DIR$/application/views/user/details_admin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/User.php" afterPath="$PROJECT_DIR$/application/controllers/User.php" />
     </list>
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -100,21 +100,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="details_admin.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="details_admin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/user/details_admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="73" column="65" selection-start-line="73" selection-start-column="65" selection-end-line="73" selection-end-column="65" />
+            <state relative-caret-position="360">
+              <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="246" column="9" selection-start-line="246" selection-start-column="9" selection-end-line="246" selection-end-column="9" />
+            <state relative-caret-position="135">
+              <caret line="544" column="25" selection-start-line="544" selection-start-column="25" selection-end-line="544" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -123,8 +123,8 @@
       <file leaf-file-name="Muser.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Muser.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="126" column="41" selection-start-line="126" selection-start-column="41" selection-end-line="126" selection-end-column="41" />
+            <state relative-caret-position="285">
+              <caret line="293" column="11" selection-start-line="293" selection-start-column="11" selection-end-line="293" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -202,7 +202,6 @@
         <option value="$PROJECT_DIR$/application/views/user/add.php" />
         <option value="$PROJECT_DIR$/application/views/user/add_root_user.php" />
         <option value="$PROJECT_DIR$/application/views/user/admin_add_user.php" />
-        <option value="$PROJECT_DIR$/application/controllers/User.php" />
         <option value="$PROJECT_DIR$/application/libraries/MY_Controller.php" />
         <option value="$PROJECT_DIR$/application/models/Morder.php" />
         <option value="$PROJECT_DIR$/application/controllers/Order.php" />
@@ -213,6 +212,7 @@
         <option value="$PROJECT_DIR$/application/models/Mproduct.php" />
         <option value="$PROJECT_DIR$/application/models/Muser.php" />
         <option value="$PROJECT_DIR$/application/views/user/details_admin.php" />
+        <option value="$PROJECT_DIR$/application/controllers/User.php" />
       </list>
     </option>
   </component>
@@ -451,12 +451,12 @@
       <updated>1422366590855</updated>
       <workItem from="1460101198155" duration="3419000" />
       <workItem from="1460211226277" duration="21456000" />
-      <workItem from="1460291410192" duration="5751000" />
+      <workItem from="1460291410192" duration="5898000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30626000" />
+    <option name="totallyTimeSpent" value="30773000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="972" extended-state="6" />
@@ -885,22 +885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="246" column="9" selection-start-line="246" selection-start-column="9" selection-end-line="246" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Muser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="126" column="41" selection-start-line="126" selection-start-column="41" selection-end-line="126" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/product/details_admin.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -911,8 +895,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/user/details_admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="73" column="65" selection-start-line="73" selection-start-column="65" selection-end-line="73" selection-end-column="65" />
+        <state relative-caret-position="360">
+          <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Muser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="293" column="11" selection-start-line="293" selection-start-column="11" selection-end-line="293" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="544" column="25" selection-start-line="544" selection-start-column="25" selection-end-line="544" selection-end-column="25" />
           <folding />
         </state>
       </provider>

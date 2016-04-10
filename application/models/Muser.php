@@ -124,7 +124,7 @@ class Muser extends CI_Model
             insert into users
             (username, password, name, citizen_id, mobile_no, wechat_id, qq_no, pid, is_valid, bank_info, lft, rgt, dept)
             values
-            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
             (select rgt from variables{$temp}), (select rgt + 1 from variables{$temp}),
             (select count(1)+1 from users where lft<(select rgt from variables{$temp}) and rgt>(select rgt+1 from variables{$temp})));
         ";

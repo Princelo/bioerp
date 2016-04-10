@@ -76,6 +76,8 @@
                     <th>联系人电话</th>
                     <!--<th>订单备注</th>-->
                     <th>快递单号</th>
+                    <th>使用代金券</th>
+                    <th>潜在利润</th>
                     <th>订单提交时间</th>
                     <!--<th>回扣(不含推荐回扣)</th>
                     <th>推荐回扣</th>-->
@@ -94,13 +96,15 @@
                         <td><?=cny($v->amount)?></td>
                         <td><?=cny($v->post_fee)?></td>
                         <td><span class="<?=$v->is_pay==true?"accept":"cross";?>"></span></td>
-                        <td><span class="<?=$v->is_pay==true&&$v->is_correct==true?"accept":"cross";?>"></span></td>
+                        <td><span class="<?=$v->is_finished==true?"accept":"cross";?>"></span></td>
                         <td><?=$v->finish_time?></td>
                         <td><?=$v->is_post==true?"邮寄":"自取"?></td>
                         <td><?=$v->linkman?></td>
                         <td><?=$v->mobile?></td>
                         <!--<td><?=$v->remark?></td>-->
                         <td><?=$v->post_info?></td>
+                        <td><?=cny($v->coupon_volume)?></td>
+                        <td><?=$v->profit_potential==''?'':$v->profit_potential.'%'?></td>
                         <td><?=substr($v->stock_time, 0, 19);?></td>
                         <!--<td><?=cny($v->return_profit)?></td>
                         <td><?=cny($v->p_return_invite)?></td>-->

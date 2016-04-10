@@ -99,7 +99,19 @@
                             <tr>
                                 <th>提现余额</th>
                                 <td>
-                                    <input type="text" value="<?=cny($v->balance)?>" disabled="disabled" style="color:#f60;"/>
+                                    <input type="text" value="<?=cny($v->real_balance)?>" disabled="disabled" style="color:#f60;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>已生效现金卷</th>
+                                <td>
+                                    <input type="text" value="<?=cny($v->active_coupon)?>" disabled="disabled" style="color:#f60;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>未生效现金卷</th>
+                                <td>
+                                    <input type="text" value="<?=cny($v->inactivated_coupon)?>" disabled="disabled" style="color:#f60;">
                                 </td>
                             </tr>
                         </table>

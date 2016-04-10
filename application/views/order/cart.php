@@ -84,6 +84,7 @@
         <p class="global-total">
             <strong>合计(不含运费):</strong>
             ￥<span id="global-total"><?=money($total)?></span>
+            <div style="color:red; font-weight:bold; font-size:18px; display:none;" id="tips">您尚未完成首次交易, 购物车金额需满￥5000(折后￥3000)才能完成交易</div>
         </p>
 
     </fieldset>
@@ -202,15 +203,18 @@
                     this.checked = true;
                     if($(this).attr('pid') != undefined)
                         $("#select-items").val(addSelectedItems($(this).attr('pid'), $("#select-items").val()));
+                    check();
                 });
             }else{
                 $('input[type="checkbox"]').each(function(){
                     this.checked = false;
                     if($(this).attr('pid') != undefined)
                         $("#select-items").val(removeSelectedItems($(this).attr('pid'), $("#select-items").val()));
+                    check();
                 });
             }
             updateTotal();
+            check();
         });
         $(".product-item").each(function(){
             $(this).change(
@@ -218,9 +222,11 @@
                     if(this.checked){
                         $("#select-items").val(addSelectedItems($(this).attr('pid'), $("#select-items").val()));
                         updateTotal();
+                        check();
                     }else{
                         $("#select-items").val(removeSelectedItems($(this).attr('pid'), $("#select-items").val()));
                         updateTotal();
+                        check();
                     }
                 }
             );
@@ -233,6 +239,7 @@
                 pid = $(this).attr('pid');
                 $("#total-"+pid).html( (parseFloat($('#price-'+pid).val()) * parseInt($(this).val())).toFixed(2) );
                 updateTotal();
+                check();
             });
         });
         function finishConfirm()
@@ -251,6 +258,7 @@
             if($("#product-"+id).is(':checked'))
                 $("#select-items").val(addSelectedItemsForCalc(id, $("#select-items").val()));
             updateTotal();
+            check();
             return false;
         }
         var decrease = function(id)
@@ -263,10 +271,28 @@
                     $("#select-items").val(addSelectedItemsForCalc(id, $("#select-items").val()));
             }
             updateTotal();
+            check();
             return false;
         }
+        
+        var check = function()
+        {
+            if(!<?=$initiation;?>)
+            {
+                console.log(parseFloat($('#global-total').html()));
+                if(parseFloat($('#global-total').html()) < 3000){
+                    $('#tips').show();
+                    $('#btnS').hide();
+                }else{
+                    $('#tips').hide();
+                    $('#btnS').show();
+                }
+            }
+        }
+        
         $(".increase").each(function(){$(this).click()});
         $(".decrease").each(function(){$(this).click()});
         updateTotal();
-        $('#btnS').show();
+        check();
+        //$('#btnS').show();
     </script>

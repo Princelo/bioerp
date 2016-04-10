@@ -44,6 +44,8 @@
                         <th>他的收益</th>
                         <th>已提现金额</th>
                         <th>帐户余额</th>
+                        <th>已生效代金券</th>
+                        <th>未生效代金券</th>
                         <th>是否生效</th>
                         <th></th>
                         <th></th>
@@ -60,7 +62,9 @@
                                 <td><?=cny($v->turnover)?></td>
                                 <td><?=cny($v->profit)?></td>
                                 <td><?=cny($v->withdraw_volume)?></td>
-                                <td><?=cny($v->balance)?></td>
+                                <td><?=cny($v->real_balance)?></td>
+                                <td><?=cny($v->active_coupon)?></td>
+                                <td><?=cny($v->inactivated_coupon)?></td>
                                 <td><?=$v->is_valid==true?'是':'否'?></td>
                                 <td><a href="<?=base_url()?>user/sublistpage/<?=$v->id?>">他的下级</a></td>
                                 <td><a bhref="<?=base_url()?>user/details_admin/<?=$v->id?>" onclick="window.open('<?=base_url()?>user/details_admin/<?=$v->id?>','Edit','width=600,height=600,0,status=0,')">编辑</a></td>

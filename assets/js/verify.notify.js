@@ -2290,8 +2290,8 @@
              * - at plugin load, 'regex' will be transformed into validator function 'fn' which uses 'message'
              */
             currency: {
-                regex: /^\-?\$?\d{1,2}(,?\d{3})*(\.\d+)?$/,
-                message: "Invalid monetary value"
+                regex: /^\d{1,100}(\.\d{0,2})?$/,
+                message: "无效金额"
             },
             email: {
                 regex: /^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -2472,7 +2472,7 @@
                     suffix = r.args[1] || '',
                     min = parseFloat(r.args[0]);
                 if(v < min)
-                    return "Must be greater than " + min + suffix;
+                    return "金额不得少于 " + min + suffix;
                 return true;
             },
             maxVal: function(r) {
@@ -2480,7 +2480,7 @@
                     suffix = r.args[1] || '',
                     max = parseFloat(r.args[0]);
                 if(v > max)
-                    return "Must be less than " + max + suffix;
+                    return "金额不得超过 " + max + suffix;
                 return true;
             },
             rangeVal: function(r) {

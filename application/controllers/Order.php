@@ -310,7 +310,7 @@ class Order extends MY_Controller {
         {
             if($this->input->post('finish') == 'finish_with_pay')
             {
-                if($data['v']->is_pay == true && $data['v']->is_correct == true)
+                if($data['v']->is_finished == true)
                 {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单已完成');
                     redirect('order/details_admin/'.$order_id);
@@ -331,7 +331,7 @@ class Order extends MY_Controller {
             }
             if($this->input->post('finish') == 'finish_without_pay')
             {
-                if($data['v']->is_pay == true && $data['v']->is_correct == true)
+                if($data['v']->is_finished == true)
                 {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单已完成');
                     redirect('order/details_admin/'.$order_id);
@@ -365,7 +365,7 @@ class Order extends MY_Controller {
             }
             if($this->input->post('finish') == 'unfinish_rollback')
             {
-                if($data['v']->is_pay == false || $data['v']->is_correct == false)
+                if($data['v']->is_pay == false || $data['v']->is_correct == false || $data['v']->is_finished == false)
                 {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单未完成');
                     redirect('order/details_admin/'.$order_id);
@@ -383,7 +383,7 @@ class Order extends MY_Controller {
             }
             if($this->input->post('finish') == 'unfinish')
             {
-                if($data['v']->is_pay == false || $data['v']->is_correct == false)
+                if($data['v']->is_pay == false || $data['v']->is_correct == false || $data['v']->is_finished == false)
                 {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单未完成');
                     redirect('order/details_admin/'.$order_id);
@@ -516,10 +516,15 @@ class Order extends MY_Controller {
                 $result_id = $this->Morder->intAddReturnOrderId($main_data, $address_info);
                 if($result_id != 0){
                     $this->session->set_flashdata('flashdata', '订单添加成功');
-                    if($this->input->post('pay_method') == 'alipay')
-                        redirect('order/pay_method/'.$result_id);
-                    else
-                        redirect('order/listpage/');
+                    $result = $this->db->query('select active_coupon from users where id = ?', [$this->session->userdata('current_user_id')])->result();
+                    if (floatval(money($result[0]->active_coupon)) > 0) {
+                        redirect('order/modify_payment/'.$result_id);
+                    } else {
+                        if($this->input->post('pay_method') == 'alipay')
+                            redirect('order/pay_method/'.$result_id);
+                        else
+                            redirect('order/listpage/');
+                    }
                 }
                 else{
                     $this->session->set_flashdata('flashdata', '订单添加失败');
@@ -610,7 +615,8 @@ class Order extends MY_Controller {
         $level = $this->session->userdata('level');
         $data = array();
         $data['products'] = $this->Morder->getCartInfo($user_id, $level);
-        $data['level'] = $this->session->userdata('level');
+        //$data['level'] = $this->session->userdata('level');
+        $data['initiation'] = $this->session->userdata('initiation');
 
 
         $this->load->view('templates/header_user', $data);
@@ -685,8 +691,59 @@ class Order extends MY_Controller {
         $data = $this->Morder->getOrderPrice($order_id);
         $data->token = $this->session->userdata('token');
         $data->order_id = $order_id;
+        $data->coupon_volume = $this->Morder->objGetOrderInfo($order_id)->coupon_volume;
         $this->load->view('templates/header_user', $data);
         $this->load->view('order/pay_method', $data);
+    }
+    
+    public function modify_payment($order_id)
+    {
+        if($this->session->userdata('role') == 'admin')
+            exit('You are the admin.');
+        $user_id = $this->session->userdata('current_user_id');
+        if(!$this->Morder->checkIsOwn($user_id, $order_id))
+        {
+            exit('This Order is not yours');
+        }
+        if($this->Morder->is_paid($order_id)) {
+//            exit('This Order is paid!');
+            redirect('order/listpage');
+        }
+        if ($this->input->get('confirm') == '1') {
+            $this->db->query("update orders set is_confirmed = true where id = ?", [$order_id]);
+            $this->__redirect_order($order_id);
+        }
+        if ($this->Morder->objGetOrderInfo($order_id)->has_coupon_volume) {
+            redirect('order/listpage');
+        }
+        if ( isset($_POST) && !empty($_POST) ) {
+            $modify_data = [];
+            $modify_data['volume'] = floatval($this->input->post('volume'));
+            if (floatval($modify_data['volume']) > floatval(money($this->Muser->objGetUserInfo($user_id)->active_coupon))) {
+                $this->session->set_flashdata('flashdata', '您的代金卷金额不足');
+                redirect('order/modify_payment/'.$order_id);
+            }
+            if ($this->Morder->updatePaymentCoupon($order_id, $modify_data['volume'])) {
+                $data = $this->Morder->getOrderPrice($order_id);
+                if ($modify_data['volume'] >= $data->total) {
+                    $this->session->set_flashdata('flashdata', '支付成功!');
+                    redirect('order/listpage');
+                } else {
+                    $this->__redirect_order($order_id);
+                }
+            } else {
+                $this->session->set_flashdata('flashdata', '操作失败');
+                redirect('order/listpage');
+            }
+        } else {
+            $data = array();
+            $data = $this->Morder->getOrderPrice($order_id);
+            $data->order_info = $this->Morder->objGetOrderInfo($order_id);
+            $data->user_info = $this->Muser->objGetUserInfo($user_id);
+            $this->load->view('templates/header_user', $data);
+            $this->load->view('order/modify_payment', $data);
+        }
+
     }
 
 
@@ -721,7 +778,8 @@ class Order extends MY_Controller {
         $subject = $this->session->userdata('user') . "_-_ERP_no.".$order_id;
 
         $data = $this->Morder->getOrderPrice($order_id);
-        $total_fee = $data->total;
+        $coupon = $this->Morder->objGetOrderInfo($order_id)->coupon_volume;
+        $total_fee = bcsub(money($data->total), money($coupon), 2);
 
 
         //$anti_phishing_key = $alipaySubmit->query_timestamp();
@@ -834,6 +892,16 @@ class Order extends MY_Controller {
             }
         } else {
             return 0;
+        }
+    }
+
+    private function __redirect_order($order_id)
+    {
+        $data = $this->Morder->objGetOrderInfo($order_id);
+        if ($data->pay_method == 'alipay') {
+            redirect('order/pay_method/'.$order_id);
+        } else {
+            redirect('order/listpage');
         }
     }
 

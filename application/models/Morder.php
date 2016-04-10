@@ -21,7 +21,7 @@ class Morder extends CI_Model
                           is_pay, is_correct, pay_time, pay_amt, is_cancelled, is_post, province_id, city_id,
                           address_info,linkman,mobile,remark,finish_time,stock_time,is_pay_online,pay_method,
                           pay_amt_without_post_fee,post_info,uid,iq.username name_ch,iq.account username,
-                          return_profit,p_return_invite
+                          return_profit,p_return_invite,profit_potential,coupon_volume,is_finished
            from (select
                    --p.title          title,
                    --p.id             pid,
@@ -56,7 +56,10 @@ class Morder extends CI_Model
                    o.is_first       is_first,
                    o.post_info      post_info,
                    o.return_profit  return_profit,
-                   o.p_return_invite p_return_invite
+                   o.p_return_invite p_return_invite,
+                   o.profit_potential profit_potential,
+                   o.coupon_volume coupon_volume,
+                   o.is_finished is_finished
             from
                 orders o
                 join order_product op
@@ -84,7 +87,7 @@ class Morder extends CI_Model
                           is_pay, is_correct, pay_time, pay_amt, is_cancelled, is_post, province_id, city_id,
                           address_info,linkman,mobile,remark,finish_time,stock_time,is_pay_online,pay_method,
                           pay_amt_without_post_fee,post_info,uid,iq.username, return_profit,
-                          p_return_invite,iq.account
+                          p_return_invite,iq.account,profit_potential,coupon_volume,is_finished
             order by id desc
             {$limit}
         ";
@@ -166,7 +169,7 @@ class Morder extends CI_Model
         $insert_sql_order = "";
         $insert_sql_order .= "
 
-            insert into orders (user_id, address_book_id, is_post, post_fee, is_first, pay_method)
+            insert into orders (user_id, address_book_id, is_post, post_fee, is_first, pay_method, is_confirmed)
             select {$current_user_id} user_id,
                     currval('address_books_id_seq') address_book_id,
                     ? is_post,
@@ -181,7 +184,12 @@ class Morder extends CI_Model
                             false
                         end
                     ),
-                    ?
+                    ?,
+                    case when
+                        (select active_coupon::decimal from users where id = {$current_user_id}) > 0
+                        then false
+                        else true
+                    end
                 from users u where u.id = {$current_user_id}
             ;
         ";
@@ -313,11 +321,11 @@ class Morder extends CI_Model
         $query_sql = "";
         $query_sql .= "
            select
-           sum(iq.amount) amount,sum(quantity) quantity,count(opid) diff_quantity,id,username,id,parent_user_id,grand_parent_user_id,post_fee,
+           sum(iq.amount) amount,sum(quantity) quantity,count(opid) diff_quantity,id,username,parent_user_id,grand_parent_user_id,post_fee,
                           is_pay, is_correct, pay_time, pay_amt, is_cancelled, is_post, province_id, city_id,
                           address_info,linkman,mobile,remark,finish_time,stock_time,is_pay_online,pay_method,
                           pay_amt_without_post_fee,post_info,uid, iq.username name_ch, is_first, return_profit,
-                          p_return_invite, iq.account username
+                          p_return_invite, iq.account username,profit_potential,has_coupon_volume,cash_volume,coupon_volume,is_finished
             from (select
                    op.id            opid,
                    op.quantity      quantity,
@@ -349,7 +357,12 @@ class Morder extends CI_Model
                    o.is_first       is_first,
                    o.post_info      post_info,
                    o.return_profit  return_profit,
-                   o.p_return_invite    p_return_invite
+                   o.p_return_invite    p_return_invite,
+                   o.profit_potential   profit_potential,
+                   o.has_coupon_volume  has_coupon_volume,
+                   o.coupon_volume      coupon_volume,
+                   o.cash_volume        cash_volume,
+                   o.is_finished        is_finished
             from
                 orders o
                 join order_product op
@@ -374,7 +387,7 @@ class Morder extends CI_Model
             group by id,username,parent_user_id,grand_parent_user_id,post_fee,is_pay,is_correct,is_pay_online,post_info
             ,is_first, pay_method,stock_time,finish_time,remark,mobile,linkman,pay_time,pay_amt,pay_amt_without_post_fee,
             is_cancelled,is_post,province_id,city_id,address_info,uid,return_profit,p_return_invite,
-            iq.account
+            iq.account,profit_potential,has_coupon_volume,coupon_volume,cash_volume,is_finished
         ";
         $data = array();
         $query = $this->objDB->query($query_sql);
@@ -427,13 +440,15 @@ class Morder extends CI_Model
     function finish_with_pay($order_id, $pay_amt, $user_id, $parent_user_id, $grand_parent_user_id, $pay_amt_without_post_fee, $is_first,
                             $original_amount)
     {
+        $order_id = intval($order_id);
         $now = now();
         $next_week = date("Y-m-d 00:00:00", strtotime("+1 week"));
-        $ten_percent = bcmul($original_amount, 0.1, 2);
-        $five_percent = bcmul($original_amount, 0.05, 2);
+        $next_month = date('Y-m-1 00:00:00', strtotime("+1 month"));
+        $ten_percent = bcmul($pay_amt_without_post_fee, 0.1, 2);
+        $five_percent = bcmul($pay_amt_without_post_fee, 0.05, 2);
 
         if($parent_user_id > 0) {
-            $parent_profit =  bcadd($ten_percent, $five_percent, 2);
+            $parent_profit =  bcadd(bcadd($ten_percent, $ten_percent, 2), $five_percent, 2); 
             //$parent_extra_profit = $is_first?$ten_percent:0;
         } else {
             $parent_profit = 0;
@@ -441,10 +456,20 @@ class Morder extends CI_Model
         }
 
         if ($grand_parent_user_id > 0) {
-            $grand_parent_profit = $ten_percent;
+            $grand_parent_profit = bcadd($ten_percent, $ten_percent, 2);
+            $profit_potential_first_order = 0;
+            $profit_potential = 15;
         } else {
             $grand_parent_profit = 0;
+            if ($parent_user_id > 0) {
+                $profit_potential_first_order = 20;
+                $profit_potential = 35;
+            } else {
+                $profit_potential_first_order = 60;
+                $profit_potential = 60;
+            }
         }
+        
 
         /*$insert_sql_job = "
             insert into jobs (user_id, order_id, return_profit, excute_time)
@@ -478,8 +503,8 @@ class Morder extends CI_Model
                     {$parent_profit} +
                     case when
                         not exists
-                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
-                        then {$ten_percent}
+                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
+                        then ".bcadd( $ten_percent, $five_percent, 2)."
                         else 0
                     end
             ),
@@ -487,8 +512,35 @@ class Morder extends CI_Model
                     {$parent_profit} +
                     case when
                         not exists
-                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
-                        then {$ten_percent}
+                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
+                        then ".bcadd( $ten_percent, $five_percent, 2)."
+                        else 0
+                    end
+            ),
+            real_balance = real_balance::decimal + (
+                    ".bcmul($parent_profit, 0.9, 2)." +
+                    case when
+                        not exists
+                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
+                        then ".bcmul(bcadd( $ten_percent, $five_percent, 2), 0.9, 2)."
+                        else 0
+                    end
+            ),
+            inactivated_coupon = inactivated_coupon::decimal + (
+                    ".bcmul($parent_profit, 0.1, 2)." +
+                    case when
+                        not exists
+                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
+                        then ".bcmul(bcadd( $ten_percent, $five_percent, 2), 0.1, 2)."
+                        else 0
+                    end
+            ),
+            coupon_volume = coupon_volume::decimal + (
+                    ".bcmul($parent_profit, 0.1, 2)." +
+                    case when
+                        not exists
+                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
+                        then ".bcmul(bcadd( $ten_percent, $five_percent, 2), 0.1, 2)."
                         else 0
                     end
             )
@@ -498,7 +550,13 @@ class Morder extends CI_Model
             update users set profit = profit::decimal +
                     {$grand_parent_profit},
                     balance = balance::decimal +
-                    {$grand_parent_profit}
+                    {$grand_parent_profit},
+                    real_balance = real_balance::decimal +
+                    ".bcmul($grand_parent_profit, 0.9, 2).",
+                    coupon_volume = coupon_volume::decimal +
+                    ".bcmul($grand_parent_profit, 0.1, 2).",
+                    inactivated_coupon = inactivated_coupon::decimal +
+                    ".bcmul($grand_parent_profit, 0.1, 2)."
             where id = {$grand_parent_user_id};
             ";
 
@@ -516,7 +574,7 @@ class Morder extends CI_Model
                 ({$order_id}, ?, ?, ?, ?, ?,
                     case when
                         not exists
-                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
                         then true
                         else false
                     end
@@ -530,6 +588,7 @@ class Morder extends CI_Model
                 set pay_amt = '{$pay_amt}',
                     is_pay = true,
                     is_correct = true,
+                    is_finished = true,
                     pay_amt_without_post_fee = '{$pay_amt_without_post_fee}',
                     original_amount = '{$original_amount}',
                     update_time = '{$now}',
@@ -537,17 +596,45 @@ class Morder extends CI_Model
                     return_profit = ( {$parent_profit} + {$grand_parent_profit} ),
                     p_return_profit = {$parent_profit},
                     gp_return_profit = {$grand_parent_profit},
+                    cash_volume = {$pay_amt} - coupon_volume::decimal,
+                    profit_potential = 
+                        case when
+                            not exists
+                                (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                            then {$profit_potential_first_order}
+                            else {$profit_potential}
+                        end,
                     p_return_invite =
                      case when
                         not exists
                         (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
                         and {$parent_user_id} > 0
-                        then {$ten_percent}
+                        then {$ten_percent} + {$five_percent}
                         else 0
                         end
             where
                 id = {$order_id};
                 ";
+
+        $insert_coupon_sql_parent = "
+            insert into coupons (user_id, active_time, order_id, volume) 
+            values 
+            (?,?,?,
+            case when
+                not exists
+                    (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
+                then ".bcmul( bcmul(bcadd($ten_percent, $ten_percent, 2), 2, 2), 0.1, 2)."
+                else ".bcmul( bcadd(bcadd($ten_percent, $ten_percent, 2), $five_percent, 2), 0.1, 2)."
+            end
+            )
+        ";
+        $insert_coupon_sql_parent_binds = [$user_id, $next_month, $order_id];
+        $insert_coupon_sql_grand_parent = "
+            insert into coupons (user_id, active_time, order_id, volume) 
+            values 
+            (?,?,?,?)
+        ";
+        $insert_coupon_sql_grand_parent_binds = [$user_id, $next_month, $order_id, bcmul(bcadd($ten_percent, $ten_percent, 2), 0.1, 2)];
         $this->objDB->trans_start();
 
         $this->objDB->query("set constraints all deferred");
@@ -556,9 +643,11 @@ class Morder extends CI_Model
         $this->objDB->query($update_sql_turnover);
         if($parent_user_id > 0) {
             $this->objDB->query($update_sql_parent_profit);
+            $this->objDB->query($insert_coupon_sql_parent, $insert_coupon_sql_parent_binds);
         }
         if ($grand_parent_user_id > 0) {
             $this->objDB->query($update_sql_grand_parent_profit);
+            $this->objDB->query($insert_coupon_sql_grand_parent, $insert_coupon_sql_grand_parent_binds);
         }
         $this->objDB->query($update_sql_initiation);
         $this->objDB->query($finish_log, $binds_finish_log);
@@ -574,6 +663,26 @@ class Morder extends CI_Model
             return false;
         }
 
+    }
+
+    public function finishPayment($order_id)
+    {
+        $update_sql = "
+            update orders
+                set is_pay  = true,
+                    pay_amt = ?,
+                    pay_amt_without_post_fee = ?,
+                    is_correct = true,
+                    pay_method = offline
+            where
+                id = ?
+        ";
+        $price = $this->getOrderPrice($order_id);
+        $query = $this->objDB->query($update_sql, [$price->total_fee, $price->pay_amt_without_post_fee, $order_id]);
+        if ($query === true)
+            return true;
+        else
+            return false;
     }
 
     public function checkIsOwn($user_id, $order_id)
@@ -645,8 +754,6 @@ class Morder extends CI_Model
 
     public function getOrderPrice($id)
     {
-        if($this->is_paid($id))
-            exit('This order has paid!');
         $query_sql = "
             select sum(pay_amt_without_post_fee) as pay_amt_without_post_fee,
                    post_fee,
@@ -672,6 +779,47 @@ class Morder extends CI_Model
         $query->free_result();
 
         return $data;
+    }
+
+    public function updatePaymentCoupon($order_id, $volume)
+    {
+        $data['update_time'] = now();
+        $data['coupon_volume'] = $volume;
+        $data['has_coupon_volume'] = true;
+        $data['is_confirmed'] = true;
+        $where = [
+            'is_pay' => 'false',
+            'id'     => $order_id
+            ];
+        $user_id = $this->objGetOrderInfo($order_id)->uid;
+        $update_sql = $this->objDB->update_string('orders', $data, $where);
+        $update_user_sql = "
+            update users set active_coupon = active_coupon::decimal - $volume where id = ?
+        ";
+        $price = $this->getOrderPrice($order_id);
+        $update_payment_sql = "
+            update orders
+                set is_pay  = true,
+                    pay_amt = ?,
+                    pay_amt_without_post_fee = ?,
+                    is_correct = true,
+                    pay_method = 'offline'
+            where
+                id = ?
+        ";
+        $this->objDB->trans_start();
+        $this->objDB->query($update_sql);
+        $this->objDB->query($update_user_sql, [$user_id]);
+        if ($volume >= floatval(money($price->total)))
+            $this->objDB->query($update_payment_sql, [$price->total, $price->pay_amt_without_post_fee, $order_id]);
+        $this->objDB->trans_complete();
+
+        $result = $this->objDB->trans_status();
+
+        if($result === true)
+            return true;
+        else
+            return false;
     }
 
     public function updateOrderTradeNo($trade_no, $order_id)

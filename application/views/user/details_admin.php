@@ -69,6 +69,13 @@
                             </td>
                         </tr>
                         <tr>
+                            <th><label for="qq_no">银行卡信息 <span>*</span></label></th>
+                            <td>
+                                <input type="text" name="qq_no" data-validate="required"
+                                       value="<?=$v->bank_info?>"/>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>他的业绩</th>
                             <td>
                                 <input type="text" value="<?=cny($v->turnover)?>" disabled="disabled" />
@@ -89,7 +96,19 @@
                         <tr>
                             <th>帐户余额</th>
                             <td>
-                                <input type="text" value="<?=cny($v->balance)?>" disabled="disabled" style="color:#f60;"/>
+                                <input type="text" value="<?=cny($v->real_balance)?>" disabled="disabled" style="color:#f60;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>已生效代金券</th>
+                            <td>
+                                <input type="text" value="<?=cny($v->active_coupon)?>" disabled="disabled" style="color:#f60;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>未生效代金券</th>
+                            <td>
+                                <input type="text" value="<?=cny($v->inactivated_coupon)?>" disabled="disabled" style="color:#f60;"/>
                             </td>
                         </tr>
                         <tr>

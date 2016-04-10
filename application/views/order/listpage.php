@@ -69,6 +69,7 @@
                     <th>联系人电话</th>
                     <!--<th>订单备注</th>-->
                     <th>快递单号</th>
+                    <th>使用代金券</th>
                     <th>订单提交时间</th>
                     <th></th>
                     <th></th>
@@ -84,13 +85,14 @@
                         <td><?=cny($v->amount)?></td>
                         <td><?=cny($v->post_fee)?></td>
                         <td><span class="<?=$v->is_pay==true?"accept":"cross";?>"></span></td>
-                        <td><span class="<?=$v->is_pay==true&&$v->is_correct==true?"accept":"cross";?>"></span></td>
+                        <td><span class="<?=$v->is_finished==true?"accept":"cross";?>"></span></td>
                         <td><?=$v->finish_time?></td>
                         <td><?=$v->is_post==true?"邮寄":"自取"?></td>
                         <td><?=$v->linkman?></td>
                         <td><?=$v->mobile?></td>
                         <!--<td><?=$v->remark?></td>-->
                         <td><?=$v->post_info?></td>
+                        <td><?=cny($v->coupon_volume)?></td>
                         <td><?=substr($v->stock_time, 0, 19);?></td>
                         <td><a href="<?=base_url()?>order/details/<?=$v->id;?>">查看详情</a></td>
                         <td>

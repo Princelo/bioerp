@@ -255,6 +255,11 @@ class User extends MY_Controller {
                 'rules'   => 'trim|xss_clean|required|min_length[5]|max_length[50]|is_unique[users.qq_no]'
             ),
             array(
+                'field'   => 'bank_info',
+                'label'   => '银行卡信息',
+                'rules'   => 'trim|xss_clean|required'
+            ),
+            array(
                 'field'   => 'is_valid',
                 'label'   => '是否生效',
                 'rules'   => 'trim|xss_clean|required|is_natural|less_than[2]'
@@ -281,6 +286,7 @@ class User extends MY_Controller {
                     'mobile_no' => $this->input->post('mobile_no'),
                     'wechat_id' => $this->input->post('wechat_id'),
                     'qq_no' => $this->input->post('qq_no'),
+                    'bank_info' => $this->input->post('bank_info'),
                     'is_valid' => $this->input->post('is_valid'),
                 );
                 if(  $_POST['password'] != $_POST['password2'])
@@ -323,6 +329,9 @@ class User extends MY_Controller {
     {
         if($this->session->userdata('role') != 'user')
             exit('You are the admin.');
+        if(!$this->session->userdata('initiation')) {
+            exit('You have not complete the first order yet.');
+        }
         $data = array();
         $data['error'] = $error;
         $config = array(
@@ -361,6 +370,11 @@ class User extends MY_Controller {
                 'label'   => 'QQ号',
                 'rules'   => 'trim|xss_clean|required|min_length[5]|max_length[50]|is_unique[users.qq_no]'
             ),
+            array(
+                'field'   => 'bank_info',
+                'label'   => '银行卡信息',
+                'rules'   => 'trim|xss_clean|required'
+            ),
         );
 
         $this->form_validation->set_rules($config);
@@ -378,6 +392,7 @@ class User extends MY_Controller {
                     'mobile_no' => $this->input->post('mobile_no'),
                     'wechat_id' => $this->input->post('wechat_id'),
                     'qq_no' => $this->input->post('qq_no'),
+                    'bank_info' => $this->input->post('bank_info'),
                 );
                 if(  $_POST['password'] != $_POST['password2'])
                 {
@@ -453,7 +468,7 @@ class User extends MY_Controller {
             return false;
         }
         if (!$check && !$isParent && !$isGrandParent) {
-            exit('You does not have access right to get details of this user');
+            exit('You does not have the access right to get details of this user');
         }
     }
 
@@ -500,6 +515,11 @@ class User extends MY_Controller {
                     'rules'   => 'trim|xss_clean|required|min_length[5]|max_length[50]'
                 ),
                 array(
+                    'field'   => 'bank_info',
+                    'label'   => '银行卡信息',
+                    'rules'   => 'trim|xss_clean|required'
+                ),
+                array(
                     'field'   => 'is_valid',
                     'label'   => '是否生效',
                     'rules'   => 'trim|xss_clean|required|is_natural|less_than[2]'
@@ -528,6 +548,7 @@ class User extends MY_Controller {
                         'mobile_no' => $this->input->post('mobile_no'),
                         'wechat_id' => $this->input->post('wechat_id'),
                         'qq_no' => $this->input->post('qq_no'),
+                        'bank_info' => $this->input->post('bank_info'),
                         'is_valid' => $this->input->post('is_valid'),
                     );
                     $result = $this->Muser->update($main_data, $id);

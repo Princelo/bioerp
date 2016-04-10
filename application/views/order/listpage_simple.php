@@ -59,7 +59,7 @@
                                 <td><?=$v->diff_quantity;?></td>
                                 <td><?=cny($v->amount)?></td>
                                 <td><span class="<?=$v->is_pay==true?"accept":"cross";?>"></span></td>
-                                <td><span class="<?=$v->is_pay==true&&$v->is_correct==true?"accept":"cross";?>"></span></td>
+                                <td><span class="<?=$v->is_finished==true?"accept":"cross";?>"></span></td>
                                 <td><?=$v->finish_time?></td>
                                 <td><?=$v->is_post==true?"邮寄":"自取"?></td>
                                 <td><?=$v->linkman?></td>

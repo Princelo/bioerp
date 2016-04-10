@@ -97,6 +97,13 @@
                                    maxlength="11" value="<?=set_value('qq_no')?>"/>
                         </td>
                     </tr>
+                    <tr>
+                        <th><label for="bank_info">银行卡信息 <span>*</span></label></th>
+                        <td>
+                            <input type="text" name="bank_info" data-validate="required"
+                                    value="<?=set_value('bank_info')?>"/>
+                        </td>
+                    </tr>
                 </table>
 
             </fieldset>

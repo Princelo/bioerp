@@ -56,6 +56,8 @@
                         <th>他的收益</th>
                         <th>已提现金额</th>
                         <th>帐户余额</th>
+                        <th>已生效代金券</th>
+                        <th>未生效代金券</th>
                         <th>是否生效</th>
                         <th>推荐人</th>
                         <th>跨界推荐人</th>
@@ -79,7 +81,9 @@
                             <td><?=cny($v->turnover)?></td>
                             <td><?=cny($v->profit)?></td>
                             <td><?=cny($v->withdraw_volume)?></td>
-                            <td><?=cny($v->balance)?></td>
+                            <td><?=cny($v->real_balance)?></td>
+                            <td><?=cny($v->active_coupon)?></td>
+                            <td><?=cny($v->inactivated_coupon)?></td>
                             <td><?=$v->is_valid==true?'是':'否'?></td>
                             <? if($v->pid == '0' || $v->pid == '') { ?>
                                 <td>无推荐人</td>

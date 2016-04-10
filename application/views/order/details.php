@@ -127,6 +127,18 @@
                         </td>
                     </tr>
                     <tr class="odd">
+                        <th>使用代金券</th>
+                        <td>
+                            <span class="info important"><?=cny($v->coupon_volume)?></span>
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <th>使用现金</th>
+                        <td>
+                            <span class="info important"><?=cny($v->cash_volume)?></span>
+                        </td>
+                    </tr>
+                    <tr class="odd">
                         <th>付款方式</th>
                         <td>
                             <span class="info"><?=$v->pay_method=='alipay'?'线上付款':'线下付款';?></span>
@@ -159,7 +171,7 @@
                     <tr class="even">
                         <th>是否完成订单</th>
                         <td>
-                            <span class="<?=$v->is_pay==true&&$v->is_correct==true?"accept":"cross";?>"></span>
+                            <span class="<?=$v->is_finished==true?"accept":"cross";?>"></span>
                         </td>
                     </tr>
                     <tr class="odd">

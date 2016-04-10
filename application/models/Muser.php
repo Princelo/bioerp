@@ -78,17 +78,17 @@ class Muser extends CI_Model
         $insert_sql_user = "";
         $insert_sql_user .= "
             insert into users
-                (username, password, name, citizen_id, mobile_no, wechat_id, qq_no, is_valid,
+                (username, password, name, citizen_id, mobile_no, wechat_id, qq_no, is_valid, bank_info
                 pid, lft, rgt)
             values
-                (?, ?, ?, ?, ?, ?, ?, ?, 1, 1, 2);
+                (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1, 2);
             update users set initiation = true where id = currval('users_id_seq');
         ";
         $binds = array(
             $main_data['username'], $main_data['password'],
             $main_data['name'],
             $main_data['citizen_id'], $main_data['mobile_no'], $main_data['wechat_id'], $main_data['qq_no'],
-            $main_data['is_valid'],
+            $main_data['is_valid'],$main_data['bank_info']
         );
 
         $this->db->trans_start();
@@ -122,16 +122,16 @@ class Muser extends CI_Model
         $insert_sql_user = "";
         $insert_sql_user .= "
             insert into users
-            (username, password, name, citizen_id, mobile_no, wechat_id, qq_no, pid, is_valid, lft, rgt, dept)
+            (username, password, name, citizen_id, mobile_no, wechat_id, qq_no, pid, is_valid, bank_info lft, rgt, dept)
             values
-            (?, ?, ?, ?, ?, ?, ?, ?, ?,
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             (select rgt from variables{$temp}), (select rgt + 1 from variables{$temp}),
             (select count(1)+1 from users where lft<(select rgt from variables{$temp}) and rgt>(select rgt+1 from variables{$temp})));
         ";
         $binds = array(
             $main_data['username'], $main_data['password'], $main_data['name'],
             $main_data['citizen_id'], $main_data['mobile_no'], $main_data['wechat_id'], $main_data['qq_no'],
-            $current_user_id, $main_data['is_valid']
+            $current_user_id, $main_data['is_valid'],$main_data['bank_info']
         );
 
         $this->db->trans_start();
@@ -229,6 +229,11 @@ class Muser extends CI_Model
                 u.is_valid is_valid,
                 u.pid pid,
                 u.balance,
+                u.real_balance,
+                u.coupon_volume,
+                u.active_coupon,
+                u.inactivated_coupon,
+                u.bank_info,
                 u.withdraw_volume,
                 pu.name pname,
                 pu.username pusername,
@@ -307,14 +312,15 @@ class Muser extends CI_Model
     public function boolWithdraw($volume, $id)
     {
         $insert_log_sql = "insert into withdraw_logs (user_id, volume, balance_before)
-                           values (?, ?, (select balance from users where id = ?));";
+                           values (?, ?, (select real_balance from users where id = ?));";
         $insert_log_binds = [$id, $volume, $id];
         $update_user_sql = "update users
                         set balance = balance::decimal - ?,
+                        real_balance = real_balance::decimal - ?,
                         withdraw_volume = withdraw_volume::decimal + ?
                         where id = ?;
                         ";
-        $update_user_binds = [$volume, $volume, $id];
+        $update_user_binds = [$volume, $volume, $volume, $id];
         $this->db->trans_start();
         $this->db->query($insert_log_sql, $insert_log_binds);
         $this->db->query($update_user_sql, $update_user_binds);
@@ -330,7 +336,7 @@ class Muser extends CI_Model
 
     public function isEnough($volume, $id)
     {
-        $query_sql = "select balance::decimal from users where id = ?";
+        $query_sql = "select real_balance::decimal from users where id = ?";
         $query = $this->db->query($query_sql, [$id]);
         if (floatval($query->result()[0]->balance) >= floatval($volume))
             return true;

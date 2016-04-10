@@ -171,7 +171,7 @@
                 <ul class="dropdown-menu other-menu" id="menu-user">
                     <li><a href="<?=base_url()?>user/treepage" class="" style="background: none;"><span>代理关系图 </span></a>
                     </li>
-                    <li><a href="<?=base_url()?>user/add" class="" style="background: none;"><span>新增代理 </span></a>
+                    <li><a href="<?=base_url()?>user/add" class="" style="background: none;<? if(!$this->session->userdata('initiation')){?> background: #999;<?}?>"><span <? if(!$this->session->userdata('initiation')){?> style="color: #aaa"<?}?>>新增代理 </span></a>
                     </li>
                 </ul>
 

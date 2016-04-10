@@ -18,9 +18,13 @@
             <fieldset>
                 <legend> 是否马上付款</legend>
                 <div class="price_tip">
-                    本次交易总额为<span class="red">￥<?=cny(bcadd($pay_amt_without_post_fee, $post_fee, 2))?></span>，
-                    其中产品价格<span class="red">￥<?=cny($pay_amt_without_post_fee)?></span>，
-                    运费共<span class="red">￥<?=cny($post_fee)?></span>
+                    <h3>
+                        本次交易总额为<span class="red">￥<?=cny(bcadd($pay_amt_without_post_fee, $post_fee, 2))?></span>，<br>
+                        其中产品价格<span class="red">￥<?=cny($pay_amt_without_post_fee)?></span>，<br>
+                        运费共<span class="red">￥<?=cny($post_fee)?></span>,<br>
+                        使用代金券共<span class="red"><?=cny($coupon_volume)?></span>,<br>
+                        还需付款: <span style="color:#f60; font-weight:bold">￥<?=bcsub(bcadd($pay_amt_without_post_fee, $post_fee, 2), money($coupon_volume), 2)?></span>
+                    </h3>
                 </div>
                 <form id="pay" action="<?=base_url()?>order/pay/<?=$order_id?>" method="post">
                     <input type="hidden" name="token" value="<?=$token?>" />

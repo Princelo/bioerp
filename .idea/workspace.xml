@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/product/add.php" afterPath="$PROJECT_DIR$/application/views/product/add.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Mproduct.php" afterPath="$PROJECT_DIR$/application/models/Mproduct.php" />
     </list>
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,18 +36,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="treepage_admin.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/user/treepage_admin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1453360907000" expanded="true" signature="128:191" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Morder.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Morder.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -61,18 +49,28 @@
       <file leaf-file-name="Product.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="214" column="20" selection-start-line="214" selection-start-column="20" selection-end-line="214" selection-end-column="20" />
+            <state relative-caret-position="525">
+              <caret line="391" column="4" selection-start-line="391" selection-start-column="4" selection-end-line="391" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Mproduct.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/models/Mproduct.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="97" column="20" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/product/add.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="92" column="92" selection-start-line="92" selection-start-column="92" selection-end-line="92" selection-end-column="92" />
+            <state relative-caret-position="510">
+              <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
               <folding>
                 <marker date="1460298423000" expanded="true" signature="1135:1144" placeholder="..." />
               </folding>
@@ -182,7 +180,6 @@
         <option value="$PROJECT_DIR$/application/controllers/Report.php" />
         <option value="$PROJECT_DIR$/application/views/product/details.php" />
         <option value="$PROJECT_DIR$/application/views/product/listpage_admin.php" />
-        <option value="$PROJECT_DIR$/application/models/Mproduct.php" />
         <option value="$PROJECT_DIR$/application/views/report/listpage_productbills.php" />
         <option value="$PROJECT_DIR$/application/models/Mbill.php" />
         <option value="$PROJECT_DIR$/application/views/report/listpage_month_users.php" />
@@ -213,6 +210,7 @@
         <option value="$PROJECT_DIR$/application/views/order/details_admin.php" />
         <option value="$PROJECT_DIR$/application/views/order/listpage_admin.php" />
         <option value="$PROJECT_DIR$/application/views/product/add.php" />
+        <option value="$PROJECT_DIR$/application/models/Mproduct.php" />
       </list>
     </option>
   </component>
@@ -346,7 +344,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="com.intellij.ide.scratch.ScratchpadManager" value="PostgreSQL" />
     <property name="dynamic.classpath" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="product&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Product.php&#10;morder&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Morder.php&#10;order&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Order.php&#10;my&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/libraries/MY_Controller.php&#10;muser&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;pay_&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/pay_method.php&#10;ver&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/assets/js/verify.notify.js&#10;updatePay&#9;null&#9;null&#10;modi&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/modify_payment.php&#10;modify&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/modify_payment.php&#10;pay&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/pay_method.php&#10;mor&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Morder.php&#10;mord&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Morder.php&#10;pay_me&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/pay_method.php&#10;mycon&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/libraries/MY_Controller.php&#10;listpage&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/listpage_admin.php&#10;hea&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;verify&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/assets/js/verify.notify.js&#10;add_by&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/add_by_cart.php&#10;index_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/forecast/index_user.php&#10;for&#9;null&#9;null&#10;header_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;header&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header.php&#10;treepage&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage.php&#10;cart&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/cart.php&#10;login&#9;null&#9;null&#10;mcont&#9;null&#9;null&#10;cart.php&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/cart.php&#10;mbill&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Mbill.php&#10;repor&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Report.php&#10;listpage_pr&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_productbills.php&#10;mpr&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Mproduct.php&#10;details&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/product/details.php&#10;with&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/withdraw_log_admin.php&#10;he&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header.php&#10;details_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/details_admin.php&#10;listpage_mon&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_month_admin.php&#10;listpage_day&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_day_admin.php&#10;query_sub&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/query_sub.php&#10;header_u&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;list&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/listpage_admin.php&#10;listpage_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/listpage_admin.php&#10;tree&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage.php&#10;listpage_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_userbills.php&#10;listpage_pro&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_productbills.php&#10;listpage_mont&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_month.php&#10;listpage_year&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_year_admin.php&#10;detai&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;gener&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/assets/general.css" />
+    <property name="SearchEverywhereHistoryKey" value="mpro&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Mproduct.php&#10;product&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Product.php&#10;morder&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Morder.php&#10;order&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Order.php&#10;my&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/libraries/MY_Controller.php&#10;muser&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Muser.php&#10;pay_&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/pay_method.php&#10;ver&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/assets/js/verify.notify.js&#10;updatePay&#9;null&#9;null&#10;modi&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/modify_payment.php&#10;modify&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/modify_payment.php&#10;pay&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/pay_method.php&#10;mor&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Morder.php&#10;mord&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Morder.php&#10;pay_me&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/pay_method.php&#10;mycon&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/libraries/MY_Controller.php&#10;listpage&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/listpage_admin.php&#10;hea&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;verify&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/assets/js/verify.notify.js&#10;add_by&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/add_by_cart.php&#10;index_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/forecast/index_user.php&#10;for&#9;null&#9;null&#10;header_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;header&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header.php&#10;treepage&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage.php&#10;cart&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/cart.php&#10;login&#9;null&#9;null&#10;mcont&#9;null&#9;null&#10;cart.php&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/cart.php&#10;mbill&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Mbill.php&#10;repor&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Report.php&#10;listpage_pr&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_productbills.php&#10;mpr&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Mproduct.php&#10;details&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/product/details.php&#10;with&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/withdraw_log_admin.php&#10;he&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header.php&#10;details_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/details_admin.php&#10;listpage_mon&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_month_admin.php&#10;listpage_day&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_day_admin.php&#10;query_sub&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/query_sub.php&#10;header_u&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/templates/header_user.php&#10;list&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/listpage_admin.php&#10;listpage_admin&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/listpage_admin.php&#10;tree&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/treepage.php&#10;listpage_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_userbills.php&#10;listpage_pro&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_productbills.php&#10;listpage_mont&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_month.php&#10;listpage_year&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/report/listpage_year_admin.php&#10;detai&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
@@ -411,12 +409,12 @@
       <updated>1422366590855</updated>
       <workItem from="1460101198155" duration="3419000" />
       <workItem from="1460211226277" duration="21456000" />
-      <workItem from="1460291410192" duration="4298000" />
+      <workItem from="1460291410192" duration="4451000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29173000" />
+    <option name="totallyTimeSpent" value="29326000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="972" extended-state="6" />
@@ -518,13 +516,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="96" column="70" selection-start-line="96" selection-start-column="70" selection-end-line="96" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Mproduct.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1185">
-          <caret line="79" column="16" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -853,21 +844,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/product/add.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding>
+            <marker date="1460298423000" expanded="true" signature="1135:1144" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="214" column="20" selection-start-line="214" selection-start-column="20" selection-end-line="214" selection-end-column="20" />
+        <state relative-caret-position="525">
+          <caret line="391" column="4" selection-start-line="391" selection-start-column="4" selection-end-line="391" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/product/add.php">
+    <entry file="file://$PROJECT_DIR$/application/models/Mproduct.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="92" column="92" selection-start-line="92" selection-start-column="92" selection-end-line="92" selection-end-column="92" />
-          <folding>
-            <marker date="1460298423000" expanded="true" signature="1135:1144" placeholder="..." />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="97" column="20" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>

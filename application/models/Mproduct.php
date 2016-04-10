@@ -94,8 +94,8 @@ class Mproduct extends CI_Model
         $insert_sql_product = "";
         $insert_sql_product .= "
             insert into products
-            (title, properties, feature, usage_method, ingredient, img, is_valid, weight, category, thumb)
-            values (?,?,?,?,?,?,?,?,?,?);
+            (title, properties, feature, usage_method, ingredient, img, is_valid, weight, category, thumb, discount)
+            values (?,?,?,?,?,?,?,?,?,?,?);
         ";
         $insert_sql_price = "";
         $insert_sql_price .= "

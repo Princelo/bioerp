@@ -277,7 +277,7 @@
         
         var check = function()
         {
-            if(!<?=$initiation;?>)
+            if('<?=$initiation;?>' == '')
             {
                 console.log(parseFloat($('#global-total').html()));
                 if(parseFloat($('#global-total').html()) < 3000){

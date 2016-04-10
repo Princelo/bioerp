@@ -314,11 +314,11 @@ class Product extends MY_Controller {
                 'label'   => '单价',
                 'rules'   => 'trim|xss_clean|numeric|required'
             ),
-            array(
-                'field'   => 'discount',
-                'label'   => '折扣',
-                'rules'   => 'trim|xss_clean|numeric|required'
-            ),
+//            array(
+//                'field'   => 'discount',
+//                'label'   => '折扣',
+//                'rules'   => 'trim|xss_clean|numeric|required'
+//            ),
             array(
                 'field' => 'weight',
                 'label' => '总重量',

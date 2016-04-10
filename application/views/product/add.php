@@ -90,7 +90,7 @@
                     <tr>
                         <th><label>折扣</label></th>
                         <td>
-                            <input name="discount" data-validate="required,decimal" value="60" disabled/>(单位: 百份比)
+                            <input name="discount" data-validate="required,decimal" value="<?=set_value('discount', 60)?>" disabled/>(单位: 百份比)
                         </td>
                     </tr>
                     <tr>

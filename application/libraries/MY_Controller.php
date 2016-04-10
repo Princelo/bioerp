@@ -49,13 +49,27 @@ class MY_Controller extends CI_Controller {
         $check_result = $this->db->query($check_sql)->result();
         if (intval($check_result[0]->count) > 0) {
             $update_sql_users = "
-                update users 
-                set active_coupon = active_coupon
-                    + 
-                    (select sum(volume) from coupons c where c.is_active = false and c.active_time < now() and c.user_id = id),
-                    inactivated_coupon = inactivated_coupon
-                    -
-                    (select sum(volume) from coupons c where c.is_active = false and c.active_time < now() and c.user_id = id)
+                update users u
+                set active_coupon = 
+                        coalesce(active_coupon, '$0')
+                            + 
+                        coalesce(
+                            (select sum(c.volume) 
+                                from coupons c 
+                            where c.is_active = false 
+                              and c.active_time < now() 
+                              and c.user_id = u.id),
+                        '$0'),
+                    inactivated_coupon =
+                        coalesce(inactivated_coupon, '$0')
+                            - 
+                        coalesce(
+                            (select sum(c.volume) 
+                                from coupons c 
+                            where c.is_active = false 
+                              and c.active_time < now() 
+                              and c.user_id = u.id),
+                        '$0')
                 ";
             $update_sql_coupons = "
                 update coupons set is_active = true;

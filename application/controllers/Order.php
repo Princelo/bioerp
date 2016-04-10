@@ -923,9 +923,9 @@ class Order extends MY_Controller {
         if($is_finish != null)
         {
             if($is_finish == '1')
-                $where .= " and o.is_pay = true and o.is_correct = true ";
+                $where .= " and o.is_finished = true ";
             elseif($is_finish == '0')
-                $where .= " and (o.is_pay = false or o.is_correct = false) ";
+                $where .= " and (o.is_pay = false or o.is_correct = false or is_finished = false) ";
         }
         if($date_from != null && $date_to == null && $hour == null)
         {

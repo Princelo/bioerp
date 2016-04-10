@@ -56,7 +56,7 @@
                     <? $n ++; ?>
                     <tr class="<?=$n%2==0?"even":"odd";?>">
                         <td><input type="checkbox" id="product-<?=$v->pid?>" class="product-item" pid="<?=$v->pid?>" checked="checked"> </td>
-                        <td><a href="<?=base_url()?>product/details/<?=$v->pid?>"><?=$v->title;?>(<?=$v->pid?>)</a></td>
+                        <td><a href="<?=base_url()?>product/details/<?=$v->pid?>"><?=$v->title;?></a></td>
                         <td><input type="hidden" value="<?=money($v->unit_price)?>" class="unit-price" id="price-<?=$v->pid?>"><?="￥".money($v->unit_price);?></td>
                         <td>
                             <div class="buy-quantity">

@@ -124,7 +124,7 @@ class Mbill extends CI_Model
         //http://stackoverflow.com/questions/15691127/postgresql-query-to-count-group-by-day-and-display-days-with-no-data
         $data = array();
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -167,7 +167,7 @@ class Mbill extends CI_Model
         //http://stackoverflow.com/questions/15691127/postgresql-query-to-count-group-by-day-and-display-days-with-no-data
         $data = array();
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -298,7 +298,7 @@ class Mbill extends CI_Model
         //http://stackoverflow.com/questions/17492167/group-query-results-by-month-and-year-in-postgresql
         $data = array();
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -346,7 +346,7 @@ class Mbill extends CI_Model
         //http://stackoverflow.com/questions/7450515/postgresql-generate-series-of-months
         $data = array();
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -392,7 +392,7 @@ class Mbill extends CI_Model
         //http://stackoverflow.com/questions/15691127/postgresql-query-to-count-group-by-day-and-display-days-with-no-data
         $data = array();
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -532,7 +532,7 @@ class Mbill extends CI_Model
             ;
         ";
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -556,7 +556,7 @@ class Mbill extends CI_Model
         $query = $this->objDB->query($query_sql);
 
 
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             $count = $query->row()->count;
         } else {
             return 0;
@@ -592,7 +592,7 @@ class Mbill extends CI_Model
         ";
         $query = $this->objDB->query($query_sql);
         $data = [];
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }

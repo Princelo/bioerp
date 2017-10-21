@@ -46,12 +46,13 @@ class Mpost extends CI_Model
         ";
         $binds = array($data['province_id'], $data['city_id']);
         $query = $this->objDB->query($query_sql, $binds);
-        if($query->num_rows() > 0){
-            if($query->result()[0]->count > 0 )
+        if ($query->num_rows() > 0) {
+            if ($query->result()[0]->count > 0) {
                 return true;
-            else
+            } else {
                 return false;
-        }else{
+            }
+        } else {
             return false;
         }
     }
@@ -72,11 +73,12 @@ class Mpost extends CI_Model
         ";
         $binds = array($data['province_id'], $data['city_id'], $id);
         $query = $this->objDB->query($query_sql, $binds);
-        if($query->num_rows() > 0){
-            if($query->result()[0]->count > 0 )
+        if ($query->num_rows() > 0) {
+            if ($query->result()[0]->count > 0) {
                 return true;
-            else
+            } else {
                 return false;
+            }
         }else{
             return false;
         }
@@ -86,20 +88,22 @@ class Mpost extends CI_Model
     {
         $insert_sql = $this->objDB->insert_string('post_rules', $data);
         $query = $this->objDB->query($insert_sql);
-        if($query === true)
+        if ($query === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function update($data, $id)
     {
         $update_sql = $this->objDB->update_string('post_rules', $data, array('id' => $id));
         $query = $this->objDB->query($update_sql);
-        if($query === true)
+        if ($query === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
 }

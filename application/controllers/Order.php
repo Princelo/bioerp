@@ -1,10 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include('application/libraries/MY_Controller.php');
-class Order extends MY_Controller {
-
+class Order extends MY_Controller
+{
     public $db;
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
             redirect('login');
@@ -19,8 +20,9 @@ class Order extends MY_Controller {
 
     public function index_sub($offset = 0)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $current_user_id = $this->session->userdata('current_user_id');
         $get_config = array(
             array(
@@ -35,10 +37,9 @@ class Order extends MY_Controller {
             ),
         );
         $this->form_validation->set_rules($get_config);
-        if($this->input->get('search', true) != '' ||
+        if ($this->input->get('search', true) != '' ||
             $this->input->get('level', true) != ''
-        )
-        {
+        ) {
             $search = $this->input->get('search', true);
             $search = $this->db->escape_like_str($search);
             $level = $this->input->get('level', true);
@@ -62,7 +63,7 @@ class Order extends MY_Controller {
             $data['users'] = $this->Muser->objGetSubUserList($where, $iwhere, $order, $limit, 2);
             $this->load->view('templates/header_user', $data);
             $this->load->view('order/index_sub', $data);
-        }else{
+        } else {
             $data = array();
             if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
             $config['base_url'] = base_url()."order/index_sub/";
@@ -85,7 +86,7 @@ class Order extends MY_Controller {
 
     public function query_sub($id)
     {
-        if($this->session->userdata('role') == 'user') {
+        if ($this->session->userdata('role') == 'user') {
             $pid = $this->session->userdata('current_user_id');
             if(!is_numeric($id))
                 exit('ERROR');
@@ -103,8 +104,9 @@ class Order extends MY_Controller {
 
     public function listpage_admin($offset = 0)
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $get_config = array(
             array(
                 'field' =>  'search',
@@ -123,14 +125,13 @@ class Order extends MY_Controller {
             ),*/
         );
         $this->form_validation->set_rules($get_config);
-        if($this->input->get('search', true) != '' ||
+        if ($this->input->get('search', true) != '' ||
             $this->input->get('uid', true) != '' ||
             $this->input->get('is_finish', true) != '' ||
             $this->input->get('date_from', true) != '' ||
             $this->input->get('date_to', true) != '' ||
             $this->input->get('hour', true) != ''
-        )
-        {
+        ) {
             $search = $this->input->get('search', true);
             $search = $this->db->escape_like_str($search);
             $uid = $this->input->get('uid', true);
@@ -154,7 +155,7 @@ class Order extends MY_Controller {
             $data['orders'] = $this->Morder->objGetOrderList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('order/listpage_admin', $data);
-        }else{
+        } else {
             $data = array();
             $where = '';
             $config['base_url'] = base_url()."order/listpage_admin/";
@@ -175,8 +176,9 @@ class Order extends MY_Controller {
 
     public function listpage($offset = 0)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $get_config = array(
             array(
                 'field' =>  'search',
@@ -188,8 +190,7 @@ class Order extends MY_Controller {
         $this->form_validation->set_rules($get_config);
         if($this->input->get('search', true) != '' ||
             $this->input->get('is_finish', true) != ''
-        )
-        {
+        ) {
             $search = $this->input->get('search', true);
             $search = $this->db->escape_like_str($search);
             $is_finish = $this->input->get('is_finish', true);
@@ -210,7 +211,7 @@ class Order extends MY_Controller {
             $data['orders'] = $this->Morder->objGetOrderList($where, $order, $limit);
             $this->load->view('templates/header_user', $data);
             $this->load->view('order/listpage', $data);
-        }else{
+        } else {
             $data = array();
             $where = ' and o.user_id = '.$uid;
             $config['base_url'] = base_url()."order/listpage/";
@@ -231,11 +232,13 @@ class Order extends MY_Controller {
 
     public function listpage_sub_admin($offset = 0)
     {
-        if($this->session->userdata('role') != 'admin')
+        if($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $current_user_id = $this->input->get('user');
-        if(!is_numeric($current_user_id))
+        if (!is_numeric($current_user_id)) {
             exit('User Id Error');
+        }
         $uid = $current_user_id;
 
         $data = array();
@@ -258,14 +261,17 @@ class Order extends MY_Controller {
 
     public function listpage_sub($offset = 0)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $pid = $this->session->userdata('current_user_id');
         $current_user_id = $this->input->get('user');
-        if(!is_numeric($current_user_id))
+        if (!is_numeric($current_user_id)) {
             exit('User Id Error');
-        if(!$this->Muser->isAccessibleSons($pid, $current_user_id))
+        }
+        if (!$this->Muser->isAccessibleSons($pid, $current_user_id)) {
             exit('You are not the Superior of this user');
+        }
         $uid = $current_user_id;
         $data = array();
         $where = ' and o.user_id = '. $uid;
@@ -287,8 +293,9 @@ class Order extends MY_Controller {
 
     public function details($order_id)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $data = array();
         $data['v'] = $this->Morder->objGetOrderInfo($order_id);
         $this->load->view('templates/header_user', $data);
@@ -296,22 +303,20 @@ class Order extends MY_Controller {
     }
     public function details_admin($order_id)
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $data = array();
         $data['v'] = $this->Morder->objGetOrderInfo($order_id);
-        if($this->input->post('post_info') != '')
-        {
+        if($this->input->post('post_info') != '') {
             $this->db->query("update orders set post_info = '{$this->input->post('post_info')}' where id = {$order_id}");
-            if($this->input->post('finish') == '')
+            if ($this->input->post('finish') == '') {
                 redirect('order/details_admin/'.$order_id);
+            }
         }
-        if($this->input->post('finish', true) != '')
-        {
-            if($this->input->post('finish') == 'finish_with_pay')
-            {
-                if($data['v']->is_finished == true)
-                {
+        if ($this->input->post('finish', true) != '') {
+            if ($this->input->post('finish') == 'finish_with_pay') {
+                if ($data['v']->is_finished == true) {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单已完成');
                     redirect('order/details_admin/'.$order_id);
                 }
@@ -323,79 +328,64 @@ class Order extends MY_Controller {
                                                          money($data['v']->amount),
                                                          $data['v']->is_first,
                                                          money($data['v']->original_amount));
-                if($result === true)
-                {
+                if ($result === true) {
                     $this->session->set_flashdata('flashdata', '订单更改成功');
                     redirect('order/listpage_admin');
                 }
             }
-            if($this->input->post('finish') == 'finish_without_pay')
-            {
-                if($data['v']->is_finished == true)
-                {
+            if ($this->input->post('finish') == 'finish_without_pay') {
+                if($data['v']->is_finished == true) {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单已完成');
                     redirect('order/details_admin/'.$order_id);
                 }
-                if($data['v']->is_pay_online == false)
-                {
+                if($data['v']->is_pay_online == false) {
                     $this->session->set_flashdata('flashdata', '该订单属于线下付款类，必须插入付款纪录');
                     redirect('order/details_admin/'.$order_id);
                 }
-                if($data['v']->is_pay == false && $data['v']->is_pay_online == true)
-                {
+                if($data['v']->is_pay == false && $data['v']->is_pay_online == true) {
                     $this->session->set_flashdata('flashdata', '该订单未支付金额，且属于线上交易类，未能完成订单');
                     redirect('order/details_admin/'.$order_id);
                 }
-                if(
+                if (
                 (money($data['v']->pay_amt) <
                     bcadd(money($data['v']->post_fee), bcmul(money($data['v']->unit_price), $data['v']->count, 4), 4)
                 ) &&
                 $data['v']->is_pay_online == true
-                )
-                {
+                ) {
                     $this->session->set_flashdata('flashdata', '该订单支付金额不足，未能完成订单');
                     redirect('order/details_admin/'.$order_id);
                 }
                 $result = $this->Morder->finish_without_pay($order_id);
-                if($result === true)
-                {
+                if ($result === true) {
                     $this->session->set_flashdata('flashdata', '订单更改成功');
                 }
 
             }
-            if($this->input->post('finish') == 'unfinish_rollback')
-            {
-                if($data['v']->is_pay == false || $data['v']->is_correct == false || $data['v']->is_finished == false)
-                {
+            if ($this->input->post('finish') == 'unfinish_rollback') {
+                if ($data['v']->is_pay == false || $data['v']->is_correct == false || $data['v']->is_finished == false) {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单未完成');
                     redirect('order/details_admin/'.$order_id);
                 }
-                if($data['v']->is_pay_online == true)
-                {
+                if ($data['v']->is_pay_online == true) {
                     $this->session->set_flashdata('flashdata', '该订单属于线上付款类，禁止清除付款纪录');
                     redirect('order/details_admin/'.$order_id);
                 }
                 $result = $this->Morder->unfinish_rollback($order_id);
-                if($result === true)
-                {
+                if ($result === true) {
                     $this->session->set_flashdata('flashdata', '订单更改成功');
                 }
             }
-            if($this->input->post('finish') == 'unfinish')
-            {
-                if($data['v']->is_pay == false || $data['v']->is_correct == false || $data['v']->is_finished == false)
-                {
+            if ($this->input->post('finish') == 'unfinish') {
+                if ($data['v']->is_pay == false || $data['v']->is_correct == false || $data['v']->is_finished == false) {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单未完成');
                     redirect('order/details_admin/'.$order_id);
                 }
-                if($data['v']->is_pay_online == false)
-                {
+                if ($data['v']->is_pay_online == false) {
                     $this->session->set_flashdata('flashdata', '该订单属于线下付款类，要执行该操作，必须清除付款纪录');
                     redirect('order/details_admin/'.$order_id);
                 }
                 $result = $this->Morder->unfinish($order_id);
-                if($result === true)
-                {
+                if ($result === true) {
                     $this->session->set_flashdata('flashdata', '订单更改成功');
                 }
             }
@@ -406,22 +396,17 @@ class Order extends MY_Controller {
 
     public function order_product($order_id)
     {
-        if($this->session->userdata('role') != 'admin')
-        {
-            if(!$this->Morder->checkIsOwn($this->session->userdata('current_user_id'), $order_id))
-            {
+        if ($this->session->userdata('role') != 'admin') {
+            if (!$this->Morder->checkIsOwn($this->session->userdata('current_user_id'), $order_id)) {
                 exit('The order is not yours');
             }
         }
         $data = array();
         $data['products'] = $this->Morder->getOrderProducts($order_id);
-        if($this->session->userdata('role') != 'admin')
-        {
+        if ($this->session->userdata('role') != 'admin') {
             $this->load->view('templates/header_user');
             $this->load->view('order/order_product', $data);
-        }
-        else
-        {
+        } else {
             $this->load->view('templates/header');
             $this->load->view('order/order_product_admin', $data);
         }
@@ -429,9 +414,10 @@ class Order extends MY_Controller {
 
     public function add()
     {
-        if($this->session->userdata('role') == 'admin')
+        if ($this->session->userdata('role') == 'admin') {
             exit('You are the admin.');
-        if($this->input->post('token') != $this->session->userdata('token')){
+        }
+        if ($this->input->post('token') != $this->session->userdata('token')) {
             redirect('order/listpage');
         }
         $data = array();
@@ -464,8 +450,7 @@ class Order extends MY_Controller {
                 'rules'   => 'trim|xss_clean|required'
             ),
         );
-        if($this->input->post('is_post') == 1)
-        {
+        if ($this->input->post('is_post') == 1) {
             array_merge($config,
                 array(
                     'field'   => 'province_id',
@@ -491,13 +476,11 @@ class Order extends MY_Controller {
 
 
         $this->form_validation->set_rules($config);
-        if(isset($_POST) && !empty($_POST))
-        {
+        if (isset($_POST) && !empty($_POST)) {
             $this->__extra_verify();
-            if ($this->form_validation->run() == FALSE)
-            {
+            if ($this->form_validation->run() == FALSE) {
                 redirect('order/cart');
-            }else{
+            } else {
                 $address_info = array(
                     'province_id' => $this->input->post('province_id'),
                     'city_id' => $this->input->post('city_id'),
@@ -514,24 +497,24 @@ class Order extends MY_Controller {
                 );
                 $main_data['post_fee'] = $this->calcPostFee($main_data, $address_info);
                 $result_id = $this->Morder->intAddReturnOrderId($main_data, $address_info);
-                if($result_id != 0){
+                if ($result_id != 0) {
                     $this->session->set_flashdata('flashdata', '订单添加成功');
                     $result = $this->db->query('select active_coupon from users where id = ?', [$this->session->userdata('current_user_id')])->result();
                     if (floatval(money($result[0]->active_coupon)) > 0) {
                         redirect('order/modify_payment/'.$result_id);
                     } else {
-                        if($this->input->post('pay_method') == 'alipay')
+                        if ($this->input->post('pay_method') == 'alipay') {
                             redirect('order/pay_method/'.$result_id);
-                        else
+                        } else {
                             redirect('order/listpage/');
+                        }
                     }
-                }
-                else{
+                } else {
                     $this->session->set_flashdata('flashdata', '订单添加失败');
                     redirect('order/cart');
                 }
             }
-        }else{
+        } else {
             redirect('order/listpage');
         }
     }
@@ -540,8 +523,9 @@ class Order extends MY_Controller {
 
     public function addtocart()
     {
-        if($this->session->userdata('role') == 'admin')
+        if ($this->session->userdata('role') == 'admin') {
             exit('You are the admin.');
+        }
         $config = array(
             array(
                 'field'   => 'product_id',
@@ -556,12 +540,11 @@ class Order extends MY_Controller {
         );
 
         $this->form_validation->set_rules($config);
-        if ($this->form_validation->run() == FALSE)
-        {
+        if ($this->form_validation->run() == FALSE) {
             echo "{'info':'未知錯誤'}";
             return false;
         }
-        $check = $this->db->select('id')
+        $this->db->select('id')
             ->from('cart_product')
             ->where(
                 array(
@@ -571,7 +554,7 @@ class Order extends MY_Controller {
                 )
             );
         $check = $this->db->get()->result();
-        if(!empty($check)){
+        if (!empty($check)) {
             $return_data = array();
             $return_data['info'] = '错误:您的购物车存在此产品';
             exit(json_encode($return_data));
@@ -581,26 +564,26 @@ class Order extends MY_Controller {
             $this->input->post('quantity')
         );
         $return_data = array();
-        if($result)
+        if ($result) {
             $return_data['info'] = "成功添加至购物车！";
-        else
+        } else {
             $return_data['info'] = "未知錯誤！";
+        }
         echo json_encode($return_data);
         return false;
     }
 
     public function remove_from_cart($product_id)
     {
-        if($this->session->userdata('role') == 'admin')
+        if ($this->session->userdata('role') == 'admin') {
             exit('You are the admin.');
+        }
         $user_id = $this->session->userdata('current_user_id');
         $result = $this->db->from('cart_product')->where(array('product_id'=> $product_id, 'user_id' => $user_id))->delete();
-        if($result === true)
-        {
+        if ($result === true) {
             $this->session->set_flashdata('flashdata', '刪除成功');
             redirect('order/cart');
-        }else
-        {
+        } else {
             $this->session->set_flashdata('flashdata', '刪除失败');
             redirect('order/cart');
         }
@@ -609,8 +592,9 @@ class Order extends MY_Controller {
 
     public function cart()
     {
-        if($this->session->userdata('role') == 'admin')
+        if ($this->session->userdata('role') == 'admin') {
             exit('You are the admin.');
+        }
         $user_id = $this->session->userdata('current_user_id');
         $level = $this->session->userdata('level');
         $data = array();
@@ -625,10 +609,10 @@ class Order extends MY_Controller {
 
     public function add_by_cart()
     {
-        if($this->session->userdata('role') == 'admin')
+        if($this->session->userdata('role') == 'admin') {
             exit('You are the admin.');
-        if(!isset($_POST) || empty($_POST))
-        {
+        }
+        if(!isset($_POST) || empty($_POST)) {
             redirect('order/cart');
         }
         $this->session->set_userdata('token', md5(date('YmdHis').rand(0, 32000)) );
@@ -641,8 +625,7 @@ class Order extends MY_Controller {
         );
 
         $this->form_validation->set_rules($config);
-        if ($this->form_validation->run() == FALSE)
-        {
+        if ($this->form_validation->run() == FALSE) {
             redirect('order/cart');
         }
         $products = $this->getProducts($this->input->post('items'));
@@ -650,8 +633,7 @@ class Order extends MY_Controller {
         $data['products_quantity'] = $products;
         $user_id = $this->session->userdata('current_user_id');
         $data['products'] = $this->Morder->getCartInfo($user_id);
-        if(empty($data['products']))
-        {
+        if (empty($data['products'])) {
             redirect('order/listpage');
         }
         $data['str'] = $this->input->post('items');
@@ -665,8 +647,7 @@ class Order extends MY_Controller {
     {
         $str = explode("|", $str);
         $arr = array();
-        foreach($str as $k => $v)
-        {
+        foreach($str as $k => $v) {
             $value = substr($v, strpos($v, ",") + 1);
             $kvalue = substr($v, 0, strpos($v, ","));
             $arr[$kvalue] = $value;
@@ -676,14 +657,14 @@ class Order extends MY_Controller {
 
     public function pay_method($order_id)
     {
-        if($this->session->userdata('role') == 'admin')
+        if ($this->session->userdata('role') == 'admin') {
             exit('You are the admin.');
+        }
         $user_id = $this->session->userdata('current_user_id');
-        if(!$this->Morder->checkIsOwn($user_id, $order_id))
-        {
+        if (!$this->Morder->checkIsOwn($user_id, $order_id)) {
             exit('This Order is not yours');
         }
-        if($this->Morder->is_paid($order_id)) {
+        if ($this->Morder->is_paid($order_id)) {
             exit('This Order is paid!');
         }
         $this->session->set_userdata('token', md5(date('YmdHis').rand(0, 32000)) );
@@ -698,18 +679,18 @@ class Order extends MY_Controller {
     
     public function modify_payment($order_id)
     {
-        if($this->session->userdata('role') == 'admin')
+        if ($this->session->userdata('role') == 'admin') {
             exit('You are the admin.');
+        }
         $user_id = $this->session->userdata('current_user_id');
-        if(!$this->Morder->checkIsOwn($user_id, $order_id))
-        {
+        if (!$this->Morder->checkIsOwn($user_id, $order_id)) {
             exit('This Order is not yours');
         }
-        if($this->Morder->is_paid($order_id)) {
+        if ($this->Morder->is_paid($order_id)) {
 //            exit('This Order is paid!');
             redirect('order/listpage');
         }
-        if($this->Morder->has_coupon_volume($order_id)) {
+        if ($this->Morder->has_coupon_volume($order_id)) {
 //            exit('This Order has paid with coupon!');
             redirect('order/listpage');
         }
@@ -740,24 +721,24 @@ class Order extends MY_Controller {
                 redirect('order/listpage');
             }
         } else {
-            $data = array();
             $data = $this->Morder->getOrderPrice($order_id);
             $data->order_info = $this->Morder->objGetOrderInfo($order_id);
             $data->user_info = $this->Muser->objGetUserInfo($user_id);
             $this->load->view('templates/header_user', $data);
             $this->load->view('order/modify_payment', $data);
         }
-
     }
 
 
     public function pay($order_id)
     {
-        if($this->session->userdata('role') == 'admin')
+        if ($this->session->userdata('role') == 'admin') {
             exit('You are the admin.');
-        if(!$this->__validate_token())
+        }
+        if (!$this->__validate_token()) {
             exit('your operation is expired!');
-        if($this->Morder->is_paid($order_id)) {
+        }
+        if ($this->Morder->is_paid($order_id)) {
             exit('This Order is paid!');
         }
         require_once("application/third_party/alipay/lib/alipay_submit.class.php");
@@ -819,18 +800,20 @@ class Order extends MY_Controller {
 
     public function move_to_trash($order_id)
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
-        if($this->Morder->move_to_trash($order_id))
+        }
+        if ($this->Morder->move_to_trash($order_id)) {
             $this->session->set_flashdata('flashdata', '移除成功');
-        else
+        } else {
             $this->session->set_flashdata('flashdata', '移除失敗');
+        }
         redirect('order/listpage_admin');
     }
 
     private function calcPostFee($data, $address_info)
     {
-        if($data['is_post'] == 1) {
+        if ($data['is_post'] == 1) {
             $this->db->select('first_pay')
                 ->select('additional_pay')
                 ->select('first_weight')
@@ -843,7 +826,7 @@ class Order extends MY_Controller {
                     )
                 );
             $query = $this->db->get()->result();
-            if(empty($query)) {
+            if (empty($query)) {
                 $this->db->select('first_pay')
                     ->select('additional_pay')
                     ->select('first_weight')
@@ -857,7 +840,7 @@ class Order extends MY_Controller {
                     );
                 $query = $this->db->get()->result();
             }
-            if(empty($query)) {
+            if (empty($query)) {
                 $this->db->select('first_pay')
                     ->select('additional_pay')
                     ->select('first_weight')
@@ -880,14 +863,15 @@ class Order extends MY_Controller {
             //$quantity = $data['count'];
             //$product_id = $data['product_id'];
             $total_weight = 0;
-            foreach($data['products'] as $k => $v)
+            foreach ($data['products'] as $k => $v) {
                 $total_weight += $this->db->select('weight')
-                    ->from('products')
-                    ->where(array('id' => $k))
-                    ->get()
-                    ->result()[0]->weight * $v;
+                        ->from('products')
+                        ->where(array('id' => $k))
+                        ->get()
+                        ->result()[0]->weight * $v;
+            }
 
-            if($total_weight < $first_weight) {
+            if ($total_weight < $first_weight) {
                 return $first_pay;
             } else {
                 $additional_total_weight = $total_weight - $first_weight;
@@ -912,35 +896,29 @@ class Order extends MY_Controller {
     private function __get_search_str($search = '', $uid = '', $is_finish = null, $date_from = null, $date_to = null, $hour = null)
     {
         $where = '';
-        if($search != '')
-        {
+        if ($search != '') {
             $where .= " and (p.title like '%{$search}%' or p.feature like '%{$search}%' ) ";
         }
-        if($uid != '')
-        {
+        if ($uid != '') {
             $where .= " and o.user_id = {$uid} ";
         }
-        if($is_finish != null)
-        {
-            if($is_finish == '1')
+        if ($is_finish != null) {
+            if ($is_finish == '1') {
                 $where .= " and o.is_finished = true ";
-            elseif($is_finish == '0')
+            } elseif ($is_finish == '0') {
                 $where .= " and (o.is_pay = false or o.is_correct = false or is_finished = false) ";
+            }
         }
-        if($date_from != null && $date_to == null && $hour == null)
-        {
+        if ($date_from != null && $date_to == null && $hour == null) {
             $where = " and o.create_time between '{$date_from} 00:00:00' and now() ";
         }
-        if($date_to != null && $date_from == null && $hour == null)
-        {
+        if ($date_to != null && $date_from == null && $hour == null) {
             $where = " and o.create_time between '2014-12-30 00:00:00' and '{$date_to} 23:59:59' ";
         }
-        if($date_from != null && $date_to != null && $hour == null)
-        {
+        if ($date_from != null && $date_to != null && $hour == null) {
             $where = " and o.create_time between '{$date_from} 00:00:00' and '{$date_to} 23:59:59' ";
         }
-        if($hour != null)
-        {
+        if ($hour != null) {
             $where = " and o.create_time + interval '{$hour} hour' >= now() ";
         }
         return $where;
@@ -953,7 +931,7 @@ class Order extends MY_Controller {
         $alipay_config = alipay_config();
         $alipayNotify = new AlipayNotify($alipay_config);
         $verify_result = $alipayNotify->verifyReturn();
-        if($verify_result) {
+        if ($verify_result) {
             $out_trade_no = $_GET['out_trade_no'];
             $trade_no = $_GET['trade_no'];
             $trade_status = $_GET['trade_status'];
@@ -972,12 +950,10 @@ class Order extends MY_Controller {
                     echo "验证失败";
                     echo "</html>";
                 }
-            }
-            else {
+            } else {
                 echo "trade_status=".$_GET['trade_status'];
             }
-        }
-        else {
+        } else {
             echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head>";
             echo "<script>alert('你的支付信息将同步到系统！请等待管理员审核完成实物交易。');</script>";
             echo "<script>window.location.href=\"".base_url()."order/listpage\";</script>";
@@ -988,22 +964,23 @@ class Order extends MY_Controller {
 
 
     private function  __validate_token($token = 'token'){
-        if(isset($_POST[$token]) && $_POST[$token] != $this->session->userdata($token)){
+        if (isset($_POST[$token]) && $_POST[$token] != $this->session->userdata($token)) {
             $this->session->set_userdata('token', md5(date('YmdHis').rand(0, 32000)) );
             return false;
-        }else if(!isset($_POST[$token])){
+        } else if (!isset($_POST[$token])) {
             $this->session->set_userdata('token', md5(date('YmdHis').rand(0, 32000)) );
             return false;
-        }else if($_POST[$token] == $this->session->userdata($token)){
+        } else if ($_POST[$token] == $this->session->userdata($token)) {
             return true;
         }
     }
 
     private function __extra_verify()
     {
-        if($this->input->post('pay_method') != 'alipay'
-        && $this->input->post('pay_method') != 'offline')
+        if ($this->input->post('pay_method') != 'alipay'
+        && $this->input->post('pay_method') != 'offline') {
             exit('pay_method error!');
+        }
     }
 
 

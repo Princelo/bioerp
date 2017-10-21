@@ -1,9 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Alipay_Notify extends CI_Controller {
+class Alipay_Notify extends CI_Controller
+{
 
     public $db;
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('Morder', 'Morder');
         $this->db = $this->load->database('default', true);
@@ -18,32 +20,31 @@ class Alipay_Notify extends CI_Controller {
         $verify_result = $alipayNotify->verifyNotify();
         $result = false;
 
-        if($verify_result) {
+        if ($verify_result) {
             $out_trade_no = $_POST['out_trade_no'];
             $trade_no = $_POST['trade_no'];
             $trade_status = $_POST['trade_status'];
-            if($_POST['trade_status'] == 'TRADE_FINISHED') {
+            if ($_POST['trade_status'] == 'TRADE_FINISHED') {
                 $result = $this->Morder->updatePaymentStatus($out_trade_no);
-                if(!$result)
+                if (!$result) {
                     logResult('update payment error:'.$out_trade_no . "\\n");
+                }
+                logResult($out_trade_no . " " . $trade_no . " " . $trade_status . "\\n");
+            } elseif ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+                $result = $this->Morder->updatePaymentStatus($out_trade_no);
+                if (!$result) {
+                    logResult('update payment error:'.$out_trade_no . "\\n");
+                }
                 logResult($out_trade_no . " " . $trade_no . " " . $trade_status . "\\n");
             }
-            else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
-                $result = $this->Morder->updatePaymentStatus($out_trade_no);
-                if(!$result)
-                    logResult('update payment error:'.$out_trade_no . "\\n");
-                logResult($out_trade_no . " " . $trade_no . " " . $trade_status . "\\n");
-            }
-            if($result)
+            if ($result) {
                 echo "success";		//请不要修改或删除
-            else
+            } else {
                 echo 'fail';
-        }
-        else {
+            }
+        } else {
             echo "fail";
             logResult("notify fail out_trade_no:".$_POST['out_trade_no'].' trade_no:'.$_POST['trade_no']. ' trade_status:'.$_POST['trade_status']);
-            //if($_POST['trade_status'] == 'TRADE_SUCCESS')
-            //    logPayError();
         }
     }
 

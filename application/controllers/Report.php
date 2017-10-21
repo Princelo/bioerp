@@ -1,13 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include('application/libraries/MY_Controller.php');
-class Report extends MY_Controller {
+class Report extends MY_Controller
+{
 
     public $db;
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
-        if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user') {
             redirect('login');
+        }
         $this->load->model('Mproduct', 'Mproduct');
         $this->load->model('Mbill', 'Mbill');
         $this->load->model('Muser', 'Muser');
@@ -18,16 +21,18 @@ class Report extends MY_Controller {
 
     public function index()
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $this->load->view('templates/header_user');
         $this->load->view('report/index');
     }
 
     public function index_admin($offset = 0)
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $get_config = array(
             array(
                 'field' =>  'search',
@@ -36,7 +41,7 @@ class Report extends MY_Controller {
             ),
         );
         $this->form_validation->set_rules($get_config);
-        if($this->input->get('search', true) != '' ) {
+        if ($this->input->get('search', true) != '' ) {
             $search = $this->input->get('search', true);
             $search = $this->db->escape_like_str($search);
             $data = array();
@@ -57,7 +62,7 @@ class Report extends MY_Controller {
             $data['users'] = $this->Muser->objGetUserList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('report/listuser_admin', $data);
-        }else{
+        } else {
             $data = array();
             $config['base_url'] = base_url()."report/index_admin/";
             if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
@@ -81,27 +86,31 @@ class Report extends MY_Controller {
 
     public function index_user()
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $user_id = $this->input->get('user');
-        if(!is_numeric($user_id))
+        if (!is_numeric($user_id)) {
             exit('ERROR');
+        }
         $this->load->view('templates/header');
         $this->load->view('report/index_user');
     }
 
     public function index_zents()
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $this->load->view('templates/header');
         $this->load->view('report/index_zents');
     }
 
     public function index_sub($offset = 0)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $current_user_id = $this->session->userdata('current_user_id');
         $get_config = array(
             array(
@@ -111,7 +120,7 @@ class Report extends MY_Controller {
             ),
         );
         $this->form_validation->set_rules($get_config);
-        if($this->input->get('search', true) != '') {
+        if ($this->input->get('search', true) != '') {
             $search = $this->input->get('search', true);
             $search = $this->db->escape_like_str($search);
             $data = array();
@@ -133,7 +142,7 @@ class Report extends MY_Controller {
             $data['users'] = $this->Muser->objGetSubUserList($where, $iwhere, $order, $limit, 2);
             $this->load->view('templates/header_user', $data);
             $this->load->view('report/index_sub', $data);
-        }else{
+        } else {
             $data = array();
             $config['base_url'] = base_url()."report/index_sub/";
             if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
@@ -156,13 +165,16 @@ class Report extends MY_Controller {
 
     public function query_sub($id)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $pid = $this->session->userdata('current_user_id');
-        if(!is_numeric($id))
+        if (!is_numeric($id)) {
             exit('ERROR');
-        if(!$this->Muser->isAccessibleSons($pid, $id))
+        }
+        if (!$this->Muser->isAccessibleSons($pid, $id)) {
             exit('You are not the Superior of this user');
+        }
         $data['id'] = $id;
         $this->load->view('templates/header_user');
         $this->load->view('report/query_sub', $data);
@@ -170,14 +182,17 @@ class Report extends MY_Controller {
 
     public function listpage_sub($offset = 0)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $user_id = $this->input->get('user');
-        if(!is_numeric($user_id))
+        if (!is_numeric($user_id)) {
             exit('ERROR');
+        }
         $pid = $this->session->userdata('current_user_id');
-        if(!$this->Muser->isAccessibleSons($pid, $user_id))
+        if (!$this->Muser->isAccessibleSons($pid, $user_id)) {
             exit('You are not the Superior of this user');
+        }
         $get_config = array(
             array(
                 'field' => 'is_filter',
@@ -257,10 +272,9 @@ class Report extends MY_Controller {
         $interval = date_diff(new \DateTime($date_from), new \DateTime($date_to), true);
         $date_from = strtotime($date_from);
         $date_to = strtotime($date_to);
-        if($this->input->get('report_type', true) != '' &&
+        if ($this->input->get('report_type', true) != '' &&
             $date_from != '' && $date_to != ''
-        )
-        {
+        ) {
             $date_from = date('Y-m-d', $date_from);
             $date_to = date('Y-m-d', $date_to);
             //$search = $this->db->escape_like_str($search);
@@ -274,8 +288,7 @@ class Report extends MY_Controller {
             //$config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
 
             $config['per_page'] = 30;
-            switch($report_type)
-            {
+            switch($report_type) {
                 case "day":
                     $config['total_rows'] = $interval->days + 1;
                     //if($this->input->get('is_filter') == 'on')
@@ -299,35 +312,37 @@ class Report extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             $where = '';
             $order = '';
-            switch($report_type)
-            {
+            switch($report_type) {
                 case 'day':
-                    if($this->input->get('is_filter') == 'on') {
+                    if ($this->input->get('is_filter') == 'on') {
                         $data['bills'] = $this->Mbill->objGetBillsOfDayWithFilter($date_from, $date_to, $user_id, $limit);
                         $config['total_rows'] = $this->Mbill->objGetBillsOfDayWithFilterCount($date_from, $date_to, $user_id);
                         $this->pagination->initialize($config);
                         $data['page'] = $this->pagination->create_links();
-                    }else
+                    } else {
                         $data['bills'] = $this->Mbill->objGetBillsOfDay($date_from, $date_to, $user_id, $limit);
+                    }
                     $this->load->view('templates/header_user', $data);
                     $this->load->view('report/listpage_day', $data);
                     break;
                 case 'month':
-                    if($this->input->get('is_filter') == 'on') {
+                    if ($this->input->get('is_filter') == 'on') {
                         $data['bills'] = $this->Mbill->objGetBillsOfMonthWithFilter($date_from, $date_to, $user_id, $limit);
                         $config['total_rows'] = $this->Mbill->objGetBillsOfMonthWithFilterCount($date_from, $date_to, $user_id);
                         $this->pagination->initialize($config);
                         $data['page'] = $this->pagination->create_links();
-                    } else
+                    } else {
                         $data['bills'] = $this->Mbill->objGetBillsOfMonth($date_from, $date_to, $user_id, $limit);
+                    }
                     $this->load->view('templates/header_user', $data);
                     $this->load->view('report/listpage_month', $data);
                     break;
                 case 'year':
-                    if($this->input->get('is_filter') == 'on')
+                    if ($this->input->get('is_filter') == 'on') {
                         $data['bills'] = $this->Mbill->objGetBillsOfYearWithFilter($date_from, $date_to, $user_id);
-                    else
+                    } else {
                         $data['bills'] = $this->Mbill->objGetBillsOfYear($date_from, $date_to, $user_id);
+                    }
                     $this->load->view('templates/header_user', $data);
                     $this->load->view('report/listpage_year', $data);
                     break;
@@ -336,7 +351,7 @@ class Report extends MY_Controller {
             }
             //$this->load->view('templates/header', $data);
             //$this->load->view('report/listpage', $data);
-        }else{
+        } else {
             $this->session->set_flashdata('flashdata', '参数错误');
             redirect('report/index');
         }
@@ -344,11 +359,13 @@ class Report extends MY_Controller {
 
     public function listpage_user($offset = 0)
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $user_id = $this->input->get('user');
-        if(!is_numeric($user_id))
+        if (!is_numeric($user_id)) {
             exit('ERROR');
+        }
         $get_config = array(
             array(
                 'field' => 'is_filter',
@@ -412,20 +429,16 @@ class Report extends MY_Controller {
         $interval = date_diff(new \DateTime($date_from), new \DateTime($date_to), true);
         $date_from = strtotime($date_from);
         $date_to = strtotime($date_to);
-        if($this->input->get('report_type', true) != '' &&
-            $date_from != '' && $date_to != ''
-        )
-        {
+        if ($this->input->get('report_type', true) != '' &&
+            $date_from != '' && $date_to != '' ) {
             $date_from = date('Y-m-d', $date_from);
             $date_to = date('Y-m-d', $date_to);
             $data = array();
             if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
             $config['base_url'] = base_url()."report/listpage_user/";
             $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-
             $config['per_page'] = 30;
-            switch($report_type)
-            {
+            switch($report_type) {
                 case "day":
                     $config['total_rows'] = $interval->days + 1;
                     break;
@@ -443,8 +456,7 @@ class Report extends MY_Controller {
             $data['page'] = $this->pagination->create_links();
             $limit = '';
             $limit .= " limit {$config['per_page']} offset {$offset} ";
-            switch($report_type)
-            {
+            switch($report_type) {
                 case 'day':
                     $data['bills'] = $this->Mbill->objGetBillsOfDay($date_from, $date_to, $user_id, $limit);
                     $this->load->view('templates/header', $data);
@@ -458,7 +470,7 @@ class Report extends MY_Controller {
                 default:
                     break;
             }
-        }else{
+        } else {
             $this->session->set_flashdata('flashdata', '参数错误');
             redirect('report/index_admin');
         }
@@ -466,8 +478,9 @@ class Report extends MY_Controller {
 
     public function listpage($offset = 0)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $user_id = $this->session->userdata('current_user_id', true);
         $get_config = array(
             array(
@@ -548,10 +561,8 @@ class Report extends MY_Controller {
         $interval = date_diff(new \DateTime($date_from), new \DateTime($date_to), true);
         $date_from = strtotime($date_from);
         $date_to = strtotime($date_to);
-        if($this->input->get('report_type', true) != '' &&
-            $date_from != '' && $date_to != ''
-        )
-        {
+        if ($this->input->get('report_type', true) != '' &&
+            $date_from != '' && $date_to != '' ) {
             $date_from = date('Y-m-d', $date_from);
             $date_to = date('Y-m-d', $date_to);
             //$search = $this->db->escape_like_str($search);
@@ -561,8 +572,7 @@ class Report extends MY_Controller {
             $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
 
             $config['per_page'] = 30;
-            switch($report_type)
-            {
+            switch($report_type) {
                 case "day":
                     $config['total_rows'] = $interval->days + 1;
                     break;
@@ -585,8 +595,7 @@ class Report extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             $where = '';
             $order = '';
-            switch($report_type)
-            {
+            switch($report_type) {
                 case 'day':
                     $data['bills'] = $this->Mbill->objGetBillsOfDay($date_from, $date_to, $user_id, $limit);
                     $this->load->view('templates/header_user', $data);
@@ -608,7 +617,7 @@ class Report extends MY_Controller {
             }
             //$this->load->view('templates/header', $data);
             //$this->load->view('report/listpage', $data);
-        }else{
+        } else {
             $this->session->set_flashdata('flashdata', '参数错误');
             redirect('report/index');
         }
@@ -616,8 +625,9 @@ class Report extends MY_Controller {
 
     public function listpage_admin($offset = 0)
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $get_config = array(
             array(
                 'field' => 'is_filter',
@@ -697,10 +707,9 @@ class Report extends MY_Controller {
         $interval = date_diff(new \DateTime($date_from), new \DateTime($date_to), true);
         $date_from = strtotime($date_from);
         $date_to = strtotime($date_to);
-        if($this->input->get('report_type', true) != '' &&
+        if ($this->input->get('report_type', true) != '' &&
             $date_from != '' && $date_to != ''
-        )
-        {
+        ) {
             $date_from = date('Y-m-d', $date_from);
             $date_to = date('Y-m-d', $date_to);
             //$search = $this->db->escape_like_str($search);
@@ -717,8 +726,7 @@ class Report extends MY_Controller {
             //$config['total_rows'] = $this->Mproduct->intGetProductsCount($where);
 
             $config['per_page'] = 30;
-            switch($report_type)
-            {
+            switch($report_type) {
                 case "day":
                     $config['total_rows'] = $interval->days + 1;
                     //if($this->input->get('is_filter') == 'on')
@@ -747,8 +755,7 @@ class Report extends MY_Controller {
             $limit .= " limit {$config['per_page']} offset {$offset} ";
             $where = '';
             $order = '';
-            switch($report_type)
-            {
+            switch($report_type) {
                 case 'day':
                     $data['bills'] = $this->Mbill->objGetZentsBillsOfDay($date_from, $date_to, $limit);
                     $this->load->view('templates/header', $data);
@@ -779,7 +786,7 @@ class Report extends MY_Controller {
             }
             //$this->load->view('templates/header', $data);
             //$this->load->view('report/listpage', $data);
-        }else{
+        } else {
             $this->session->set_flashdata('flashdata', '参数错误');
             redirect('report/index_zents');
         }
@@ -788,14 +795,14 @@ class Report extends MY_Controller {
 
     public function listpage_withdraw($offset = 0)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $date_from = $this->input->get('date_from', true);
         $date_to = $this->input->get('date_to', true);
         $data['date_from'] = $date_from;
         $data['date_to'] = $date_to;
-        if( $date_from != '' && $date_to != '' )
-        {
+        if ( $date_from != '' && $date_to != '') {
             $date_from = date('Y-m-d', strtotime($date_from));
             $date_to = date('Y-m-d', strtotime($date_to));
             //$search = $this->db->escape_like_str($search);
@@ -815,7 +822,7 @@ class Report extends MY_Controller {
             $data['logs'] = $this->Mbill->objGetWithdrawLogs($where, $date_from, $date_to, $limit);
             $this->load->view('templates/header_user', $data);
             $this->load->view('report/withdraw_log', $data);
-        }else {
+        } else {
             $this->session->set_flashdata('flashdata', '参数错误');
             redirect('report/withdraw');
         }
@@ -823,8 +830,9 @@ class Report extends MY_Controller {
 
     public function withdraw()
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $this->load->view('templates/header_user');
         $this->load->view('report/withdraw');
     }
@@ -834,10 +842,12 @@ class Report extends MY_Controller {
     {
         $date_from = $this->input->get('date_from', true);
         $date_to = $this->input->get('date_to', true);
-        if ($date_from != '')
+        if ($date_from != '') {
             $date_from = date('Y-m-d', strtotime($date_from));
-        if ($date_to != '')
+        }
+        if ($date_to != '') {
             $date_to = date('Y-m-d', strtotime($date_to));
+        }
         //$search = $this->db->escape_like_str($search);
         $data = array();
         $data['date_from'] = $date_from;
@@ -866,8 +876,9 @@ class Report extends MY_Controller {
     private function __get_search_str($search = '')
     {
         $where = '';
-        if($search != '')
+        if ($search != '') {
             $where .= " and (u.username like '%{$search}%' or u.name like '%{$search}%' ) ";
+        }
         return $where;
     }
 
@@ -876,9 +887,8 @@ class Report extends MY_Controller {
         $report_type = $this->input->post('report_type');
         $date_from = $this->input->post('date_from');
         $date_to = $this->input->post('date_to');
-        if($report_type != '' &&
-            $date_from != '' && $date_to != ''
-        ) {
+        if ($report_type != '' &&
+            $date_from != '' && $date_to != '' ) {
             $this->load->library('PHPExcel');
             $objPHPExcel = new PHPExcel();
 
@@ -964,22 +974,23 @@ class Report extends MY_Controller {
                         ->setCellValue("G$i", cny($v->extra_return_profit_self2parent))
                         ->setCellValue("H$i", "￥".bcadd(money($v->normal_return_profit_self2parent), money($v->extra_return_profit_self2parent), 2 ))
                         ->setCellValue("I$i", cny($v->normal_return_profit_self2gparent));
-                    if(intval($v->pid) > 0)
+                    if (intval($v->pid) > 0) {
                         $objPHPExcel->setActiveSheetIndex(0)
                             ->setCellValue("J$i", $v->pname."(".$v->pusername."/".$v->pid.")");
-                    else
+                    } else {
                         $objPHPExcel->setActiveSheetIndex(0)
                             ->setCellValue("J$i", "无推荐人");
-                    if(intval($v->gpid) > 0)
+                    }
+                    if(intval($v->gpid) > 0) {
                         $objPHPExcel->setActiveSheetIndex(0)
                             ->setCellValue("K$i", $v->gpname."(".$v->gpusername."/".$v->gpid.")");
-                    else
+                    } else {
                         $objPHPExcel->setActiveSheetIndex(0)
                             ->setCellValue("K$i", "无跨界推荐人");
+                    }
 
                 }
             } else {
-                // Add some data
                 $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValue('A1', $title)
                     ->setCellValue('A2', '日期')
@@ -991,8 +1002,7 @@ class Report extends MY_Controller {
                     ->setCellValue('F2', '收益总量')
                     ->setCellValue('G2', '订单数');
                 // Miscellaneous glyphs, UTF-8
-                foreach($bills as $k => $v)
-                {
+                foreach($bills as $k => $v) {
                     $i = $k + 3;
                     $objPHPExcel->setActiveSheetIndex(0)
                         ->setCellValue("A$i", $v->date)

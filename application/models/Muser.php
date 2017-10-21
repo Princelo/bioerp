@@ -24,7 +24,6 @@ class Muser extends CI_Model
                 and is_valid = true
         ";
         $binds = array($login_id, $password);
-        $data = array();
         $query = $this->db->query($query_sql, $binds);
         if($query->result()[0]->count > 0 ) {
             $this->session->set_userdata('role', 'user');
@@ -38,11 +37,11 @@ class Muser extends CI_Model
                 where
                 username = ?
                 and password = ?
-        ";
+            ";
             $binds = array($login_id, $password);
             $data = array();
             $query = $this->db->query($query_sql, $binds);
-            if($query->result()[0]->count > 0 ) {
+            if ($query->result()[0]->count > 0) {
                 $this->session->set_userdata('role', 'admin');
                 return true;
             } else {
@@ -55,26 +54,26 @@ class Muser extends CI_Model
         $update_data = array("password" => $password);
         $update_sql =  $this->db->update_string('users', $update_data, array("id"=>$login_id));
         $result = $this->db->query($update_sql);
-        if($result === true)
+        if ($result === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function boolUpdatePasswordAdmin($password, $login_id){
         $update_data = array("password" => $password);
         $update_sql =  $this->db->update_string('admins', $update_data, array("id"=>$login_id));
         $result = $this->db->query($update_sql);
-        if($result === true)
+        if ($result === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function addRootUser($main_data)
     {
-        $current_user_id = $this->session->userdata('current_user_id');
-        $now = now();
         $insert_sql_user = "";
         $insert_sql_user .= "
             insert into users
@@ -85,10 +84,15 @@ class Muser extends CI_Model
             update users set initiation = true where id = currval('users_id_seq');
         ";
         $binds = array(
-            $main_data['username'], $main_data['password'],
+            $main_data['username'],
+            $main_data['password'],
             $main_data['name'],
-            $main_data['citizen_id'], $main_data['mobile_no'], $main_data['wechat_id'], $main_data['qq_no'],
-            $main_data['is_valid'],$main_data['bank_info']
+            $main_data['citizen_id'],
+            $main_data['mobile_no'],
+            $main_data['wechat_id'],
+            $main_data['qq_no'],
+            $main_data['is_valid'],
+            $main_data['bank_info']
         );
 
         $this->db->trans_start();
@@ -99,9 +103,9 @@ class Muser extends CI_Model
 
         $result = $this->db->trans_status();
 
-        if($result === true){
+        if ($result === true) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -130,8 +134,9 @@ class Muser extends CI_Model
         ";
         $binds = array(
             $main_data['username'], $main_data['password'], $main_data['name'],
-            $main_data['citizen_id'], $main_data['mobile_no'], $main_data['wechat_id'], $main_data['qq_no'],
-            $current_user_id, $main_data['is_valid'],$main_data['bank_info']
+            $main_data['citizen_id'], $main_data['mobile_no'], $main_data['wechat_id'],
+            $main_data['qq_no'], $current_user_id, $main_data['is_valid'],
+            $main_data['bank_info']
         );
 
         $this->db->trans_start();
@@ -146,9 +151,9 @@ class Muser extends CI_Model
 
         $result = $this->db->trans_status();
 
-        if($result === true){
+        if ($result === true) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -173,10 +178,11 @@ class Muser extends CI_Model
         ";
         $binds = array($username);
         $result = $this->db->query($query_sql, $binds);
-        if($result->result()[0]->id > 0)
+        if ($result->result()[0]->id > 0) {
             return $result->result()[0]->id;
-        else
+        } else {
             exit('error');
+        }
     }
 
     public function intGetCurrentAdminId($username)
@@ -187,10 +193,11 @@ class Muser extends CI_Model
         ";
         $binds = array($username);
         $result = $this->db->query($query_sql, $binds);
-        if($result->result()[0]->id > 0)
+        if ($result->result()[0]->id > 0) {
             return $result->result()[0]->id;
-        else
+        } else {
             exit('error');
+        }
     }
 
     public function intGetUsersCount($where = '')
@@ -201,9 +208,9 @@ class Muser extends CI_Model
             {$where};
         ";
         $query = $this->db->query($query_sql);
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             $count = $query->row()->count;
-        }else{
+        } else {
             return 0;
         }
 
@@ -254,16 +261,15 @@ class Muser extends CI_Model
         ";
         $data = array();
         $query = $this->db->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
-        }else{
+        } else {
             return 0;
         }
         $query->free_result();
 
-        //debug($data);
         return $data;
     }
 
@@ -281,9 +287,8 @@ class Muser extends CI_Model
         $binds = array($id);
         $data = array();
         $query = $this->db->query($query_sql, $binds);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             return $query->result()[0];
-        }else{
         }
         $query->free_result();
 
@@ -302,9 +307,9 @@ class Muser extends CI_Model
 
         $result = $this->db->trans_status();
 
-        if($result === true) {
+        if ($result === true) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -327,9 +332,9 @@ class Muser extends CI_Model
         $this->db->trans_complete();
         $result = $this->db->trans_status();
 
-        if($result === true) {
+        if ($result === true) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -338,10 +343,11 @@ class Muser extends CI_Model
     {
         $query_sql = "select real_balance::decimal from users where id = ?";
         $query = $this->db->query($query_sql, [$id]);
-        if (floatval($query->result()[0]->balance) >= floatval($volume))
+        if (floatval($query->result()[0]->balance) >= floatval($volume)) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function objGetSubUserList($where = '', $iwhere = '', $order = '', $limit = '', $depth = 1)
@@ -373,11 +379,11 @@ class Muser extends CI_Model
                 {$limit}
         ";
         $query = $this->db->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
-        }else{
+        } else {
             return 0;
         }
         $query->free_result();
@@ -409,10 +415,9 @@ class Muser extends CI_Model
                 HAVING  (COUNT(p.id) - (sub_tree.idepth + 1)) = 1
                 limit 1;
         ";
-        //debug($query_sql);exit;
         $query = $this->db->query($query_sql);
         $count = 0;
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             $count = $query->row()->count;
         }
 
@@ -435,15 +440,16 @@ class Muser extends CI_Model
         ";
         $binds = array($pid, $id);
         $query = $this->db->query($query_sql, $binds);
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             $count = $query->row()->count;
-        }else{
+        } else {
             return false;
         }
 
         $query->free_result();
-        if($count > 0)
+        if ($count > 0) {
             return true;
+        }
     }
 
     public function getSuperiorInfo($id)
@@ -453,13 +459,11 @@ class Muser extends CI_Model
         ";
         $binds = array($id);
         $query = $this->db->query($query_sql, $binds);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             $data = $query->result()[0];
-        }else{
         }
         $query->free_result();
 
-        //debug($data);
         return $data;
     }
 
@@ -481,12 +485,12 @@ class Muser extends CI_Model
 
         $return = array();
         $max_dept = 1;
-        foreach($data as $k => $v) {
+        foreach ($data as $k => $v) {
             if ($v->dept > $max_dept) {
                 $max_dept = $v->dept;
             }
         }
-        foreach($data as $k => $v) {
+        foreach ($data as $k => $v) {
             $return[$k] = [
                 'id' => $v->id,
                 'parent'=>$v->pid == 0 ? '#':$v->pid,
@@ -522,7 +526,7 @@ class Muser extends CI_Model
             $query = $this->db->query($query_sql);
             $data = $query->result();
             $return = array();
-            foreach($data as $k => $v) {
+            foreach ($data as $k => $v) {
                 $return[$k] = [
                     'id' => $v->id,
                     'parent'=>$k == 0 ? '#':$v->pid,  // the first record is the root
@@ -548,7 +552,7 @@ class Muser extends CI_Model
                 exit;
             }
             $return = array();
-            foreach($data as $k => $v) {
+            foreach ($data as $k => $v) {
                 $return[$k] = [
                     'id' => $v->id,
                     'parent'=> $v->pid,
@@ -570,7 +574,7 @@ class Muser extends CI_Model
                 $max_dept = $v->dept;
             }
         }
-        foreach($data as $k => $v) {
+        foreach ($data as $k => $v) {
             if($v->dept == $max_dept && $v->id == $id) {
                 return true;
             }

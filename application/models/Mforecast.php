@@ -23,7 +23,7 @@ class Mforecast extends CI_Model
         ";
         $data = array();
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -46,7 +46,7 @@ class Mforecast extends CI_Model
         ";
         $query = $this->objDB->query($query_sql);
         $data = array();
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             $data = $query->result()[0];
         }
         $query->free_result();
@@ -58,10 +58,11 @@ class Mforecast extends CI_Model
     {
         $update_sql = $this->objDB->update_string('forecasts', array('content'=>$forecast), array('id'=>1));
         $result = $this->objDB->query($update_sql);
-        if($result === true)
+        if ($result === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
 }

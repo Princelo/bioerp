@@ -102,16 +102,6 @@
                     <? } ?>
                 </table>
                 <div class="page"><?=$page;?></div>
-                <script>
-                    /*function myconfirm(id){
-                     if (confirm("are you sure?")){
-                     window.location.href = "<?=base_url()?>index.php/unvadmin/singerdelete/"+id;
-                     } else {
-
-                     }
-                     }*/
-                </script>
-
 
             </div>
 

@@ -1,8 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Login extends CI_Controller
+{
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->load->database();
         $this->load->model('Muser', 'Muser');
@@ -13,9 +15,9 @@ class Login extends CI_Controller {
 
     public function index($error = '')
     {
-        if($this->session->userdata('user') != ""){
+        if ($this->session->userdata('user') != "") {
             redirect('forecast/index');
-        }else{
+        } else {
             $this->session->sess_destroy();
         }
         $vals = array(
@@ -39,24 +41,29 @@ class Login extends CI_Controller {
         $this->db->query($query);
         $data['captcha'] = $cap['image'];
         $data['error'] = $error;
-        $this->load->view('login/index', $data);
+        if (is_mobile()) {
+            $this->load->view('mobile/login/index', $data);
+        } else {
+            $this->load->view('login/index', $data);
+        }
     }
 
     public function check(){
-        if(isset($_POST['captcha']) && isset($_POST['login_id']) && isset($_POST['password'])){
+        if (isset($_POST['captcha']) && isset($_POST['login_id']) && isset($_POST['password'])) {
             $_POST['password'] = md5($_POST['password']);
-            if($this->__validate_captcha() === true){
-                if($this->Muser->boolVerify($_POST['login_id'], $_POST['password'])){
+            if ($this->__validate_captcha() === true) {
+                if ($this->Muser->boolVerify($_POST['login_id'], $_POST['password'])) {
                     $this->session->set_userdata('user', $this->input->post('login_id'));
-                    if ($this->session->userdata('role') == 'user')
+                    if ($this->session->userdata('role') == 'user') {
                         $this->session->set_userdata('current_user_id', $this->Muser->intGetCurrentUserId($this->input->post('login_id')));
-                    else
+                    } else {
                         $this->session->set_userdata('current_user_id', $this->Muser->intGetCurrentAdminId($this->input->post('login_id')));
+                    }
                     redirect('forecast/index', 'refresh');
-                }else{
+                } else {
                     $this->index('用戶或密码错误');
                 }
-            }else{
+            } else {
                 $this->index('验证码错误');
             }
         }

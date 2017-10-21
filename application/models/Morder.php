@@ -93,7 +93,7 @@ class Morder extends CI_Model
         ";
         $data = array();
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -114,10 +114,11 @@ class Morder extends CI_Model
             $user_id, $product_id, $quantity
         );
         $result = $this->objDB->query($insert_sql, $binds);
-        if($result === true)
+        if ($result === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function getCartInfo($user_id)
@@ -140,7 +141,7 @@ class Morder extends CI_Model
         ";
         $data = array();
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -197,14 +198,15 @@ class Morder extends CI_Model
             $main_data['is_post'], $post_fee, $main_data['pay_method']
         );
 
-        $insert_sql_order_product = "
-            insert into order_product(order_id, product_id, quantity) values";
+        $insert_sql_order_product = "insert into order_product(order_id, product_id, quantity) values";
         foreach($main_data['products'] as $k => $v)
         {
-            if(!is_numeric($k))
+            if(!is_numeric($k)) {
                 exit;
-            if(!is_numeric($v))
+            }
+            if(!is_numeric($v)) {
                 exit;
+            }
             $insert_sql_order_product .= "(currval('orders_id_seq'), ".$k . ", " . $v . " ),";
         }
         $insert_sql_order_product = substr($insert_sql_order_product, 0, -1);
@@ -212,8 +214,7 @@ class Morder extends CI_Model
 
         $product_id_implode_by_comma = "";
 
-        foreach($main_data['products'] as $k => $v)
-        {
+        foreach ($main_data['products'] as $k => $v) {
             $product_id_implode_by_comma .= $k . ",";
         }
         $product_id_implode_by_comma = substr($product_id_implode_by_comma, 0, -1);
@@ -223,8 +224,7 @@ class Morder extends CI_Model
         $temp_original_amounts_str = "";
 
 
-        foreach($main_data['products'] as $k => $v)
-        {
+        foreach ($main_data['products'] as $k => $v) {
             $temp_amounts_str .= "coalesce(pr{$k}.discount_price::decimal, 0) * {$v} +";
             $temp_amounts_str_2 .= " left join price pr{$k} on pr{$k}.product_id = {$k} ";
             $temp_original_amounts_str .= "coalesce(pr{$k}.price::decimal, 0) * {$v} +";
@@ -244,8 +244,7 @@ class Morder extends CI_Model
             ;
         ";
         $insert_sql_product_amount = [];
-        foreach($main_data['products'] as $product_id => $quantity)
-        {
+        foreach ($main_data['products'] as $product_id => $quantity) {
             $product_id = intval($product_id);
             $insert_sql_product_amount[] = "
             insert into product_amount (amount, original_amount, order_id, product_id, quantity)
@@ -270,8 +269,9 @@ class Morder extends CI_Model
         $this->objDB->query($insert_sql_order, $binds_order);
         $this->objDB->query($insert_sql_order_product);
         $this->objDB->query($insert_sql_amount);
-        foreach($insert_sql_product_amount as $v)
+        foreach ($insert_sql_product_amount as $v) {
             $this->objDB->query($v);
+        }
         $this->objDB->query($clean_cart_sql);
         $inserted_order_id_result = $this->objDB->query(
             "select currval('orders_id_seq') id;"
@@ -281,14 +281,14 @@ class Morder extends CI_Model
 
         $result = $this->objDB->trans_status();
 
-        if($result === true){
+        if ($result === true) {
             if($inserted_order_id_result->num_rows() > 0) {
                 $inserted_order_id = $inserted_order_id_result->row()->id;
             }
 
             $inserted_order_id_result->free_result();
             return $inserted_order_id;
-        }else{
+        } else {
             return 0;
         }
     }
@@ -306,7 +306,7 @@ class Morder extends CI_Model
         $query = $this->objDB->query($query_sql);
 
 
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             $count = $query->row()->count;
         }
 
@@ -657,9 +657,9 @@ class Morder extends CI_Model
 
         $result = $this->objDB->trans_status();
 
-        if($result === true){
+        if ($result === true) {
             return true;
-        }else{
+        } else {
             return false;
         }
 
@@ -679,23 +679,24 @@ class Morder extends CI_Model
         ";
         $price = $this->getOrderPrice($order_id);
         $query = $this->objDB->query($update_sql, [$price->total_fee, $price->pay_amt_without_post_fee, $order_id]);
-        if ($query === true)
+        if ($query === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function checkIsOwn($user_id, $order_id)
     {
         $query_sql = "select count(1) from orders where id = ? and user_id = ?;";
         $binds = array($order_id, $user_id);
-        $data = array();
         $query = $this->objDB->query($query_sql, $binds);
         if($query->num_rows() > 0){
-            if($query->result()[0]->count > 0 )
+            if($query->result()[0]->count > 0) {
                 return true;
-            else
+            } else {
                 return false;
+            }
         }else{
             return false;
         }
@@ -718,10 +719,11 @@ class Morder extends CI_Model
         $update_sql = $this->objDB->update_string('orders', $data, $where);
         $query = $this->objDB->query($update_sql);
 
-        if($query === true)
+        if ($query === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function is_paid( $order_id )
@@ -737,13 +739,13 @@ class Morder extends CI_Model
                 and id = ?
         ";
         $binds = array($order_id);
-        $data = array();
         $query = $this->objDB->query($query_sql, $binds);
         if($query->num_rows() > 0){
-            if($query->result()[0]->count > 0 )
+            if($query->result()[0]->count > 0) {
                 return true;
-            else
+            } else {
                 return false;
+            }
         }else{
             return false;
         }
@@ -763,13 +765,13 @@ class Morder extends CI_Model
                 and id = ?
         ";
         $binds = array($order_id);
-        $data = array();
         $query = $this->objDB->query($query_sql, $binds);
         if($query->num_rows() > 0){
-            if($query->result()[0]->count > 0 )
+            if($query->result()[0]->count > 0) {
                 return true;
-            else
+            } else {
                 return false;
+            }
         }else{
             return false;
         }
@@ -846,10 +848,11 @@ class Morder extends CI_Model
 
         $result = $this->objDB->trans_status();
 
-        if($result === true)
+        if ($result === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function updateOrderTradeNo($trade_no, $order_id)
@@ -863,10 +866,11 @@ class Morder extends CI_Model
         $update_sql = $this->objDB->update_string('orders', $data, $where);
         $query = $this->objDB->query($update_sql);
 
-        if($query === true)
+        if ($query === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
 
@@ -881,10 +885,11 @@ class Morder extends CI_Model
         $update_sql = $this->objDB->update_string('orders', $data, $where);
         $query = $this->objDB->query($update_sql);
 
-        if($query === true)
+        if ($query === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
 }

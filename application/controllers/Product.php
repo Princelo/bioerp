@@ -1,13 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include('application/libraries/MY_Controller.php');
-class Product extends MY_Controller {
-
+class Product extends MY_Controller
+{
     public $db;
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
-        if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user') {
             redirect('login');
+        }
         $this->load->model('Mproduct', 'Mproduct');
         $this->load->model('Muser', 'Muser');
         $this->load->library('form_validation');
@@ -17,8 +19,9 @@ class Product extends MY_Controller {
 
     public function listpage_admin($offset = 0)
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $get_config = array(
             array(
                 'field' =>  'search',
@@ -37,12 +40,11 @@ class Product extends MY_Controller {
             ),
         );
         $this->form_validation->set_rules($get_config);
-        if($this->input->get('search', true) != '' ||
+        if ($this->input->get('search', true) != '' ||
             $this->input->get('price_low', true) != '' ||
             $this->input->get('price_high', true) != '' ||
             $this->input->get('category', true) != ''
-        )
-        {
+        ) {
             $search = $this->input->get('search', true);
             $search = $this->db->escape_like_str($search);
             $price_low = $this->input->get('price_low', true);
@@ -66,7 +68,7 @@ class Product extends MY_Controller {
             $data['products'] = $this->Mproduct->objGetProductList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('product/listpage_admin', $data);
-        }else{
+        } else {
             $data = array();
             $config['base_url'] = base_url()."product/listpage_admin/";
             if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
@@ -88,8 +90,9 @@ class Product extends MY_Controller {
 
     public function listpage_admin_invalid($offset = 0)
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $get_config = array(
             array(
                 'field' =>  'search',
@@ -108,12 +111,11 @@ class Product extends MY_Controller {
             ),
         );
         $this->form_validation->set_rules($get_config);
-        if($this->input->get('search', true) != '' ||
+        if ($this->input->get('search', true) != '' ||
             $this->input->get('price_low', true) != '' ||
             $this->input->get('price_high', true) != '' ||
             $this->input->get('category', true) != ''
-        )
-        {
+        ) {
             $search = $this->input->get('search', true);
             $search = $this->db->escape_like_str($search);
             $price_low = $this->input->get('price_low', true);
@@ -137,7 +139,7 @@ class Product extends MY_Controller {
             $data['products'] = $this->Mproduct->objGetProductList($where, $order, $limit);
             $this->load->view('templates/header', $data);
             $this->load->view('product/listpage_admin', $data);
-        }else{
+        } else {
             $data = array();
             $where = ' and p.is_valid = false ';
             $order = '';
@@ -158,8 +160,9 @@ class Product extends MY_Controller {
 
     public function listpage($offset = 0)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are the admin.');
+        }
         $get_config = array(
             array(
                 'field' =>  'search',
@@ -178,12 +181,11 @@ class Product extends MY_Controller {
             ),
         );
         $this->form_validation->set_rules($get_config);
-        if($this->input->get('search', true) != '' ||
+        if ($this->input->get('search', true) != '' ||
             $this->input->get('price_low', true) != '' ||
             $this->input->get('price_high', true) != '' ||
             $this->input->get('category', true) != ''
-        )
-        {
+        ) {
             $search = $this->input->get('search', true);
             $search = $this->db->escape_like_str($search);
             $price_low = $this->input->get('price_low', true);
@@ -207,7 +209,7 @@ class Product extends MY_Controller {
             $data['products'] = $this->Mproduct->objGetProductList($where, $order, $limit);
             $this->load->view('templates/header_user', $data);
             $this->load->view('product/listpage', $data);
-        }else{
+        } else {
             $data = array();
             $where = ' and p.is_valid = true ';
             $order = '';
@@ -228,8 +230,9 @@ class Product extends MY_Controller {
 
     public function details_admin($product_id)
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $data = array();
         $data['v'] = $this->Mproduct->objGetProductInfo($product_id);
         $config = array(
@@ -252,13 +255,11 @@ class Product extends MY_Controller {
         );
 
         $this->form_validation->set_rules($config);
-        if(isset($_POST) && !empty($_POST))
-        {
-            if ($this->form_validation->run() == FALSE)
-            {
+        if (isset($_POST) && !empty($_POST)) {
+            if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header', $data);
                 $this->load->view('product/details_admin/'.$product_id, $data);
-            }else{
+            } else {
                 $main_data = array(
                     'title' => $this->input->post('title'),
                     'properties' => $this->input->post('properties'),
@@ -270,10 +271,9 @@ class Product extends MY_Controller {
                     'is_valid' => false,
                 );
                 $main_data['is_valid'] = $this->input->post('is_valid')=='1'?'true':'false';
-                if($this->Mproduct->update($main_data, $product_id))
-                {
+                if ($this->Mproduct->update($main_data, $product_id)) {
                     $this->session->set_flashdata('flashdata', '产品更改成功');
-                }else{
+                } else {
                     $this->session->set_flashdata('flashdata', '产品更改失败');
                 }
                 redirect('product/details_admin/'.$product_id);
@@ -286,20 +286,23 @@ class Product extends MY_Controller {
 
     public function details($product_id)
     {
-        if($this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'user') {
             exit('You are not admin.');
+        }
         $data = array();
         $data['v'] = $this->Mproduct->objGetProductInfo($product_id);
-        if($data['v']->is_valid == false)
+        if ($data['v']->is_valid == false) {
             exit('The product is invalid');
+        }
         $this->load->view('templates/header_user', $data);
         $this->load->view('product/details', $data);
     }
 
     public function add($error = '')
     {
-        if($this->session->userdata('role') != 'admin')
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin.');
+        }
         $data = array();
         $data['error'] = $error;
         $config = array(
@@ -326,26 +329,21 @@ class Product extends MY_Controller {
             ),
         );
         $this->form_validation->set_rules($config);
-        if(isset($_POST) && !empty($_POST))
-        {
-            if ($this->form_validation->run() == FALSE)
-            {
+        if (isset($_POST) && !empty($_POST)) {
+            if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header', $data);
                 $this->load->view('product/add', $data);
-            }else{
+            } else {
                 $config['upload_path'] = './uploads/';
                 $config['file_name'] = uniqid();
                 $config['allowed_types'] = 'jpg|png|jpeg';
                 $config['max_size']	= '500000';
                 $this->load->library('upload', $config);
-                if ( ! $this->upload->do_upload('img'))
-                {
+                if (!$this->upload->do_upload('img')) {
                     $error = array('error' => $this->upload->display_errors());
                     echo $error['error'];
                     return false;
-                }
-                else
-                {
+                } else {
                     $upload_data = array('upload_data' => $this->upload->data());
                     $upload_data = array('upload_data' => $this->upload->data());
                     $path = $upload_data['upload_data']['file_path'];
@@ -377,16 +375,15 @@ class Product extends MY_Controller {
                     'thumb' => $thumb,
                 );
                 $result = $this->Mproduct->add($main_data);
-                if($result){
+                if ($result) {
                     $this->session->set_flashdata('flashdata', '产品添加成功');
                     redirect('product/add');
-                }
-                else{
+                } else {
                     $this->session->set_flashdata('flashdata', '产品添加失败');
                     redirect('product/add');
                 }
             }
-        }else{
+        } else {
             $this->load->view('templates/header', $data);
             $this->load->view('product/add', $data);
         }
@@ -395,29 +392,29 @@ class Product extends MY_Controller {
     private function __get_search_str($search = '', $price_low = '', $price_high = '', $category = null)
     {
         $where = "";
-        if($search != '' && $price_low != '' && $price_high != '') {
+        if ($search != '' && $price_low != '' && $price_high != '') {
             $where .= " and (p.title like '%{$search}%' or p.feature like '%{$search}%' or
                             pr.discount_price::decimal between {$price_low} and {$price_high} )
                             ) ";
-        } elseif($search != '' && $price_low == '' && $price_high == '') {
+        } elseif ($search != '' && $price_low == '' && $price_high == '') {
             $where .= " and (p.title like '%{$search}%' or p.feature like '%{$search}%') ";
-        } elseif($search != '' && $price_low != '' && $price_high == '') {
+        } elseif ($search != '' && $price_low != '' && $price_high == '') {
             $where .= " and (p.title like '%{$search}%' or p.feature like '%{$search}%' or
                             (cast(pr.discount_price as decimal) > {$price_low} )
                             ) ";
-        } elseif($search != '' && $price_low == '' && $price_high != '') {
+        } elseif ($search != '' && $price_low == '' && $price_high != '') {
             $where .= " and (p.title like '%{$search}%' or p.feature like '%{$search}%' or
                             (cast(pr.discount_price as decimal) < {$price_high} )
                             ) ";
-        } elseif($search == '' && $price_low != '' && $price_high != '') {
+        } elseif ($search == '' && $price_low != '' && $price_high != '') {
             $where .= " and (cast(pr.discount_price as decimal) between {$price_low} and {$price_high}) ";
-        } elseif($search == '' && $price_low != '' && $price_high == '') {
+        } elseif ($search == '' && $price_low != '' && $price_high == '') {
             $where .= " and (cast(pr.discount_price as decimal) > {$price_low} )";
-        } elseif($search == '' && $price_low == '' && $price_high != '') {
+        } elseif ($search == '' && $price_low == '' && $price_high != '') {
             $where .= " and (cast(pr.discount_price as decimal) < {$price_high} )";
         }
 
-        if($category != null) {
+        if ($category != null) {
             $where .= " and p.category = {$category} ";
         }
 

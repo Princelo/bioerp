@@ -1,9 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include('application/libraries/MY_Controller.php');
-class Forecast extends MY_Controller {
+class Forecast extends MY_Controller
+{
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
             redirect('login');
@@ -46,11 +48,9 @@ class Forecast extends MY_Controller {
 
         $this->form_validation->set_rules($config);
         $id = $this->session->userdata('current_user_id');
-        if($_POST && $_POST != '')
-        {
-            if($this->session->userdata('role')=='admin' && $this->input->post('forecast') != '')
-            {
-                if($this->Mforecast->update($this->input->post('forecast'))){
+        if ($_POST && $_POST != '') {
+            if ($this->session->userdata('role')=='admin' && $this->input->post('forecast') != '') {
+                if ($this->Mforecast->update($this->input->post('forecast'))) {
                     $this->session->set_flashdata('flashdata', '修改成功');
                     redirect('forecast/index');
                 }
@@ -62,8 +62,7 @@ class Forecast extends MY_Controller {
                 'wechat_id' => $this->input->post('wechat_id'),
                 'qq_no' => $this->input->post('qq_no'),
             );
-            if($this->Muser->update($main_data, $id))
-            {
+            if ($this->Muser->update($main_data, $id)) {
                 $this->session->set_flashdata('flashdata', '修改成功');
                 redirect('forecast/index');
             }
@@ -72,13 +71,12 @@ class Forecast extends MY_Controller {
         $data['forecast'] = $this->Mforecast->objGetForecastInfo()->content;
         $data['v'] = $this->Muser->objGetUserInfo($id);
         //$data['forecasts'] = $this->Mforecast->objGetForecastList();
-        if($this->session->userdata('role') == 'admin'){
+        if ($this->session->userdata('role') == 'admin') {
 
             $this->load->view('templates/header', $data);
 
             $this->load->view('forecast/index', $data);
-        }
-        else{
+        } else {
             //$data['tip'] = $this->_getTips($data);
             $this->load->view('templates/header_user', $data);
             $this->load->view('forecast/index_user', $data);

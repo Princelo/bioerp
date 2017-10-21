@@ -119,9 +119,9 @@ class Mproduct extends CI_Model
 
         $result = $this->objDB->trans_status();
 
-        if($result === true){
+        if ($result === true){
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -173,10 +173,11 @@ class Mproduct extends CI_Model
         $binds = array($id);
 
         $result = $this->objDB->query($update_sql, $binds);
-        if($result === true)
+        if ($result === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function disable($id)
@@ -187,10 +188,11 @@ class Mproduct extends CI_Model
         $binds = array($id);
 
         $result = $this->objDB->query($update_sql, $binds);
-        if($result === true)
+        if ($result === true) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function update($main_data, $id)
@@ -204,9 +206,9 @@ class Mproduct extends CI_Model
 
         $result = $this->objDB->trans_status();
 
-        if($result === true) {
+        if ($result === true) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

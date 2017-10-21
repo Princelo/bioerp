@@ -1,14 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include('application/libraries/MY_Controller.php');
-class Post_Setting extends MY_Controller {
-
-    public function __construct(){
+class Post_Setting extends MY_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
+        if ($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user') {
             redirect('login');
-        if($this->session->userdata('role') != 'admin')
+        }
+        if ($this->session->userdata('role') != 'admin') {
             exit('You are not the admin');
+        }
         $this->load->model('Mpost', 'Mpost');
         $this->load->library('form_validation');
     }
@@ -59,8 +62,7 @@ class Post_Setting extends MY_Controller {
         );
 
         $this->form_validation->set_rules($config);
-        if($_POST && $_POST != '')
-        {
+        if ($_POST && $_POST != '') {
             $main_data = array(
                 'province_id' => $this->input->post('province_id'),
                 'city_id' => $this->input->post('city_id'),
@@ -69,11 +71,10 @@ class Post_Setting extends MY_Controller {
                 'first_pay' => $this->input->post('first_pay'),
                 'additional_pay' => $this->input->post('additional_pay'),
             );
-            if($this->Mpost->checkIsDuplicate($main_data)) {
+            if ($this->Mpost->checkIsDuplicate($main_data)) {
                 exit('The rule you edited Is Duplicate Or Conflict with another rule exists');
             }
-            if($this->Mpost->add($main_data))
-            {
+            if ($this->Mpost->add($main_data)) {
                 $this->session->set_flashdata('flashdata', '修改成功');
                 redirect('post_setting/index');
             } else {
@@ -123,8 +124,7 @@ class Post_Setting extends MY_Controller {
         );
 
         $this->form_validation->set_rules($config);
-        if($_POST && $_POST != '')
-        {
+        if ($_POST && $_POST != '') {
             $main_data = array(
                 'province_id' => $this->input->post('province_id'),
                 'city_id' => $this->input->post('city_id'),
@@ -133,11 +133,10 @@ class Post_Setting extends MY_Controller {
                 'first_pay' => $this->input->post('first_pay'),
                 'additional_pay' => $this->input->post('additional_pay'),
             );
-            if($this->Mpost->checkWhetherConflict($main_data, $id)) {
+            if ($this->Mpost->checkWhetherConflict($main_data, $id)) {
                 exit('The rule you edited Is Duplicate Or Conflict with another rule exists');
             }
-            if($this->Mpost->update($main_data, $id))
-            {
+            if ($this->Mpost->update($main_data, $id)) {
                 $this->session->set_flashdata('flashdata', '修改成功');
                 redirect('post_setting/index');
             }

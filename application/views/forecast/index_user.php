@@ -13,7 +13,6 @@
                             alert("<?=$this->session->flashdata('flashdata', 'value');?>");
                     </script>
                 </h4>
-                <?php //phpinfo(); ?>
                 <h4>公告:</h4>
                 <div class="font-size:16px;">
                     <?=$forecast?>
@@ -25,6 +24,11 @@
 
             <div class="">
                 <h2>你的信息:</h2>
+                <?php if (!$this->session->userdata('initiation')) { ?>
+                <div style="color:#992222">你尚未成为正式代理 <a href="javascript:void(0);">马上成为正式代理</a>
+                    <br> 如果你已完成付款，请等待井刷新浏览器
+                </div>
+                <?php } ?>
                 <form action="<?=base_url()?>forecast/index" method="post">
 
                     <fieldset>
@@ -78,12 +82,12 @@
                                            maxlength="11" value="<?=$v->qq_no?>"/>
                                 </td>
                             </tr>
-                            <tr>
+                            <!--<tr>
                                 <th>你的业绩</th>
                                 <td>
                                     <input type="text" value="<?=cny($v->turnover)?>" disabled="disabled" />
                                 </td>
-                            </tr>
+                            </tr>-->
                             <tr>
                                 <th>你的收益</th>
                                 <td>
@@ -102,7 +106,7 @@
                                     <input type="text" value="<?=cny($v->real_balance)?>" disabled="disabled" style="color:#f60;"/>
                                 </td>
                             </tr>
-                            <tr>
+                            <!--<tr>
                                 <th>已生效现金卷</th>
                                 <td>
                                     <input type="text" value="<?=cny($v->active_coupon)?>" disabled="disabled" style="color:#f60;">
@@ -114,6 +118,12 @@
                                     <input type="text" value="<?=cny($v->inactivated_coupon)?>" disabled="disabled" style="color:#f60;">
                                 </td>
                             </tr>
+                            <tr>
+                                <th>未兑换产品券</th>
+                                <td>
+                                    <input type="text" value="<?=cny($v->bonus_product)?>" disabled="disabled" style="color:#f60;">
+                                </td>
+                            </tr>-->
                             <tr>
                                 <th>帐号状态</th>
                                 <td>

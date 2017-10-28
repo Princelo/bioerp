@@ -4,6 +4,8 @@
  **/
 class Muser extends CI_Model
 {
+    private $INI_AMT = 5000;
+
     function __construct()
     {
         parent::__construct();
@@ -147,6 +149,37 @@ class Muser extends CI_Model
         $this->db->query($insert_sql_user, $binds);
         $this->db->query("DROP TABLE IF EXISTS variables{$temp};");
 
+        $this->db->trans_complete();
+
+        $result = $this->db->trans_status();
+
+        if ($result === true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function initialize($user_id)
+    {
+        $this->db->trans_start();
+        $update_sql_initiation = "
+            update
+                users
+                set initiation = true
+            where initiation = false
+                  and id = {$user_id}
+        ";
+        $this->db->query($update_sql_initiation);
+        include('application/strategies/RegisterProfitToParent.php');
+        include('application/strategies/RegisterProfitToGrand.php');
+        include('application/strategies/RegisterProductBonus.php');
+        $register_profit_to_parent = new RegisterProfitToParent($this->db);
+        $register_profit_to_grand = new RegisterProfitToGrand($this->db);
+        $register_product_bonus = new RegisterProductBonus($this->db);
+        $register_profit_to_parent->payback($user_id, $this->INI_AMT);
+        $register_profit_to_grand->payback($user_id, $this->INI_AMT);
+        $register_product_bonus->payback($user_id, $this->INI_AMT);
         $this->db->trans_complete();
 
         $result = $this->db->trans_status();

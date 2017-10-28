@@ -177,7 +177,7 @@
                             }
                         },
                     };
-                    tmp.details.submenu = {
+                    /*tmp.details.submenu = {
                         "create_folder" : {
                             "separator_after"	: true,
                             "label"				: "订单",
@@ -195,7 +195,7 @@
                                 window.open('<?=site_url('report/index_user');?>?user='+obj.id,"_blank");
                             }
                         }
-                    };
+                    };*/
                     if(this.get_type(node) === "valid") {
                         delete tmp.enable;
                     } else {

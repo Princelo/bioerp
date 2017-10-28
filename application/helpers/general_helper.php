@@ -473,6 +473,26 @@ function get_trial_type($type)
     return $return;
 }
 
+if (!function_exists('getYears')) {
+    function getYears()
+    {
+        $current = date('Y');
+        $begin_year = 2017;
+        $years = array();
+        for ($i = $begin_year; $i <= $current; $i++) {
+            array_push($years, $i);
+        }
+        return $years;
+    }
+}
+
+if (!function_exists('getMonths')) {
+    function getMonths()
+    {
+        return array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+    }
+}
+
 if (!function_exists('is_mobile')) {
     function is_mobile() {
         $user_agent = $_SERVER['HTTP_USER_AGENT'];

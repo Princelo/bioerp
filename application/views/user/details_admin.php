@@ -75,12 +75,12 @@
                                        value="<?=$v->bank_info?>"/>
                             </td>
                         </tr>
-                        <tr>
+                        <!--<tr>
                             <th>他的业绩</th>
                             <td>
                                 <input type="text" value="<?=cny($v->turnover)?>" disabled="disabled" />
                             </td>
-                        </tr>
+                        </tr>-->
                         <tr>
                             <th>他的收益</th>
                             <td>
@@ -99,7 +99,7 @@
                                 <input type="text" value="<?=cny($v->real_balance)?>" disabled="disabled" style="color:#f60;"/>
                             </td>
                         </tr>
-                        <tr>
+                        <!--<tr>
                             <th>已生效代金券</th>
                             <td>
                                 <input type="text" value="<?=cny($v->active_coupon)?>" disabled="disabled" style="color:#f60;"/>
@@ -110,7 +110,7 @@
                             <td>
                                 <input type="text" value="<?=cny($v->inactivated_coupon)?>" disabled="disabled" style="color:#f60;"/>
                             </td>
-                        </tr>
+                        </tr>-->
                         <tr>
                             <th>帐号状态</th>
                             <td>

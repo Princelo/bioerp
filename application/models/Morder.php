@@ -438,29 +438,19 @@ class Morder extends CI_Model
     }
 
     function finish_with_pay($order_id, $pay_amt, $user_id, $parent_user_id, $grand_parent_user_id, $pay_amt_without_post_fee, $is_first,
-                            $original_amount)
+                            $original_amount, $db)
     {
         $order_id = intval($order_id);
+        $order_id = $db->escape($order_id);
         $now = now();
-        $next_week = date("Y-m-d 00:00:00", strtotime("+1 week"));
-        $next_month = date('Y-m-1 00:00:00', strtotime("+1 month"));
         $ten_percent = bcmul($pay_amt_without_post_fee, 0.1, 2);
         $five_percent = bcmul($pay_amt_without_post_fee, 0.05, 2);
-
-        if($parent_user_id > 0) {
-            $parent_profit =  bcadd(bcadd($ten_percent, $ten_percent, 2), $five_percent, 2); 
-            //$parent_extra_profit = $is_first?$ten_percent:0;
-        } else {
-            $parent_profit = 0;
-            $parent_extra_profit = 0;
-        }
-
+        $parent_profit = 0;
+        $grand_parent_profit = 0;
         if ($grand_parent_user_id > 0) {
-            $grand_parent_profit = bcadd($ten_percent, $ten_percent, 2);
             $profit_potential_first_order = 0;
             $profit_potential = 15;
         } else {
-            $grand_parent_profit = 0;
             if ($parent_user_id > 0) {
                 $profit_potential_first_order = 20;
                 $profit_potential = 35;
@@ -469,120 +459,20 @@ class Morder extends CI_Model
                 $profit_potential = 60;
             }
         }
-        
 
-        /*$insert_sql_job = "
-            insert into jobs (user_id, order_id, return_profit, excute_time)
-            values ({$user_id}, {$order_id},
-            {$ten_percent}+{$ten_percent}+{$ten_percent}+{$ten_percent}
-            + case when
-                not exists
-                    (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
-                then 0
-                else {$ten_percent}
-                end ,
-            '{$next_week}')
-        ";*/
+//        $purchase_profit_to_parent = new PurchaseProfitToParent($db, $parent_user_id);
+//        $purchase_coupon_to_parent = new PurchaseCouponToParent($db, $order_id);
+//        $purchase_profit_to_grand = new PurchaseProfitToGrand($db, $grand_parent_user_id);
+//        $purchase_coupon_to_grand = new PurchaseCouPonToGrand($db, $order_id, $grand_parent_user_id);
+        include('application/strategies/Turnover.php');
+        $turnover = new Turnover($db);
 
-        $update_sql_first_purchase = "
-            update users set first_purchase = '{$pay_amt}'::decimal
-             where not exists
-                (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
-             and id = {$user_id}
-        ";
+//        $parent_profit = $purchase_profit_to_parent->payback($user_id, $pay_amt_without_post_fee);
+//        $purchase_coupon_to_parent->payback($user_id, $pay_amt_without_post_fee);
+//        $grand_parent_profit = $purchase_profit_to_grand->payback($user_id, $pay_amt_without_post_fee);
+//        $purchase_coupon_to_grand->payback($grand_parent_user_id, $pay_amt_without_post_fee);
+        $turnover->payback($user_id, $pay_amt_without_post_fee);
 
-        $order_id = $this->objDB->escape($order_id);
-        $update_sql_turnover = "
-            update
-                users
-                    set turnover =
-                        turnover::decimal + {$pay_amt_without_post_fee}
-                where id = {$user_id};";
-        $update_sql_parent_profit = "
-            update users set profit = profit::decimal + (
-                    {$parent_profit} +
-                    case when
-                        not exists
-                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
-                        then ".bcadd( $ten_percent, $five_percent, 2)."
-                        else 0
-                    end
-            ),
-            balance = balance::decimal + (
-                    {$parent_profit} +
-                    case when
-                        not exists
-                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
-                        then ".bcadd( $ten_percent, $five_percent, 2)."
-                        else 0
-                    end
-            ),
-            real_balance = real_balance::decimal + (
-                    ".bcmul($parent_profit, 0.9, 2)." +
-                    case when
-                        not exists
-                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
-                        then ".bcmul(bcadd( $ten_percent, $five_percent, 2), 0.9, 2)."
-                        else 0
-                    end
-            ),
-            inactivated_coupon = inactivated_coupon::decimal + (
-                    ".bcmul($parent_profit, 0.1, 2)." +
-                    case when
-                        not exists
-                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
-                        then ".bcmul(bcadd( $ten_percent, $five_percent, 2), 0.1, 2)."
-                        else 0
-                    end
-            ),
-            coupon_volume = coupon_volume::decimal + (
-                    ".bcmul($parent_profit, 0.1, 2)." +
-                    case when
-                        not exists
-                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
-                        then ".bcmul(bcadd( $ten_percent, $five_percent, 2), 0.1, 2)."
-                        else 0
-                    end
-            )
-            where id = {$parent_user_id};
-            ";
-        $update_sql_grand_parent_profit = "
-            update users set profit = profit::decimal +
-                    {$grand_parent_profit},
-                    balance = balance::decimal +
-                    {$grand_parent_profit},
-                    real_balance = real_balance::decimal +
-                    ".bcmul($grand_parent_profit, 0.9, 2).",
-                    coupon_volume = coupon_volume::decimal +
-                    ".bcmul($grand_parent_profit, 0.1, 2).",
-                    inactivated_coupon = inactivated_coupon::decimal +
-                    ".bcmul($grand_parent_profit, 0.1, 2)."
-            where id = {$grand_parent_user_id};
-            ";
-
-        $update_sql_initiation = "
-            update
-                users
-                set initiation = true
-            where initiation = false
-                  and id = {$user_id}
-        ";
-        $finish_log = "
-            insert into
-                finish_log(order_id, pay_amt, user_id, parent_user_id, pay_amt_without_post_fee, g_parent_user_id, is_first)
-                values
-                ({$order_id}, ?, ?, ?, ?, ?,
-                    case when
-                        not exists
-                            (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_finished = true and is_deleted = false)
-                        then true
-                        else false
-                    end
-                )
-            ;";
-        $binds_finish_log = array(
-            $pay_amt, $user_id, $parent_user_id, $pay_amt_without_post_fee, $grand_parent_user_id
-        );
         $update_sql_order = "
             update orders
                 set pay_amt = '{$pay_amt}',
@@ -616,52 +506,8 @@ class Morder extends CI_Model
                 id = {$order_id};
                 ";
 
-        $insert_coupon_sql_parent = "
-            insert into coupons (user_id, active_time, order_id, volume) 
-            values 
-            (?,?,?,
-            case when
-                not exists
-                    (select id from orders where user_id = {$user_id} and is_pay = true and is_correct = true and is_deleted = false)
-                then ".bcmul( bcmul(bcadd($ten_percent, $ten_percent, 2), 2, 2), 0.1, 2)."
-                else ".bcmul( bcadd(bcadd($ten_percent, $ten_percent, 2), $five_percent, 2), 0.1, 2)."
-            end
-            )
-        ";
-        $insert_coupon_sql_parent_binds = [$user_id, $next_month, $order_id];
-        $insert_coupon_sql_grand_parent = "
-            insert into coupons (user_id, active_time, order_id, volume) 
-            values 
-            (?,?,?,?)
-        ";
-        $insert_coupon_sql_grand_parent_binds = [$user_id, $next_month, $order_id, bcmul(bcadd($ten_percent, $ten_percent, 2), 0.1, 2)];
-        $this->objDB->trans_start();
+        $db->query($update_sql_order);
 
-        $this->objDB->query("set constraints all deferred");
-        //$this->objDB->query($insert_sql_job);
-        $this->objDB->query($update_sql_first_purchase);
-        $this->objDB->query($update_sql_turnover);
-        if($parent_user_id > 0) {
-            $this->objDB->query($update_sql_parent_profit);
-            $this->objDB->query($insert_coupon_sql_parent, $insert_coupon_sql_parent_binds);
-        }
-        if ($grand_parent_user_id > 0) {
-            $this->objDB->query($update_sql_grand_parent_profit);
-            $this->objDB->query($insert_coupon_sql_grand_parent, $insert_coupon_sql_grand_parent_binds);
-        }
-        $this->objDB->query($update_sql_initiation);
-        $this->objDB->query($finish_log, $binds_finish_log);
-        $this->objDB->query($update_sql_order);
-
-        $this->objDB->trans_complete();
-
-        $result = $this->objDB->trans_status();
-
-        if ($result === true) {
-            return true;
-        } else {
-            return false;
-        }
 
     }
 
@@ -746,7 +592,7 @@ class Morder extends CI_Model
             } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
     }

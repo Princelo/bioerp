@@ -11,6 +11,8 @@ class Order extends MY_Controller
             redirect('login');
         $this->load->model('Mproduct', 'Mproduct');
         $this->load->model('Morder', 'Morder');
+        $this->load->model('MorderProxy', 'MorderProxy');
+        $this->MorderProxy->setMorder($this->Morder);
         $this->load->model('Muser', 'Muser');
         $this->load->library('form_validation');
         $this->load->library('pagination');
@@ -320,7 +322,7 @@ class Order extends MY_Controller
                     $this->session->set_flashdata('flashdata', '操作有误: 订单已完成');
                     redirect('order/details_admin/'.$order_id);
                 }
-                $result = $this->Morder->finish_with_pay($order_id,
+                $result = $this->MorderProxy->finish_with_pay($order_id,
                                                          bcadd(money($data['v']->amount), money($data['v']->post_fee),4),
                                                          $data['v']->uid,
                                                          $data['v']->parent_user_id,
@@ -333,34 +335,34 @@ class Order extends MY_Controller
                     redirect('order/listpage_admin');
                 }
             }
-            if ($this->input->post('finish') == 'finish_without_pay') {
-                if($data['v']->is_finished == true) {
-                    $this->session->set_flashdata('flashdata', '操作有误: 订单已完成');
-                    redirect('order/details_admin/'.$order_id);
-                }
-                if($data['v']->is_pay_online == false) {
-                    $this->session->set_flashdata('flashdata', '该订单属于线下付款类，必须插入付款纪录');
-                    redirect('order/details_admin/'.$order_id);
-                }
-                if($data['v']->is_pay == false && $data['v']->is_pay_online == true) {
-                    $this->session->set_flashdata('flashdata', '该订单未支付金额，且属于线上交易类，未能完成订单');
-                    redirect('order/details_admin/'.$order_id);
-                }
-                if (
-                (money($data['v']->pay_amt) <
-                    bcadd(money($data['v']->post_fee), bcmul(money($data['v']->unit_price), $data['v']->count, 4), 4)
-                ) &&
-                $data['v']->is_pay_online == true
-                ) {
-                    $this->session->set_flashdata('flashdata', '该订单支付金额不足，未能完成订单');
-                    redirect('order/details_admin/'.$order_id);
-                }
-                $result = $this->Morder->finish_without_pay($order_id);
-                if ($result === true) {
-                    $this->session->set_flashdata('flashdata', '订单更改成功');
-                }
-
-            }
+//            if ($this->input->post('finish') == 'finish_without_pay') {
+//                if($data['v']->is_finished == true) {
+//                    $this->session->set_flashdata('flashdata', '操作有误: 订单已完成');
+//                    redirect('order/details_admin/'.$order_id);
+//                }
+//                if($data['v']->is_pay_online == false) {
+//                    $this->session->set_flashdata('flashdata', '该订单属于线下付款类，必须插入付款纪录');
+//                    redirect('order/details_admin/'.$order_id);
+//                }
+//                if($data['v']->is_pay == false && $data['v']->is_pay_online == true) {
+//                    $this->session->set_flashdata('flashdata', '该订单未支付金额，且属于线上交易类，未能完成订单');
+//                    redirect('order/details_admin/'.$order_id);
+//                }
+//                if (
+//                (money($data['v']->pay_amt) <
+//                    bcadd(money($data['v']->post_fee), bcmul(money($data['v']->unit_price), $data['v']->count, 4), 4)
+//                ) &&
+//                $data['v']->is_pay_online == true
+//                ) {
+//                    $this->session->set_flashdata('flashdata', '该订单支付金额不足，未能完成订单');
+//                    redirect('order/details_admin/'.$order_id);
+//                }
+//                $result = $this->Morder->finish_without_pay($order_id);
+//                if ($result === true) {
+//                    $this->session->set_flashdata('flashdata', '订单更改成功');
+//                }
+//
+//            }
             if ($this->input->post('finish') == 'unfinish_rollback') {
                 if ($data['v']->is_pay == false || $data['v']->is_correct == false || $data['v']->is_finished == false) {
                     $this->session->set_flashdata('flashdata', '操作有误: 订单未完成');
@@ -937,13 +939,13 @@ class Order extends MY_Controller
             $trade_status = $_GET['trade_status'];
             if($_GET['trade_status'] == 'TRADE_FINISHED' || $_GET['trade_status'] == 'TRADE_SUCCESS') {
                 $result = $this->Morder->updatePaymentStatus($out_trade_no);
-                if($result){
+                if ($result) {
                     echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head>";
                     echo "验证成功<br />";
                     echo "<script>alert('支付成功！请等待管理员审核完成实物交易。');</script>";
                     echo "<script>window.location.href=\"".base_url()."order/listpage\";</script>";
                     echo "</html>";
-                }else{
+                } else {
                     echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head>";
                     echo "<script>alert('你的支付信息将同步到系统！请等待管理员审核完成实物交易。');</script>";
                     echo "<script>window.location.href=\"".base_url()."order/listpage\";</script>";

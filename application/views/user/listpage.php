@@ -56,7 +56,7 @@
                         <th>电话</th>
                         <th>微信</th>
                         <th>QQ</th>
-                        <th>他的业绩</th>
+                        <!--<th>他的业绩</th>-->
                         <th>他的收益</th>
                         <th>是否生效</th>
                     </tr>
@@ -72,7 +72,7 @@
                             <td><?=$v->mobile_no?></td>
                             <td><?=$v->wechat_id?></td>
                             <td><?=$v->qq_no?></td>
-                            <td><?=cny($v->turnover)?></td>
+                            <!--<td><?=cny($v->turnover)?></td>-->
                             <td><?=cny($v->profit)?></td>
                             <td><?=$v->is_valid==true?'是':'否'?></td>
                         </tr>
@@ -80,15 +80,6 @@
                     <? } ?>
                 </table>
                 <div class="page"><?=$page;?></div>
-                <script>
-                    /*function myconfirm(id){
-                     if (confirm("are you sure?")){
-                     window.location.href = "<?=base_url()?>index.php/unvadmin/singerdelete/"+id;
-                     } else {
-
-                     }
-                     }*/
-                </script>
 
 
             </div>

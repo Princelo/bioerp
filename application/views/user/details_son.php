@@ -66,12 +66,12 @@
                                maxlength="11" value="<?=$v->qq_no?>" disabled/>
                     </td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <th>他的业绩</th>
                     <td>
                         <input type="text" value="<?=cny($v->turnover)?>" disabled="disabled" />
                     </td>
-                </tr>
+                </tr>-->
                 <tr>
                     <th>他的收益</th>
                     <td>

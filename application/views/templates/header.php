@@ -162,7 +162,7 @@
             <li class="li-menu">
                 <a href="<?=base_url()?>forecast/index" class="parent" ><span>首页 </span></a>
             </li>
-            <li class="li-menu">
+            <li class="li-menu" style="display: none;">
                 <a href="javascript:;" onclick="showmenu('menu-product');" class="parent"><span>产品</span></a>
                 <ul class="dropdown-menu other-menu" id="menu-product">
                     <li>
@@ -183,7 +183,7 @@
                 </ul>
 
             </li>
-            <li class="li-menu">
+            <li class="li-menu" style="display: none;">
                 <a href="javascript:;" onclick="showmenu('menu-order')" class="parent" ><span>订单系统 </span></a>
                 <ul class="dropdown-menu other-menu" id="menu-order">
                     <li><a href="<?=base_url()?>order/listpage_admin" class="" style="background: none;"><span>订单列表 </span></a>
@@ -192,6 +192,14 @@
 
             </li>
             <li class="li-menu">
+                <a href="javascript:;" onclick="showmenu('menu-bonus')" class="parent" ><span>奖品订单 </span></a>
+                <ul class="dropdown-menu other-menu" id="menu-bonus">
+                    <li><a href="<?=base_url()?>bonus/listpage_admin" class="" style="background: none;"><span>订单列表 </span></a>
+                    </li>
+                </ul>
+
+            </li>
+            <li class="li-menu" style="display: none;">
                 <a href="javascript:;" onclick="showmenu('menu-report')" class="parent" ><span>报表系统 </span></a>
                 <ul class="dropdown-menu other-menu" id="menu-report">
                     <li><a href="<?=base_url()?>report/index_admin" class="" style="background: none;"><span>代理报表查询 </span></a>
@@ -201,7 +209,7 @@
                     <li><a href="<?=base_url()?>report/listpage_withdraw_admin" class="" style="background: none;"><span>结算查询 </span></a>
                 </ul>
             </li>
-            <li class="li-menu">
+            <li class="li-menu" style="display: none;">
                 <a href="<?=base_url()?>post_setting"><span>运费设置</span></a>
             </li>
             <li class="li-menu"><a href="<?=base_url();?>user/password" class=""><span>修改密碼 </span></a></li>

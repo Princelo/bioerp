@@ -3,7 +3,7 @@
 include('application/libraries/MY_Controller.php');
 class User extends MY_Controller
 {
-
+    private $INI_AMT = 5000;
     public $db;
     public function __construct()
     {
@@ -704,6 +704,127 @@ class User extends MY_Controller
                 );
         }
 
+    }
+
+    public function initialize()
+    {
+        if ($this->session->userdata('initiation')) {
+            exit('You are initialized');
+        }
+        if ($this->session->userdata('role') == 'admin') {
+            exit('You are the admin.');
+        }
+        $this->session->set_userdata('token_initiation', md5(date('YmdHis').rand(0, 32000)) );
+        $data = new stdClass();
+        $data->token = $this->session->userdata('token_initiation');
+        $data->user_id = $this->session->userdata('user_id');
+//        $data->pay_amt = $this->INI_AMY;
+        $data->pay_amt = 0.01;
+        $this->load->view('templates/header_user', $data);
+        $this->load->view('user/initialize', $data);
+    }
+
+    public function pay($user_id)
+    {
+        if ($this->session->userdata('role') == 'admin') {
+            exit('You are the admin.');
+        }
+        if (!$this->__validate_token()) {
+            exit('your operation is expired!');
+        }
+        if ($this->session->userdata('current_user_id') != $user_id) {
+            exit('You cannot pay for another!');
+        }
+        require_once("application/third_party/alipay/lib/alipay_submit.class.php");
+        $alipay_config = alipay_config();
+        $alipaySubmit = new AlipaySubmit($alipay_config);
+
+
+        $payment_type = "1";
+        $notify_url = base_url()."alipay_notify_initiation?alipay=sb";
+        //there's a bug that alipay api will filter out the first para of the url return.
+        //fixed it by insert a para in the url.
+
+        $return_url = base_url()."user/return_alipay?alipay=sb";
+
+        //$out_trade_no = $this->session->userdata('user') . date('YmdHis') . random_string('numeric', 4);
+        $out_trade_no = $user_id;
+
+        //$is_update_out_trade_no_success = $this->Morder->updateOrderTradeNo($out_trade_no, $order_id);
+        //if(!$is_update_out_trade_no_success)
+        //exit('error!\nPlease try again later');
+
+        $subject = $this->session->userdata('user') . "_-_ERP_USER_no.".$user_id;
+
+        $total_fee = $this->INI_AMT;
+
+
+        //$anti_phishing_key = $alipaySubmit->query_timestamp();
+        $anti_phishing_key = "";
+
+        $exter_invoke_ip = get_client_ip();
+
+        $body = "";
+        $show_url = "";
+
+        $parameter = array(
+            "service" => "create_direct_pay_by_user",
+            "partner" => trim($alipay_config['partner']),
+            "seller_email" => trim($alipay_config['seller_email']),
+            "payment_type"	=> $payment_type,
+            "notify_url"	=> $notify_url,
+            "return_url"	=> $return_url,
+            "out_trade_no"	=> $out_trade_no,
+            "subject"	=> $subject,
+            "total_fee"	=> $total_fee,
+            "body"	=> $body,
+            "show_url"	=> $show_url,
+            "anti_phishing_key"	=> $anti_phishing_key,
+            "exter_invoke_ip"	=> $exter_invoke_ip,
+            "_input_charset"	=> trim(strtolower($alipay_config['input_charset']))
+        );
+
+        $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
+        echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head>";
+        echo "<div style=\"display:none;\">".$html_text."</div></html>";
+
+    }
+
+    public function return_alipay()
+    {
+        require_once("application/third_party/alipay/lib/alipay_notify.class.php");
+        $alipay_config = alipay_config();
+        $alipayNotify = new AlipayNotify($alipay_config);
+        $verify_result = $alipayNotify->verifyReturn();
+        if ($verify_result) {
+            $out_trade_no = $_GET['out_trade_no'];
+            $trade_no = $_GET['trade_no'];
+            $trade_status = $_GET['trade_status'];
+            if($_GET['trade_status'] == 'TRADE_FINISHED' || $_GET['trade_status'] == 'TRADE_SUCCESS') {
+                $result = $this->Muser->initialize($out_trade_no);
+                if ($result) {
+                    echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head>";
+                    echo "验证成功<br />";
+                    echo "<script>alert('支付成功！恭喜成为正式代理。');</script>";
+                    echo "<script>window.location.href=\"".base_url()."forecast/index\";</script>";
+                    echo "</html>";
+                } else {
+                    echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head>";
+                    echo "<script>alert('你的支付信息将同步到系统！请等待验证成为代理或联系管理工作人员审核。');</script>";
+                    echo "<script>window.location.href=\"".base_url()."forecast/index\";</script>";
+                    echo "验证失败";
+                    echo "</html>";
+                }
+            } else {
+                echo "trade_status=".$_GET['trade_status'];
+            }
+        } else {
+            echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head>";
+            echo "<script>alert('你的支付信息将同步到系统！请等待验证成为代理或联系管理工作人员审核。');</script>";
+            echo "<script>window.location.href=\"".base_url()."forecast/index\";</script>";
+            echo "验证失败";
+            echo "</html>";
+        }
     }
 
     private function __get_search_str($search = '')

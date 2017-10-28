@@ -158,7 +158,7 @@
             <li class="li-menu">
                 <a href="<?=base_url()?>forecast/index" class="parent" ><span>首页 </span></a>
             </li>
-            <li class="li-menu">
+            <li class="li-menu" style="display: none;">
                 <a href="javascript:;" onclick="showmenu('menu-product')" class="parent" ><span>产品 </span></a>
                 <ul class="dropdown-menu other-menu" id="menu-product">
                     <li><a href="<?=base_url()?>product/listpage" class="" style="background: none;"><span>产品列表 </span></a>
@@ -178,7 +178,7 @@
                 </ul>
 
             </li>
-            <li class="li-menu">
+            <li class="li-menu" style="display: none;">
                 <a href="javascript:;" onclick="showmenu('menu-order')" class="parent" ><span>订单系统 </span></a>
                 <ul class="dropdown-menu other-menu" id="menu-order">
                     <li><a href="<?=base_url()?>order/listpage" class="" style="background: none;"><span>订单列表 </span></a>
@@ -188,7 +188,7 @@
                 </ul>
 
             </li>
-            <li class="li-menu">
+            <li class="li-menu" style="display: none;">
                 <a href="javascript:;" onclick="showmenu('menu-report')" class="parent" ><span>报表系统 </span></a>
                 <ul class="dropdown-menu other-menu" id="menu-report">
                     <li><a href="<?=base_url()?>report/index" class="" style="background: none;"><span>报表查询 </span></a>

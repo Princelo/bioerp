@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/User.php" afterPath="$PROJECT_DIR$/application/controllers/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/initialize.php" afterPath="$PROJECT_DIR$/application/views/user/initialize.php" />
     </list>
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="719" column="58" lean-forward="false" selection-start-line="719" selection-start-column="58" selection-end-line="719" selection-end-column="58" />
+            <state relative-caret-position="124">
+              <caret line="810" column="14" lean-forward="true" selection-start-line="810" selection-start-column="14" selection-end-line="810" selection-end-column="14" />
               <folding>
                 <marker date="1509177715292" expanded="true" signature="9425:9463" ph="select name,... users" />
                 <marker date="1509177715292" expanded="true" signature="18679:18712" ph="select pid f... users" />
@@ -97,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="initialize.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="initialize.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/user/initialize.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="375">
+              <caret line="25" column="62" lean-forward="false" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -221,7 +221,6 @@
         <option value="$PROJECT_DIR$/application/strategies/PurchaseCouponToGrand.php" />
         <option value="$PROJECT_DIR$/application/models/MorderProxy.php" />
         <option value="$PROJECT_DIR$/application/views/order/listpage.php" />
-        <option value="$PROJECT_DIR$/application/views/user/initialize.php" />
         <option value="$PROJECT_DIR$/application/controllers/Order.php" />
         <option value="$PROJECT_DIR$/application/strategies/RegisterProfitToParent.php" />
         <option value="$PROJECT_DIR$/application/strategies/RegisterProfitToGrand.php" />
@@ -244,6 +243,7 @@
         <option value="$PROJECT_DIR$/application/views/user/sublistpage.php" />
         <option value="$PROJECT_DIR$/application/views/forecast/index_user.php" />
         <option value="$PROJECT_DIR$/application/controllers/User.php" />
+        <option value="$PROJECT_DIR$/application/views/user/initialize.php" />
       </list>
     </option>
   </component>
@@ -532,7 +532,7 @@
       <workItem from="1508584900987" duration="10877000" />
       <workItem from="1508658170325" duration="20736000" />
       <workItem from="1509027884820" duration="6156000" />
-      <workItem from="1509170715072" duration="5345000" />
+      <workItem from="1509170715072" duration="5472000" />
     </task>
     <servers />
   </component>
@@ -542,7 +542,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76436000" />
+    <option name="totallyTimeSpent" value="76563000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="948" extended-state="0" />
@@ -1174,23 +1174,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/user/initialize.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="719" column="58" lean-forward="false" selection-start-line="719" selection-start-column="58" selection-end-line="719" selection-end-column="58" />
+        <state relative-caret-position="124">
+          <caret line="810" column="14" lean-forward="true" selection-start-line="810" selection-start-column="14" selection-end-line="810" selection-end-column="14" />
           <folding>
             <marker date="1509177715292" expanded="true" signature="9425:9463" ph="select name,... users" />
             <marker date="1509177715292" expanded="true" signature="18679:18712" ph="select pid f... users" />
             <marker date="1509177715292" expanded="true" signature="32463:32476" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/user/initialize.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="62" lean-forward="false" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>

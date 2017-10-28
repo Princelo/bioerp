@@ -23,7 +23,7 @@
                     </h3>
                 </div>
                 <form id="pay" action="<?=base_url()?>user/pay/<?=$user_id?>" method="post">
-                    <input type="hidden" name="token" value="<?=$token?>" />
+                    <input type="hidden" name="token_initiation" value="<?=$token?>" />
                     <input type="submit" style="" value="马上付款"/>
                 </form>
 

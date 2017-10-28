@@ -835,5 +835,17 @@ class User extends MY_Controller
         }
         return $where;
     }
+
+    private function  __validate_token($token = 'token_initiation'){
+        if (isset($_POST[$token]) && $_POST[$token] != $this->session->userdata($token)) {
+            $this->session->set_userdata('token_initiation', md5(date('YmdHis').rand(0, 32000)) );
+            return false;
+        } else if (!isset($_POST[$token])) {
+            $this->session->set_userdata('token_initiation', md5(date('YmdHis').rand(0, 32000)) );
+            return false;
+        } else if ($_POST[$token] == $this->session->userdata($token)) {
+            return true;
+        }
+    }
 }
 

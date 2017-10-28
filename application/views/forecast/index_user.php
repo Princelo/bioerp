@@ -25,7 +25,7 @@
             <div class="">
                 <h2>你的信息:</h2>
                 <?php if (!$this->session->userdata('initiation')) { ?>
-                <div style="color:#992222">你尚未成为正式代理 <a href="javascript:void(0);">马上成为正式代理</a>
+                <div style="color:#992222">你尚未成为正式代理 <a href="<?=base_url()?>user/initialize" target="_blank">马上成为正式代理</a>
                     <br> 如果你已完成付款，请等待井刷新浏览器
                 </div>
                 <?php } ?>

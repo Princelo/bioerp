@@ -2,38 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/controllers/Bonus.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/models/Mbonus_delivery.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/models/MorderProxy.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/strategies/IPaybackStrategy.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/strategies/PurchaseCouponToGrand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/strategies/PurchaseCouponToParent.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/strategies/PurchaseProfitToGrand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/strategies/PurchaseProfitToParent.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/strategies/RegisterProductBonus.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/strategies/RegisterProfitToGrand.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/strategies/RegisterProfitToParent.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/strategies/Turnover.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/bonus/listpage_admin.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/user/initialize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Order.php" afterPath="$PROJECT_DIR$/application/controllers/Order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/User.php" afterPath="$PROJECT_DIR$/application/controllers/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/helpers/general_helper.php" afterPath="$PROJECT_DIR$/application/helpers/general_helper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/libraries/MY_Controller.php" afterPath="$PROJECT_DIR$/application/libraries/MY_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Morder.php" afterPath="$PROJECT_DIR$/application/models/Morder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Muser.php" afterPath="$PROJECT_DIR$/application/models/Muser.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/forecast/index_user.php" afterPath="$PROJECT_DIR$/application/views/forecast/index_user.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/order/listpage.php" afterPath="$PROJECT_DIR$/application/views/order/listpage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/templates/header.php" afterPath="$PROJECT_DIR$/application/views/templates/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/templates/header_user.php" afterPath="$PROJECT_DIR$/application/views/templates/header_user.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/details_admin.php" afterPath="$PROJECT_DIR$/application/views/user/details_admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/details_son.php" afterPath="$PROJECT_DIR$/application/views/user/details_son.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/listpage.php" afterPath="$PROJECT_DIR$/application/views/user/listpage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/listpage_admin.php" afterPath="$PROJECT_DIR$/application/views/user/listpage_admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/sublistpage.php" afterPath="$PROJECT_DIR$/application/views/user/sublistpage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/treepage.php" afterPath="$PROJECT_DIR$/application/views/user/treepage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/user/treepage_admin.php" afterPath="$PROJECT_DIR$/application/views/user/treepage_admin.php" />
     </list>
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,37 +34,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="details_admin.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/user/details_admin.php">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1781">
-              <caret line="58" column="27" lean-forward="false" selection-start-line="58" selection-start-column="27" selection-end-line="58" selection-end-column="27" />
+            <state relative-caret-position="600">
+              <caret line="721" column="29" lean-forward="false" selection-start-line="721" selection-start-column="29" selection-end-line="721" selection-end-column="29" />
               <folding>
-                <marker date="1509175016055" expanded="false" signature="5067:5078" ph="..." />
-                <marker date="1509175016055" expanded="false" signature="5371:5382" ph="..." />
+                <marker date="1509174244087" expanded="true" signature="9425:9463" ph="select name,... users" />
+                <marker date="1509174244087" expanded="true" signature="18679:18712" ph="select pid f... users" />
+                <marker date="1509174244087" expanded="true" signature="32455:32468" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="treepage_admin.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/user/treepage_admin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="230" column="23" lean-forward="false" selection-start-line="230" selection-start-column="23" selection-end-line="230" selection-end-column="23" />
-              <folding>
-                <marker date="1509175011638" expanded="true" signature="128:191" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="listpage.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/user/listpage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1110">
-              <caret line="74" column="65" lean-forward="false" selection-start-line="74" selection-start-column="65" selection-end-line="74" selection-end-column="65" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -144,11 +92,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="initialize.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="initialize.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/user/initialize.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
               <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index_user.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/forecast/index_user.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="27" column="107" lean-forward="false" selection-start-line="27" selection-start-column="107" selection-end-line="27" selection-end-column="107" />
+              <folding>
+                <marker date="1509177317143" expanded="false" signature="5524:5535" ph="..." />
+                <marker date="1509177317143" expanded="false" signature="5851:5862" ph="..." />
+                <marker date="1509177317143" expanded="false" signature="6173:6184" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header_user.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/templates/header_user.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="173" column="46" lean-forward="false" selection-start-line="173" selection-start-column="46" selection-end-line="173" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -259,7 +231,6 @@
         <option value="$PROJECT_DIR$/application/controllers/Bonus.php" />
         <option value="$PROJECT_DIR$/application/models/Mbonus_delivery.php" />
         <option value="$PROJECT_DIR$/application/views/bonus/listpage_admin.php" />
-        <option value="$PROJECT_DIR$/application/views/forecast/index_user.php" />
         <option value="$PROJECT_DIR$/application/views/user/treepage.php" />
         <option value="$PROJECT_DIR$/application/views/user/details_son.php" />
         <option value="$PROJECT_DIR$/application/views/user/details_admin.php" />
@@ -267,6 +238,7 @@
         <option value="$PROJECT_DIR$/application/views/user/listpage.php" />
         <option value="$PROJECT_DIR$/application/views/user/listpage_admin.php" />
         <option value="$PROJECT_DIR$/application/views/user/sublistpage.php" />
+        <option value="$PROJECT_DIR$/application/views/forecast/index_user.php" />
       </list>
     </option>
   </component>
@@ -555,7 +527,7 @@
       <workItem from="1508584900987" duration="10877000" />
       <workItem from="1508658170325" duration="20736000" />
       <workItem from="1509027884820" duration="6156000" />
-      <workItem from="1509170715072" duration="4601000" />
+      <workItem from="1509170715072" duration="4998000" />
     </task>
     <servers />
   </component>
@@ -565,7 +537,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75692000" />
+    <option name="totallyTimeSpent" value="76089000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="948" extended-state="0" />
@@ -862,18 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/templates/header_user.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#li#4;n#ul#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/templates/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="586">
@@ -933,18 +893,6 @@
           <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
           <folding>
             <marker date="1508678853533" expanded="true" signature="362:550" ph="update users... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="721" column="29" lean-forward="false" selection-start-line="721" selection-start-column="29" selection-end-line="721" selection-end-column="29" />
-          <folding>
-            <marker date="1509174244087" expanded="true" signature="9425:9463" ph="select name,... users" />
-            <marker date="1509174244087" expanded="true" signature="18679:18712" ph="select pid f... users" />
-            <marker date="1509174244087" expanded="true" signature="32455:32468" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1094,18 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/forecast/index_user.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="68" column="35" lean-forward="false" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
-          <folding>
-            <marker date="1509174719952" expanded="false" signature="5497:5508" ph="..." />
-            <marker date="1509174719952" expanded="false" signature="5824:5835" ph="..." />
-            <marker date="1509174719952" expanded="false" signature="6146:6157" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/user/treepage.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -1213,11 +1149,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="721" column="29" lean-forward="false" selection-start-line="721" selection-start-column="29" selection-end-line="721" selection-end-column="29" />
+          <folding>
+            <marker date="1509174244087" expanded="true" signature="9425:9463" ph="select name,... users" />
+            <marker date="1509174244087" expanded="true" signature="18679:18712" ph="select pid f... users" />
+            <marker date="1509174244087" expanded="true" signature="32455:32468" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/user/initialize.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/templates/header_user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="173" column="46" lean-forward="false" selection-start-line="173" selection-start-column="46" selection-end-line="173" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/forecast/index_user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="27" column="107" lean-forward="false" selection-start-line="27" selection-start-column="107" selection-end-line="27" selection-end-column="107" />
+          <folding>
+            <marker date="1509177317143" expanded="false" signature="5524:5535" ph="..." />
+            <marker date="1509177317143" expanded="false" signature="5851:5862" ph="..." />
+            <marker date="1509177317143" expanded="false" signature="6173:6184" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

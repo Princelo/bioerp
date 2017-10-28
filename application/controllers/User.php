@@ -717,7 +717,7 @@ class User extends MY_Controller
         $this->session->set_userdata('token_initiation', md5(date('YmdHis').rand(0, 32000)) );
         $data = new stdClass();
         $data->token = $this->session->userdata('token_initiation');
-        $data->user_id = $this->session->userdata('user_id');
+        $data->user_id = $this->session->userdata('current_user_id');
 //        $data->pay_amt = $this->INI_AMY;
         $data->pay_amt = 0.01;
         $this->load->view('templates/header_user', $data);

@@ -39,44 +39,34 @@ class Bonus extends MY_Controller
             ),
         );
         $this->form_validation->set_rules($get_config);
-        if ($this->input->get('year', true) != '' ||
-            $this->input->get('month', true) != ''
-        ) {
-            $year = $this->input->get('year', true);
-            $month = $this->input->get('month', true);
-            $data = array();
-            $config['base_url'] = base_url()."bonus/listpage_admin/";
-            if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
-            $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-            $where = '';
-            $where .= $this->__get_search_str($year, $month);
-            $config['total_rows'] = $this->Mbonus_delivery->intGetCount($where);
-            $config['per_page'] = 30;
-            $this->pagination->initialize($config);
-            $data['page'] = $this->pagination->create_links();
-            $limit = '';
-            $limit .= " limit {$config['per_page']} offset {$offset} ";
-            //$where = '';
-            $order = '';
-            $data['bonus'] = $this->Mbonus_delivery->objGetList($where, $order, $limit);
-            $this->load->view('templates/header', $data);
-            $this->load->view('bonus/listpage_admin', $data);
-        } else {
-            $data = array();
-            $config['base_url'] = base_url()."bonus/listpage_admin/";
-            if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
-            $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
-            $where = '';
-            $config['total_rows'] = $this->Mbonus_delivery->intGetCount($where);
-            $config['per_page'] = 30;
-            $this->pagination->initialize($config);
-            $data['page'] = $this->pagination->create_links();
-            $limit = '';
-            $order = '';
-            $data['bonus'] = $this->Mbonus_delivery->objGetList($where, $order, $limit);
-            $this->load->view('templates/header', $data);
-            $this->load->view('bonus/listpage_admin', $data);
+        $year = $this->input->get('year', true);
+        $month = $this->input->get('month', true);
+        $actived = $this->input->get('actived', true);
+        if ("" == $year) {
+            $year = date('Y');
+            $month = date('m');
+            $actived = "0";
         }
+        $data = array();
+        $data['year'] = $year;
+        $data['month'] = $month;
+        $data['actived'] = $actived;
+        $config['base_url'] = base_url()."bonus/listpage_admin/";
+        if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+        $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
+        $where = '';
+        $where .= $this->__get_search_str($year, $month, $actived);
+        $config['total_rows'] = $this->Mbonus_delivery->intGetCount($where);
+        $config['per_page'] = 30;
+        $this->pagination->initialize($config);
+        $data['page'] = $this->pagination->create_links();
+        $limit = '';
+        $limit .= " limit {$config['per_page']} offset {$offset} ";
+        //$where = '';
+        $order = ' order by id ';
+        $data['bonus'] = $this->Mbonus_delivery->objGetList($where, $order, $limit);
+        $this->load->view('templates/header', $data);
+        $this->load->view('bonus/listpage_admin', $data);
     }
 
     public function delivery()
@@ -115,14 +105,14 @@ class Bonus extends MY_Controller
         $active_begin_at = new DateTime();
         $active_begin_at->setDate($year, $month, 1);
         $active_end_at = new DateTime();
-        $active_end_at->setDate($year, $month == 12 ? 1 : $month + 1, 1);
+        $active_end_at->setDate($month == 12 ? $year + 1 : $year, $month == 12 ? 1 : $month + 1, 1);
         $where = " and ";
-        $where .= " b.active_at >= " . $active_begin_at->format("Y-m-d") . ":date ";
-        $where .= " and b.active_at < " . $active_end_at->format("Y-m-d") . ":date ";
+        $where .= " b.active_at >= '" . $active_begin_at->format("Y-m-d") . "'::date ";
+        $where .= " and b.active_at < '" . $active_end_at->format("Y-m-d") . "'::date ";
         if ($actived == 1) {
-            $where .= " and is_active = true ";
+            $where .= " and b.is_active = true ";
         } elseif ($actived == 2) {
-            $where .= " and is_active = false ";
+            $where .= " and b.is_active = false ";
         }
         return $where;
     }

@@ -35,23 +35,23 @@
                                 <th>搜索</th>
                                 <th>年&nbsp;&nbsp;
                                     <select name="year">
-                                        <?php foreach (getYears() as $year ) { ?>
-                                            <option value="<?=$year?>"><?=$year?></option>
+                                        <?php foreach (getYears() as $y ) { ?>
+                                            <option value="<?=$y?>" <?php if ($year == $y) { echo "selected"; }?>><?=$y?></option>
                                         <?php } ?>
                                     </select>
                                 </th>
                                 <th>月&nbsp;&nbsp;
                                     <select name="month">
-                                        <?php foreach (getMonths() as $month ) { ?>
-                                            <option value="<?=$month?>"><?=$month?></option>
+                                        <?php foreach (getMonths() as $m ) { ?>
+                                            <option value="<?=$m?>" <?php if ($month == $m) { echo "selected"; }?>><?=$m?></option>
                                         <?php } ?>
                                     </select>
                                 </th>
                                 <th>激活状态&nbsp;&nbsp;
                                     <select name="actived">
-                                        <option value="0">不限</option>
-                                        <option value="1">是</option>
-                                        <option value="2">否</option>
+                                        <option value="0" <?php if ($actived == "0") { echo "selected"; }?>>不限</option>
+                                        <option value="1" <?php if ($actived == "1") { echo "selected"; }?>>是</option>
+                                        <option value="2" <?php if ($actived == "2") { echo "selected"; }?>>否</option>
                                     </select>
                                 </th>
                                 <th>
@@ -83,15 +83,15 @@
                             <? $n ++; ?>
                             <tr class="<?=$n%2==0?"even":"odd";?>">
                                 <td><?=$v->id?></td>
-                                <td><?=$v->title?></td>
+                                <td><span id="title<?=$v->id?>"><?=$v->title?></span></td>
                                 <td><?=cny($v->price)?></td>
                                 <td><?=$v->username;?></td>
                                 <td><?=$v->name;?></td>
                                 <td><?=$v->active_at;?></td>
                                 <td><?=$v->delivered_at;?></td>
                                 <td><span class="<?=$v->is_active==true?"accept":"cross";?>"></span></td>
-                                <td><span id="delivery<?=$id?>" class="<?=$v->is_delivered==true?"accept":"cross";?>" id=""></span></td>
-                                <td><a href="javascript:void(0);" onclick="delivery(<?=$v->id?>)">发货</a></td>
+                                <td><span id="delivery<?=$v->id?>" class="<?=$v->is_delivered==true?"accept":"cross";?>" id=""></span></td>
+                                <td><?php if ($v->is_active == true) {?><a href="javascript:void(0);" onclick="delivery(<?=$v->id?>)">发货</a><?php } ?></td>
                             </tr>
                         <? } ?>
                     <? } ?>
@@ -120,14 +120,17 @@
                 $.ajax({
                     url: ajaxurl,
                     dataType: "json",
-                    data: {"id" : id, "title" : title},
+                    data: {"id": id, "title": title},
                     type: "POST",
-                    success: function(ajaxobj){
+                    success: function (ajaxobj) {
                         alert(ajaxobj.message);
-                        if (ajaxobj.state=='success') {
-                            $("#delivery" + id).className = "accept";
+                        if (ajaxobj.state == 'success') {
+                            $("#delivery" + id).removeClass("cross");
+                            $("#delivery" + id).addClass("accept");
+                            $("#title" + id).html(title);
                         }
                     }
+                });
             }
         </script>
         <!-- IE Column Clearing -->

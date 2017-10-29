@@ -479,7 +479,7 @@ if (!function_exists('getYears')) {
         $current = date('Y');
         $begin_year = 2017;
         $years = array();
-        for ($i = $begin_year; $i <= $current; $i++) {
+        for ($i = $begin_year; $i <= $current + 1; $i++) {
             array_push($years, $i);
         }
         return $years;

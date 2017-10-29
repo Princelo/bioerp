@@ -20,6 +20,9 @@
                     <a href='<?=base_url()?>user/listpage_admin' ><div>表格式代理列表 </div></a>
                 </li>
                 <li><a href='<?=base_url();?>user/treepage_admin' ><div>树状图代理列表 </div></a></li>
+                <li>
+                    <a href='<?=base_url()?>user/payments' ><div>支付列表</div></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -177,8 +180,8 @@
                             }
                         },
                     };
-                    /*tmp.details.submenu = {
-                        "create_folder" : {
+                    tmp.details.submenu = {
+                        /*"create_folder" : {
                             "separator_after"	: true,
                             "label"				: "订单",
                             "action"			: function (data) {
@@ -186,7 +189,7 @@
                                     obj = inst.get_node(data.reference);
                                 window.open('<?=site_url('order/query_sub');?>/'+obj.id,"_blank");
                             }
-                        },
+                        },*/
                         "create_file" : {
                             "label"				: "报表",
                             "action"			: function (data) {
@@ -195,7 +198,7 @@
                                 window.open('<?=site_url('report/index_user');?>?user='+obj.id,"_blank");
                             }
                         }
-                    };*/
+                    };
                     if(this.get_type(node) === "valid") {
                         delete tmp.enable;
                     } else {

@@ -90,12 +90,12 @@ class MY_Controller extends CI_Controller
                         coalesce(bonus_product, '$0')
                             + 
                         coalesce(
-                            (select sum(c.volume) 
-                                from coupons c 
-                            where c.is_active = false 
-                              and c.is_finished = false
-                              and c.active_time < '{$now}' 
-                              and c.user_id = u.id),
+                            (select sum(j.amount) 
+                                from bonus_product_jobs j 
+                            where j.is_active = false 
+                              and j.is_finished = false
+                              and j.active_time < '{$now}' 
+                              and j.user_id = u.id),
                         '$0')
                 ";
                 $update_sql_bonus = "

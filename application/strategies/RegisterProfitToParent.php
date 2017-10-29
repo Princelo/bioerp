@@ -6,6 +6,7 @@
  * Time: 8:41 PM
  */
 
+include_once('application/strategies/IPaybackStrategy.php');
 class RegisterProfitToParent implements IPaybackStrategy
 {
     private $db;

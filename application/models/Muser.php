@@ -174,12 +174,16 @@ class Muser extends CI_Model
         include('application/strategies/RegisterProfitToParent.php');
         include('application/strategies/RegisterProfitToGrand.php');
         include('application/strategies/RegisterProductBonus.php');
+        include('application/strategies/Payment.php');
         $register_profit_to_parent = new RegisterProfitToParent($this->db);
         $register_profit_to_grand = new RegisterProfitToGrand($this->db);
         $register_product_bonus = new RegisterProductBonus($this->db);
+        $payment = new Payment($this->db);
         $register_profit_to_parent->payback($user_id, $this->INI_AMT);
         $register_profit_to_grand->payback($user_id, $this->INI_AMT);
         $register_product_bonus->payback($user_id, $this->INI_AMT);
+        $payment->record($user_id, $this->INI_AMT, 'register');
+
         $this->db->trans_complete();
 
         $result = $this->db->trans_status();
@@ -194,7 +198,7 @@ class Muser extends CI_Model
     public function add($main_data)
     {
         $current_user_id = $this->session->userdata('current_user_id');
-        $main_data['is_valid'] = false;
+        $main_data['is_valid'] = true;
         return $this->addWithPid($main_data, $current_user_id);
     }
 
@@ -376,7 +380,7 @@ class Muser extends CI_Model
     {
         $query_sql = "select real_balance::decimal from users where id = ?";
         $query = $this->db->query($query_sql, [$id]);
-        if (floatval($query->result()[0]->balance) >= floatval($volume)) {
+        if (floatval($query->result()[0]->real_balance) >= floatval($volume)) {
             return true;
         } else {
             return false;

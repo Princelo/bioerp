@@ -10,6 +10,9 @@
                     <a href='<?=base_url()?>user/listpage_admin' ><div>表格式代理列表 </div></a>
                 </li>
                 <li><a href='<?=base_url();?>user/treepage_admin' ><div>树状图代理列表 </div></a></li>
+                <li>
+                    <a href='<?=base_url()?>user/payments' ><div>支付列表</div></a>
+                </li>
             </ul>
         </div>
     </div>

@@ -6,7 +6,7 @@
  * Time: 10:34 PM
  */
 
-class Mbonus_delivery extends CI_Model
+class Mpayment extends CI_Model
 {
     private $db;
 
@@ -16,25 +16,26 @@ class Mbonus_delivery extends CI_Model
         $this->db = $this->load->database("default", true);
     }
 
-    public function objGetList($where = '', $order = '', $limit = '')
+    public function listPayments($where = '', $order = '', $limit = '')
     {
         $query_sql = "";
         $query_sql .= "
             select
-                b.id id,
-                b.title title,
-                b.price price,
+                p.id id,
+                p.amount amount,
+                p.type,
                 u.username username,
                 u.name,
                 u.id    user_id,
-                b.is_active,
-                b.is_delivered,
-                b.active_at,
-                b.delivered_at
+                o.id    order_id,
+                p.is_verified,
+                p.pay_at
             from
-                bonus_delivery b
+                payments p
                 left join users u
-                on u.id = b.user_id
+                on u.id = p.user_id
+                left join orders o
+                on o.id = p.order_id
             where
                 1 = 1
                 {$where}
@@ -53,11 +54,11 @@ class Mbonus_delivery extends CI_Model
         return $data;
     }
 
-    public function intGetCount($where)
+    public function countPayments($where)
     {
         $query_sql = "";
         $query_sql .= "
-            select count(1) from bonus_delivery b
+            select count(1) from payments p
             where
             1 = 1
               {$where}
@@ -72,29 +73,6 @@ class Mbonus_delivery extends CI_Model
         $query->free_result();
 
         return $count;
-    }
-
-    public function update($data, $id)
-    {
-        $update_sql = $this->db->update_string("bonus_delivery", $data, array("id" => $id));
-        $this->db->trans_start();
-
-        $this->db->query($update_sql);
-
-        $sql_jobs = "update bonus_product_jobs set is_finished = true, finished_at = 
-                    '{$data['delivered_at']}' where 
-                    id = (select job_id from bonus_delivery d where d.id = {$id})";
-        $this->db->query($sql_jobs);
-
-        $this->db->trans_complete();
-
-        $result = $this->db->trans_status();
-
-        if ($result === true) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 }

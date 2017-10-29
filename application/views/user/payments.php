@@ -27,65 +27,72 @@
 
 
             <div class="info view_form">
-                <h2>代理列表</h2>
+                <h2>奖品列表</h2>
                 <script>
                     if("<?=$this->session->flashdata('flashdata', 'value');?>"!="")
                         alert("<?=$this->session->flashdata('flashdata', 'value');?>");
                 </script>
-                <form action="">
-                    <input type="submit" onclick="history.go(-1);return false;" value="&#171;返回">
-                </form>
+                <div>
+                    <form action="<?=base_url()?>bonus/listpage_admin" method="get">
+                        <table>
+                            <tr>
+                                <th>搜索</th>
+                                <th>年&nbsp;&nbsp;
+                                    <select name="year">
+                                        <?php foreach (getYears() as $y ) { ?>
+                                            <option value="<?=$y?>" <?php if ($year == $y) { echo "selected"; }?>><?=$y?></option>
+                                        <?php } ?>
+                                    </select>
+                                </th>
+                                <th>月&nbsp;&nbsp;
+                                    <select name="month">
+                                        <?php foreach (getMonths() as $m ) { ?>
+                                            <option value="<?=$m?>" <?php if ($month == $m) { echo "selected"; }?>><?=$m?></option>
+                                        <?php } ?>
+                                    </select>
+                                </th>
+                                <th>激活状态&nbsp;&nbsp;
+                                    <select name="actived">
+                                        <option value="0" <?php if ($actived == "0") { echo "selected"; }?>>不限</option>
+                                        <option value="1" <?php if ($actived == "1") { echo "selected"; }?>>是</option>
+                                        <option value="2" <?php if ($actived == "2") { echo "selected"; }?>>否</option>
+                                    </select>
+                                </th>
+                                <th>
+                                    <input type="submit" />
+                                </th>
+
+                            </tr>
+                        </table>
+                    </form>
+                </div>
                 <table width="100%">
                     <!--<col width="50%">
                     <col width="50%">-->
                     <tr>
-                        <th>代理ID</th>
-                        <th>用戶名</th>
-                        <th>姓名</th>
-                        <th>电话</th>
-                        <!--<th>他的业绩</th>-->
-                        <th>他的收益</th>
-                        <th>已提现金额</th>
-                        <th>帐户余额</th>
-                        <!--<th>已生效代金券</th>
-                        <th>未生效代金券</th>-->
-                        <th>是否生效</th>
-                        <th></th>
-                        <th></th>
+                        <th>ID</th>
+                        <th>支付金额</th>
+                        <th>用户</th>
+                        <th>用户姓名</th>
+                        <th>支付时间</th>
+                        <th>成功核验</th>
                     </tr>
                     <? $n = 0; ?>
-                    <? if(!empty($users)) {?>
-                        <? foreach($users as $k => $v){ ?>
+                    <? if(!empty($payments)) { ?>
+                        <? foreach($payments as $k => $v){ ?>
                             <? $n ++; ?>
                             <tr class="<?=$n%2==0?"even":"odd";?>">
                                 <td><?=$v->id?></td>
+                                <td><?=cny($v->amount)?></td>
                                 <td><?=$v->username;?></td>
                                 <td><?=$v->name;?></td>
-                                <td><?=$v->mobile_no;?></td>
-                                <!--<td><?=cny($v->turnover)?></td>-->
-                                <td><?=cny($v->profit)?></td>
-                                <td><?=cny($v->withdraw_volume)?></td>
-                                <td><?=cny($v->real_balance)?></td>
-                                <!--<td><?=cny($v->active_coupon)?></td>
-                                <td><?=cny($v->inactivated_coupon)?></td>-->
-                                <td><?=$v->is_valid==true?'是':'否'?></td>
-                                <td><a href="<?=base_url()?>user/sublistpage/<?=$v->id?>">他的下级</a></td>
-                                <td><a bhref="<?=base_url()?>user/details_admin/<?=$v->id?>" onclick="window.open('<?=base_url()?>user/details_admin/<?=$v->id?>','Edit','width=600,height=600,0,status=0,')">编辑</a></td>
+                                <td><?=$v->pay_at;?></td>
+                                <td><span class="<?=$v->is_verified==true?"accept":"cross";?>"></span></td>
                             </tr>
                         <? } ?>
                     <? } ?>
                 </table>
                 <div class="page"><?=$page;?></div>
-                <script>
-                    /*function myconfirm(id){
-                     if (confirm("are you sure?")){
-                     window.location.href = "<?=base_url()?>index.php/unvadmin/singerdelete/"+id;
-                     } else {
-
-                     }
-                     }*/
-                </script>
-
 
             </div>
 

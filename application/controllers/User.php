@@ -11,6 +11,7 @@ class User extends MY_Controller
         if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
             redirect('login');
         $this->load->model('Muser', 'Muser');
+        $this->load->model('Mpayment', 'Mpayment');
         $this->load->library('form_validation');
         $this->load->library('pagination');
         $this->db = $this->load->database('default', true);
@@ -847,5 +848,71 @@ class User extends MY_Controller
             return true;
         }
     }
+
+    public function payments($offset = 0)
+    {
+        if ($this->session->userdata('role') != 'admin') {
+            exit('You are not the admin.');
+        }
+        $get_config = array(
+            array(
+                'field' =>  'year',
+                'label' =>  '年',
+                'rules' =>  'trim|xss_clean|numeric'
+            ),
+            array(
+                'field' =>  'month',
+                'label' =>  '月',
+                'rules' =>  'trim|xss_clean|numeric'
+            ),
+        );
+        $this->form_validation->set_rules($get_config);
+        $year = $this->input->get('year', true);
+        $month = $this->input->get('month', true);
+        $actived = $this->input->get('actived', true);
+        if ("" == $year) {
+            $year = date('Y');
+            $month = date('m');
+            $actived = "0";
+        }
+        $data = array();
+        $data['year'] = $year;
+        $data['month'] = $month;
+        $data['actived'] = $actived;
+        $config['base_url'] = base_url()."user/payments/";
+        if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+        $config['first_url'] = $config['base_url'].'?'.http_build_query($_GET);
+        $where = '';
+        $where .= $this->__payments_where($year, $month, $actived);
+        $config['total_rows'] = $this->Mpayment->countPayments($where);
+        $config['per_page'] = 30;
+        $this->pagination->initialize($config);
+        $data['page'] = $this->pagination->create_links();
+        $limit = '';
+        $limit .= " limit {$config['per_page']} offset {$offset} ";
+        //$where = '';
+        $order = ' order by id ';
+        $data['payments'] = $this->Mpayment->listPayments($where, $order, $limit);
+        $this->load->view('templates/header', $data);
+        $this->load->view('user/payments', $data);
+    }
+
+    private function __payments_where($year, $month, $actived)
+    {
+        $pay_begin_at = new DateTime();
+        $pay_begin_at->setDate($year, $month, 1);
+        $pay_end_at = new DateTime();
+        $pay_end_at->setDate($month == 12 ? $year + 1 : $year, $month == 12 ? 1 : $month + 1, 1);
+        $where = " and ";
+        $where .= " p.pay_at >= '" . $pay_begin_at->format("Y-m-d") . "'::date ";
+        $where .= " and p.pay_at < '" . $pay_end_at->format("Y-m-d") . "'::date ";
+        if ($actived == 1) {
+            $where .= " and p.is_verified = true ";
+        } elseif ($actived == 2) {
+            $where .= " and p.is_verified = false ";
+        }
+        return $where;
+    }
+
 }
 

@@ -6,6 +6,7 @@
  * Time: 8:46 PM
  */
 
+include_once('application/strategies/IPaybackStrategy.php');
 class RegisterProfitToGrand implements IPaybackStrategy
 {
     private $db;

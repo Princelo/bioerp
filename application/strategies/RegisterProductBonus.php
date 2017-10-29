@@ -6,6 +6,7 @@
  * Time: 9:23 PM
  */
 
+include_once('application/strategies/IPaybackStrategy.php');
 class RegisterProductBonus implements IPaybackStrategy
 {
     private $db;
@@ -31,9 +32,6 @@ class RegisterProductBonus implements IPaybackStrategy
                     "price" => '$1200',
                     "active_at" =>$next->format('Y-m-d 00:00:00'),
                 );
-                $sql = "insert into bonus_product_jobs (user_id, active_time, amount) values ($user_id,
-                        '{$append['active_at']}', '{$append['price']}')";
-                array_push($jobs, $sql);
             }
             array_push($values, $append);
         } else {

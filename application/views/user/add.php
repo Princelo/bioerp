@@ -11,7 +11,7 @@
                 <li>
                     <a href='<?=base_url()?>user/treepage' ><div>代理关系图 </div></a>
                 </li>
-                <li><a href='<?=base_url();?>user/add' ><div>新增代理 </div></a></li>
+                <li><a <? if(!$this->session->userdata('initiation')) {?>href="javascript:void(0);" b<?}?>href='<?=base_url();?>user/add' ><div <? if(!$this->session->userdata('initiation')) {?>style="color:#aaa"<?}?>>新增代理 </div></a></li>
             </ul>
         </div>
     </div>

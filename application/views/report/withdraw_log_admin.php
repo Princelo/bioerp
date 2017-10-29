@@ -7,10 +7,10 @@
         <div id="col1_content" class="clearfix">
 
             <ul id="left_menu">
-                <li>
+                <!--<li>
                     <a href='<?=base_url()?>report/index_admin' ><div>代理报表查询 </div></a>
                 </li>
-                <li><a href='<?=base_url();?>report/index_zents' ><div>总报表查询 </div></a></li>
+                <li><a href='<?=base_url();?>report/index_zents' ><div>总报表查询 </div></a></li>-->
                 <li>
                     <a href='<?=base_url()?>report/listpage_withdraw_admin' ><div>结算查询 </div></a>
                 </li>

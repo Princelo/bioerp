@@ -188,13 +188,13 @@
                 </ul>
 
             </li>
-            <li class="li-menu" style="display: none;">
+            <li class="li-menu">
                 <a href="javascript:;" onclick="showmenu('menu-report')" class="parent" ><span>报表系统 </span></a>
                 <ul class="dropdown-menu other-menu" id="menu-report">
-                    <li><a href="<?=base_url()?>report/index" class="" style="background: none;"><span>报表查询 </span></a>
+                    <!--<li><a href="<?=base_url()?>report/index" class="" style="background: none;"><span>报表查询 </span></a>
                     </li>
                     <li><a href="<?=base_url()?>report/index_sub" class="" style="background: none;"><span>报表查询(下级代理) </span></a>
-                    </li>
+                    </li>-->
                     <li><a href="<?=base_url()?>report/withdraw" class="" style="background: none;"><span>结算查询 </span></a>
                     </li>
                 </ul>

@@ -180,6 +180,7 @@
                     <li><a href="<?=base_url()?>user/listpage_admin" class="" style="background: none;"><span>表格式代理列表 </span></a>
                     <li><a href="<?=base_url()?>user/treepage_admin" class="" style="background: none;"><span>树状图代理列表 </span></a>
                     </li>
+                    <li><a href="<?=base_url()?>user/payments" class="" style="background: none;"><span>支付列表 </span></a>
                 </ul>
 
             </li>
@@ -199,13 +200,13 @@
                 </ul>
 
             </li>
-            <li class="li-menu" style="display: none;">
+            <li class="li-menu">
                 <a href="javascript:;" onclick="showmenu('menu-report')" class="parent" ><span>报表系统 </span></a>
                 <ul class="dropdown-menu other-menu" id="menu-report">
-                    <li><a href="<?=base_url()?>report/index_admin" class="" style="background: none;"><span>代理报表查询 </span></a>
+                    <!--<li><a href="<?=base_url()?>report/index_admin" class="" style="background: none;"><span>代理报表查询 </span></a>
                     </li>
                     <li><a href="<?=base_url()?>report/index_zents" class="" style="background: none;"><span>总报表查询 </span></a>
-                    </li>
+                    </li>-->
                     <li><a href="<?=base_url()?>report/listpage_withdraw_admin" class="" style="background: none;"><span>结算查询 </span></a>
                 </ul>
             </li>

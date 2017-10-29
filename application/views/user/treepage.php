@@ -130,7 +130,7 @@
                                 window.open('<?=site_url('user/details');?>/'+obj.id,"Edit","width=600,height=600,0,status=0,");
                             }
                         },
-                        /*'order': {
+                        'order': {
                             "label": '订单',
                             "action": function (data) {
                                 var inst = $.jstree.reference(data.reference),
@@ -145,7 +145,7 @@
                                     obj = inst.get_node(data.reference);
                                 window.open('<?=site_url('report/query_sub');?>/'+obj.id,"_blank");
                             }
-                        }*/
+                        }
                     };
                     if (node.id <= <?=$this->session->userdata('current_user_id');?> || node.id == '#') {
                         delete tmp.report;
@@ -167,7 +167,7 @@
         });
         // bind to events triggered on the tree
         $('#jstree').on("changed.jstree", function (e, data) {
-            console.log(data.selected);
+//            console.log(data.selected);
         })
         // interact with the tree - either way is OK
         $('button').on('click', function () {

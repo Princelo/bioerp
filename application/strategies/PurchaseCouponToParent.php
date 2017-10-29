@@ -6,6 +6,7 @@
  * Time: 4:16 PM
  */
 
+include_once('application/strategies/IPaybackStrategy.php');
 class PurchaseCouponToParent implements IPaybackStrategy
 {
     private $db;

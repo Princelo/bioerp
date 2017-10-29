@@ -51,7 +51,7 @@
                                         <?php } ?>
                                     </select>
                                 </th>
-                                <th>激活状态&nbsp;&nbsp;
+                                <th>验证状态&nbsp;&nbsp;
                                     <select name="actived">
                                         <option value="0" <?php if ($actived == "0") { echo "selected"; }?>>不限</option>
                                         <option value="1" <?php if ($actived == "1") { echo "selected"; }?>>是</option>

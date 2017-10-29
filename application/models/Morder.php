@@ -427,7 +427,7 @@ class Morder extends CI_Model
         ";
         $binds = array($order_id);
         $query = $this->objDB->query($query_sql, $binds);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -537,13 +537,13 @@ class Morder extends CI_Model
         $query_sql = "select count(1) from orders where id = ? and user_id = ?;";
         $binds = array($order_id, $user_id);
         $query = $this->objDB->query($query_sql, $binds);
-        if($query->num_rows() > 0){
-            if($query->result()[0]->count > 0) {
+        if ($query->num_rows() > 0) {
+            if ($query->result()[0]->count > 0) {
                 return true;
             } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
     }
@@ -586,8 +586,8 @@ class Morder extends CI_Model
         ";
         $binds = array($order_id);
         $query = $this->objDB->query($query_sql, $binds);
-        if($query->num_rows() > 0){
-            if($query->result()[0]->count > 0) {
+        if ($query->num_rows() > 0) {
+            if ($query->result()[0]->count > 0) {
                 return true;
             } else {
                 return false;
@@ -612,13 +612,13 @@ class Morder extends CI_Model
         ";
         $binds = array($order_id);
         $query = $this->objDB->query($query_sql, $binds);
-        if($query->num_rows() > 0){
-            if($query->result()[0]->count > 0) {
+        if ($query->num_rows() > 0) {
+            if ($query->result()[0]->count > 0) {
                 return true;
             } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
     }

@@ -41,7 +41,7 @@ class Mproduct extends CI_Model
         ";
         $data = array();
         $query = $this->objDB->query($query_sql);
-        if($query->num_rows() > 0){
+        if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $val) {
                 $data[] = $val;
             }
@@ -119,7 +119,7 @@ class Mproduct extends CI_Model
 
         $result = $this->objDB->trans_status();
 
-        if ($result === true){
+        if ($result === true) {
             return true;
         } else {
             return false;
@@ -139,7 +139,7 @@ class Mproduct extends CI_Model
         $query = $this->objDB->query($query_sql);
 
 
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             $count = $query->row()->count;
         }
 
@@ -156,7 +156,7 @@ class Mproduct extends CI_Model
         ";
         $binds = array($product_id);
         $query = $this->objDB->query($query_sql, $binds);
-        if($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             $title = $query->row()->title;
         }
 

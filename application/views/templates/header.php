@@ -213,7 +213,7 @@
             <li class="li-menu" style="display: none;">
                 <a href="<?=base_url()?>post_setting"><span>运费设置</span></a>
             </li>
-            <li class="li-menu"><a href="<?=base_url();?>user/password" class=""><span>修改密碼 </span></a></li>
+            <li class="li-menu"><a href="<?=base_url();?>user/password" class=""><span>修改密码 </span></a></li>
             <li class="li-menu"><a href="<?=base_url();?>logout" class=""><span>登出 </span></a></li>
         </ul>
     </div>

@@ -33,7 +33,7 @@
                         alert("<?=$this->session->flashdata('flashdata', 'value');?>");
                 </script>
                 <div>
-                    <form action="<?=base_url()?>bonus/listpage_admin" method="get">
+                    <form action="<?=base_url()?>user/payments" method="get">
                         <table>
                             <tr>
                                 <th>搜索</th>

@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-error_reporting(E_ERROR);
+//error_reporting(E_ERROR);
 
 require_once "application/lib/WxPay.Api.php";
 require_once 'application/lib/WxPay.Notify.php';
-require_once 'log.php';
+require_once 'application/views/mobile/user/log.php';
 //初始化日志
 $logHandler= new CLogFileHandler("application/logs/".date('Y-m-d').'.log');
 $log = Log::Init($logHandler, 15);

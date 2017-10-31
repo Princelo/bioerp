@@ -80,7 +80,7 @@ class Forecast extends MY_Controller
         } else {
             if (!$this->session->userdata('initiation')) {
                 $user_id = $this->session->userdata('current_user_id');
-                $count = $this->Mpayment->countPayments(" user_id = $user_id and type = 'register' ");
+                $count = $this->Mpayment->countPayments(" and user_id = $user_id and type = 'register' ");
                 $tip = "";
                 $paid = false;
                 if ($count > 0) {

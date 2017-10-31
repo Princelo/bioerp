@@ -811,7 +811,7 @@ $id;
             $this->session->set_flashdata('flashdata', '你已经成为正式代理');
             redirect('forecast/index');
         }
-        if ($this->Mpayment->countPayments(" user_id = $user_id and type = 'register' ") > 0) {
+        if ($this->Mpayment->countPayments(" and user_id = $user_id and type = 'register' ") > 0) {
             redirect('forecast/index');
         }
         if (is_mobile()) {

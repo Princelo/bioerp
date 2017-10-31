@@ -21,7 +21,7 @@ class Payment
         $data['amount'] = $pay_amt;
         $data['type'] = $type;
         $sql = "insert into payments
-                select $user_id, $pay_amt, '$type' from payments
+                select $user_id user_id, $pay_amt pay_amount, '$type' register from payments
                 where not exists (
                   select 1 from payments where user_id = $user_id and type = '$type'
                 )";

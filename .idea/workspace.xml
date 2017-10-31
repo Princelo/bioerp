@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa958129-21e8-4953-b289-2369920a78ea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/User.php" afterPath="$PROJECT_DIR$/application/controllers/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/strategies/Payment.php" afterPath="$PROJECT_DIR$/application/strategies/Payment.php" />
     </list>
     <ignored path="zentserp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="1033" column="51" lean-forward="false" selection-start-line="1033" selection-start-column="51" selection-end-line="1033" selection-end-column="51" />
+            <state relative-caret-position="390">
+              <caret line="1031" column="8" lean-forward="false" selection-start-line="1031" selection-start-column="8" selection-end-line="1031" selection-end-column="8" />
               <folding>
                 <marker date="1509472696078" expanded="true" signature="9664:9702" ph="select name,... users" />
                 <marker date="1509472696078" expanded="true" signature="14181:14219" ph="select name,... users" />
@@ -60,19 +60,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Payment.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Payment.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/strategies/Payment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="45" lean-forward="false" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
+            <state relative-caret-position="345">
+              <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
               <folding>
-                <marker date="1509469108887" expanded="true" signature="475:518" ph="insert into payments... " />
-                <marker date="1509469108887" expanded="true" signature="475:528" ph="insert into payments... " />
-                <marker date="1509469108887" expanded="true" signature="475:653" ph="insert into payments... " />
-                <marker date="1509469108887" expanded="true" signature="475:666" ph="insert into payments... " />
-                <marker date="1509469108887" expanded="true" signature="475:680" ph="insert into payments... " />
-                <marker date="1509469108887" expanded="true" signature="475:698" ph="insert into payments... " />
-                <marker date="1509469108887" expanded="true" signature="614:652" ph="select 1 fro... payments" />
+                <marker date="1509473066995" expanded="true" signature="475:518" ph="insert into payments... " />
+                <marker date="1509473066995" expanded="true" signature="475:536" ph="insert into payments... " />
+                <marker date="1509473066995" expanded="true" signature="475:681" ph="insert into payments... " />
+                <marker date="1509473066995" expanded="true" signature="475:694" ph="insert into payments... " />
+                <marker date="1509473066995" expanded="true" signature="475:708" ph="insert into payments... " />
+                <marker date="1509473066995" expanded="true" signature="475:726" ph="insert into payments... " />
+                <marker date="1509473066995" expanded="true" signature="642:680" ph="select 1 fro... payments" />
               </folding>
             </state>
           </provider>
@@ -126,8 +126,8 @@
       <file leaf-file-name="Mpayment.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Mpayment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+            <state relative-caret-position="825">
+              <caret line="60" column="35" lean-forward="true" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
               <folding>
                 <marker date="1509289013387" expanded="true" signature="415:972" ph="select p.id payments" />
                 <marker date="1509289013387" expanded="true" signature="1385:1467" ph="select count... bonus_delivery" />
@@ -300,12 +300,12 @@
         <option value="$PROJECT_DIR$/application/strategies/RegisterProfitToParent.php" />
         <option value="$PROJECT_DIR$/application/strategies/Turnover.php" />
         <option value="$PROJECT_DIR$/application/controllers/Wxpay_notify.php" />
-        <option value="$PROJECT_DIR$/application/strategies/Payment.php" />
         <option value="$PROJECT_DIR$/application/models/Muser.php" />
         <option value="$PROJECT_DIR$/application/views/mobile/forecast/index_user.php" />
         <option value="$PROJECT_DIR$/application/views/mobile/user/initialize.php" />
         <option value="$PROJECT_DIR$/application/controllers/Forecast.php" />
         <option value="$PROJECT_DIR$/application/controllers/User.php" />
+        <option value="$PROJECT_DIR$/application/strategies/Payment.php" />
       </list>
     </option>
   </component>
@@ -475,7 +475,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="com.intellij.ide.scratch.ScratchpadManager" value="PostgreSQL" />
     <property name="dynamic.classpath" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="Servi&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/services/InitiationService.php&#10;payment&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/strategies/Payment.php&#10;fore&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Forecast.php&#10;forecast/index&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/mobile/forecast/index_user.php&#10;ini&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/mobile/user/initialize.php&#10;User&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/User.php&#10;in&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/mobile/user/initialize.php&#10;user&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/User.php&#10;i&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/mobile/user/initialize.php&#10;foreca&#9;null&#9;null&#10;mpay&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Mpayment.php&#10;pay&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/strategies/Payment.php&#10;Muser&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Muser.php&#10;wx&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Wxpay_notify.php&#10;wxpay_no&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Wxpay_notify.php&#10;order&#9;null&#9;null&#10;alipay&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Alipay_notify.php&#10;payments&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/user/payments.php&#10;hea&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/templates/header.php&#10;head&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/templates/header_user.php&#10;header&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/templates/header_user.php&#10;muser&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Muser.php&#10;bonus&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Bonus.php&#10;produc&#9;null&#9;null&#10;mbo&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Mbonus_delivery.php&#10;gene&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/helpers/general_helper.php&#10;my&#9;null&#9;null&#10;init&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/user/initialize.php&#10;general_h&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/helpers/general_helper.php&#10;mor&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/MorderProxy.php&#10;morder&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Morder.php&#10;login&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Login.php&#10;list_admin&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/user/listpage_admin.php&#10;session&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/system/libraries/Session/Session.php&#10;config&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/config/config.php&#10;autoload&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/config/autoload.php&#10;muser.php&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Muser.php&#10;det&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;cart&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/cart.php&#10;mycon&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/libraries/MY_Controller.php&#10;index_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/forecast/index_user.php&#10;for&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Forecast.php&#10;add_by&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/add_by_cart.php&#10;mpro&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Mproduct.php&#10;product&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Product.php&#10;pay_&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/pay_method.php&#10;ver&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/assets/js/verify.notify.js&#10;updatePay&#9;null&#9;null&#10;modi&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/modify_payment.php&#10;modify&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/modify_payment.php" />
+    <property name="SearchEverywhereHistoryKey" value="payment&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/strategies/Payment.php&#10;mp&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Mpayment.php&#10;Servi&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/services/InitiationService.php&#10;fore&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Forecast.php&#10;forecast/index&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/mobile/forecast/index_user.php&#10;ini&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/mobile/user/initialize.php&#10;User&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/User.php&#10;in&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/mobile/user/initialize.php&#10;user&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/User.php&#10;i&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/mobile/user/initialize.php&#10;foreca&#9;null&#9;null&#10;mpay&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Mpayment.php&#10;pay&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/strategies/Payment.php&#10;Muser&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Muser.php&#10;wx&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Wxpay_notify.php&#10;wxpay_no&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Wxpay_notify.php&#10;order&#9;null&#9;null&#10;alipay&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Alipay_notify.php&#10;payments&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/user/payments.php&#10;hea&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/templates/header.php&#10;head&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/templates/header_user.php&#10;header&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/templates/header_user.php&#10;muser&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Muser.php&#10;bonus&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Bonus.php&#10;produc&#9;null&#9;null&#10;mbo&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Mbonus_delivery.php&#10;gene&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/helpers/general_helper.php&#10;my&#9;null&#9;null&#10;init&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/user/initialize.php&#10;general_h&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/helpers/general_helper.php&#10;mor&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/MorderProxy.php&#10;morder&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Morder.php&#10;login&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/controllers/Login.php&#10;list_admin&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/views/user/listpage_admin.php&#10;session&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/system/libraries/Session/Session.php&#10;config&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/config/config.php&#10;autoload&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/config/autoload.php&#10;muser.php&#9;FILE&#9;file:///Library/WebServer/Documents/bioerp/application/models/Muser.php&#10;det&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/user/details_admin.php&#10;cart&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/cart.php&#10;mycon&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/libraries/MY_Controller.php&#10;index_user&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/forecast/index_user.php&#10;for&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Forecast.php&#10;add_by&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/add_by_cart.php&#10;mpro&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/models/Mproduct.php&#10;product&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/controllers/Product.php&#10;pay_&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/pay_method.php&#10;ver&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/assets/js/verify.notify.js&#10;updatePay&#9;null&#9;null&#10;modi&#9;FILE&#9;file:///Library/WebServer/Documents/zentserp2/application/views/order/modify_payment.php" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -566,7 +566,7 @@
       <workItem from="1509027884820" duration="6156000" />
       <workItem from="1509170715072" duration="5849000" />
       <workItem from="1509283939837" duration="8648000" />
-      <workItem from="1509458934217" duration="11730000" />
+      <workItem from="1509458934217" duration="12040000" />
     </task>
     <servers />
   </component>
@@ -576,7 +576,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97318000" />
+    <option name="totallyTimeSpent" value="97628000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="948" extended-state="0" />
@@ -1105,17 +1105,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Mpayment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="26" column="35" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-          <folding>
-            <marker date="1509289013387" expanded="true" signature="415:972" ph="select p.id payments" />
-            <marker date="1509289013387" expanded="true" signature="1385:1467" ph="select count... bonus_delivery" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/mobile/user/initialize.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-198">
@@ -1143,22 +1132,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/strategies/Payment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="45" lean-forward="false" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
-          <folding>
-            <marker date="1509469108887" expanded="true" signature="475:518" ph="insert into payments... " />
-            <marker date="1509469108887" expanded="true" signature="475:528" ph="insert into payments... " />
-            <marker date="1509469108887" expanded="true" signature="475:653" ph="insert into payments... " />
-            <marker date="1509469108887" expanded="true" signature="475:666" ph="insert into payments... " />
-            <marker date="1509469108887" expanded="true" signature="475:680" ph="insert into payments... " />
-            <marker date="1509469108887" expanded="true" signature="475:698" ph="insert into payments... " />
-            <marker date="1509469108887" expanded="true" signature="614:652" ph="select 1 fro... payments" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/services/InitiationService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1169,14 +1142,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="1033" column="51" lean-forward="false" selection-start-line="1033" selection-start-column="51" selection-end-line="1033" selection-end-column="51" />
+        <state relative-caret-position="390">
+          <caret line="1031" column="8" lean-forward="false" selection-start-line="1031" selection-start-column="8" selection-end-line="1031" selection-end-column="8" />
           <folding>
             <marker date="1509472696078" expanded="true" signature="9664:9702" ph="select name,... users" />
             <marker date="1509472696078" expanded="true" signature="14181:14219" ph="select name,... users" />
             <marker date="1509472696078" expanded="true" signature="23026:23059" ph="select pid f... users" />
             <marker date="1509472696078" expanded="true" signature="37646:37684" ph="select name,... users" />
             <marker date="1509472696078" expanded="true" signature="40714:40727" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Mpayment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="60" column="35" lean-forward="true" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
+          <folding>
+            <marker date="1509289013387" expanded="true" signature="415:972" ph="select p.id payments" />
+            <marker date="1509289013387" expanded="true" signature="1385:1467" ph="select count... bonus_delivery" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/strategies/Payment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+          <folding>
+            <marker date="1509473066995" expanded="true" signature="475:518" ph="insert into payments... " />
+            <marker date="1509473066995" expanded="true" signature="475:536" ph="insert into payments... " />
+            <marker date="1509473066995" expanded="true" signature="475:681" ph="insert into payments... " />
+            <marker date="1509473066995" expanded="true" signature="475:694" ph="insert into payments... " />
+            <marker date="1509473066995" expanded="true" signature="475:708" ph="insert into payments... " />
+            <marker date="1509473066995" expanded="true" signature="475:726" ph="insert into payments... " />
+            <marker date="1509473066995" expanded="true" signature="642:680" ph="select 1 fro... payments" />
           </folding>
         </state>
       </provider>

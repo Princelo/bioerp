@@ -182,7 +182,10 @@ class Muser extends CI_Model
         $register_profit_to_parent->payback($user_id, $this->INI_AMT);
         $register_profit_to_grand->payback($user_id, $this->INI_AMT);
         $register_product_bonus->payback($user_id, $this->INI_AMT);
-        $payment->record($user_id, $this->INI_AMT, 'register');
+        if (!$payment->verifyRegister($user_id)) {
+            $payment->record($user_id, $this->INI_AMT, 'register');
+            $payment->verifyRegister($user_id);
+        }
 
         $this->db->trans_complete();
 

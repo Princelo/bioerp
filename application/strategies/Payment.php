@@ -20,8 +20,20 @@ class Payment
         $data['user_id'] = $user_id;
         $data['amount'] = $pay_amt;
         $data['type'] = $type;
-        $data['is_verified'] = true;
-        $sql = $this->db->insert_string("payments", $data);
+        $sql = "insert into payments
+                select $user_id, $pay_amt, '$type' from payments
+                where not exists (
+                  select 1 from payments where user_id = $user_id and type = '$type'
+                )";
         $this->db->query($sql);
+
+    }
+
+    public function verifyRegister($user_id)
+    {
+        $sql = $this->db->update_string("payments", array('is_verified' => true),
+            array("user_id" => $user_id, "type" => "register"));
+        $this->db->query($sql);
+        return $this->db->affected_rows() > 0;
     }
 }

@@ -1014,6 +1014,20 @@ $id;
         }
     }
 
+    public function return_wxpay()
+    {
+        if ($this->session->userdata('role')) {
+            exit('You are the admin');
+        }
+        if ($this->session->userdata('initiation')) {
+            $this->session->set_flashdata('flashdata', '恭喜成为正式代理');
+            redirect('forecast/index');
+        }
+        $user_id = $this->session->userdata('current_user_id');
+        $payment = new Payment($this->db);
+        $payment->record($user_id, 5000,'register');
+    }
+
     private function __get_search_str($search = '')
     {
         $where = '';

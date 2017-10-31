@@ -803,8 +803,15 @@ $id;
 
     public function initialize()
     {
+        if ($this->session->userdata('role') == 'admin') {
+            exit('You are the admin');
+        }
+        $user_id = $this->session->userdata('current_user_id');
         if ($this->session->userdata('initiation')) {
             $this->session->set_flashdata('flashdata', '你已经成为正式代理');
+            redirect('forecast/index');
+        }
+        if ($this->Mpayment->countPayments(" user_id = $user_id and type = 'register' ") > 0) {
             redirect('forecast/index');
         }
         if (is_mobile()) {
@@ -1016,7 +1023,7 @@ $id;
 
     public function return_wxpay()
     {
-        if ($this->session->userdata('role')) {
+        if ($this->session->userdata('role') == 'admin') {
             exit('You are the admin');
         }
         if ($this->session->userdata('initiation')) {
@@ -1026,6 +1033,7 @@ $id;
         $user_id = $this->session->userdata('current_user_id');
         $payment = new Payment($this->db);
         $payment->record($user_id, 5000,'register');
+        redirect('forecast/index');
     }
 
     private function __get_search_str($search = '')

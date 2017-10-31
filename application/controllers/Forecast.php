@@ -11,6 +11,7 @@ class Forecast extends MY_Controller
             redirect('login');
         $this->load->model('Mforecast', 'Mforecast');
         $this->load->model('Muser', 'Muser');
+        $this->load->model('Mpayment', 'Mpayment');
         $this->load->library('form_validation');
     }
 
@@ -77,6 +78,21 @@ class Forecast extends MY_Controller
 
             $this->load->view('forecast/index', $data);
         } else {
+            if (!$this->session->userdata('initiation')) {
+                $user_id = $this->session->userdata('current_user_id');
+                $count = $this->Mpayment->countPayments(" user_id = $user_id and type = 'register' ");
+                $tip = "";
+                $paid = false;
+                if ($count > 0) {
+                    $tip .= '你已成功付款，系统核验中...';
+                    $paid = true;
+                } else {
+                    $tip .= "马上成为正式代理";
+                    $paid = false;
+                }
+            }
+            $data['tip'] = $tip;
+            $data['paid'] = $paid;
             //$data['tip'] = $this->_getTips($data);
             $this->load->view('templates/header_user', $data);
             $this->load->view('forecast/index_user', $data);

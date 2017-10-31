@@ -94,6 +94,10 @@ class Forecast extends MY_Controller
             $data['tip'] = $tip;
             $data['paid'] = $paid;
             //$data['tip'] = $this->_getTips($data);
+            if (is_mobile()) {
+                $this->load->view('mobile/forecast/index_user', $data);
+                return;
+            }
             $this->load->view('templates/header_user', $data);
             $this->load->view('forecast/index_user', $data);
         }

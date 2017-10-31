@@ -2,11 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: Princelo
- * Date: 10/22/17
- * Time: 3:57 PM
+ * Date: 10/31/17
+ * Time: 11:06 PM
  */
 
-interface IPaybackStrategy
+interface IService
 {
-    function payback($user_id, $purchase_amount);
+    function process($data);
 }

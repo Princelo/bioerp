@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Created by PhpStorm.
  * User: Princelo
@@ -20,6 +20,7 @@ class Payment
         $data['user_id'] = $user_id;
         $data['amount'] = $pay_amt;
         $data['type'] = $type;
+        $data['is_verified'] = true;
         $sql = $this->db->insert_string("payments", $data);
         $this->db->query($sql);
     }

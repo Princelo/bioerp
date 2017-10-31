@@ -1031,6 +1031,7 @@ $id;
             redirect('forecast/index');
         }
         $user_id = $this->session->userdata('current_user_id');
+        require_once('application/strategies/Payment.php');
         $payment = new Payment($this->db);
         $payment->record($user_id, 5000,'register');
         redirect('forecast/index');

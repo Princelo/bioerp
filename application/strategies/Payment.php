@@ -20,12 +20,13 @@ class Payment
         $data['user_id'] = $user_id;
         $data['amount'] = $pay_amt;
         $data['type'] = $type;
-        $sql = "insert into payments
-                select $user_id user_id, $pay_amt pay_amount, '$type' register from payments
+        $sql = "insert into payments(user_id, amount, type)
+                select $user_id user_id, $pay_amt amount, '$type' as type
                 where not exists (
                   select 1 from payments where user_id = $user_id and type = '$type'
                 )";
         $this->db->query($sql);
+        return $this->db->affected_rows() > 0;
 
     }
 

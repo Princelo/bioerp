@@ -78,11 +78,11 @@ class Forecast extends MY_Controller
 
             $this->load->view('forecast/index', $data);
         } else {
+            $tip = "";
+            $paid = true;
             if (!$this->session->userdata('initiation')) {
                 $user_id = $this->session->userdata('current_user_id');
                 $count = $this->Mpayment->countPayments(" and user_id = $user_id and type = 'register' ");
-                $tip = "";
-                $paid = false;
                 if ($count > 0) {
                     $tip .= '你已成功付款，系统核验中...';
                     $paid = true;

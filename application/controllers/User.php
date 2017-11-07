@@ -19,7 +19,7 @@ class User extends MY_Controller
             if ($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'user')
                 redirect('login');
         }
-        
+
         $this->load->model('Muser', 'Muser');
         $this->load->model('Mpayment', 'Mpayment');
         $this->load->library('form_validation');
@@ -111,7 +111,7 @@ class User extends MY_Controller
             exit('You are not the admin.');
         }
         $current_user_id = // $this->session->userdata('current_user_id');
-$id;
+            $id;
         $get_config = array(
             array(
                 'field' => 'search',
@@ -284,7 +284,7 @@ $id;
                 'rules' => 'trim|xss_clean|required|is_natural|less_than[2]'
             )
         );
-        
+
         $this->form_validation->set_rules($config);
         if (isset($_POST) && ! empty($_POST)) {
             if ($this->form_validation->run() == FALSE) {
@@ -391,7 +391,7 @@ $id;
                 'rules' => 'trim|xss_clean|required|is_natural|less_than[2]'
             )
         );
-        
+
         $this->form_validation->set_rules($config);
         if (isset($_POST) && ! empty($_POST)) {
             if ($this->form_validation->run() == FALSE) {
@@ -490,7 +490,7 @@ $id;
                 'rules' => 'trim|xss_clean|required'
             )
         );
-        
+
         $this->form_validation->set_rules($config);
         if (isset($_POST) && ! empty($_POST)) {
             if ($this->form_validation->run() == FALSE) {
@@ -640,7 +640,7 @@ $id;
             $this->form_validation->set_rules($config);
             if (isset($_POST) && ! empty($_POST)) {
                 $data['v'] = $this->Muser->objGetUserInfo($id);
-                
+
                 if ($this->form_validation->run() == FALSE) {
                     $this->output->set_content_type('application/json')->set_output(json_encode(array(
                         'state' => 'error',
@@ -697,7 +697,7 @@ $id;
             )));
         } else {
             $result = $this->Muser->boolWithdraw($volume, $id);
-            
+
             if ($result) {
                 // $this->session->set_flashdata('flashdata', '结算成功');
                 $this->output->set_content_type('application/json')->set_output(json_encode(array(
@@ -737,7 +737,7 @@ $id;
         } else {
             $this->load->view('templates/header_user', $data);
         }
-        
+
         $this->load->view('user/password', $data);
     }
 
@@ -820,11 +820,11 @@ $id;
             require_once ("application/lib/WxPay.Api.php");
             require_once "application/views/mobile/user/WxPay.JsApiPay.php";
             require_once 'application/views/mobile/user/log.php';
-            
+
             // 初始化日志
             $logHandler = new CLogFileHandler("application/logs/" . date('Y-m-d') . '.log');
             $log = Log::Init($logHandler, 15);
-            
+
             // 打印输出数组信息
             function printf_info($data)
             {
@@ -832,11 +832,11 @@ $id;
                     echo "<font color='#00ff55;'>$key</font> : $value <br/>";
                 }
             }
-            
+
             // ①、获取用户openid
             $tools = new JsApiPay();
             $openId = $tools->GetOpenid();
-            
+
             // ②、统一下单
             $input = new WxPayUnifiedOrder();
             $input->SetBody("加盟费用");
@@ -856,10 +856,10 @@ $id;
             //echo '<br/>';
             //printf_info($order);
             $jsApiParameters = $tools->GetJsApiParameters($order);
-            
+
             // 获取共享收货地址js函数参数
             $editAddress = $tools->GetEditAddressParameters();
-            
+
             // ③、在支持成功回调通知中处理成功之后的事宜，见 notify.php
             /**
              * 注意：
@@ -876,7 +876,7 @@ $id;
             $this->load->view('mobile/user/initialize', $data);
             return;
         } else {
-            
+
             if ($this->session->userdata('initiation')) {
                 exit('You are initialized');
             }
@@ -889,7 +889,7 @@ $id;
             $data->user_id = $this->session->userdata('current_user_id');
             // $data->pay_amt = $this->INI_AMY;
             $data->pay_amt = 0.01;
-            
+
             $this->load->view('templates/header_user', $data);
             $this->load->view('user/initialize', $data);
         }
@@ -897,7 +897,7 @@ $id;
 
     public function codefenxian($error = '')
     {
-        
+
         // if ($this->session->userdata('role') != 'admin') {
         // exit('You are not the admin.');
         // }
@@ -913,7 +913,7 @@ $id;
             )));
         }
         $data = array();
-        
+
         $data['user'] = $result[0];
         if (is_mobile()) {
             $this->load->view('mobile/user/codefenxian', $data);
@@ -935,33 +935,33 @@ $id;
         require_once ("application/third_party/alipay/lib/alipay_submit.class.php");
         $alipay_config = alipay_config();
         $alipaySubmit = new AlipaySubmit($alipay_config);
-        
+
         $payment_type = "1";
         $notify_url = base_url() . "alipay_notify_initiation?alipay=sb";
         // there's a bug that alipay api will filter out the first para of the url return.
         // fixed it by insert a para in the url.
-        
+
         $return_url = base_url() . "user/return_alipay?alipay=sb";
-        
+
         // $out_trade_no = $this->session->userdata('user') . date('YmdHis') . random_string('numeric', 4);
         $out_trade_no = $user_id;
-        
+
         // $is_update_out_trade_no_success = $this->Morder->updateOrderTradeNo($out_trade_no, $order_id);
         // if(!$is_update_out_trade_no_success)
         // exit('error!\nPlease try again later');
-        
+
         $subject = $this->session->userdata('user') . "_-_ERP_USER_no." . $user_id;
-        
+
         $total_fee = $this->INI_AMT;
-        
+
         // $anti_phishing_key = $alipaySubmit->query_timestamp();
         $anti_phishing_key = "";
-        
+
         $exter_invoke_ip = get_client_ip();
-        
+
         $body = "";
         $show_url = "";
-        
+
         $parameter = array(
             "service" => "create_direct_pay_by_user",
             "partner" => trim($alipay_config['partner']),
@@ -978,7 +978,7 @@ $id;
             "exter_invoke_ip" => $exter_invoke_ip,
             "_input_charset" => trim(strtolower($alipay_config['input_charset']))
         );
-        
+
         $html_text = $alipaySubmit->buildRequestForm($parameter, "get", "确认");
         echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\"></head>";
         echo "<div style=\"display:none;\">" . $html_text . "</div></html>";
@@ -1051,11 +1051,11 @@ $id;
         if (isset($_POST[$token]) && $_POST[$token] != $this->session->userdata($token)) {
             $this->session->set_userdata('token_initiation', md5(date('YmdHis') . rand(0, 32000)));
             return false;
-        } else 
+        } else
             if (! isset($_POST[$token])) {
                 $this->session->set_userdata('token_initiation', md5(date('YmdHis') . rand(0, 32000)));
                 return false;
-            } else 
+            } else
                 if ($_POST[$token] == $this->session->userdata($token)) {
                     return true;
                 }
